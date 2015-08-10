@@ -1,5 +1,8 @@
 {
-  "name"    : "edward-csvhands",
-  "version" : "0.1.0",
-  "main"    : "csvedit/common/main.js"
+  "name": "edward-csvhands",
+  "version": "0.1.0",
+  "main": "csvedit/common/main.js",
+  "dependencies": {
+    "jasmine": "^2.3.2"
+  }
 }
