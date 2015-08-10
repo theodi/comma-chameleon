@@ -52,8 +52,8 @@
         { name: 'text', extensions: ['csv'] }
       ]}, function (fileName) {
         if (fileName === undefined) return;
-          debugger;
-          fs.writeFile(fileName, hot.getData(), function (err) {
+          data = hot.getData().map(function(d) { return d.join(",") }).join("\n")
+          fs.writeFile(fileName, data, function (err) {
         });
       });
     }
