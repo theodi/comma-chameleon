@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Hello World!</title>
+    <title>Untitled.csv</title>
     <script>
     window.$ = window.jQuery = require('./bower_components/jquery/dist/jquery.js');
     </script>
@@ -172,7 +172,6 @@
       colHeaders: true,
       rowHeaders: true,
       columnSorting: true,
-      contextMenu: true
     });
 
     function openFile() {
@@ -181,6 +180,7 @@
       ]}, function (fileNames) {
           if (fileNames === undefined) return;
           var fileName = fileNames[0];
+          document.title = fileName;
           fs.readFile(fileName, 'utf-8', function (err, data) {
             csv = $.csv.toArrays(data);
             hot.loadData(csv)
