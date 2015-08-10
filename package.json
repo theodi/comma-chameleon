@@ -1,5 +1,5 @@
 {
   "name"    : "edward-csvhands",
   "version" : "0.1.0",
-  "main"    : "main.js"
+  "main"    : "csvedit/common/main.js"
 }
