@@ -129,12 +129,12 @@ app.on('ready', function() {
         {
           label: 'Reload',
           accelerator: 'CmdOrCtrl+R',
-          click: function() { getCurrentWindow().reload(); }
+          click: function() { BrowserWindow.getFocusedWindow().reload(); }
         },
         {
           label: 'Toggle DevTools',
           accelerator: 'Alt+CmdOrCtrl+I',
-          click: function() { getCurrentWindow().toggleDevTools(); }
+          click: function() { BrowserWindow.getFocusedWindow().toggleDevTools(); }
         },
       ]
     },
