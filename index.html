@@ -21,12 +21,13 @@
     <script>
     var ipc = require('ipc');
     var fs = require('fs');
+
     var container = document.getElementById("editor");
     var hot = new Handsontable(container, {
       colHeaders: true,
       rowHeaders: true,
       columnSorting: true,
-      contextMenu: true
+      contextMenu: false
     });
 
     ipc.on('loadData', function(data) {
