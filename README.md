@@ -20,3 +20,7 @@ electron .
 ```
 
 functionality should include
+```
+
+To test Handsontable functionality download .zip from https://github.com/handsontable/handsontable
+and run SpecRunner.html from /test
