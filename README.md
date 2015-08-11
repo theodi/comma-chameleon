@@ -18,3 +18,5 @@ Then to open the app run:
 ```
 electron .
 ```
+
+functionality should include
