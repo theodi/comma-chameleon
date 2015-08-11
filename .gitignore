@@ -1,8 +1,9 @@
+
+de_modules
+bower_components
+*.log
 .DS_Store
 Thumbs.db
-
-npm-debug.log
-debug.log
-
-bower_components/
-node_modules/
+/build/
+/releases/
+/tmp/
