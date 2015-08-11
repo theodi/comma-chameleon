@@ -25,7 +25,7 @@ app.on('window-all-closed', function() {
 app.on('ready', function() {
   var template = [
     {
-      label: 'Electron',
+      label: 'CSV E',
       submenu: [
         {
           label: 'About Electron',

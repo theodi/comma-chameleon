@@ -30,12 +30,13 @@
     });
 
     ipc.on('loadData', function(data) {
+
       csv = $.csv.toArrays(data);
       hot.loadData(csv);
     });
 
     ipc.on('saveData', function(fileName) {
-      data = hot.getData().map(function(d) { return d.join(",") }).join("\n")
+      data = hot.getData().map(function(d) { return d.join(",") }).join("\n");
       fs.writeFile(fileName, data, function (err) {
       });
       document.title = fileName;
