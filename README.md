@@ -4,7 +4,17 @@
 
 A desktop CSV editor with validation magic - Built with electron.js
 
-## Running:
+## Setup
 
-* `npm install electron-prebuilt -g`
-* `electron .`
+```
+brew install node
+npm install bower jasmine electron-prebuilt -g
+npm install
+bower install
+```
+
+Then to open the app run:
+
+```
+electron .
+```
