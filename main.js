@@ -1,5 +1,8 @@
 var app = require('app');  // Module to control application life.
 var BrowserWindow = require('browser-window');  // Module to create native browser window.
+var Menu = require('menu');
+var Dialog = require('dialog');
+var Fs = require('fs');
 
 // Report crashes to our server.
 require('crash-reporter').start();
@@ -167,6 +170,12 @@ app.on('ready', function() {
   Menu.setApplicationMenu(menu);
 
   // Create the browser window.
+  createWindow();
+});
+
+function createWindow(data, title) {
+  data = typeof data !== 'undefined' ? data : '"","",""';
+  title = typeof title !== 'undefined' ? title : "Untitled.csv";
 
   mainWindow = new BrowserWindow({width: 800, height: 600});
 
@@ -174,7 +183,12 @@ app.on('ready', function() {
   mainWindow.loadUrl('file://' + __dirname + '/index.html');
 
   // Open the devtools.
-  //mainWindow.openDevTools();
+  mainWindow.openDevTools();
+  mainWindow.title = title;
+
+  mainWindow.webContents.on('did-finish-load', function() {
+    mainWindow.webContents.send('loadData', data);
+  });
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function() {
@@ -183,4 +197,27 @@ app.on('ready', function() {
     // when you should delete the corresponding element.
     mainWindow = null;
   });
-});
+}
+
+function openFile() {
+  Dialog.showOpenDialog({ filters: [
+    { name: 'text', extensions: ['csv'] }
+  ]}, function (fileNames) {
+      if (fileNames === undefined) return;
+      var fileName = fileNames[0];
+      Fs.readFile(fileName, 'utf-8', function (err, data) {
+        createWindow(data, fileName);
+      });
+  });
+}
+
+function saveFile() {
+  window = BrowserWindow.getFocusedWindow();
+  Dialog.showSaveDialog({ filters: [
+    { name: 'text', extensions: ['csv'] }
+  ]}, function (fileName) {
+    if (fileName === undefined) return;
+    window.webContents.send('saveData', fileName);
+    window.title = fileName;
+  });
+}

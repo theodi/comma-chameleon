@@ -19,44 +19,28 @@
   <body>
     <div id="editor"></div>
     <script>
-    var remote = require('remote');
-    var dialog = remote.require('dialog');
+    var ipc = require('ipc');
     var fs = require('fs');
     var container = document.getElementById("editor");
-
-    data = [['', '', ''], ['', '', '']];
     var hot = new Handsontable(container, {
-      data: data,
       colHeaders: true,
       rowHeaders: true,
       columnSorting: true,
       contextMenu: true
     });
 
-    function openFile() {
-      dialog.showOpenDialog({ filters: [
-        { name: 'text', extensions: ['csv'] }
-      ]}, function (fileNames) {
-          if (fileNames === undefined) return;
-          var fileName = fileNames[0];
-          document.title = fileName;
-          fs.readFile(fileName, 'utf-8', function (err, data) {
-            csv = $.csv.toArrays(data);
-            hot.loadData(csv)
-          });
-      });
-    }
+    ipc.on('loadData', function(data) {
+      csv = $.csv.toArrays(data);
+      hot.loadData(csv);
+    });
 
-    function saveFile () {
-      dialog.showSaveDialog({ filters: [
-        { name: 'text', extensions: ['csv'] }
-      ]}, function (fileName) {
-        if (fileName === undefined) return;
-          data = hot.getData().map(function(d) { return d.join(",") }).join("\n")
-          fs.writeFile(fileName, data, function (err) {
-        });
+    ipc.on('saveData', function(fileName) {
+      data = hot.getData().map(function(d) { return d.join(",") }).join("\n")
+      console.log(data);
+      fs.writeFile(fileName, data, function (err) {
       });
-    }
+    });
+
     </script>
   </body>
 </html>
