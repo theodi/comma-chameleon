@@ -36,9 +36,9 @@
 
     ipc.on('saveData', function(fileName) {
       data = hot.getData().map(function(d) { return d.join(",") }).join("\n")
-      console.log(data);
       fs.writeFile(fileName, data, function (err) {
       });
+      document.title = fileName;
     });
 
     </script>

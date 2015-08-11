@@ -218,6 +218,5 @@ function saveFile() {
   ]}, function (fileName) {
     if (fileName === undefined) return;
     window.webContents.send('saveData', fileName);
-    window.title = fileName;
   });
 }
