@@ -96,6 +96,8 @@
         columnLeft.enabled = false
       }
       menu.popup(remote.getCurrentWindow());
+      rowAbove.enabled = true
+      columnLeft.enabled = true
     }, false);
 
     ipc.on('loadData', function(data) {
