@@ -40,6 +40,7 @@
       label: 'Insert row above',
       click: function() {
         hot.alter('insert_row', hot.getSelected()[0] - 1)
+        hot.deselectCell()
       }
     })
 
@@ -47,6 +48,7 @@
       label: 'Insert row below',
       click: function() {
         hot.alter('insert_row', hot.getSelected()[0] + 1)
+        hot.deselectCell()
       }
     })
 
@@ -54,6 +56,7 @@
       label: 'Insert column left',
       click: function() {
         hot.alter('insert_col', hot.getSelected()[1] - 1)
+        hot.deselectCell()
       }
     })
 
@@ -61,6 +64,7 @@
       label: 'Insert column right',
       click: function() {
         hot.alter('insert_col', hot.getSelected()[1] + 1)
+        hot.deselectCell()
       }
     })
 
@@ -68,6 +72,7 @@
       label: 'Remove entire row',
       click: function() {
         hot.alter('remove_row', hot.getSelected()[0])
+        hot.deselectCell()
       }
     })
 
@@ -75,6 +80,7 @@
       label: 'Remove entire column',
       click: function() {
         hot.alter('remove_col', hot.getSelected()[1])
+        hot.deselectCell()
       }
     })
 
