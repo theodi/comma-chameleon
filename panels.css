@@ -4,14 +4,44 @@ body, html {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
-#message-panel{
-    font-family: "Courier New", Courier, monospace;
-    background-color: rgba(255, 76, 66, 0.6);
-    position:fixed;
-    margin: 20px;
-    padding: 2px;
-    bottom:0;
+#message-panel {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    right: 0;
     overflow: scroll;
-    height: 25%;
-    width: 95%;
+    max-height: 25%;
+    z-index: 100;
+}
+
+.message {
+  font-size: 14px;
+  margin: 10px;
+  padding: 5px 10px;
+  border-radius: 3px;
+}
+
+.message p {
+  margin: .6em 0;
+}
+
+.message pre {
+  background-color: rgba(50, 50, 50, 0.15);
+  padding: 5px;
+  margin: .7em 0;
+}
+
+.error-message {
+  background-color: rgba(255, 76, 66, 0.6);
+  border: 1px solid rgba(226, 88, 88, 0.6);
+}
+
+.warning-message {
+  background-color: rgba(255, 152, 66, 0.6);
+  border: 1px solid rgba(226, 151, 88, 0.6);
+}
+
+.info-message {
+  background-color: rgba(99, 149, 215, 0.6);
+  border: 1px solid rgba(88, 153, 226, 0.6);
 }
