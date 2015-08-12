@@ -19,30 +19,8 @@
   <body>
     <button id="validate" onclick="validate();">Validate CSV</button>
     <div id="editor"></div>
+    <script src="hot.js"></script>
+    <script src="menu.js"></script>
     <script src="csvlint_validation.js" charset="utf-8"></script>
-    <script>
-    var ipc = require('ipc');
-    var fs = require('fs');
-    var container = document.getElementById("editor");
-    var hot = new Handsontable(container, {
-      colHeaders: true,
-      rowHeaders: true,
-      columnSorting: true,
-      contextMenu: true
-    });
-
-    ipc.on('loadData', function(data) {
-      csv = $.csv.toArrays(data);
-      hot.loadData(csv);
-    });
-
-    ipc.on('saveData', function(fileName) {
-      data = hot.getData().map(function(d) { return d.join(",") }).join("\n")
-      fs.writeFile(fileName, data, function (err) {
-      });
-      document.title = fileName;
-    });
-
-    </script>
   </body>
 </html>
