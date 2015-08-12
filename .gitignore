@@ -1,11 +1,9 @@
-
+.idea
 node_modules
 bower_components
 app/node_modules
 app/electron_spec
 *.log
-.DS_Store
-Thumbs.db
 /build/
 /releases/
 /tmp/
