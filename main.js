@@ -206,15 +206,21 @@ function createWindow(data, title) {
 }
 
 function openFile() {
-  Dialog.showOpenDialog({ filters: [
-    { name: 'text', extensions: ['csv'] }
-  ]}, function (fileNames) {
-      if (fileNames === undefined) return;
-      var fileName = fileNames[0];
-      Fs.readFile(fileName, 'utf-8', function (err, data) {
-        createWindow(data, fileName);
-      });
-  });
+    Dialog.showOpenDialog(
+        { filters: [
+            { name: 'csv files', extensions: ['csv'] },
+            { name: 'json schemas', extensions: ['json'] }
+        ]}, function (fileNames) {
+            if (fileNames === undefined) {
+                return;
+            } else {
+                console.log("the file processed = "+JSON.stringify(fileNames));
+                var fileName = fileNames[0];
+                Fs.readFile(fileName, 'utf-8', function (err, data) {
+                    createWindow(data, fileName);
+                });
+            }
+        });
 }
 
 function saveFile() {
