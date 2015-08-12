@@ -180,7 +180,7 @@ app.on('ready', function() {
   createWindow();
 });
 
-function createWindow(data, title) {
+function createWindow(data, title, datatype) {
   data = typeof data !== 'undefined' ? data : '"","",""';
   title = typeof title !== 'undefined' ? title : "Untitled.csv";
 
@@ -194,7 +194,12 @@ function createWindow(data, title) {
 
   mainWindow.webContents.on('did-finish-load', function() {
     mainWindow.setTitle(title);
-    mainWindow.webContents.send('loadData', data);
+    if (datatype === 'csv') {
+      mainWindow.webContents.send('loadData', data);
+    }
+    else if (datatype === 'json') {
+      console.log("unsupported file type");
+    }
   });
 
   // Emitted when the window is closed.
@@ -211,7 +216,7 @@ function openFile() {
     // browserWindow - permissable nil as default?
     // options
     { filters: [
-        { name: 'text', extensions: ['csv'] }
+        { name: 'text', extensions: ['csv', 'json'] }
     ]},
     // callback
     function (fileNames) {
@@ -228,9 +233,11 @@ function openFile() {
 
 function parseFile(fileNames){
   var fileName = fileNames[0];
-  console.log(mime.extension(mime.lookup(fileName)));
+  fileExtension = mime.extension(mime.lookup(fileName));
+  console.log(fileExtension);
+  console.log(typeof fileExtension);
   Fs.readFile(fileName, 'utf-8', function (err, data) {
-    createWindow(data, fileName);
+    createWindow(data, fileName, fileExtension);
   });
 }
 
