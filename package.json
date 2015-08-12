@@ -1,5 +1,8 @@
 {
-  "name"    : "edward-csvhands",
-  "version" : "0.1.0",
-  "main"    : "main.js"
+  "name": "edward-csvhands",
+  "version": "0.1.0",
+  "main": "main.js",
+  "dependencies": {
+    "request": "^2.60.0"
+  }
 }
