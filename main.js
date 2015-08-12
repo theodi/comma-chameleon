@@ -4,6 +4,7 @@ var BrowserWindow = require('browser-window');  // Module to create native brows
 var Menu = require('menu');
 var Dialog = require('dialog');
 var Fs = require('fs');
+var mime = require('mime');
 
 // Report crashes to our server.
 require('crash-reporter').start();
@@ -206,14 +207,30 @@ function createWindow(data, title) {
 }
 
 function openFile() {
-  Dialog.showOpenDialog({ filters: [
-    { name: 'text', extensions: ['csv'] }
-  ]}, function (fileNames) {
-      if (fileNames === undefined) return;
-      var fileName = fileNames[0];
-      Fs.readFile(fileName, 'utf-8', function (err, data) {
-        createWindow(data, fileName);
-      });
+  Dialog.showOpenDialog(
+    // browserWindow - permissable nil as default?
+    // options
+    { filters: [
+        { name: 'text', extensions: ['csv'] }
+    ]},
+    // callback
+    function (fileNames) {
+      console.log(fileNames);
+      console.log(typeof fileNames);
+      if (fileNames === undefined) {
+        return;
+      }
+      else{
+        parseFile(fileNames);
+      }
+  });
+} // end open file
+
+function parseFile(fileNames){
+  var fileName = fileNames[0];
+  console.log(mime.extension(mime.lookup(fileName)));
+  Fs.readFile(fileName, 'utf-8', function (err, data) {
+    createWindow(data, fileName);
   });
 }
 
