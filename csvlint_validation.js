@@ -29,6 +29,8 @@ function getValidation(content) {
   });
 }
 
+// Splits validation returned from CSVLint into errors, warnings and info messages
+
 function validate() {
   data = hot.getData().map(function(d) { return d.join(",") }).join("\n")
   getValidation(data).then(function(json_validation) {
