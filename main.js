@@ -184,9 +184,9 @@ function createWindow(data, title) {
 
   // Open the devtools.
   mainWindow.openDevTools();
-  mainWindow.title = title;
 
   mainWindow.webContents.on('did-finish-load', function() {
+    mainWindow.setTitle(title);
     mainWindow.webContents.send('loadData', data);
   });
 
