@@ -195,10 +195,11 @@ function createWindow(data, title, datatype) {
   mainWindow.webContents.on('did-finish-load', function() {
     mainWindow.setTitle(title);
     if (datatype === 'csv') {
-      mainWindow.webContents.send('loadData', data);
+      mainWindow.webContents.send('loadCSV', data);
     }
     else if (datatype === 'json') {
       console.log("unsupported file type");
+      mainWindow.webContents.send('loadSchema', data);
     }
   });
 
