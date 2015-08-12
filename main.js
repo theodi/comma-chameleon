@@ -213,6 +213,7 @@ function createWindow(data, title, datatype) {
 }
 
 function openFile() {
+//<<<<<<< HEAD
   Dialog.showOpenDialog(
     // browserWindow - permissable nil as default?
     // options
@@ -240,6 +241,23 @@ function parseFile(fileNames){
   Fs.readFile(fileName, 'utf-8', function (err, data) {
     createWindow(data, fileName, fileExtension);
   });
+//=======
+//    Dialog.showOpenDialog(
+//        { filters: [
+//            { name: 'csv files', extensions: ['csv'] },
+//            { name: 'json schemas', extensions: ['json'] }
+//        ]}, function (fileNames) {
+//            if (fileNames === undefined) {
+//                return;
+//            } else {
+//                console.log("the file processed = "+JSON.stringify(fileNames));
+//                var fileName = fileNames[0];
+//                Fs.readFile(fileName, 'utf-8', function (err, data) {
+//                    createWindow(data, fileName);
+//                });
+//            }
+//        });
+//>>>>>>> 92c629b6aac3202537bf0df16205b742039a9044
 }
 
 function saveFile() {
