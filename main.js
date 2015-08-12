@@ -1,4 +1,5 @@
 var app = require('app');  // Module to control application life.
+var request = require('request');
 var BrowserWindow = require('browser-window');  // Module to create native browser window.
 var Menu = require('menu');
 var Dialog = require('dialog');
@@ -89,6 +90,11 @@ app.on('ready', function() {
           accelerator: 'Shift+CmdOrCtrl+S',
           click: function() { saveFile(); }
         },
+        {
+          label: 'Validate',
+          accelerator: 'CmdOrCtrl+V',
+          click: function() { validateFile(); }
+        }
       ]
     },
     {
@@ -190,9 +196,9 @@ function createWindow(data, title) {
 
   // Open the devtools.
   mainWindow.openDevTools();
-  mainWindow.title = title;
 
   mainWindow.webContents.on('did-finish-load', function() {
+    mainWindow.setTitle(title);
     mainWindow.webContents.send('loadData', data);
   });
 
@@ -206,15 +212,21 @@ function createWindow(data, title) {
 }
 
 function openFile() {
-  Dialog.showOpenDialog({ filters: [
-    { name: 'text', extensions: ['csv'] }
-  ]}, function (fileNames) {
-      if (fileNames === undefined) return;
-      var fileName = fileNames[0];
-      Fs.readFile(fileName, 'utf-8', function (err, data) {
-        createWindow(data, fileName);
-      });
-  });
+    Dialog.showOpenDialog(
+        { filters: [
+            { name: 'csv files', extensions: ['csv'] },
+            { name: 'json schemas', extensions: ['json'] }
+        ]}, function (fileNames) {
+            if (fileNames === undefined) {
+                return;
+            } else {
+                console.log("the file processed = "+JSON.stringify(fileNames));
+                var fileName = fileNames[0];
+                Fs.readFile(fileName, 'utf-8', function (err, data) {
+                    createWindow(data, fileName);
+                });
+            }
+        });
 }
 
 function saveFile() {
@@ -258,4 +270,8 @@ function importExcel() {
         popup = null;
       });
   });
+
+function validateFile() {
+  window = BrowserWindow.getFocusedWindow();
+  window.webContents.send('validate');
 }
