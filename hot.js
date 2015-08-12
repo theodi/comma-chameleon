@@ -22,7 +22,7 @@ window.addEventListener('contextmenu', function (e) {
   columnLeft.enabled = true
 }, false);
 
-ipc.on('loadData', function(data) {
+ipc.on('loadCSV', function(data) {
   csv = $.csv.toArrays(data);
   hot.loadData(csv);
 });
