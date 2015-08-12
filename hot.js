@@ -85,7 +85,11 @@ function validate() {
 }
 
 function refactorColumns(csv) {
-  hot.alter('insert_col', null, (getMaxColumns(csv) - hot.countCols()))
+  col_add = getMaxColumns(csv) - hot.countCols()
+  // adds a column by default if the amount parameter is 0, hence conditional
+  if (col_add != 0) {
+    hot.alter('insert_col', null, col_add)
+  }
 }
 
 function getMaxColumns(csv) {
