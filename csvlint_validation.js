@@ -31,8 +31,7 @@ function getValidation(content) {
 
 function validate() {
   data = hot.getData().map(function(d) { return d.join(",") }).join("\n")
-  json_data = '{"version":"0.1","licence":"http://opendatacommons.org/licenses/odbl/","validation":{"url":"http://csvlint.io/validation/55ca092f63737668de000069","source":"http://theodi.github.io/hot-drinks/hot-drinks.csv","state":"warnings","errors":[],"warnings":[{"type":"malformed_header","category":"schema","row":1,"col":null}],"info":[{"type":"assumed_header","category":"structure","row":null,"col":null},{"type":"nonrfc_line_breaks","category":"structure","row":null,"col":null}],"standardisedCSV":"http://csvlint.io/validation/55ca092f63737668de000069.csv","badges":{"svg":"http://csvlint.io/validation/55ca092f63737668de000069.svg","png":"http://csvlint.io/validation/55ca092f63737668de000069.png"}}}'
-  json_data_2 = getValidation("Interns,LOL,,,,a\nas,f").then(function(json_validation) {
+  getValidation(data).then(function(json_validation) {
     errors = json_validation.validation.errors
     warnings = json_validation.validation.warnings
     info_messages = json_validation.validation.info
