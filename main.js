@@ -3,6 +3,7 @@ var BrowserWindow = require('browser-window');  // Module to create native brows
 var Menu = require('menu');
 var Dialog = require('dialog');
 var Fs = require('fs');
+var XLSX = require('xlsx');
 
 // Report crashes to our server.
 require('crash-reporter').start();
@@ -77,6 +78,10 @@ app.on('ready', function() {
           label: 'Open..',
           accelerator: 'CmdOrCtrl+O',
           click: function() { openFile(); }
+        },
+        {
+          label: 'Import Excel file',
+          click: function() { importExcel(); }
         },
         {
           label: 'Save As..',
@@ -218,5 +223,19 @@ function saveFile() {
   ]}, function (fileName) {
     if (fileName === undefined) return;
     window.webContents.send('saveData', fileName);
+  });
+}
+
+function importExcel() {
+  Dialog.showOpenDialog({ filters: [
+    { name: 'text', extensions: ['xlsx', 'xls'] }
+  ]}, function (fileNames) {
+      if (fileNames === undefined) return;
+      var fileName = fileNames[0];
+      var workbook = XLSX.readFile(fileName);
+      var first_sheet_name = workbook.SheetNames[0];
+      var worksheet = workbook.Sheets[first_sheet_name];
+      data = XLSX.utils.sheet_to_csv(worksheet);
+      createWindow(data);
   });
 }
