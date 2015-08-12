@@ -7,4 +7,4 @@ var editorPane = document.getElementById("schema-editor");
 
 editorPane.addEventListener();
 
-ipc.on();
+ipc.on('loadSchema', function(){});
