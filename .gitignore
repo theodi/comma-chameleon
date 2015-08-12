@@ -1,8 +1,5 @@
-.DS_Store
-Thumbs.db
-
 npm-debug.log
 debug.log
-
 bower_components/
 node_modules/
+fixtures/
