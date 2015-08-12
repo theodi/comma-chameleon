@@ -239,20 +239,19 @@ function importExcel() {
 
       popup = new BrowserWindow({width: 300, height: 150, 'always-on-top': true});
       popup.loadUrl('file://' + __dirname + '/select_worksheet.html');
-      popup.openDevTools();
 
       popup.webContents.on('did-finish-load', function() {
         popup.webContents.send('loadSheets', workbook.SheetNames);
-      });
 
-      ipc.on('worksheetSelected', function(e, sheet_name) {
-        data = XLSX.utils.sheet_to_csv(workbook.Sheets[sheet_name]);
-        createWindow(data);
-        popup.close();
-      });
+        ipc.on('worksheetSelected', function(e, sheet_name) {
+          data = XLSX.utils.sheet_to_csv(workbook.Sheets[sheet_name]);
+          popup.close();
+          createWindow(data);
+        });
 
-      ipc.on('worksheetCanceled', function() {
-        popup.close();
+        ipc.on('worksheetCanceled', function() {
+          popup.close();
+        });
       });
 
       popup.on('closed', function() {
