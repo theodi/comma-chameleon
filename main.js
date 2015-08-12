@@ -270,6 +270,7 @@ function importExcel() {
         popup = null;
       });
   });
+}
 
 function validateFile() {
   window = BrowserWindow.getFocusedWindow();
