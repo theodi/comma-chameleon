@@ -1,8 +1,9 @@
-.DS_Store
-Thumbs.db
-
-npm-debug.log
-debug.log
-
-bower_components/
-node_modules/
+.idea
+node_modules
+bower_components
+app/node_modules
+app/electron_spec
+*.log
+/build/
+/releases/
+/tmp/

@@ -1,20 +1,20 @@
-[![Stories in Ready](https://badge.waffle.io/theodi/edward-csvhands.svg?label=ready&title=Ready)](http://waffle.io/theodi/edward-csvhands)
+A provisional fork from https://github.com/szwacz/electron-boilerplate, to get a unified way of running tests in electron
 
-# Edward CSVhands
+Setup
 
-A desktop CSV editor with validation magic - Built with electron.js
+`brew install node`  
+`npm install bower jasmine electron-prebuilt -g`
 
-## Setup
+in root dir run `npm install`
 
-```
-brew install node
-npm install bower jasmine electron-prebuilt -g
-npm install
-bower install
-```
+`cd app/`
 
-Then to open the app run:
+run `npm install` then `bower install`
 
-```
-electron .
-```
+cd ..
+
+within root dir again run `npm start` - this is different than using electron . as 'electron prebuilt' is not implemented here
+
+This fork was conducted to implement an end to end testing solution with Jasmine. The example tests in app/hello_world function
+Integration with handsontables existing test suite is more difficult as they use a bespoke way of testing their jquery
+Confirmation that electron tests pass is pending a documentation request with that principal repo
