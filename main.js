@@ -4,6 +4,7 @@ var Menu = require('menu');
 var Dialog = require('dialog');
 var Fs = require('fs');
 var XLSX = require('xlsx');
+var ipc = require('ipc');
 
 // Report crashes to our server.
 require('crash-reporter').start();
@@ -235,7 +236,23 @@ function importExcel() {
       var workbook = XLSX.readFile(fileName);
       var first_sheet_name = workbook.SheetNames[0];
       var worksheet = workbook.Sheets[first_sheet_name];
-      data = XLSX.utils.sheet_to_csv(worksheet);
-      createWindow(data);
+
+      popup = new BrowserWindow({width: 300, height: 150, 'always-on-top': true, frame: false});
+      popup.loadUrl('file://' + __dirname + '/select_worksheet.html');
+      popup.openDevTools();
+
+      popup.webContents.on('did-finish-load', function() {
+        popup.webContents.send('loadSheets', workbook.SheetNames);
+      });
+
+      ipc.on('worksheetSelected', function(e, sheet_name) {
+        data = XLSX.utils.sheet_to_csv(workbook.Sheets[sheet_name]);
+        createWindow(data);
+        popup.close();
+      });
+
+      ipc.on('worksheetCanceled', function() {
+        popup.close();
+      })
   });
 }
