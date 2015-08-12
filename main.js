@@ -253,6 +253,10 @@ function importExcel() {
 
       ipc.on('worksheetCanceled', function() {
         popup.close();
-      })
+      });
+
+      popup.on('closed', function() {
+        popup = null;
+      });
   });
 }
