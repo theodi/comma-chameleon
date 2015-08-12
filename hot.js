@@ -9,7 +9,7 @@ var hot = new Handsontable(container, {
   contextMenu: false
 });
 
-window.addEventListener('contextmenu', function (e) {
+container.addEventListener('contextmenu', function (e) {
   e.preventDefault();
   if (hot.getSelected()[0] == 0) {
     rowAbove.enabled = false
