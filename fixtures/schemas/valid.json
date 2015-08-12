@@ -1,0 +1,22 @@
+{
+  "fields": [
+    {
+      "name": "FirstName",
+      "constraints": {
+        "required": true
+      }
+    },
+    {
+      "name": "LastName",
+      "constraints": {
+        "required": true
+      }
+    },
+    {
+      "name": "Insult",
+      "constraints": {
+        "required": true
+      }
+    }
+  ]
+}
