@@ -81,6 +81,11 @@ app.on('ready', function() {
           click: function() { openFile(); }
         },
         {
+          label: 'Open Schema',
+          //accelerator: 'CmdOrCtrl+O',
+          click: function() { openSchema(); }
+        },
+        {
           label: 'Save As..',
           accelerator: 'Shift+CmdOrCtrl+S',
           click: function() { saveFile(); }
@@ -210,6 +215,26 @@ function createWindow(data, title, datatype) {
     // when you should delete the corresponding element.
     mainWindow = null;
   });
+}
+
+function openSchema(){
+  Dialog.showOpenDialog(
+    // browserWindow - permissable nil as default?
+    // options
+    { filters: [
+      { name: 'text', extensions: ['csv', 'json'] }
+    ]},
+    // callback
+    function (fileNames) {
+      console.log(fileNames);
+      console.log(typeof fileNames);
+      if (fileNames === undefined) {
+        return;
+      }
+      else{
+        parseFile(fileNames);
+      }
+    });
 }
 
 function openFile() {
