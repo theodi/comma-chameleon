@@ -84,6 +84,11 @@ app.on('ready', function() {
           accelerator: 'Shift+CmdOrCtrl+S',
           click: function() { saveFile(); }
         },
+        {
+          label: 'Validate',
+          accelerator: 'CmdOrCtrl+V',
+          click: function() { validateFile(); }
+        }
       ]
     },
     {
@@ -220,4 +225,9 @@ function saveFile() {
     if (fileName === undefined) return;
     window.webContents.send('saveData', fileName);
   });
+}
+
+function validateFile() {
+  window = BrowserWindow.getFocusedWindow();
+  window.webContents.send('validate');
 }
