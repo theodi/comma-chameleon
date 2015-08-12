@@ -17,7 +17,9 @@
     </style>
   </head>
   <body>
+    <button id="validate" onclick="validate();">Validate CSV</button>
     <div id="editor"></div>
+    <script src="csvlint_validation.js" charset="utf-8"></script>
     <script>
     var ipc = require('ipc');
     var fs = require('fs');

@@ -221,33 +221,3 @@ function saveFile() {
     window.webContents.send('saveData', fileName);
   });
 }
-
-// How to use:
-// getValidation("Example,CSV,content\na,b,c\n")
-//  .then(function(validation) {console.log(validation)})
-
-function getValidation(content) {
-  content = new Buffer(content).toString("base64");
-  content = "editor.csv;data:text/csv;base64," + content;
-  return Promise(function(resolve, reject) {
-    request.post("http://csvlint.io/package.json", { formData: {"files_data[]": content } }, function(error, response, body) {
-      
-      if (error) return reject(error);
-      
-      var packageURL = JSON.parse(response.body).package.url;
-      var interval = setInterval(function() {
-        request.get(packageURL + ".json", function(error, response, body) {
-          try {
-            var validationURL = JSON.parse(body).package.validations[0].url;
-            clearInterval(interval);
-            request.get(validationURL + ".json", function(error, response, body) {
-              if (error) return reject(error);
-              resolve(JSON.parse(body));
-            });
-          } catch(e) {}
-        });
-      }, 1000);
-      
-    });
-  });
-}
