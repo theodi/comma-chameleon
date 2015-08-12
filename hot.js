@@ -74,11 +74,15 @@ function getValidation(content) {
 function validate() {
   data = hot.getData().map(function(d) { return d.join(",") }).join("\n")
   getValidation(data).then(function(json_validation) {
-    errors = json_validation.validation.errors
-    warnings = json_validation.validation.warnings
-    info_messages = json_validation.validation.info
-    console.error(errors)
-    console.warn(warnings)
+    errors = json_validation.validation.errors;
+    warnings = json_validation.validation.warnings;
+    info_messages = json_validation.validation.info;
+    console.error(errors);
+    console.warn(warnings);
     console.info(info_messages);
+    //document.getElementById("message-panel").setAttribute("visibility", "visible");
+    //document.getElementById("response").setAttribute("visibility", "visible");
+    document.getElementById("message-panel").innerHTML = JSON.stringify(errors)+JSON.stringify(warnings)+JSON.stringify(info_messages);
+
   });
 }

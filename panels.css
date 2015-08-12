@@ -5,6 +5,7 @@ body, html {
 }
 
 #message-panel {
+    background-color: rgba(139,0,0,0.5);
     position: fixed;
     left: 0;
     bottom: 0;
@@ -12,6 +13,27 @@ body, html {
     overflow: scroll;
     max-height: 25%;
     z-index: 100;
+    /*visibility: hidden;*/
+}
+
+#editor{
+    /*background-color: rgba(139,0,0,0.5);*/
+    position: fixed;
+    top: 0;
+    left:0;
+    max-width: 60%;
+    max-height: 70%;
+}
+
+#schema-editor {
+    font-family: "Courier New", Courier, monospace;
+    font-size: 10px;
+    background-color: rgba(24, 37, 139, 0.5);
+    position: fixed;
+    right: 0;
+    max-width: 30%;
+    max-height: 70%;
+    overflow: scroll;
 }
 
 .message {
