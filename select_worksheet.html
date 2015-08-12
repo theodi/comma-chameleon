@@ -12,11 +12,29 @@
         padding: 0;
         font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
       }
+
+      .well {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        margin: 0;
+        text-align: right;
+        border-radius: 0;
+        border-bottom: 0;
+        padding: 7px;
+      }
+
+      #worksheets {
+        margin: 7px;
+        width: 95%;
+      }
     </style>
   </head>
   <body>
-    <select id="worksheets"></select>
-    <button id="submit">Go</button> <button id="cancel">Cancel</button>
+    <p><select id="worksheets" class="form-control"></select></p>
+    <div class="well">
+      <button id="submit" class="btn btn-default">Go</button> <button id="cancel" class="btn btn-default">Cancel</button>
+    </div>
     <script>
       var ipc = require('ipc');
 
