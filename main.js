@@ -1,4 +1,5 @@
 var app = require('app');  // Module to control application life.
+var request = require('request');
 var BrowserWindow = require('browser-window');  // Module to create native browser window.
 var Menu = require('menu');
 var Dialog = require('dialog');
@@ -83,6 +84,11 @@ app.on('ready', function() {
           accelerator: 'Shift+CmdOrCtrl+S',
           click: function() { saveFile(); }
         },
+        {
+          label: 'Validate',
+          accelerator: 'CmdOrCtrl+V',
+          click: function() { validateFile(); }
+        }
       ]
     },
     {
@@ -184,9 +190,9 @@ function createWindow(data, title) {
 
   // Open the devtools.
   mainWindow.openDevTools();
-  mainWindow.title = title;
 
   mainWindow.webContents.on('did-finish-load', function() {
+    mainWindow.setTitle(title);
     mainWindow.webContents.send('loadData', data);
   });
 
@@ -225,4 +231,9 @@ function saveFile() {
     if (fileName === undefined) return;
     window.webContents.send('saveData', fileName);
   });
+}
+
+function validateFile() {
+  window = BrowserWindow.getFocusedWindow();
+  window.webContents.send('validate');
 }
