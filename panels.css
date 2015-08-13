@@ -51,7 +51,7 @@ body, html {
 
     background-color: rgba(139,0,0,0.5);
     position: fixed;
-    left: 0;
+    /*left: 0;*/
     bottom: 0;
     right: 0;
     overflow: scroll;
@@ -88,11 +88,13 @@ body, html {
         position: fixed;
         right: 0;
         width: 38%;
-        height: 70%;
+        height: 50%;
         /*overflow: scroll;*/
     }
 
 #interactions {
+    visibility: hidden;
+    /*workaround while merging branches*/
     position: absolute;
     height: 30%;
     bottom: 0;

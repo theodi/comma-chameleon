@@ -35,6 +35,7 @@ ipc.on('schemaSave', function(){
 });
 
 ipc.on('loadSchema', function(data){
+  console.log("are you receivin loadSchema?");
   try {
     var json = JSON.parse(data);
   } catch (jsonErr) {
@@ -42,7 +43,7 @@ ipc.on('loadSchema', function(data){
   }
   jsonSchema = json;
   editor.set(json);
-  document.getElementById("save-schema").className = 'btn btn-primary';
+  //document.getElementById("save-schema").className = 'btn btn-primary';
   // workaround to set the button for saving to be anabled only when schema loaded
   var json = editor.get();
 });
