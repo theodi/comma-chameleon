@@ -1,5 +1,4 @@
 var BrowserWindow = require('browser-window');
-var Menu = require('menu');
 var Dialog = require('dialog');
 var Fs = require('fs');
 var ipc = require('ipc');
