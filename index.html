@@ -5,6 +5,7 @@
     <script>
     window.$ = window.jQuery = require('./bower_components/jquery/dist/jquery.js');
     </script>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="bower_components/handsontable/dist/handsontable.full.css" />
     <link rel="stylesheet" href="panels.css" />
 
@@ -13,9 +14,24 @@
 
     <script src="bower_components/handsontable/dist/handsontable.full.js"></script>
     <script src="bower_components/jquery-csv/src/jquery.csv.min.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
   </head>
   <body>
-    <div id="editor"></div>
+    <div id="editor" class="col-md-8">
+
+    </div>
+
+    <div id="schema-editor" class="col-md-4">
+
+      <div id="jsoneditor">
+
+      </div>
+    </div>
+
+    <div id="interactions">
+      <button id="save-schema" class="btn btn-primary disabled">Save Schema</button>
+      <button id="change-to-tree-view" class="btn btn-default">Toggle Tree View</button><button id="change-to-code-editor" class="btn btn-default">Toggle Code View</button><button id="change-to-text-editor" class="btn btn-default">Toggle Text View</button>
+    </div>
 
     <div id="message-panel">
       <p id="response">
@@ -28,10 +44,6 @@
         post- boat faded corporation kanji concrete marketing jeans uplink bomb shoes. wristwatch dead engine RAF face forwards grenade city marketing digital hacker tiger-team. katana grenade saturation point fetishism dead film urban assault order-flow courier woman. shanty town jeans jeans cartel sub-orbital RAF cardboard chrome stimulate carbon Ko
       </p>
     </div>
-    <div id="jsoneditor">
-
-    </div>
-    <div id="message-panel"></div>
 
     <script src="hot.js"></script>
     <script src="editor.js"></script>
