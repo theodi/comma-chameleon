@@ -293,6 +293,14 @@ function datapackageJson(data) {
   return data
 }
 
+function generateDatapackage(data, csv) {
+  zip = new require('node-zip')();
+  zip.file('datapackage.json', JSON.stringify(data));
+  zip.file('data/' + data.name + '.csv', csv);
+  zipData = zip.generate({base64:false,compression:'DEFLATE'});
+  Fs.writeFileSync(fileName, zipData, 'binary');
+}
+
 function exportDatapackage() {
   var window = BrowserWindow.getFocusedWindow();
 
@@ -312,19 +320,12 @@ function exportDatapackage() {
       ],
       defaultPath: 'datapackage.zip'
     }, function (fileName) {
-      datapackage.close();
       if (fileName === undefined) return;
       datapackage.close();
-
-      zip = new require('node-zip')();
-      zip.file('datapackage.json', JSON.stringify(data));
-
       window.webContents.send('getCSV');
 
       ipc.once('sendCSV', function(e, csv) {
-        zip.file('data/' + data.name + '.csv', csv);
-        zipData = zip.generate({base64:false,compression:'DEFLATE'});
-        Fs.writeFileSync(fileName, zipData, 'binary');
+        generateDatapackage(data, csv)
       });
     });
   });
