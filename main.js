@@ -85,6 +85,7 @@ app.on('ready', function() {
         },
         {
           label: 'Import Excel file',
+          accelerator: 'CmdOrCtrl+I',
           click: function() { importExcel(); }
         },
         {
@@ -94,6 +95,7 @@ app.on('ready', function() {
         },
         {
           label: 'Export as Datapackage',
+          accelerator: 'CmdOrCtrl+D',
           click: function() { datapackage.exportDatapackage(); }
         },
         {
