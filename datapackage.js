@@ -2,6 +2,7 @@ var BrowserWindow = require('browser-window');
 var Dialog = require('dialog');
 var Fs = require('fs');
 var ipc = require('ipc');
+var path = require('path');
 
 var exports = module.exports = {};
 
@@ -16,13 +17,17 @@ exports.exportDatapackage = function() {
   });
 
   ipc.once('sendDatapackage', function(e, data) {
-    var data = datapackageJson(data)
+    var data = datapackageJson(data);
+    //debugger;
+    var currentFileName = window.getTitle();
+    var suggestedFileName = path.basename(currentFileName).replace('.csv', '');
 
     Dialog.showSaveDialog({
+      defaultPath: suggestedFileName+".zip",
       filters: [
         { name: 'text', extensions: ['zip'] }
       ],
-      defaultPath: 'datapackage.zip'
+      //defaultPath: 'datapackage.zip'
     }, function (fileName) {
       if (fileName === undefined) return;
       datapackage.close();
