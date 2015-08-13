@@ -36,6 +36,11 @@ ipc.on('saveData', function(fileName) {
   document.title = fileName;
 });
 
+ipc.on('getCSV', function() {
+  data = hot.getData().map(function(d) { return d.join(",") }).join("\r\n")
+  ipc.send('sendCSV', data);
+})
+
 ipc.on('validate', function() {
   validate();
 });
@@ -82,7 +87,25 @@ function validate() {
     console.error(errors)
     console.warn(warnings)
     console.info(info_messages);
+    displayValidationMessages(json_validation.validation);
   });
+}
+
+
+function displayValidationMessages(validation) {
+  var $messagePanel = $('#message-panel');
+  var messageTemplate = _.template('<div class="<%= cssClass %>"><p><%= type %> <% if (row) print("on row " + row) %> <% if (col) print("on column " + col) %></p></div>');
+  var messages = _.flatten([
+    _.map(validation.errors,   function(d) { return _.extend({}, d, { cssClass: 'message validation-error' }) }),
+    _.map(validation.warnings, function(d) { return _.extend({}, d, { cssClass: 'message validation-warning' }) }),
+    _.map(validation.info,     function(d) { return _.extend({}, d, { cssClass: 'message validation-info' }) })
+  ]);
+  if (messages.length) {
+    var html = _.map(messages, messageTemplate);
+    $messagePanel.html(html);
+  } else {
+    $messagePanel.html('<p>CSV Valid!</p>');
+  }
 }
 
 function refactorColumns(csv) {
