@@ -24,19 +24,36 @@ body, html {
     position: fixed;
     top: 0;
     left:0;
-    max-width: 60%;
-    max-height: 70%;
+    /*max-width: 60%;*/
+    /*max-height: 70%;*/
 }
 
-#jsoneditor {
-    font-family: "Courier New", Courier, monospace;
+#schema-editor {
+    /*font-family: "Courier New", Courier, monospace;*/
     font-size: 10px;
     /*background-color: rgba(24, 37, 139, 0.5);*/
     position: fixed;
     right: 0;
-    width: 45%;
-    height: 70%;
+    /*overflow: auto;*/
     /*overflow: scroll;*/
+}
+
+    #jsoneditor {
+        font-family: "Courier New", Courier, monospace;
+        font-size: 10px;
+        /*background-color: rgba(24, 37, 139, 0.5);*/
+        position: fixed;
+        right: 0;
+        width: 38%;
+        height: 70%;
+        /*overflow: scroll;*/
+    }
+
+#interactions {
+    position: absolute;
+    height: 30%;
+    bottom: 0;
+    right: 0;
 }
 
 .message {
