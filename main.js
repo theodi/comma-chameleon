@@ -85,6 +85,16 @@ app.on('ready', function() {
           click: function() { openFile(); }
         },
         {
+          label: 'Open Schema',
+
+          click: function(){ loadSchema();}
+        },
+        {
+          label: 'Save Schema',
+
+          click: function(){}
+        },
+        {
           label: 'Import Excel file',
           click: function() { importExcel(); }
         },
@@ -303,6 +313,27 @@ ipc.on('saveSchema', function(event,arg){
     });
   });
 });
+
+function loadSchema(){
+  // function to handle loading schema from menu
+  Dialog.showOpenDialog(
+    // browserWindow - permissable nil as default?
+    // options
+    { filters: [
+      { name: 'text', extensions: ['json'] }
+    ]},
+    // callback
+    function (fileNames) {
+      console.log("open file grabs "+fileNames);
+      console.log(typeof fileNames);
+      if (fileNames === undefined) {
+        return;
+      }
+      else{
+        parseFile(fileNames);
+      }
+    });
+}
 
 function importExcel() {
   Dialog.showOpenDialog({ filters: [
