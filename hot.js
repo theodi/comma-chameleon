@@ -130,4 +130,5 @@ function fixRaggedRows(csv) {
 
 function fixCell(x,y) {
   hot.setDataAtCell(y,x,"")
+  console.log("Cell (" + String.fromCharCode(97 + y).toUpperCase() + "," + (x + 1) + ") has been added to file")
 }
