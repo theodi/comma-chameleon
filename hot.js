@@ -26,6 +26,7 @@ ipc.on('loadData', function(data) {
   csv = $.csv.toArrays(data);
   hot.loadData(csv);
   refactorColumns(csv);
+  fixRaggedRows();
 });
 
 ipc.on('saveData', function(fileName) {
@@ -103,17 +104,34 @@ function getMaxColumns(csv) {
   return max_columns
 }
 
+// Fills undefined cells with an empty string, keeping the table in a
+// rectangular format
+
 function fixRaggedRows() {
   // Could be more efficient, repeats ipc.on('loadData')
   data = hot.getData().map(function(d) { return d.join(",") }).join("\n")
   csv = $.csv.toArrays(data);
+  ragged_rows = 0;
   //
   for (var y = 0; y < hot.countRows(); y++) {
     for (var x = 0; x < getMaxColumns(csv); x++) {
-      if (! hot.getDataAtCell(y,x)) {
-        hot.setDataAtCell(y,x,"")
-        console.log("Cell (" + y + "," + x + ") has been added to file")
+      if (hot.getDataAtCell(y,x) === undefined) {
+        if (ragged_rows == 0) {
+          if (confirm("Your file has ragged rows, do you want to correct this?")) {
+            ragged_rows = 1
+            fixCell(x,y)
+          }
+          else {ragged_rows = -1}
+        }
+        else if (ragged_rows == 1) {
+          fixCell(x,y)
+        }
       }
     }
   }
+}
+
+function fixCell(x,y) {
+  hot.setDataAtCell(y,x,"")
+  console.log("Cell (" + y + "," + x + ") has been added to file")
 }
