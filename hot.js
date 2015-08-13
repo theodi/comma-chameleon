@@ -22,7 +22,7 @@ container.addEventListener('contextmenu', function (e) {
   columnLeft.enabled = true
 }, false);
 
-ipc.on('loadData', function(data) {
+ipc.on('loadCSV', function(data) {
   csv = $.csv.toArrays(data);
   hot.loadData(csv);
   refactorColumns(csv);
@@ -30,14 +30,14 @@ ipc.on('loadData', function(data) {
 });
 
 ipc.on('saveData', function(fileName) {
-  data = hot.getData().map(function(d) { return d.join(",") }).join("\r\n")
+  data = $.csv.fromArrays(hot.getData());
   fs.writeFile(fileName, data, function (err) {
   });
   document.title = fileName;
 });
 
 ipc.on('getCSV', function() {
-  data = hot.getData().map(function(d) { return d.join(",") }).join("\r\n")
+  data = $.csv.fromArrays(hot.getData());
   ipc.send('sendCSV', data);
 })
 
@@ -79,17 +79,13 @@ function getValidation(content) {
 // Splits validation returned from CSVLint into errors, warnings and info messages
 
 function validate() {
-  data = hot.getData().map(function(d) { return d.join(",") }).join("\r\n")
+  data = $.csv.fromArrays(hot.getData());
   $('#right-panel').removeClass("hidden")
   $('#message-panel').html("<div class=\"validation-load\"><p><span class=\"glyphicon glyphicon-refresh spinning\"></span></p><p>Loading validation results...</p></div>");
-
   getValidation(data).then(function(json_validation) {
-    errors = json_validation.validation.errors
-    warnings = json_validation.validation.warnings
-    info_messages = json_validation.validation.info
-    console.error(errors)
-    console.warn(warnings)
-    console.info(info_messages);
+    errors = json_validation.validation.errors;
+    warnings = json_validation.validation.warnings;
+    info_messages = json_validation.validation.info;
     displayValidationMessages(json_validation.validation);
   });
 }
