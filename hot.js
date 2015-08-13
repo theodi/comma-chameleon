@@ -102,3 +102,18 @@ function getMaxColumns(csv) {
   }
   return max_columns
 }
+
+function fixRaggedRows() {
+  // Could be more efficient, repeats ipc.on('loadData')
+  data = hot.getData().map(function(d) { return d.join(",") }).join("\n")
+  csv = $.csv.toArrays(data);
+  //
+  for (var y = 0; y < hot.countRows(); y++) {
+    for (var x = 0; x < getMaxColumns(csv); x++) {
+      if (! hot.getDataAtCell(y,x)) {
+        hot.setDataAtCell(y,x,"")
+        console.log("Cell (" + y + "," + x + ") has been added to file")
+      }
+    }
+  }
+}
