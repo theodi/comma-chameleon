@@ -37,7 +37,7 @@ ipc.on('saveData', function(fileName) {
 });
 
 ipc.on('getCSV', function() {
-  data = hot.getData().map(function(d) { return d.join(",") }).join("\r\n")
+  data = $.csv.fromArrays(hot.getData());
   ipc.send('sendCSV', data);
 })
 
