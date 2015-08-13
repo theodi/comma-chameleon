@@ -255,13 +255,13 @@ function importExcel() {
     popup.webContents.on('did-finish-load', function() {
       popup.webContents.send('loadSheets', workbook.SheetNames);
 
-      ipc.on('worksheetSelected', function(e, sheet_name) {
+      ipc.once('worksheetSelected', function(e, sheet_name) {
         data = XLSX.utils.sheet_to_csv(workbook.Sheets[sheet_name]);
         popup.close();
         createWindow(data);
       });
 
-      ipc.on('worksheetCanceled', function() {
+      ipc.once('worksheetCanceled', function() {
         popup.close();
       });
     });
