@@ -30,14 +30,14 @@ ipc.on('loadData', function(data) {
 });
 
 ipc.on('saveData', function(fileName) {
-  data = hot.getData().map(function(d) { return d.join(",") }).join("\r\n")
+  data = $.csv.fromArrays(hot.getData());
   fs.writeFile(fileName, data, function (err) {
   });
   document.title = fileName;
 });
 
 ipc.on('getCSV', function() {
-  data = hot.getData().map(function(d) { return d.join(",") }).join("\r\n")
+  data = $.csv.fromArrays(hot.getData());
   ipc.send('sendCSV', data);
 })
 
@@ -79,7 +79,7 @@ function getValidation(content) {
 // Splits validation returned from CSVLint into errors, warnings and info messages
 
 function validate() {
-  data = hot.getData().map(function(d) { return d.join(",") }).join("\r\n")
+  data = $.csv.fromArrays(hot.getData());
   getValidation(data).then(function(json_validation) {
     errors = json_validation.validation.errors
     warnings = json_validation.validation.warnings
