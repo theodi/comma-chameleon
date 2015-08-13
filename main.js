@@ -7,6 +7,8 @@ var Fs = require('fs');
 var XLSX = require('xlsx');
 var ipc = require('ipc');
 
+var datapackage = require('./datapackage')
+
 // Report crashes to our server.
 require('crash-reporter').start();
 
@@ -83,12 +85,18 @@ app.on('ready', function() {
         },
         {
           label: 'Import Excel file',
+          accelerator: 'CmdOrCtrl+I',
           click: function() { importExcel(); }
         },
         {
           label: 'Save As..',
           accelerator: 'Shift+CmdOrCtrl+S',
           click: function() { saveFile(); }
+        },
+        {
+          label: 'Export as Datapackage',
+          accelerator: 'CmdOrCtrl+D',
+          click: function() { datapackage.exportDatapackage(); }
         },
         {
           label: 'Validate',
