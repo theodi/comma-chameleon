@@ -40,6 +40,7 @@ exports.exportDatapackage = function() {
 }
 
 function datapackageJson(data) {
+  //debugger
   data.keywords = data.keywords.split(",")
   data.resources = [
     {
@@ -53,7 +54,7 @@ function datapackageJson(data) {
 
 function generateDatapackage(fileName, data, csv) {
   zip = new require('node-zip')();
-  zip.file('datapackage.json', JSON.stringify(data));
+  zip.file('datapackage.json', JSON.stringify(data,null, 4));
   zip.file('data/' + data.name + '.csv', csv);
   zipData = zip.generate({base64:false,compression:'DEFLATE'});
   Fs.writeFileSync(fileName, zipData, 'binary');
