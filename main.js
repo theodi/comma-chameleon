@@ -292,6 +292,7 @@ function exportDatapackage() {
   });
 
   ipc.once('sendDatapackage', function(e, data) {
+    data.keywords = data.keywords.split(",")
     data.resources = [
       {
         "name": data.name,
