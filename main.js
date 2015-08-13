@@ -144,6 +144,17 @@ app.on('ready', function() {
       ]
     },
     {
+
+      label: 'Tools',
+      submenu: [
+        {
+          label: 'Generate Header',
+          selector: function(){ generateSchemaFromHeader(); }
+        }
+      ]
+
+    },
+    {
       label: 'View',
       submenu: [
         {
@@ -203,7 +214,7 @@ function createWindow(data, title) {
   mainWindow.loadUrl('file://' + __dirname + '/index.html');
 
   // Open the devtools.
-  mainWindow.openDevTools();
+  //mainWindow.openDevTools();
 
   mainWindow.webContents.on('did-finish-load', function() {
     mainWindow.setTitle(title);
