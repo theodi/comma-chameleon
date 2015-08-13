@@ -84,3 +84,6 @@ body, html {
 .validation-info {
   background-color: rgba(99, 149, 215, 0.6);
 }
+.hidden {
+  display: none;
+}

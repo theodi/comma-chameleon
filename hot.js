@@ -80,6 +80,7 @@ function getValidation(content) {
 
 function validate() {
   data = hot.getData().map(function(d) { return d.join(",") }).join("\r\n")
+  $('#right-panel').removeClass("hidden")
   getValidation(data).then(function(json_validation) {
     errors = json_validation.validation.errors
     warnings = json_validation.validation.warnings
