@@ -26,14 +26,20 @@ ipc.on('loadCSV', function(data) {
   csv = $.csv.toArrays(data);
   hot.loadData(csv);
   refactorColumns(csv);
+  fixRaggedRows(csv);
 });
 
 ipc.on('saveData', function(fileName) {
-  data = hot.getData().map(function(d) { return d.join(",") }).join("\n")
+  data = hot.getData().map(function(d) { return d.join(",") }).join("\r\n")
   fs.writeFile(fileName, data, function (err) {
   });
   document.title = fileName;
 });
+
+ipc.on('getCSV', function() {
+  data = hot.getData().map(function(d) { return d.join(",") }).join("\r\n")
+  ipc.send('sendCSV', data);
+})
 
 ipc.on('validate', function() {
   validate();
@@ -81,11 +87,25 @@ function validate() {
     console.error(errors);
     console.warn(warnings);
     console.info(info_messages);
-    //document.getElementById("message-panel").setAttribute("visibility", "visible");
-    //document.getElementById("response").setAttribute("visibility", "visible");
-    document.getElementById("message-panel").innerHTML = JSON.stringify(errors)+JSON.stringify(warnings)+JSON.stringify(info_messages);
-
+    displayValidationMessages(json_validation.validation);
   });
+}
+
+
+function displayValidationMessages(validation) {
+  var $messagePanel = $('#message-panel');
+  var messageTemplate = _.template('<div class="<%= cssClass %>"><p><%= type %> <% if (row) print("on row " + row) %> <% if (col) print("on column " + col) %></p></div>');
+  var messages = _.flatten([
+    _.map(validation.errors,   function(d) { return _.extend({}, d, { cssClass: 'message validation-error' }) }),
+    _.map(validation.warnings, function(d) { return _.extend({}, d, { cssClass: 'message validation-warning' }) }),
+    _.map(validation.info,     function(d) { return _.extend({}, d, { cssClass: 'message validation-info' }) })
+  ]);
+  if (messages.length) {
+    var html = _.map(messages, messageTemplate);
+    $messagePanel.html(html);
+  } else {
+    $messagePanel.html('<p>CSV Valid!</p>');
+  }
 }
 
 function refactorColumns(csv) {
@@ -105,4 +125,33 @@ function getMaxColumns(csv) {
     }
   }
   return max_columns
+}
+
+// Fills undefined cells with an empty string, keeping the table in a
+// rectangular format
+
+function fixRaggedRows(csv) {
+  ragged_rows = 0;
+  //
+  for (var y = 0; y < hot.countRows(); y++) {
+    for (var x = 0; x < getMaxColumns(csv); x++) {
+      if (hot.getDataAtCell(y,x) === undefined) {
+        if (ragged_rows == 0) {
+          if (confirm("Your file has ragged rows, do you want to correct this?")) {
+            ragged_rows = 1
+            fixCell(x,y)
+          }
+          else {ragged_rows = -1}
+        }
+        else if (ragged_rows == 1) {
+          fixCell(x,y)
+        }
+      }
+    }
+  }
+}
+
+function fixCell(x,y) {
+  hot.setDataAtCell(y,x,"")
+  console.log("Cell (" + String.fromCharCode(97 + y).toUpperCase() + "," + (x + 1) + ") has been added to file")
 }
