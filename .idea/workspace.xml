@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f1122128-0b3d-465b-9029-11ae65cf7deb" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/select_worksheet.html" />
+    <list default="true" id="f1122128-0b3d-465b-9029-11ae65cf7deb" name="Default" comment="&#10;">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/datapackage.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/datapackage.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bower.json" afterPath="$PROJECT_DIR$/bower.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hot.js" afterPath="$PROJECT_DIR$/hot.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
@@ -30,41 +31,41 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="false">
+      <file leaf-file-name="package.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/package.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-5.625">
+              <caret line="11" column="1" selection-start-line="10" selection-start-column="3" selection-end-line="11" selection-end-column="1" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
+            <state vertical-scroll-proportion="0.11597938">
               <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/main.js">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5025773">
-              <caret line="208" column="31" selection-start-line="208" selection-start-column="31" selection-end-line="208" selection-end-column="31" />
+            <state vertical-scroll-proportion="-9.803922">
+              <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="panels.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/panels.css">
+      <file leaf-file-name="bower.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/bower.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="38" column="25" selection-start-line="38" selection-start-column="25" selection-end-line="38" selection-end-column="25" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="hot.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/hot.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="27" column="18" selection-start-line="26" selection-start-column="15" selection-end-line="26" selection-end-column="18" />
+            <state vertical-scroll-proportion="-0.0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -74,7 +75,7 @@
         <entry file="file://$PROJECT_DIR$/editor.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+              <caret line="31" column="32" selection-start-line="31" selection-start-column="32" selection-end-line="31" selection-end-column="32" />
               <folding>
                 <element signature="e#0#49#0" expanded="false" />
               </folding>
@@ -82,11 +83,33 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/index.html">
+      <file leaf-file-name="main.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-10.0">
-              <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+            <state vertical-scroll-proportion="-67.22222">
+              <caret line="287" column="50" selection-start-line="287" selection-start-column="50" selection-end-line="287" selection-end-column="50" />
+              <folding>
+                <element signature="e#1095#4773#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="select_worksheet.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/select_worksheet.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-2.1568627">
+              <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="hot.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/hot.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="20" column="25" selection-start-line="20" selection-start-column="25" selection-end-line="20" selection-end-column="25" />
               <folding />
             </state>
           </provider>
@@ -133,18 +156,19 @@
         <option value="$PROJECT_DIR$/app/electron_spec/api-app.spec.js" />
         <option value="$PROJECT_DIR$/app/electron_spec/api-browser.window-spec.js" />
         <option value="$PROJECT_DIR$/app/electron_spec/package.json" />
-        <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/app/electron_spec/chromium.spec.js" />
         <option value="$PROJECT_DIR$/app/app.js" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/hot.js" />
         <option value="$PROJECT_DIR$/codemirror.js" />
         <option value="$PROJECT_DIR$/schema_editor.js" />
+        <option value="$PROJECT_DIR$/select_worksheet.html" />
+        <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/editor.js" />
-        <option value="$PROJECT_DIR$/index.html" />
-        <option value="$PROJECT_DIR$/panels.css" />
         <option value="$PROJECT_DIR$/main.js" />
+        <option value="$PROJECT_DIR$/panels.css" />
+        <option value="$PROJECT_DIR$/index.html" />
+        <option value="$PROJECT_DIR$/hot.js" />
       </list>
     </option>
   </component>
@@ -198,20 +222,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="edward-csvhands" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="edward-csvhands" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="edward-csvhands" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fixtures" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -452,7 +462,79 @@
       <option name="project" value="LOCAL" />
       <updated>1439410639882</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="resolving conflicts to get up to date with import Excel amendments">
+      <created>1439457947450</created>
+      <option name="number" value="00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1439457947450</updated>
+    </task>
+    <task id="LOCAL-00026" summary="an ongoing battle with CSS and not fully implemented bootstrap">
+      <created>1439466523133</created>
+      <option name="number" value="00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1439466523133</updated>
+    </task>
+    <task id="LOCAL-00027" summary="changes made to include bootstrap and organise the various divs-as-panels">
+      <created>1439466547556</created>
+      <option name="number" value="00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1439466547556</updated>
+    </task>
+    <task id="LOCAL-00028" summary="a very down and dirty (DOM manipulation all the way down) employment of the tidy JSON viewer &amp; editor, worth noting that I have taken the save function logic out of this script, need to check if this is the protocol for electron &amp; IPC &amp; renderer separation of concerns">
+      <created>1439466640396</created>
+      <option name="number" value="00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1439466640396</updated>
+    </task>
+    <task id="LOCAL-00029" summary="including bootstrap JS in this view">
+      <created>1439466665768</created>
+      <option name="number" value="00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1439466665768</updated>
+    </task>
+    <task id="LOCAL-00030" summary="new dependencies">
+      <created>1439466687814</created>
+      <option name="number" value="00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1439466687814</updated>
+    </task>
+    <task id="LOCAL-00031" summary="TL;DR some new methods and refactors of existing methods to account for using an inline JSON editor for editing schemas, may be deprecated due to being user unfriendly/daunting feature&#10;&#10;loadElements function has been created to counter logic of creating window everytime a file is loaded&#10; this change has been necessary because schema and csv are loaded in same window,&#10; if schema generation becomes a background task then this change could be reverted&#10;&#10; saveSchema method written to handle saving JSON files - currently contradicts how IPC has been separated to date&#10; this method employs path to auto suggest the name of the csv as a name for the JSON schema being saved">
+      <created>1439466974426</created>
+      <option name="number" value="00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1439466974426</updated>
+    </task>
+    <task id="LOCAL-00032" summary="adding loadschema to menu">
+      <created>1439471917081</created>
+      <option name="number" value="00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1439471917081</updated>
+    </task>
+    <task id="LOCAL-00033" summary="adding saveSchema to menu,but this seems very verbose">
+      <created>1439472524105</created>
+      <option name="number" value="00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1439472524105</updated>
+    </task>
+    <task id="LOCAL-00034" summary="button save function removed">
+      <created>1439472700228</created>
+      <option name="number" value="00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1439472700228</updated>
+    </task>
+    <task id="LOCAL-00035" summary="integrating functionality where open csv triggers a new window, and open schema adds an element to existing window">
+      <created>1439473320695</created>
+      <option name="number" value="00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1439473320695</updated>
+    </task>
+    <task id="LOCAL-00036" summary="the json schema editor can be silently toggled on and off by omitting or including the JS file per line 49">
+      <created>1439473664650</created>
+      <option name="number" value="00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1439473664650</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -464,7 +546,9 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3295325" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.329602" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -472,10 +556,8 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.329602" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3295325" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
     </layout>
@@ -492,19 +574,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="new branch for testing" />
-    <MESSAGE value="// below were from electrons test package.json" />
-    <MESSAGE value="have imported the test files from electron https://github.com/atom/electron&#10;I converted the coffeescript to javascript using npm package coffee -c *.coffee&#10;I tested each test against the native npm test afforded by this framework&#10;there are 121 failures and 70 tests which have no assertions, so there is no way to know if they are passing" />
-    <MESSAGE value="updating readme with provenance" />
-    <MESSAGE value="rewriting the readme" />
-    <MESSAGE value="writing gitignore correctly" />
-    <MESSAGE value="attempts at getting jasmine to play ball, using standalone jasmine download in order to avail of specrunner" />
-    <MESSAGE value="borrowing the fixtures from CSVlint to have a supply of local files relevant to USP of this project" />
-    <MESSAGE value="borrowing the fixtures from CSVlint to have a supply of local files relevant to USP of this project, however I am adding them to the gitignore for now because a git warning is thrown regarding the fixutre CSVs that use CRLF line breaks" />
-    <MESSAGE value="formatting change to main to make loadData function more legible&#10;to provide a solution for the panel which can dispaly csvlint.io API results a div has been implemented, rather than employing a full blown panel module&#10;css file created to handle formatting of panel and editor pane&#10;known issues: conflicts with the handontable CSS, notably not being able to employ scroll: overflow" />
-    <MESSAGE value="amending hot.js to change eventListener to the editor panel only to prevent errors when right clicking repsonse DIV" />
-    <MESSAGE value="mystery as to how to integrate jquery" />
-    <MESSAGE value="writing small functions to determine the filetype opened by application" />
     <MESSAGE value="successfully detect different files" />
     <MESSAGE value="building skeleton for schema editor" />
     <MESSAGE value="changing origin of eventListener at this point because it will trigger javascript errors whenever a rightclick occurs on part of the window that does not contain the handsontable" />
@@ -517,10 +586,25 @@
     <MESSAGE value="tidy json editor incorporated from https://github.com/josdejong/jsoneditor/ - could perhaos also be loaded as bower module&#10;known issue - opening a schema or a csv causes the entire window to lose state, and the CSV and schema files will get lost in memory" />
     <MESSAGE value="editor controller - currently need a better failing mechanism when a schema doesn't load" />
     <MESSAGE value="Merge branch 'master' of https://github.com/theodi/edward-csvhands into open-different-file-types&#10;&#10;# resolved Conflicts:&#10;#&#9;index.html&#10;#&#9;main.js&#10;#&#9;package.json&#10;#&#9;panels.css&#10;" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merge branch 'master' of https://github.com/theodi/edward-csvhands into open-different-file-types&#10;&#10;# resolved Conflicts:&#10;#&#9;index.html&#10;#&#9;main.js&#10;#&#9;package.json&#10;#&#9;panels.css&#10;" />
+    <MESSAGE value="resolving conflicts to get up to date with import Excel amendments" />
+    <MESSAGE value="an ongoing battle with CSS and not fully implemented bootstrap" />
+    <MESSAGE value="changes made to include bootstrap and organise the various divs-as-panels" />
+    <MESSAGE value="a very down and dirty (DOM manipulation all the way down) employment of the tidy JSON viewer &amp; editor, worth noting that I have taken the save function logic out of this script, need to check if this is the protocol for electron &amp; IPC &amp; renderer separation of concerns" />
+    <MESSAGE value="including bootstrap JS in this view" />
+    <MESSAGE value="new dependencies" />
+    <MESSAGE value="TL;DR some new methods and refactors of existing methods to account for using an inline JSON editor for editing schemas, may be deprecated due to being user unfriendly/daunting feature&#10;&#10;loadElements function has been created to counter logic of creating window everytime a file is loaded&#10; this change has been necessary because schema and csv are loaded in same window,&#10; if schema generation becomes a background task then this change could be reverted&#10;&#10; saveSchema method written to handle saving JSON files - currently contradicts how IPC has been separated to date&#10; this method employs path to auto suggest the name of the csv as a name for the JSON schema being saved" />
+    <MESSAGE value="adding loadschema to menu" />
+    <MESSAGE value="adding saveSchema to menu,but this seems very verbose" />
+    <MESSAGE value="button save function removed" />
+    <MESSAGE value="integrating functionality where open csv triggers a new window, and open schema adds an element to existing window" />
+    <MESSAGE value="the json schema editor can be silently toggled on and off by omitting or including the JS file per line 49" />
+    <MESSAGE value="conflict resolved but reconfiguration of index necessary because changes have been made to layout of panels" />
+    <option name="LAST_COMMIT_MESSAGE" value="conflict resolved but reconfiguration of index necessary because changes have been made to layout of panels" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <option name="time" value="1" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
@@ -536,7 +620,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="96" column="9" selection-start-line="96" selection-start-column="9" selection-end-line="96" selection-end-column="9" />
-          <folding />
+          <folding>
+            <element signature="e#1095#4773#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -586,7 +672,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="233" column="11" selection-start-line="233" selection-start-column="11" selection-end-line="233" selection-end-column="11" />
-          <folding />
+          <folding>
+            <element signature="e#1095#4773#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -636,7 +724,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="233" column="11" selection-start-line="233" selection-start-column="11" selection-end-line="233" selection-end-column="11" />
-          <folding />
+          <folding>
+            <element signature="e#1095#4773#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -731,14 +821,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.51724136">
-          <caret line="25" column="22" selection-start-line="25" selection-start-column="22" selection-end-line="25" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider editor-type-id="MultiMarkdownPreviewEditor">
         <state />
@@ -758,18 +840,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/hot.js">
+    <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="27" column="18" selection-start-line="26" selection-start-column="15" selection-end-line="26" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+        <state vertical-scroll-proportion="-5.625">
+          <caret line="11" column="1" selection-start-line="10" selection-start-column="3" selection-end-line="11" selection-end-column="1" />
           <folding />
         </state>
       </provider>
@@ -777,33 +851,67 @@
     <entry file="file://$PROJECT_DIR$/editor.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+          <caret line="31" column="32" selection-start-line="31" selection-start-column="32" selection-end-line="31" selection-end-column="32" />
           <folding>
             <element signature="e#0#49#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
+    <entry file="file://$PROJECT_DIR$/select_worksheet.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.0">
-          <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/panels.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="38" column="25" selection-start-line="38" selection-start-column="25" selection-end-line="38" selection-end-column="25" />
+        <state vertical-scroll-proportion="-2.1568627">
+          <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5025773">
-          <caret line="208" column="31" selection-start-line="208" selection-start-column="31" selection-end-line="208" selection-end-column="31" />
+        <state vertical-scroll-proportion="-67.22222">
+          <caret line="287" column="50" selection-start-line="287" selection-start-column="50" selection-end-line="287" selection-end-column="50" />
+          <folding>
+            <element signature="e#1095#4773#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hot.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="20" column="25" selection-start-line="20" selection-start-column="25" selection-end-line="20" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.803922">
+          <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bower.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/panels.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.36726806">
+          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.11597938">
+          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
           <folding />
         </state>
       </provider>
