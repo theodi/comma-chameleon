@@ -22,7 +22,7 @@ container.addEventListener('contextmenu', function (e) {
   columnLeft.enabled = true
 }, false);
 
-ipc.on('loadCSV', function(data) {
+ipc.on('loadData', function(data) {
   csv = $.csv.toArrays(data);
   hot.loadData(csv);
   refactorColumns(csv);
@@ -83,9 +83,12 @@ function validate() {
   $('#right-panel').removeClass("hidden")
   $('#message-panel').html("<div class=\"validation-load\"><p><span class=\"glyphicon glyphicon-refresh spinning\"></span></p><p>Loading validation results...</p></div>");
   getValidation(data).then(function(json_validation) {
-    errors = json_validation.validation.errors;
-    warnings = json_validation.validation.warnings;
-    info_messages = json_validation.validation.info;
+    errors = json_validation.validation.errors
+    warnings = json_validation.validation.warnings
+    info_messages = json_validation.validation.info
+    console.error(errors)
+    console.warn(warnings)
+    console.info(info_messages);
     displayValidationMessages(json_validation.validation);
   });
 }

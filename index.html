@@ -5,17 +5,11 @@
     <script>
     window.$ = window.jQuery = require('./bower_components/jquery/dist/jquery.js');
     </script>
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="bower_components/handsontable/dist/handsontable.full.css" />
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="panels.css" />
-
-    <link href="node_modules/jsoneditor/dist/jsoneditor.min.css" rel="stylesheet" type="text/css">
-    <script src="node_modules/jsoneditor/dist/jsoneditor.min.js"></script>
-
     <script src="bower_components/handsontable/dist/handsontable.full.js"></script>
     <script src="bower_components/jquery-csv/src/jquery.csv.min.js"></script>
-    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="bower_components/lodash/lodash.min.js"></script>
   </head>
   <body>
@@ -24,27 +18,16 @@
       <div id="top-panel"></div>
       <div id="main-panel">
         <div id="left-panel">
-          lalalalal
-          <div id="message-panel"></div>
         </div>
         <div id="middle-panel">
           <div id="editor"></div>
         </div>
-      <div id="right-panel" class="hidden">
-        <div id="message-panel"></div>
-          <div id="schema-editor" class="col-md-4">
-            <div id="jsoneditor">
-            </div>
-          </div>
-          <div id="interactions">
-            <button id="change-to-tree-view" class="btn btn-default">Toggle Tree View</button><button id="change-to-code-editor" class="btn btn-default">Toggle Code View</button><button id="change-to-text-editor" class="btn btn-default">Toggle Text View</button>
-          </div>
+        <div id="right-panel" class="hidden">
+          <div id="message-panel"></div>
         </div>
       </div>
     </div>
     <script src="hot.js"></script>
-    <!--<script src="editor.js"></script>-->
-    <!--comment out this line to silently omit the schema editor-->
     <script src="menu.js"></script>
   </body>
 </html>
