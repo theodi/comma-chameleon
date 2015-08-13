@@ -25,6 +25,7 @@ container.addEventListener('contextmenu', function (e) {
 ipc.on('loadCSV', function(data) {
   csv = $.csv.toArrays(data);
   hot.loadData(csv);
+  refactorColumns(csv);
 });
 
 ipc.on('saveData', function(fileName) {
@@ -72,7 +73,7 @@ function getValidation(content) {
 // Splits validation returned from CSVLint into errors, warnings and info messages
 
 function validate() {
-  data = hot.getData().map(function(d) { return d.join(",") }).join("\n")
+  data = hot.getData().map(function(d) { return d.join(",") }).join("\r\n")
   getValidation(data).then(function(json_validation) {
     errors = json_validation.validation.errors;
     warnings = json_validation.validation.warnings;
@@ -85,4 +86,23 @@ function validate() {
     document.getElementById("message-panel").innerHTML = JSON.stringify(errors)+JSON.stringify(warnings)+JSON.stringify(info_messages);
 
   });
+}
+
+function refactorColumns(csv) {
+  col_add = getMaxColumns(csv) - hot.countCols()
+  // adds a column by default if the amount parameter is 0, hence conditional
+  if (col_add != 0) {
+    hot.alter('insert_col', null, col_add)
+  }
+}
+
+function getMaxColumns(csv) {
+  max_columns = 0
+  for (var i = 0; i < csv.length; i++) {
+    col_length = csv[i].length
+    if (col_length > max_columns) {
+      max_columns = col_length
+    }
+  }
+  return max_columns
 }

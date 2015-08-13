@@ -4,7 +4,12 @@ var BrowserWindow = require('browser-window');  // Module to create native brows
 var Menu = require('menu');
 var Dialog = require('dialog');
 var Fs = require('fs');
+<<<<<<< HEAD
 var mime = require('mime');
+=======
+var XLSX = require('xlsx');
+var ipc = require('ipc');
+>>>>>>> a8045e3fcc7ca7ea25e8b3d7b3e8356f218fe81a
 
 // Report crashes to our server.
 require('crash-reporter').start();
@@ -83,7 +88,10 @@ app.on('ready', function() {
         {
           label: 'Open Schema',
           //accelerator: 'CmdOrCtrl+O',
-          click: function() { openSchema(); }
+          click: function() { openSchema(); },
+        {
+          label: 'Import Excel file',
+          click: function() { importExcel(); }
         },
         {
           label: 'Save As..',
@@ -238,6 +246,7 @@ function openSchema(){
 }
 
 function openFile() {
+<<<<<<< HEAD
 //<<<<<<< HEAD
   Dialog.showOpenDialog(
     // browserWindow - permissable nil as default?
@@ -283,6 +292,23 @@ function parseFile(fileNames){
 //            }
 //        });
 //>>>>>>> 92c629b6aac3202537bf0df16205b742039a9044
+=======
+    Dialog.showOpenDialog(
+        { filters: [
+            { name: 'csv files', extensions: ['csv'] },
+            { name: 'json schemas', extensions: ['json'] }
+        ]}, function (fileNames) {
+            if (fileNames === undefined) {
+                return;
+            } else {
+                console.log("the file processed = "+JSON.stringify(fileNames));
+                var fileName = fileNames[0];
+                Fs.readFile(fileName, 'utf-8', function (err, data) {
+                    createWindow(data, fileName);
+                });
+            }
+        });
+>>>>>>> a8045e3fcc7ca7ea25e8b3d7b3e8356f218fe81a
 }
 
 function saveFile() {
@@ -292,6 +318,39 @@ function saveFile() {
   ]}, function (fileName) {
     if (fileName === undefined) return;
     window.webContents.send('saveData', fileName);
+  });
+}
+
+function importExcel() {
+  Dialog.showOpenDialog({ filters: [
+    { name: 'text', extensions: ['xlsx', 'xls'] }
+  ]}, function (fileNames) {
+    if (fileNames === undefined) return;
+    var fileName = fileNames[0];
+    var workbook = XLSX.readFile(fileName);
+    var first_sheet_name = workbook.SheetNames[0];
+    var worksheet = workbook.Sheets[first_sheet_name];
+
+    popup = new BrowserWindow({width: 300, height: 150, 'always-on-top': true});
+    popup.loadUrl('file://' + __dirname + '/select_worksheet.html');
+
+    popup.webContents.on('did-finish-load', function() {
+      popup.webContents.send('loadSheets', workbook.SheetNames);
+
+      ipc.once('worksheetSelected', function(e, sheet_name) {
+        data = XLSX.utils.sheet_to_csv(workbook.Sheets[sheet_name]);
+        popup.close();
+        createWindow(data);
+      });
+
+      ipc.once('worksheetCanceled', function() {
+        popup.close();
+      });
+    });
+
+    popup.on('closed', function() {
+      popup = null;
+    });
   });
 }
 
