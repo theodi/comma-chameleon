@@ -25,11 +25,12 @@ document.getElementById("change-to-tree-view").addEventListener("click", functio
   editor.setMode('tree');
 });
 
-document.getElementById("save-schema").addEventListener("click", function(){
-  ipc.send('saveSchema', editor.get());
-});
+//document.getElementById("save-schema").addEventListener("click", function(){
+//  ipc.send('saveSchema', editor.get());
+//});
 
 ipc.on('schemaSave', function(){
+  console.log(editor.get());
   ipc.send('saveSchema', editor.get());
 });
 
