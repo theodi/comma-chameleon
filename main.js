@@ -4,8 +4,11 @@ var BrowserWindow = require('browser-window');  // Module to create native brows
 var Menu = require('menu');
 var Dialog = require('dialog');
 var Fs = require('fs');
+var mime = require('mime');
 var XLSX = require('xlsx');
 var ipc = require('ipc');
+var path = require('path');
+
 
 var datapackage = require('./datapackage')
 
@@ -82,6 +85,16 @@ app.on('ready', function() {
           label: 'Open..',
           accelerator: 'CmdOrCtrl+O',
           click: function() { openFile(); }
+        },
+        {
+          label: 'Open Schema',
+
+          click: function(){ loadSchema();}
+        },
+        {
+          label: 'Save Schema',
+
+          click: function(){ schemaSave(); }
         },
         {
           label: 'Import Excel file',
@@ -193,6 +206,8 @@ app.on('ready', function() {
   createWindow();
 });
 
+
+
 function createWindow(data, title) {
   data = typeof data !== 'undefined' ? data : '"","",""';
   title = typeof title !== 'undefined' ? title : "Untitled.csv";
@@ -203,48 +218,122 @@ function createWindow(data, title) {
   mainWindow.loadUrl('file://' + __dirname + '/index.html');
 
   // Open the devtools.
-  mainWindow.openDevTools();
+  //mainWindow.openDevTools();
 
   mainWindow.webContents.on('did-finish-load', function() {
     mainWindow.setTitle(title);
-    mainWindow.webContents.send('loadData', data);
+    mainWindow.webContents.send('loadCSV', data);
   });
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function() {
-    // Dereference the window object, usually you would store windows
-    // in an array if your app supports multi windows, this is the time
-    // when you should delete the corresponding element.
+    console.log("the main window still closes as aniticpated");
     mainWindow = null;
   });
 }
 
-function openFile() {
-    Dialog.showOpenDialog(
-        { filters: [
-            { name: 'csv files', extensions: ['csv'] },
-            { name: 'json schemas', extensions: ['json'] }
-        ]}, function (fileNames) {
-            if (fileNames === undefined) {
-                return;
-            } else {
-                console.log("the file processed = "+JSON.stringify(fileNames));
-                var fileName = fileNames[0];
-                Fs.readFile(fileName, 'utf-8', function (err, data) {
-                    createWindow(data, fileName);
-                });
-            }
-        });
+function loadElements(data, title) {
+  data = typeof data !== 'undefined' ? data : '"","",""';
+  title = typeof title !== 'undefined' ? title : "Untitled.csv";
+  window = BrowserWindow.getFocusedWindow();
+  window.webContents.send('loadSchema', data);
 }
+
+function openFile() {
+
+  Dialog.showOpenDialog(
+    // browserWindow - permissable nil as default?
+    // options
+    { filters: [
+        { name: 'text', extensions: ['csv', 'json'] }
+    ]},
+    // callback
+    function (fileNames) {
+      console.log("open file grabs "+fileNames);
+      console.log(typeof fileNames);
+      if (fileNames === undefined) {
+        return;
+      } else{
+        parseFile(fileNames);
+      }
+  });
+} // end open file
+
+function parseFile(fileNames){
+  var fileName = fileNames[0];
+  fileExtension = mime.extension(mime.lookup(fileName));
+  console.log(fileExtension);
+  console.log(typeof fileExtension);
+  if(fileExtension === 'csv'){
+    console.log("open a new window");
+    Fs.readFile(fileName, 'utf-8', function (err, data) {
+      createWindow(data, fileName)
+    });
+  } else {
+    console.log("stay within window, open up a schema pane");
+    Fs.readFile(fileName, 'utf-8', function (err, data) {
+      loadElements(data, fileName);
+    });
+  }
+}
+
 
 function saveFile() {
   window = BrowserWindow.getFocusedWindow();
-  Dialog.showSaveDialog({ filters: [
+  Dialog.showSaveDialog({
+    filters: [
     { name: 'text', extensions: ['csv'] }
   ]}, function (fileName) {
     if (fileName === undefined) return;
     window.webContents.send('saveData', fileName);
   });
+}
+
+// save schema - currently contradicts how IPC has been separated to date
+
+function schemaSave(){
+  window = BrowserWindow.getFocusedWindow();
+  window.webContents.send("schemaSave");
+}
+
+ipc.on('saveSchema', function(event,arg){
+  console.log(JSON.stringify(arg));
+  console.log("have landed within the saveSchema IPC");
+  window = BrowserWindow.getFocusedWindow();
+  var csvFileName = window.getTitle();
+  var associatedFileName = path.basename(csvFileName).replace(".csv", "");
+  Dialog.showSaveDialog({
+    defaultPath: associatedFileName,
+    filters: [
+    { name: 'text', extensions: ['json'] }
+    ]},
+    function (fileName) {
+    if (fileName === undefined) return;
+    console.log("the filename should be "+fileName);
+    Fs.writeFile(fileName, JSON.stringify(arg, null, 4), function (err) {
+    });
+  });
+});
+
+function loadSchema(){
+  // function to handle loading schema from menu
+  Dialog.showOpenDialog(
+    // browserWindow - permissable nil as default?
+    // options
+    { filters: [
+      { name: 'text', extensions: ['json'] }
+    ]},
+    // callback
+    function (fileNames) {
+      console.log("open file grabs "+fileNames);
+      console.log(typeof fileNames);
+      if (fileNames === undefined) {
+        return;
+      }
+      else{
+        parseFile(fileNames);
+      }
+    });
 }
 
 function importExcel() {
