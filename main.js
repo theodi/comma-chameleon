@@ -200,7 +200,7 @@ app.on('ready', function() {
 
 
 
-function createWindow(data, title, datatype) {
+function createWindow(data, title) {
   data = typeof data !== 'undefined' ? data : '"","",""';
   title = typeof title !== 'undefined' ? title : "Untitled.csv";
 
@@ -210,17 +210,11 @@ function createWindow(data, title, datatype) {
   mainWindow.loadUrl('file://' + __dirname + '/index.html');
 
   // Open the devtools.
-  mainWindow.openDevTools();
+  //mainWindow.openDevTools();
 
   mainWindow.webContents.on('did-finish-load', function() {
     mainWindow.setTitle(title);
-    if (datatype === 'csv') {
-      mainWindow.webContents.send('loadCSV', data);
-    }
-    else if (datatype === 'json') {
-      console.log("unsupported file type");
-      mainWindow.webContents.send('loadSchema', data);
-    }
+    mainWindow.webContents.send('loadCSV', data);
   });
 
   // Emitted when the window is closed.
@@ -230,24 +224,11 @@ function createWindow(data, title, datatype) {
   });
 }
 
-// loadElements function has been created to counter logic of creating window everytime a file is loaded
-// this change has been necessary because schema and csv are loaded in same window,
-// if schema generation becomes a background task then this change could be reverted
-
-function loadElements(data, title, datatype) {
+function loadElements(data, title) {
   data = typeof data !== 'undefined' ? data : '"","",""';
   title = typeof title !== 'undefined' ? title : "Untitled.csv";
   window = BrowserWindow.getFocusedWindow();
-  // this has been included to set the default window to display the name of the CSV file being edited, this
-  // value is later retrieved for saving the schema to have the same file name as the CSV it has been loaded within
-
-    if (datatype === 'csv') {
-      window.setTitle(title);
-      window.webContents.send('loadCSV', data);
-    }
-    else if (datatype === 'json') {
-      window.webContents.send('loadSchema', data);
-    }
+  window.webContents.send('loadSchema', data);
 }
 
 function openFile() {
@@ -264,8 +245,7 @@ function openFile() {
       console.log(typeof fileNames);
       if (fileNames === undefined) {
         return;
-      }
-      else{
+      } else{
         parseFile(fileNames);
       }
   });
@@ -276,9 +256,17 @@ function parseFile(fileNames){
   fileExtension = mime.extension(mime.lookup(fileName));
   console.log(fileExtension);
   console.log(typeof fileExtension);
-  Fs.readFile(fileName, 'utf-8', function (err, data) {
-    loadElements(data, fileName, fileExtension);
-  });
+  if(fileExtension === 'csv'){
+    console.log("open a new window");
+    Fs.readFile(fileName, 'utf-8', function (err, data) {
+      createWindow(data, fileName)
+    });
+  } else {
+    console.log("stay within window, open up a schema pane");
+    Fs.readFile(fileName, 'utf-8', function (err, data) {
+      loadElements(data, fileName);
+    });
+  }
 }
 
 
