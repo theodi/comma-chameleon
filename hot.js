@@ -84,9 +84,6 @@ function validate() {
     errors = json_validation.validation.errors;
     warnings = json_validation.validation.warnings;
     info_messages = json_validation.validation.info;
-    console.error(errors);
-    console.warn(warnings);
-    console.info(info_messages);
     displayValidationMessages(json_validation.validation);
   });
 }
