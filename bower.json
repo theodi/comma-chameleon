@@ -8,6 +8,7 @@
   "dependencies": {
     "handsontable": "~0.16.1",
     "jquery": "~2.1.4",
-    "jquery-csv": "*"
+    "jquery-csv": "*",
+    "bootstrap": "3.3.5"
   }
 }
