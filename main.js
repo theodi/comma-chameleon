@@ -92,7 +92,7 @@ app.on('ready', function() {
         {
           label: 'Save Schema',
 
-          click: function(){}
+          click: function(){ schemaSave(); }
         },
         {
           label: 'Import Excel file',
@@ -294,6 +294,11 @@ function saveFile() {
 }
 
 // save schema - currently contradicts how IPC has been separated to date
+
+function schemaSave(){
+  window = BrowserWindow.getFocusedWindow();
+  window.webContents.send("schemaSave");
+}
 
 ipc.on('saveSchema', function(event,arg){
   console.log(JSON.stringify(arg));

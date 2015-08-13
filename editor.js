@@ -26,8 +26,10 @@ document.getElementById("change-to-tree-view").addEventListener("click", functio
 });
 
 document.getElementById("save-schema").addEventListener("click", function(){
-  console.log("trigger for saving");
-  console.log(editor.get());
+  ipc.send('saveSchema', editor.get());
+});
+
+ipc.on('schemaSave', function(){
   ipc.send('saveSchema', editor.get());
 });
 
