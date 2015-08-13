@@ -81,6 +81,8 @@ function getValidation(content) {
 function validate() {
   data = hot.getData().map(function(d) { return d.join(",") }).join("\r\n")
   $('#right-panel').removeClass("hidden")
+  $('#message-panel').html("<div class=\"validation-load\"><p><span class=\"glyphicon glyphicon-refresh spinning\"></span></p><p>Loading validation results...</p></div>");
+
   getValidation(data).then(function(json_validation) {
     errors = json_validation.validation.errors
     warnings = json_validation.validation.warnings
