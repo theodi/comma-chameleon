@@ -29,11 +29,16 @@ ipc.on('loadData', function(data) {
 });
 
 ipc.on('saveData', function(fileName) {
-  data = hot.getData().map(function(d) { return d.join(",") }).join("\n")
+  data = hot.getData().map(function(d) { return d.join(",") }).join("\r\n")
   fs.writeFile(fileName, data, function (err) {
   });
   document.title = fileName;
 });
+
+ipc.on('getCSV', function() {
+  data = hot.getData().map(function(d) { return d.join(",") }).join("\r\n")
+  ipc.send('sendCSV', data);
+})
 
 ipc.on('validate', function() {
   validate();

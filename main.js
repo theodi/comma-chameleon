@@ -91,6 +91,10 @@ app.on('ready', function() {
           click: function() { saveFile(); }
         },
         {
+          label: 'Export as Datapackage',
+          click: function() { exportDatapackage(); }
+        },
+        {
           label: 'Validate',
           accelerator: 'CmdOrCtrl+V',
           click: function() { validateFile(); }
@@ -275,4 +279,52 @@ function importExcel() {
 function validateFile() {
   window = BrowserWindow.getFocusedWindow();
   window.webContents.send('validate');
+}
+
+function exportDatapackage() {
+  var window = BrowserWindow.getFocusedWindow();
+
+  datapackage = new BrowserWindow({width: 450, height: 600, 'always-on-top': true});
+  datapackage.loadUrl('file://' + __dirname + '/datapackage.html');
+
+  datapackage.on('closed', function() {
+    datapackage = null;
+  });
+
+  ipc.once('sendDatapackage', function(e, data) {
+    data.resources = [
+      {
+        "name": data.name,
+        "path": "data/" + data.name + ".csv",
+        "mediatype": "text/csv"
+      }
+    ]
+    var data = data
+
+    Dialog.showSaveDialog({
+      filters: [
+        { name: 'text', extensions: ['zip'] }
+      ],
+      defaultPath: 'datapackage.zip'
+    }, function (fileName) {
+      datapackage.close();
+      if (fileName === undefined) return;
+      datapackage.close();
+
+      zip = new require('node-zip')();
+      zip.file('datapackage.json', JSON.stringify(data));
+
+      window.webContents.send('getCSV');
+
+      ipc.once('sendCSV', function(e, csv) {
+        zip.file('data/' + data.name + '.csv', csv);
+        zipData = zip.generate({base64:false,compression:'DEFLATE'});
+        Fs.writeFileSync(fileName, zipData, 'binary');
+      });
+    });
+  });
+
+  ipc.once('datapackageCanceled', function() {
+    datapackage.close();
+  });
 }
