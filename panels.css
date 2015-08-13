@@ -47,6 +47,60 @@ body, html {
   overflow: auto;
 }
 
+#message-panel {
+
+    background-color: rgba(139,0,0,0.5);
+    position: fixed;
+    /*left: 0;*/
+    bottom: 0;
+    right: 0;
+    overflow: scroll;
+    max-height: 25%;
+    z-index: 100;
+    padding: 5px 10px;
+    border-radius: 3px;
+    /*visibility: hidden;*/
+}
+
+#editor{
+    /*background-color: rgba(139,0,0,0.5);*/
+    position: fixed;
+    top: 0;
+    left:0;
+    /*max-width: 60%;*/
+    /*max-height: 70%;*/
+}
+
+#schema-editor {
+    /*font-family: "Courier New", Courier, monospace;*/
+    font-size: 10px;
+    /*background-color: rgba(24, 37, 139, 0.5);*/
+    position: fixed;
+    right: 0;
+    /*overflow: auto;*/
+    /*overflow: scroll;*/
+}
+
+    #jsoneditor {
+        font-family: "Courier New", Courier, monospace;
+        font-size: 10px;
+        /*background-color: rgba(24, 37, 139, 0.5);*/
+        position: fixed;
+        right: 0;
+        width: 38%;
+        height: 50%;
+        /*overflow: scroll;*/
+    }
+
+#interactions {
+    visibility: hidden;
+    /*workaround while merging branches*/
+    position: absolute;
+    height: 30%;
+    bottom: 0;
+    right: 0;
+}
+
 #right-panel {
   flex-grow: 1;
   max-width: 320px;
@@ -55,6 +109,7 @@ body, html {
   overflow: auto;
   border-left: 1px solid #eee;
   background: #f1f1f1;
+
 }
 
 .message {

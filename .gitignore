@@ -4,4 +4,4 @@ debug.log
 bower_components/
 node_modules/
 fixtures/
-.idea/
+.idea/workspace.xml
