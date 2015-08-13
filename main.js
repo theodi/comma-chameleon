@@ -293,7 +293,7 @@ function datapackageJson(data) {
   return data
 }
 
-function generateDatapackage(data, csv) {
+function generateDatapackage(fileName, data, csv) {
   zip = new require('node-zip')();
   zip.file('datapackage.json', JSON.stringify(data));
   zip.file('data/' + data.name + '.csv', csv);
@@ -325,7 +325,7 @@ function exportDatapackage() {
       window.webContents.send('getCSV');
 
       ipc.once('sendCSV', function(e, csv) {
-        generateDatapackage(data, csv)
+        generateDatapackage(fileName, data, csv)
       });
     });
   });
