@@ -112,43 +112,23 @@
       });
     });
 
-      $('#submit').click(function(e) {
-        datapackage = $('#datapackage').serializeObject();
-//        var rGrp = $("input[name=group1]");
-////        console.log(JSON.stringify(rGrp,null,4));
-////        console.log(JSON.stringify(rGrp.filter(":checked"),null,4));
-//        if(rGrp.filter(":checked")["length"] > 0){
-////          console.log("checkbox clicked");
-////          console.log(rGrp.filter(":checked"));
-////          debugger;
-//            includeHeaders = rGrp.filter(":checked").val();
-////          console.log(includeHeaders);
-//        }else{
-////          console.log("checkbox not clicked");
-//          includeHeaders = false;
-//        }
-        includeHeaders = headerOptionClicked();
-        console.log("do we have a headers var "+typeof includeHeaders);
-//        includeHeaders = headerOptionClicked();
-//        if (rGrp.filter(":checked")){ includeHeaders = rGrp.filter(":checked").checkedRadio.val(); }
-        ipc.send('sendDatapackage', datapackage, includeHeaders);
-      });
+    $('#submit').click(function(e) {
+      datapackage = $('#datapackage').serializeObject();
+      // serialise the wizard from the div
+      var includeHeaders = headerOptionClicked();
+      // retrieve a value for headers from the radio box
+      ipc.send('sendDatapackage', datapackage, includeHeaders);
+    });
 
-      $('#cancel').click(function() {
-        ipc.send('datapackageCanceled');
-      })
+    $('#cancel').click(function() {
+      ipc.send('datapackageCanceled');
+    });
 
       function headerOptionClicked(){
         var rGrp = $("input[name=group1]");
-//        console.log(JSON.stringify(rGrp,null,4));
-//        console.log(JSON.stringify(rGrp.filter(":checked"),null,4));
         if(rGrp.filter(":checked")["length"] > 0){
-//          console.log("checkbox clicked");
-//          console.log(rGrp.filter(":checked"));
-//          debugger;
-          includeHeaders = rGrp.filter(":checked").val()
-        }else{
-//          console.log("checkbox not clicked");
+          var includeHeaders = rGrp.filter(":checked").val();
+        } else{
           includeHeaders = false;
         }
         return includeHeaders;
