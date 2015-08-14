@@ -7,7 +7,7 @@ var Fs = require('fs');
 var XLSX = require('xlsx');
 var ipc = require('ipc');
 
-var datapackage = require('./datapackage')
+var datapackage = require('./datapackage');
 
 // Report crashes to our server.
 require('crash-reporter').start();
@@ -149,7 +149,7 @@ app.on('ready', function() {
       submenu: [
         {
           label: 'Generate Header',
-          selector: function(){ generateSchemaFromHeader(); }
+          click: function(){ generateSchemaFromHeader(); }
         }
       ]
 
@@ -214,7 +214,7 @@ function createWindow(data, title) {
   mainWindow.loadUrl('file://' + __dirname + '/index.html');
 
   // Open the devtools.
-  //mainWindow.openDevTools();
+  mainWindow.openDevTools();
 
   mainWindow.webContents.on('did-finish-load', function() {
     mainWindow.setTitle(title);
@@ -291,7 +291,16 @@ function importExcel() {
   });
 }
 
+// tools
+
 function validateFile() {
   window = BrowserWindow.getFocusedWindow();
   window.webContents.send('validate');
+}
+
+function generateSchemaFromHeader() {
+  console.log('menu-click');
+  window = BrowserWindow.getFocusedWindow();
+  window.webContents.send('schemaHeaders');
+  console.log('menu-click end');
 }
