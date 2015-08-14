@@ -25,7 +25,6 @@ container.addEventListener('contextmenu', function (e) {
 ipc.on('loadData', function(data) {
   csv = $.csv.toArrays(data);
   hot.loadData(csv);
-  //refactorColumns(csv_2);
   fixRaggedRows(csv);
 });
 
@@ -115,15 +114,6 @@ function displayValidationMessages(validation) {
     $messagePanel.append(html);
   } else {
     $messagePanel.append('<p>CSV Valid!</p>');
-  }
-}
-
-// Currently redundant unless the user refuses to fix ragged rows
-function refactorColumns(csv_array) {
-  col_add = getMaxColumns(csv_array) - hot.countCols()
-  // adds a column by default if the amount parameter is 0, hence conditional
-  if (col_add != 0) {
-    hot.alter('insert_col', null, col_add)
   }
 }
 

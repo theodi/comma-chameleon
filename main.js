@@ -103,11 +103,6 @@ app.on('ready', function() {
           accelerator: 'Shift+CmdOrCtrl+V',
           click: function() { validateFile(); }
         },
-        {
-          label: 'Fix Ragged Rows',
-          accelerator: "CmdOrCtrl+R",
-          click: function() { fixRaggedRowsFile(); }
-        }
       ]
     },
     {
@@ -145,6 +140,10 @@ app.on('ready', function() {
           label: 'Select All',
           accelerator: 'CmdOrCtrl+A',
           selector: 'selectAll:'
+        },
+        {
+          label: 'Fix Ragged Rows',
+          click: function() { fixRaggedRowsFile(); }
         }
       ]
     },
