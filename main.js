@@ -95,9 +95,16 @@ app.on('ready', function() {
           type: 'separator'
         },
         {
+          label: 'Save',
+          accelerator: 'CmdOrCtrl+S',
+          click: function() { saveFile(); },
+          enabled: false,
+          id: 'save'
+        },
+        {
           label: 'Save As..',
           accelerator: 'Shift+CmdOrCtrl+S',
-          click: function() { saveFile(); }
+          click: function() { saveFileAs(); }
         },
         {
           label: 'Export as Datapackage',
@@ -252,7 +259,7 @@ function openFile() {
         });
 }
 
-function saveFile() {
+function saveFileAs() {
   window = BrowserWindow.getFocusedWindow();
   Dialog.showSaveDialog({ filters: [
     { name: 'text', extensions: ['csv'] }
@@ -260,6 +267,12 @@ function saveFile() {
     if (fileName === undefined) return;
     window.webContents.send('saveData', fileName);
   });
+}
+
+function saveFile() {
+  window = BrowserWindow.getFocusedWindow();
+  fileName = window.getTitle();
+  window.webContents.send('saveData', fileName);
 }
 
 function importExcel() {
