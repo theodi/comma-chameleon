@@ -79,6 +79,9 @@ app.on('ready', function() {
           click: function() { createWindow(); }
         },
         {
+          type: 'separator'
+        },
+        {
           label: 'Open..',
           accelerator: 'CmdOrCtrl+O',
           click: function() { openFile(); }
@@ -87,6 +90,9 @@ app.on('ready', function() {
           label: 'Import Excel file',
           accelerator: 'CmdOrCtrl+I',
           click: function() { importExcel(); }
+        },
+        {
+          type: 'separator'
         },
         {
           label: 'Save As..',
