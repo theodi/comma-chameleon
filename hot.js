@@ -25,7 +25,7 @@ container.addEventListener('contextmenu', function (e) {
 ipc.on('loadData', function(data) {
   csv = $.csv.toArrays(data);
   hot.loadData(csv);
-  refactorColumns(csv);
+  //refactorColumns(csv_2);
   fixRaggedRows(csv);
 });
 
@@ -91,7 +91,6 @@ function validate() {
   });
 }
 
-
 function displayValidationMessages(validation) {
   var $messagePanel = $('#message-panel');
   var messageTemplate = _.template('<div class="<%= cssClass %>"><p><%= type %> <% if (row) print("on row " + row) %> <% if (col) print("on column " + col) %></p></div>');
@@ -108,18 +107,19 @@ function displayValidationMessages(validation) {
   }
 }
 
-function refactorColumns(csv) {
-  col_add = getMaxColumns(csv) - hot.countCols()
+// Currently redundant unless the user refuses to fix ragged rows
+function refactorColumns(csv_array) {
+  col_add = getMaxColumns(csv_array) - hot.countCols()
   // adds a column by default if the amount parameter is 0, hence conditional
   if (col_add != 0) {
     hot.alter('insert_col', null, col_add)
   }
 }
 
-function getMaxColumns(csv) {
+function getMaxColumns(csv_array) {
   max_columns = 0
-  for (var i = 0; i < csv.length; i++) {
-    col_length = csv[i].length
+  for (var i = 0; i < csv_array.length; i++) {
+    col_length = csv_array[i].length
     if (col_length > max_columns) {
       max_columns = col_length
     }
@@ -130,28 +130,35 @@ function getMaxColumns(csv) {
 // Fills undefined cells with an empty string, keeping the table in a
 // rectangular format
 
-function fixRaggedRows(csv) {
+function fixRaggedRows(csv_array) {
   ragged_rows = 0;
   //
-  for (var y = 0; y < hot.countRows(); y++) {
-    for (var x = 0; x < getMaxColumns(csv); x++) {
-      if (hot.getDataAtCell(y,x) === undefined) {
+  for (var y = 0; y < csv_array.length; y++) {
+    for (var x = 0; x < getMaxColumns(csv_array); x++) {
+      if (hot.getDataAtCell(y,x) === undefined || hot.getDataAtCell(y,x) === null) {
         if (ragged_rows == 0) {
           if (confirm("Your file has ragged rows, do you want to correct this?")) {
             ragged_rows = 1
-            fixCell(x,y)
+            fixCell(csv_array,y,x)
           }
           else {ragged_rows = -1}
         }
         else if (ragged_rows == 1) {
-          fixCell(x,y)
+          fixCell(csv_array,y,x)
         }
       }
     }
   }
+  updateTable(csv_array)
 }
 
-function fixCell(x,y) {
-  hot.setDataAtCell(y,x,"")
-  console.log("Cell (" + String.fromCharCode(97 + y).toUpperCase() + "," + (x + 1) + ") has been added to file")
+function fixCell(csv_array,y,x) {
+  csv_array[y].push("")
+  console.log("Cell (" + String.fromCharCode(97 + x).toUpperCase() + "," + (y + 1) + ") has been added to file")
+}
+
+function updateTable(csv_array) {
+  hot.updateSettings ({
+    data: csv_array,
+  });
 }
