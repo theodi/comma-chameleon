@@ -193,6 +193,7 @@ function getMaxColumns(csv_array) {
 // rectangular format
 
 function fixRaggedRows(csv_array) {
+  var $messagePanel = $('#message-panel');
   ragged_rows = 0;
   //
   for (var y = 0; y < csv_array.length; y++) {
@@ -200,13 +201,14 @@ function fixRaggedRows(csv_array) {
       if (hot.getDataAtCell(y,x) === undefined) {
         if (ragged_rows == 0) {
           if (confirm("Your file has ragged rows, do you want to correct this?")) {
+            $('#right-panel').removeClass("hidden")
             ragged_rows = 1
-            fixCell(csv_array,y,x)
+            $messagePanel.append('<p>' + fixCell(csv_array,y,x) + '<p>')
           }
           else {ragged_rows = -1}
         }
         else if (ragged_rows == 1) {
-          fixCell(csv_array,y,x)
+          $messagePanel.append('<p>' + fixCell(csv_array,y,x) + '<p>')
         }
       }
     }
@@ -216,7 +218,9 @@ function fixRaggedRows(csv_array) {
 
 function fixCell(csv_array,y,x) {
   csv_array[y].push("")
-  console.log("Cell (" + String.fromCharCode(97 + x).toUpperCase() + "," + (y + 1) + ") has been added to file")
+  logMsg = "Cell (" + String.fromCharCode(97 + x).toUpperCase() + "," + (y + 1) + ") has been added to file"
+  console.log(logMsg)
+  return logMsg
 }
 
 function updateTable(csv_array) {
