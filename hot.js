@@ -18,13 +18,22 @@ container.addEventListener('contextmenu', function (e) {
     columnLeft.enabled = false
   }
   menu.popup(remote.getCurrentWindow());
-  rowAbove.enabled = true
-  columnLeft.enabled = true
+  rowAbove.enabled = true;
+  columnLeft.enabled = true;
 }, false);
 
 ipc.on('loadData', function(data) {
+  //debugger;
+  //if(data !== undefined || data !== null){
+  //  console.log("problem with "+data);
+  //  generateHeadersHash(data);
+  //}
+
   csv = $.csv.toArrays(data);
+  // above is a call to jquery csv parser
   hot.loadData(csv);
+
+  //debugger;
   refactorColumns(csv);
   fixRaggedRows(csv);
 });
@@ -45,9 +54,63 @@ ipc.on('validate', function() {
   validate();
 });
 
+ipc.on('schemaHeaders', function(){
+  console.log('ipc detected by hot.js');
+  theData = returnHeaderRow();
+  console.log(theData);
+  createSchema(theData);
+  //ipc.send('csvHeaders', theData);
+});
+
 // How to use:
 // getValidation("Example,CSV,content\na,b,c\n")
 //  .then(function(validation) {console.log(validation)})
+
+function createSchema(headerArray){
+  // a JSON parser
+
+  var schemaInWaiting = {
+    "fields": []
+  };
+  headerArray.forEach(function(header){
+    schemaInWaiting["fields"].push(
+      {
+        "name": header,
+        "constraints": {
+          "required": true
+        }
+      }
+    );
+  });
+  console.log(JSON.stringify(schemaInWaiting,null,4));
+  return schemaInWaiting;
+}
+
+function returnHeaderRow(){
+
+  try {
+    headerArray = hot.getData()[0];
+  } catch (err){
+    console.log("attempting to get the first row has failed");
+  }
+  return headerArray;
+  //data = $.csv.fromArrays(hot.getData());
+}
+
+function generateHeadersHash(data){
+
+  objectHash = $.csv.toObjects(data);
+  // returns an object, with numerical indexes as the keys to an Object - could fail hard
+  // innerObject contains a key->value of {Header: cell value} for each header
+  Object.keys(objectHash[0]); // will return only the headers, but returns them as an Object according to typeof
+  // but it respondes to forEach 0_o
+  objectHash[0];// returns the Object with key values
+  Object.keys(objectHash[0]).forEach(function(e){
+    console.log(objectHash[0][e]+" is of type "+typeof objectHash[0][e]); // currently returning string even when numerals in cells
+  });
+  firstRow = hot.getDataAtRow(0);
+  // a function to take the header of a CSV file and make it available as an array to other functions
+}
 
 function getValidation(content) {
   request = require('request');
