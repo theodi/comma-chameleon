@@ -254,6 +254,7 @@ function openFile() {
                 var fileName = fileNames[0];
                 Fs.readFile(fileName, 'utf-8', function (err, data) {
                     createWindow(data, fileName);
+                    enableSave();
                 });
             }
         });
@@ -266,6 +267,7 @@ function saveFileAs() {
   ]}, function (fileName) {
     if (fileName === undefined) return;
     window.webContents.send('saveData', fileName);
+    enableSave();
   });
 }
 
@@ -273,6 +275,11 @@ function saveFile() {
   window = BrowserWindow.getFocusedWindow();
   fileName = window.getTitle();
   window.webContents.send('saveData', fileName);
+}
+
+function enableSave() {
+  item = Menu.getApplicationMenu().items[1].submenu.items[5]
+  item.enabled = true
 }
 
 function importExcel() {
@@ -311,4 +318,9 @@ function importExcel() {
 function validateFile() {
   window = BrowserWindow.getFocusedWindow();
   window.webContents.send('validate');
+}
+
+function fixRaggedRowsFile() {
+  window = BrowserWindow.getFocusedWindow();
+  window.webContents.send('ragged_rows');
 }
