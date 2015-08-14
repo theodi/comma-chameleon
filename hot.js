@@ -45,6 +45,11 @@ ipc.on('validate', function() {
   validate();
 });
 
+ipc.on('ragged_rows', function() {
+  csv = hot.getData();
+  fixRaggedRows(csv);
+});
+
 // How to use:
 // getValidation("Example,CSV,content\na,b,c\n")
 //  .then(function(validation) {console.log(validation)})
