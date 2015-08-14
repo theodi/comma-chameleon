@@ -60,6 +60,7 @@ ipc.on('schemaFromHeaders', function(){
 });
 
 function returnHeaderRow() {
+  // function that extracts header data for use in schema wizard
   try {
     headerArray = hot.getData()[0];
   } catch (err) {
