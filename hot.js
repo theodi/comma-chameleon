@@ -100,7 +100,7 @@ function displayValidationMessages(validation) {
   resultsTemplate = _.template('<p><%= validation.errors.length %> errors, <%= validation.warnings.length %> warnings and <%= validation.info.length %> info messages:</p>')
   $messagePanel.append(resultsTemplate({'validation': validation}));
 
-  var messageTemplate = _.template('<div class="<%= cssClass %>"><h5><%= errorText(type) %> <% if (row) print("on row " + row) %> <% if (col) print("on column " + col) %></h5><p><%= errorGuidance(type) %></p></div>');
+  var messageTemplate = _.template('<div class="<%= cssClass %>"><h5><%= errorText(type) %></h5><p><%= errorGuidance(type, row, col) %></p></div>');
   var messages = _.flatten([
     _.map(validation.errors,   function(d) { return _.extend({}, d, { cssClass: 'message validation-error' }) }),
     _.map(validation.warnings, function(d) { return _.extend({}, d, { cssClass: 'message validation-warning' }) }),
@@ -118,8 +118,10 @@ function errorText(error) {
   return validationNotes.errors[error]
 }
 
-function errorGuidance(error) {
-  return validationNotes.errors[error + '_guidance_html']
+function errorGuidance(error, row, column) {
+  guidance = validationNotes.errors[error + '_guidance_html']
+  guidance_template = _.template(guidance)
+  return guidance_template({row: row, column: column})
 }
 
 // Currently redundant unless the user refuses to fix ragged rows
