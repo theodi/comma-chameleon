@@ -118,6 +118,35 @@ function displayValidationMessages(validation) {
   } else {
     $messagePanel.append('<p>CSV Valid!</p>');
   }
+  
+  clearHighlights();
+  
+  $messagePanel.on('click', '.message', function() {
+    highlightCell($(this).data());
+  });
+}
+
+function highlightCell(d) {
+  hot.updateSettings({
+    // set the new renderer for every cell
+    cells: function (row, col, prop) { 
+      if (row === d.row - 1 || col === d.col - 1) {
+      return { renderer: errorRenderer };
+      }
+      return {};
+    }
+  });
+}
+
+function clearHighlights() {
+  hot.updateSettings({
+    cells: null
+  });
+}
+
+function errorRenderer(instance, td, row, col, prop, value, cellProperties) {
+  Handsontable.renderers.TextRenderer.apply(this, arguments);
+  td.style.background = 'red';
 }
 
 // Currently redundant unless the user refuses to fix ragged rows
