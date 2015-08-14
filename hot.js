@@ -26,7 +26,6 @@ container.addEventListener('contextmenu', function (e) {
 ipc.on('loadData', function(data) {
   csv = $.csv.toArrays(data);
   hot.loadData(csv);
-  //refactorColumns(csv_2);
   fixRaggedRows(csv);
 });
 
@@ -44,6 +43,11 @@ ipc.on('getCSV', function() {
 
 ipc.on('validate', function() {
   validate();
+});
+
+ipc.on('ragged_rows', function() {
+  csv = hot.getData();
+  fixRaggedRows(csv);
 });
 
 // How to use:
@@ -122,15 +126,6 @@ function errorGuidance(error, row, column) {
   guidance = validationNotes.errors[error + '_guidance_html']
   guidance_template = _.template(guidance)
   return guidance_template({row: row, column: column})
-}
-
-// Currently redundant unless the user refuses to fix ragged rows
-function refactorColumns(csv_array) {
-  col_add = getMaxColumns(csv_array) - hot.countCols()
-  // adds a column by default if the amount parameter is 0, hence conditional
-  if (col_add != 0) {
-    hot.alter('insert_col', null, col_add)
-  }
 }
 
 function getMaxColumns(csv_array) {
