@@ -97,11 +97,6 @@ app.on('ready', function() {
           label: 'Export as Datapackage',
           accelerator: 'CmdOrCtrl+D',
           click: function() { datapackage.exportDatapackage(); }
-        },
-        {
-          label: 'Validate',
-          accelerator: 'CmdOrCtrl+V',
-          click: function() { validateFile(); }
         }
       ]
     },
@@ -140,6 +135,20 @@ app.on('ready', function() {
           label: 'Select All',
           accelerator: 'CmdOrCtrl+A',
           selector: 'selectAll:'
+        }
+      ]
+    },
+    {
+      label: 'Tools',
+      submenu: [
+        {
+          label: 'Validate',
+          accelerator: 'Shift+CmdOrCtrl+V',
+          click: function() { validateFile(); }
+        },
+        {
+          label: 'Fix Ragged Rows',
+          click: function() { fixRaggedRowsFile(); }
         }
       ]
     },
