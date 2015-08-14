@@ -111,8 +111,10 @@ function displayValidationMessages(validation) {
     _.map(validation.info,     function(d) { return _.extend({}, d, { cssClass: 'message validation-info' }) })
   ]);
   if (messages.length) {
-    var html = _.map(messages, messageTemplate);
-    $messagePanel.append(html);
+    var elements = _.map(messages, function(message) {
+      return $(messageTemplate(message)).data(message);
+    });
+    $messagePanel.append(elements);
   } else {
     $messagePanel.append('<p>CSV Valid!</p>');
   }
