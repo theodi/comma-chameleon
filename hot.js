@@ -97,7 +97,7 @@ function validate() {
 function displayValidationMessages(validation) {
   var $messagePanel = $('#message-panel');
   $messagePanel.html("<h4>Validation results <img src='" + validation.badges.png  +"' /></h4>")
-  resultsTemplate = _.template('<p><%= validation.errors.length %> errors, <%= validation.errors.length %> errors and <%= validation.info.length %> info messages:</p>')
+  resultsTemplate = _.template('<p><%= validation.errors.length %> errors, <%= validation.warnings.length %> warnings and <%= validation.info.length %> info messages:</p>')
   $messagePanel.append(resultsTemplate({'validation': validation}));
 
   var messageTemplate = _.template('<div class="<%= cssClass %>"><p><%= type %> <% if (row) print("on row " + row) %> <% if (col) print("on column " + col) %></p></div>');
