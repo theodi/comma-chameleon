@@ -1,0 +1,46 @@
+html {
+ margin: 0px;
+ padding: 0px;
+}
+
+body {
+ padding: 0px;
+ margin: 0px;
+ background-color: #FFFFFF;
+ border: 1px solid #FF4C4C;
+ border-bottom: 30px solid #00FF00;
+ position: absolute;
+ top: 0px;
+ left: 0px;
+ right: 0px;
+ bottom: 0px;
+ background-image: url(chameleon_icon_2.png);
+ background-position: center center;
+ background-repeat: no-repeat;
+}
+
+h1 {
+  color: #111;
+  font-family: 'Helvetica Neue', sans-serif;
+  font-size: 32px;
+  font-weight: bold;
+  letter-spacing: -1px;
+  line-height: 1;
+  text-align: left;
+}
+
+#title-bar {
+ height: 40px;
+ padding: 0px;
+ margin: 0px;
+ background-color: #00FF00;
+}
+
+#image img {
+/* the actual 'watermark' */
+position: absolute;
+top: 0; /* or whatever */
+left: 0; /* or whatever, position according to taste */
+; /* Firefox, Chrome, Safari, Opera, IE >= 9 (preview) */
+filter:alpha(opacity=50); /* for <= IE 8 */
+}
