@@ -100,8 +100,13 @@ app.on('ready', function() {
         },
         {
           label: 'Validate',
-          accelerator: 'CmdOrCtrl+V',
+          accelerator: 'Shift+CmdOrCtrl+V',
           click: function() { validateFile(); }
+        },
+        {
+          label: 'Fix Ragged Rows',
+          accelerator: "CmdOrCtrl+R",
+          click: function() { fixRaggedRowsFile(); }
         }
       ]
     },
@@ -283,4 +288,9 @@ function importExcel() {
 function validateFile() {
   window = BrowserWindow.getFocusedWindow();
   window.webContents.send('validate');
+}
+
+function fixRaggedRowsFile() {
+  window = BrowserWindow.getFocusedWindow();
+  window.webContents.send('ragged_rows');
 }
