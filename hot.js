@@ -119,9 +119,9 @@ function displayValidationMessages(validation) {
   } else {
     $messagePanel.append('<p>CSV Valid!</p>');
   }
-  
+
   clearHighlights();
-  
+
   $messagePanel.on('click', '.message', function() {
     highlightCell($(this).data());
   });
@@ -137,7 +137,7 @@ function highlightCell(d) {
   scrollToCell(d.row, d.col);
   hot.updateSettings({
     // set the new renderer for every cell
-    cells: function (row, col, prop) { 
+    cells: function (row, col, prop) {
       if (row === d.row - 1 || col === d.col - 1) {
       return { renderer: bgColorRenderer(colors[d.msg_type]) };
       }
@@ -186,7 +186,7 @@ function fixRaggedRows(csv_array) {
   //
   for (var y = 0; y < csv_array.length; y++) {
     for (var x = 0; x < getMaxColumns(csv_array); x++) {
-      if (hot.getDataAtCell(y,x) === undefined || hot.getDataAtCell(y,x) === null) {
+      if (hot.getDataAtCell(y,x) === undefined) {
         if (ragged_rows == 0) {
           if (confirm("Your file has ragged rows, do you want to correct this?")) {
             ragged_rows = 1
