@@ -25,14 +25,12 @@ exports.exportDatapackage = function() {
 
     // issue calls to get the JSON rendering of the header row
     if(includeHeaders === "true"){
-      console.log("headers true");
       window.webContents.send('schemaFromHeaders');
       ipc.once('jsonHeaders', function(event, json){
+        //assign the headers to the JSON datapackage
+        // for some reason the JSON becomes inverted at this point
         data["fields"] = json["fields"];
-        console.log(json);
       });
-    } else{
-      console.log("header logic fail");
     }
     var data = datapackageJson(data);
 

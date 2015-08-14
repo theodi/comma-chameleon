@@ -19,8 +19,9 @@ exports.createSchema = function(headerArray){
         }
       }
     );
+    console.log(JSON.stringify(schemaInWaiting,null,4));
   });
-  console.log(schemaInWaiting);
+  console.log(schemaInWaiting,null,4);
   return schemaInWaiting;
 }
 

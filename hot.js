@@ -50,7 +50,6 @@ ipc.on('validate', function() {
 });
 
 ipc.on('schemaFromHeaders', function(){
-  console.log('ipc detected by hot.js');
   ipc.send('jsonHeaders',schemawizard.createSchema(returnHeaderRow()));
   schemawizard.createSchema(returnHeaderRow());
 });
