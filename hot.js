@@ -126,6 +126,7 @@ function displayValidationMessages(validation) {
 }
 
 function highlightCell(d) {
+  scrollToCell(d.row, d.col);
   hot.updateSettings({
     // set the new renderer for every cell
     cells: function (row, col, prop) { 
@@ -135,6 +136,14 @@ function highlightCell(d) {
       return {};
     }
   });
+}
+
+function scrollToCell(row, col) {
+  row = row || 1;
+  col = col || 1;
+  console.log('select', row, col);
+  hot.selectCell(row-1, col-1);
+  hot.deselectCell();
 }
 
 function clearHighlights() {
