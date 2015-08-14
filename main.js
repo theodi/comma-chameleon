@@ -308,12 +308,6 @@ function validateFile() {
 }
 
 function generateSchemaFromHeader() {
-  console.log('menu-click');
   window = BrowserWindow.getFocusedWindow();
-  window.webContents.send('schemaHeaders');
-  ipc.on('csvHeaders', function(event, arg){
-    console.log(arg);
-    window.webContents.send('csvHeaders', arg);
-  });
-  console.log('menu-click end');
+  window.webContents.send('schemaFromHeaders');
 }

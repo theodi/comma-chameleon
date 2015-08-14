@@ -1,6 +1,6 @@
 var ipc = require('ipc');
 var fs = require('fs');
-var schemawizard = require('./schemawizard');
+var schemawizard = require('./schemawizard.js');
 
 var container = document.getElementById("editor");
 var hot = new Handsontable(container, {
@@ -24,17 +24,10 @@ container.addEventListener('contextmenu', function (e) {
 }, false);
 
 ipc.on('loadData', function(data) {
-  //debugger;
-  //if(data !== undefined || data !== null){
-  //  console.log("problem with "+data);
-  //  generateHeadersHash(data);
-  //}
 
   csv = $.csv.toArrays(data);
   // above is a call to jquery csv parser
   hot.loadData(csv);
-  schemawizard.interOperableTest("walla walla doob doob");
-  //debugger;
   refactorColumns(csv);
   fixRaggedRows(csv);
 
@@ -56,37 +49,10 @@ ipc.on('validate', function() {
   validate();
 });
 
-ipc.on('schemaHeaders', function(){
+ipc.on('schemaFromHeaders', function(){
   console.log('ipc detected by hot.js');
-  theData = returnHeaderRow();
-  console.log(theData);
-  ipc.send('csvHeaders', theData);
-  //createSchema(theData);
+  schemawizard.createSchema(returnHeaderRow());
 });
-
-// How to use:
-// getValidation("Example,CSV,content\na,b,c\n")
-//  .then(function(validation) {console.log(validation)})
-
-function createSchema(headerArray){
-  // a JSON parser
-
-  var schemaInWaiting = {
-    "fields": []
-  };
-  headerArray.forEach(function(header){
-    schemaInWaiting["fields"].push(
-      {
-        "name": header,
-        "constraints": {
-          "required": true
-        }
-      }
-    );
-  });
-  console.log(JSON.stringify(schemaInWaiting,null,4));
-  return schemaInWaiting;
-}
 
 function returnHeaderRow(){
 
@@ -96,7 +62,7 @@ function returnHeaderRow(){
     console.log("attempting to get the first row has failed");
   }
   return headerArray;
-  //data = $.csv.fromArrays(hot.getData());
+
 }
 
 function generateHeadersHash(data){
@@ -113,6 +79,10 @@ function generateHeadersHash(data){
   firstRow = hot.getDataAtRow(0);
   // a function to take the header of a CSV file and make it available as an array to other functions
 }
+
+// How to use:
+// getValidation("Example,CSV,content\na,b,c\n")
+//  .then(function(validation) {console.log(validation)})
 
 function getValidation(content) {
   request = require('request');
