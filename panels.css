@@ -8,6 +8,7 @@ html {
 
 html {
   overflow: hidden; /* disables scrolling */
+  cursor: default;
 }
 
 body, html {
