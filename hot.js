@@ -1,5 +1,6 @@
 var ipc = require('ipc');
 var fs = require('fs');
+var validationNotes = require('./validation_notes.json')
 
 var container = document.getElementById("editor");
 var hot = new Handsontable(container, {
@@ -103,7 +104,7 @@ function displayValidationMessages(validation) {
   resultsTemplate = _.template('<p><%= validation.errors.length %> errors, <%= validation.warnings.length %> warnings and <%= validation.info.length %> info messages:</p>')
   $messagePanel.append(resultsTemplate({'validation': validation}));
 
-  var messageTemplate = _.template('<div><p><%= type %> <% if (row) print("on row " + row) %> <% if (col) print("on column " + col) %></p></div>');
+  var messageTemplate = _.template('<div><h5><%= errorText(type) %></h5><p><%= errorGuidance(type, row, col) %></p></div>');
   var messages = _.flatten([
     _.map(validation.errors,   function(d) { return _.extend({}, d, { msg_type: 'error' }) }),
     _.map(validation.warnings, function(d) { return _.extend({}, d, { msg_type: 'warning' }) }),
@@ -165,6 +166,16 @@ function bgColorRenderer(color) {
     Handsontable.renderers.TextRenderer.apply(this, arguments);
     td.style.background = color;
   }
+}
+
+function errorText(error) {
+  return validationNotes.errors[error]
+}
+
+function errorGuidance(error, row, column) {
+  guidance = validationNotes.errors[error + '_guidance_html']
+  guidance_template = _.template(guidance)
+  return guidance_template({row: row, column: column})
 }
 
 function getMaxColumns(csv_array) {
