@@ -150,13 +150,8 @@ app.on('ready', function() {
         {
           label: 'Generate Header',
           click: function(){ generateSchemaFromHeader(); }
-        },
-        {
-          label: 'Module IPC test',
-          click: function(){ ipcTest(); }
         }
       ]
-
     },
     {
       label: 'View',
