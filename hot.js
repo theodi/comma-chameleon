@@ -24,9 +24,13 @@ container.addEventListener('contextmenu', function (e) {
 }, false);
 
 ipc.on('loadData', function(data) {
-  csv = $.csv.toArrays(data);
-  hot.loadData(csv);
-  fixRaggedRows(csv);
+  try {
+    csv = $.csv.toArrays(data);
+    hot.loadData(csv);
+    fixRaggedRows(csv);
+  } catch(e) {
+    alert('An error has occurred: '+e.message)
+  }
 });
 
 ipc.on('saveData', function(fileName) {
