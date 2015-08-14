@@ -203,12 +203,12 @@ function fixRaggedRows(csv_array) {
           if (confirm("Your file has ragged rows, do you want to correct this?")) {
             $('#right-panel').removeClass("hidden")
             ragged_rows = 1
-            $messagePanel.append('<p>' + fixCell(csv_array,y,x,$messagePanel) + '<p>')
+            $messagePanel.append('<p>' + fixCell(csv_array,y,x) + '<p>')
           }
           else {ragged_rows = -1}
         }
         else if (ragged_rows == 1) {
-          $messagePanel.append('<p>' + fixCell(csv_array,y,x,$messagePanel) + '<p>')
+          $messagePanel.append('<p>' + fixCell(csv_array,y,x) + '<p>')
         }
       }
     }
@@ -216,7 +216,7 @@ function fixRaggedRows(csv_array) {
   updateTable(csv_array)
 }
 
-function fixCell(csv_array,y,x,panel) {
+function fixCell(csv_array,y,x) {
   csv_array[y].push("")
   logMsg = "Cell (" + String.fromCharCode(97 + x).toUpperCase() + "," + (y + 1) + ") has been added to file"
   console.log(logMsg)
