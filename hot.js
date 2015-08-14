@@ -104,15 +104,17 @@ function displayValidationMessages(validation) {
   resultsTemplate = _.template('<p><%= validation.errors.length %> errors, <%= validation.warnings.length %> warnings and <%= validation.info.length %> info messages:</p>')
   $messagePanel.append(resultsTemplate({'validation': validation}));
 
-  var messageTemplate = _.template('<div class="<%= cssClass %>"><p><%= type %> <% if (row) print("on row " + row) %> <% if (col) print("on column " + col) %></p></div>');
+  var messageTemplate = _.template('<div><p><%= type %> <% if (row) print("on row " + row) %> <% if (col) print("on column " + col) %></p></div>');
   var messages = _.flatten([
-    _.map(validation.errors,   function(d) { return _.extend({}, d, { cssClass: 'message validation-error' }) }),
-    _.map(validation.warnings, function(d) { return _.extend({}, d, { cssClass: 'message validation-warning' }) }),
-    _.map(validation.info,     function(d) { return _.extend({}, d, { cssClass: 'message validation-info' }) })
+    _.map(validation.errors,   function(d) { return _.extend({}, d, { msg_type: 'error' }) }),
+    _.map(validation.warnings, function(d) { return _.extend({}, d, { msg_type: 'warning' }) }),
+    _.map(validation.info,     function(d) { return _.extend({}, d, { msg_type: 'info' }) })
   ]);
   if (messages.length) {
     var elements = _.map(messages, function(message) {
-      return $(messageTemplate(message)).data(message);
+      return $(messageTemplate(message)).data(message)
+        .addClass('message')
+        .addClass('validation-' + message.msg_type);
     });
     $messagePanel.append(elements);
   } else {
