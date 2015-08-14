@@ -141,7 +141,6 @@ function highlightCell(d) {
 function scrollToCell(row, col) {
   row = row || 1;
   col = col || 1;
-  console.log('select', row, col);
   hot.selectCell(row-1, col-1);
   hot.deselectCell();
 }
