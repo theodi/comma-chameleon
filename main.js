@@ -79,6 +79,9 @@ app.on('ready', function() {
           click: function() { createWindow(); }
         },
         {
+          type: 'separator'
+        },
+        {
           label: 'Open..',
           accelerator: 'CmdOrCtrl+O',
           click: function() { openFile(); }
@@ -89,19 +92,24 @@ app.on('ready', function() {
           click: function() { importExcel(); }
         },
         {
+          type: 'separator'
+        },
+        {
+          label: 'Save',
+          accelerator: 'CmdOrCtrl+S',
+          click: function() { saveFile(); },
+          enabled: false,
+          id: 'save'
+        },
+        {
           label: 'Save As..',
           accelerator: 'Shift+CmdOrCtrl+S',
-          click: function() { saveFile(); }
+          click: function() { saveFileAs(); }
         },
         {
           label: 'Export as Datapackage',
           accelerator: 'CmdOrCtrl+D',
           click: function() { datapackage.exportDatapackage(); }
-        },
-        {
-          label: 'Validate',
-          accelerator: 'CmdOrCtrl+V',
-          click: function() { validateFile(); }
         }
       ]
     },
@@ -147,6 +155,16 @@ app.on('ready', function() {
 
       label: 'Tools',
       submenu: [
+        {
+          label: 'Validate',
+          accelerator: 'Shift+CmdOrCtrl+V',
+          click: function() { validateFile(); }
+        },
+        {
+          label: 'Fix Ragged Rows',
+          click: function() { fixRaggedRowsFile(); }
+
+        },
         {
           label: 'Generate Header',
           click: function(){ generateSchemaFromHeader(); }
@@ -247,19 +265,32 @@ function openFile() {
                 var fileName = fileNames[0];
                 Fs.readFile(fileName, 'utf-8', function (err, data) {
                     createWindow(data, fileName);
+                    enableSave();
                 });
             }
         });
 }
 
-function saveFile() {
+function saveFileAs() {
   window = BrowserWindow.getFocusedWindow();
   Dialog.showSaveDialog({ filters: [
     { name: 'text', extensions: ['csv'] }
   ]}, function (fileName) {
     if (fileName === undefined) return;
     window.webContents.send('saveData', fileName);
+    enableSave();
   });
+}
+
+function saveFile() {
+  window = BrowserWindow.getFocusedWindow();
+  fileName = window.getTitle();
+  window.webContents.send('saveData', fileName);
+}
+
+function enableSave() {
+  item = Menu.getApplicationMenu().items[1].submenu.items[5]
+  item.enabled = true
 }
 
 function importExcel() {
@@ -305,4 +336,9 @@ function validateFile() {
 function generateSchemaFromHeader() {
   window = BrowserWindow.getFocusedWindow();
   window.webContents.send('schemaFromHeaders');
+}
+
+function fixRaggedRowsFile() {
+  window = BrowserWindow.getFocusedWindow();
+  window.webContents.send('ragged_rows');
 }
