@@ -4,6 +4,8 @@
 var ipc = require('ipc');
 var exports = module.exports = {};
 
+
+
 exports.createSchema = function(headerArray){
   // a JSON parser
 
@@ -25,8 +27,8 @@ exports.createSchema = function(headerArray){
         }
       }
     );
-    console.log(JSON.stringify(schemaInWaiting,null,4));
+    //console.log(JSON.stringify(schemaInWaiting,null,4));
   });
-  console.log(schemaInWaiting,null,4);
+  //console.log(schemaInWaiting,null,4);
   return schemaInWaiting;
 }
