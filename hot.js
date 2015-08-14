@@ -1,5 +1,6 @@
 var ipc = require('ipc');
 var fs = require('fs');
+var validationNotes = require('./validation_notes.json')
 
 var container = document.getElementById("editor");
 var hot = new Handsontable(container, {
@@ -114,8 +115,7 @@ function displayValidationMessages(validation) {
 }
 
 function errorText(error) {
-  notes = require('./validation_notes.json')
-  return notes.errors[error]
+  return validationNotes.errors[error]
 }
 
 // Currently redundant unless the user refuses to fix ragged rows
