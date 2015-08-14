@@ -128,13 +128,19 @@ function displayValidationMessages(validation) {
   });
 }
 
+var colors = {
+  error: 'rgba(255, 76, 66, 0.6)',
+  warning: 'rgba(255, 152, 66, 0.6)',
+  info: 'rgba(99, 149, 215, 0.6)'
+};
+
 function highlightCell(d) {
   scrollToCell(d.row, d.col);
   hot.updateSettings({
     // set the new renderer for every cell
     cells: function (row, col, prop) { 
       if (row === d.row - 1 || col === d.col - 1) {
-      return { renderer: errorRenderer };
+      return { renderer: bgColorRenderer(colors[d.msg_type]) };
       }
       return {};
     }
@@ -154,9 +160,11 @@ function clearHighlights() {
   });
 }
 
-function errorRenderer(instance, td, row, col, prop, value, cellProperties) {
-  Handsontable.renderers.TextRenderer.apply(this, arguments);
-  td.style.background = 'red';
+function bgColorRenderer(color) {
+  return function errorRenderer(instance, td, row, col, prop, value, cellProperties) {
+    Handsontable.renderers.TextRenderer.apply(this, arguments);
+    td.style.background = color;
+  }
 }
 
 // Currently redundant unless the user refuses to fix ragged rows
