@@ -65,21 +65,6 @@ function returnHeaderRow(){
 
 }
 
-function generateHeadersHash(data){
-
-  objectHash = $.csv.toObjects(data);
-  // returns an object, with numerical indexes as the keys to an Object - could fail hard
-  // innerObject contains a key->value of {Header: cell value} for each header
-  Object.keys(objectHash[0]); // will return only the headers, but returns them as an Object according to typeof
-  // but it respondes to forEach 0_o
-  objectHash[0];// returns the Object with key values
-  Object.keys(objectHash[0]).forEach(function(e){
-    console.log(objectHash[0][e]+" is of type "+typeof objectHash[0][e]); // currently returning string even when numerals in cells
-  });
-  firstRow = hot.getDataAtRow(0);
-  // a function to take the header of a CSV file and make it available as an array to other functions
-}
-
 // How to use:
 // getValidation("Example,CSV,content\na,b,c\n")
 //  .then(function(validation) {console.log(validation)})
