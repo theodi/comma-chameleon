@@ -35,7 +35,6 @@ ipc.on('loadData', function(data) {
     alert('An error has occurred: '+e.message)
   }
   hot.loadData(csv);
-  refactorColumns(csv);
   fixRaggedRows(csv);
 });
 

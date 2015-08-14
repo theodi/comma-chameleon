@@ -30,27 +30,3 @@ exports.createSchema = function(headerArray){
   console.log(schemaInWaiting,null,4);
   return schemaInWaiting;
 }
-
-// create the right JSON object
-//var EGschema = {
-//  "fields": [
-//    {
-//      "name": "FirstName",
-//      "constraints": {
-//        "required": true
-//      }
-//    },
-//    {
-//      "name": "LastName",
-//      "constraints": {
-//        "required": true
-//      }
-//    },
-//    {
-//      "name": "Insult",
-//      "constraints": {
-//        "required": true
-//      }
-//    }
-//  ]
-//};
