@@ -108,18 +108,50 @@
       var rGrp = $("input[name=group1]");
       rGrp.click(function () {
         var checkedRadio = rGrp.filter(":checked");
-        $("#status").text(checkedRadio.val());
+        console.log(checkedRadio.val());
       });
     });
 
       $('#submit').click(function(e) {
         datapackage = $('#datapackage').serializeObject();
-        ipc.send('sendDatapackage', datapackage);
-      })
+        var rGrp = $("input[name=group1]");
+//        console.log(JSON.stringify(rGrp,null,4));
+//        console.log(JSON.stringify(rGrp.filter(":checked"),null,4));
+        if(rGrp.filter(":checked")["length"] > 0){
+//          console.log("checkbox clicked");
+//          console.log(rGrp.filter(":checked"));
+//          debugger;
+          includeHeaders = rGrp.filter(":checked").val();
+//          console.log(includeHeaders);
+        }else{
+//          console.log("checkbox not clicked");
+          includeHeaders = false;
+        }
+        console.log("do we have a headers var "+typeof includeHeaders);
+//        includeHeaders = headerOptionClicked();
+//        if (rGrp.filter(":checked")){ includeHeaders = rGrp.filter(":checked").checkedRadio.val(); }
+        ipc.send('sendDatapackage', datapackage, includeHeaders);
+      });
 
       $('#cancel').click(function() {
         ipc.send('datapackageCanceled');
       })
+
+      function headerOptionClicked(){
+        var rGrp = $("input[name=group1]");
+        console.log(JSON.stringify(rGrp,null,4));
+        console.log(JSON.stringify(rGrp.filter(":checked"),null,4));
+        if(rGrp.filter(":checked")["length"] > 0){
+          console.log("checkbox clicked");
+          console.log(rGrp.filter(":checked"));
+          debugger;
+          includeHeaders = rGrp.filter(":checked").checkedRadio.val();
+        }else{
+          console.log("checkbox not clicked");
+          includeHeaders = false;
+        }
+        return includeHeaders;
+      }
     </script>
   </body>
 </html>
