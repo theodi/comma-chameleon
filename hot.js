@@ -61,8 +61,12 @@ function returnHeaderRow(){
   } catch (err){
     console.log("attempting to get the first row has failed");
   }
+  hot.getData()[0].forEach(function(contents){
+    if(contents === "" || contents === null){
+      headerArray = false;
+    }
+  });
   return headerArray;
-
 }
 
 // How to use:
