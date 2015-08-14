@@ -64,6 +64,12 @@
           <button id="submit" class="btn btn-default">Go</button> <button id="cancel" class="btn btn-default">Cancel</button>
         </div>
       </form>
+      <div id="headers">
+        <label>Generate Headers?</label>
+        <input type="radio" name="group1" value="true" /> Yes
+        <input type="radio" name="group1" value="false" /> No<br />
+        <p id="status" />
+      </div>
     </div>
     <script>
     var ipc = require('ipc');
@@ -95,6 +101,16 @@
 
       return objectData;
       };
+
+    // integrating the schema generation
+
+    $(function () {
+      var rGrp = $("input[name=group1]");
+      rGrp.click(function () {
+        var checkedRadio = rGrp.filter(":checked");
+        $("#status").text(checkedRadio.val());
+      });
+    });
 
       $('#submit').click(function(e) {
         datapackage = $('#datapackage').serializeObject();
