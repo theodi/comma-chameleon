@@ -11,6 +11,8 @@
     <script src="bower_components/handsontable/dist/handsontable.full.js"></script>
     <script src="bower_components/jquery-csv/src/jquery.csv.min.js"></script>
     <script src="bower_components/lodash/lodash.min.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
   </head>
   <body>
 
@@ -22,7 +24,10 @@
         <div id="middle-panel">
           <div id="editor"></div>
         </div>
-        <div id="right-panel" class="hidden">
+        <div id="right-panel" class="hidden alert" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
           <div id="message-panel"></div>
         </div>
       </div>
