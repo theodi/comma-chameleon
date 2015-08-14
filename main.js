@@ -150,6 +150,10 @@ app.on('ready', function() {
         {
           label: 'Generate Header',
           click: function(){ generateSchemaFromHeader(); }
+        },
+        {
+          label: 'Module IPC test',
+          click: function(){ ipcTest(); }
         }
       ]
 
@@ -230,6 +234,11 @@ function createWindow(data, title) {
   });
 }
 
+function ipcTest(){
+  window = BrowserWindow.getFocusedWindow();
+  window.webContents.send('ipcTest');
+}
+
 function openFile() {
     Dialog.showOpenDialog(
         { filters: [
@@ -302,5 +311,9 @@ function generateSchemaFromHeader() {
   console.log('menu-click');
   window = BrowserWindow.getFocusedWindow();
   window.webContents.send('schemaHeaders');
+  ipc.on('csvHeaders', function(event, arg){
+    console.log(arg);
+    window.webContents.send('csvHeaders', arg);
+  });
   console.log('menu-click end');
 }

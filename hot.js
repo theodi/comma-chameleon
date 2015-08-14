@@ -1,5 +1,6 @@
 var ipc = require('ipc');
 var fs = require('fs');
+var schemawizard = require('./schemawizard');
 
 var container = document.getElementById("editor");
 var hot = new Handsontable(container, {
@@ -32,10 +33,11 @@ ipc.on('loadData', function(data) {
   csv = $.csv.toArrays(data);
   // above is a call to jquery csv parser
   hot.loadData(csv);
-
+  schemawizard.interOperableTest("walla walla doob doob");
   //debugger;
   refactorColumns(csv);
   fixRaggedRows(csv);
+
 });
 
 ipc.on('saveData', function(fileName) {
@@ -58,8 +60,8 @@ ipc.on('schemaHeaders', function(){
   console.log('ipc detected by hot.js');
   theData = returnHeaderRow();
   console.log(theData);
-  createSchema(theData);
-  //ipc.send('csvHeaders', theData);
+  ipc.send('csvHeaders', theData);
+  //createSchema(theData);
 });
 
 // How to use:
