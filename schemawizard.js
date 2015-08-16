@@ -4,7 +4,11 @@
 var ipc = require('ipc');
 var exports = module.exports = {};
 
+var Schema = function(){
 
+}
+
+// do not know how to handle exports when creating an object
 
 exports.createSchema = function(headerArray){
   // a JSON parser
