@@ -1,6 +1,6 @@
 var ipc = require('ipc');
 var fs = require('fs');
-var validationNotes = require('./validation_notes.json')
+var validationNotes = require('../validation_notes.json')
 
 var container = document.getElementById("editor");
 var hot = new Handsontable(container, {
