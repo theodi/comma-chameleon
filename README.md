@@ -4,7 +4,7 @@
 
 A desktop CSV editor with validation magic - Built with electron.js
 
-## Run app natively
+## Download app
 
 Choose a platform:
 
@@ -14,7 +14,7 @@ Choose a platform:
 * [Windows 32 bit](https://raw.githubusercontent.com/theodi/comma-chameleon/master/packages/comma-chameleon-win32-ia32.tar.gz)
 * [Windows 64 bit](https://raw.githubusercontent.com/theodi/comma-chameleon/master/packages/comma-chameleon-win32-x64.tar.gz)
 
-## Setup
+## Development setup
 
 ```
 brew install node
