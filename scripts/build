@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+electron-packager app/ comma-chameleon --platform=all --arch=all --version=0.30.4 --icon=resources/icon.icns --out=packages --overwrite
+
+for Dir in $(find ./packages/* -maxdepth 0 -type d );
+do
+    FolderName=$(basename $Dir);
+    cd ./packages/
+    tar -zcvf "$FolderName.tar.gz" "$FolderName"
+    cd ..
+done
