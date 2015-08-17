@@ -153,6 +153,7 @@ app.on('ready', function() {
       ]
     },
     {
+
       label: 'Tools',
       submenu: [
         {
@@ -163,16 +164,7 @@ app.on('ready', function() {
         {
           label: 'Fix Ragged Rows',
           click: function() { fixRaggedRowsFile(); }
-        }
-      ]
-    },
-    {
-      label: 'View',
-      submenu: [
-        {
-          label: 'Reload',
-          accelerator: 'CmdOrCtrl+R',
-          click: function() { BrowserWindow.getFocusedWindow().reload(); }
+
         },
         {
           label: 'Toggle DevTools',
@@ -185,6 +177,7 @@ app.on('ready', function() {
         }
       ]
     },
+
     {
       label: 'Window',
       submenu: [
@@ -232,6 +225,7 @@ function createWindow(data, title) {
 
   // Open the devtools.
   mainWindow.openDevTools();
+
 
   mainWindow.webContents.on('did-finish-load', function() {
     mainWindow.setTitle(title);
@@ -299,9 +293,7 @@ function importExcel() {
     var worksheet = workbook.Sheets[first_sheet_name];
 
     popup = new BrowserWindow({width: 300, height: 150, 'always-on-top': true});
-
     popup.loadUrl('file://' + __dirname + '/comma-chameleon/views/select_worksheet.html');
-
     popup.webContents.on('did-finish-load', function() {
       popup.webContents.send('loadSheets', workbook.SheetNames);
 
@@ -322,6 +314,8 @@ function importExcel() {
   });
 }
 
+// tools
+
 function validateFile() {
   window = BrowserWindow.getFocusedWindow();
   window.webContents.send('validate');
@@ -331,7 +325,6 @@ function generateSchemaFromHeader() {
   window = BrowserWindow.getFocusedWindow();
   window.webContents.send('schemaFromHeaders');
 }
-
 
 function fixRaggedRowsFile() {
   window = BrowserWindow.getFocusedWindow();
