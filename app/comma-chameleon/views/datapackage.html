@@ -48,6 +48,12 @@
           <button id="submit" class="btn btn-default">Go</button> <button id="cancel" class="btn btn-default">Cancel</button>
         </div>
       </form>
+      <div id="headers">
+        <label>Generate Headers?</label>
+        <input type="radio" name="group1" value="true" /> Yes
+        <input type="radio" name="group1" value="false" /> No<br />
+        <p id="status" />
+      </div>
     </div>
     <script>
     var ipc = require('ipc');
@@ -80,14 +86,37 @@
       return objectData;
       };
 
-      $('#submit').click(function(e) {
-        datapackage = $('#datapackage').serializeObject();
-        ipc.send('sendDatapackage', datapackage);
-      })
+    // integrating the schema generation
 
-      $('#cancel').click(function() {
-        ipc.send('datapackageCanceled');
-      })
+    $(function () {
+      var rGrp = $("input[name=group1]");
+      rGrp.click(function () {
+        var checkedRadio = rGrp.filter(":checked");
+        console.log(checkedRadio.val());
+      });
+    });
+
+    $('#submit').click(function(e) {
+      datapackage = $('#datapackage').serializeObject();
+      // serialise the wizard from the div
+      var includeHeaders = headerOptionClicked();
+      // retrieve a value for headers from the radio box
+      ipc.send('sendDatapackage', datapackage, includeHeaders);
+    });
+
+    $('#cancel').click(function() {
+      ipc.send('datapackageCanceled');
+    });
+
+      function headerOptionClicked(){
+        var rGrp = $("input[name=group1]");
+        if(rGrp.filter(":checked")["length"] > 0){
+          var includeHeaders = rGrp.filter(":checked").val();
+        } else{
+          includeHeaders = false;
+        }
+        return includeHeaders;
+      }
     </script>
   </body>
 </html>
