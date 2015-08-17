@@ -171,21 +171,21 @@ app.on('ready', function() {
         }
       ]
     },
-    {
-      label: 'View',
-      submenu: [
-        {
-          label: 'Reload',
-          accelerator: 'CmdOrCtrl+R',
-          click: function() { BrowserWindow.getFocusedWindow().reload(); }
-        },
-        {
-          label: 'Toggle DevTools',
-          accelerator: 'Alt+CmdOrCtrl+I',
-          click: function() { BrowserWindow.getFocusedWindow().toggleDevTools(); }
-        },
-      ]
-    },
+    // {
+    //   label: 'View',
+    //   submenu: [
+    //     {
+    //       label: 'Reload',
+    //       accelerator: 'CmdOrCtrl+R',
+    //       click: function() { BrowserWindow.getFocusedWindow().reload(); }
+    //     },
+    //     {
+    //       label: 'Toggle DevTools',
+    //       accelerator: 'Alt+CmdOrCtrl+I',
+    //       click: function() { BrowserWindow.getFocusedWindow().toggleDevTools(); }
+    //     },
+    //   ]
+    // },
     {
       label: 'Window',
       submenu: [
