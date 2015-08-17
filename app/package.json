@@ -1,0 +1,15 @@
+{
+  "name": "comma-chameleon",
+  "version": "0.1.0",
+  "main": "main.js",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/theodi/comma-chameleon.git"
+  },
+  "dependencies": {
+    "request": "^2.60.0",
+    "xlsx": "^0.8.0",
+    "node-zip": "^1.1.1"
+  }
+}
