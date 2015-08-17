@@ -7,7 +7,8 @@ var Fs = require('fs');
 var XLSX = require('xlsx');
 var ipc = require('ipc');
 
-var datapackage = require('./browser/datapackage')
+
+var datapackage = require('./browser/datapackage');
 
 // Report crashes to our server.
 require('crash-reporter').start();
@@ -152,7 +153,6 @@ app.on('ready', function() {
       ]
     },
     {
-
       label: 'Tools',
       submenu: [
         {
@@ -163,7 +163,21 @@ app.on('ready', function() {
         {
           label: 'Fix Ragged Rows',
           click: function() { fixRaggedRowsFile(); }
-
+        }
+      ]
+    },
+    {
+      label: 'View',
+      submenu: [
+        {
+          label: 'Reload',
+          accelerator: 'CmdOrCtrl+R',
+          click: function() { BrowserWindow.getFocusedWindow().reload(); }
+        },
+        {
+          label: 'Toggle DevTools',
+          accelerator: 'Alt+CmdOrCtrl+I',
+          click: function() { BrowserWindow.getFocusedWindow().toggleDevTools(); }
         },
         {
           label: 'Generate Header',
@@ -171,21 +185,6 @@ app.on('ready', function() {
         }
       ]
     },
-    // {
-    //   label: 'View',
-    //   submenu: [
-    //     {
-    //       label: 'Reload',
-    //       accelerator: 'CmdOrCtrl+R',
-    //       click: function() { BrowserWindow.getFocusedWindow().reload(); }
-    //     },
-    //     {
-    //       label: 'Toggle DevTools',
-    //       accelerator: 'Alt+CmdOrCtrl+I',
-    //       click: function() { BrowserWindow.getFocusedWindow().toggleDevTools(); }
-    //     },
-    //   ]
-    // },
     {
       label: 'Window',
       submenu: [
@@ -228,7 +227,11 @@ function createWindow(data, title) {
   mainWindow = new BrowserWindow({width: 800, height: 600});
 
   // and load the index.html of the app.
+
   mainWindow.loadUrl('file://' + __dirname + '/comma-chameleon/views/index.html');
+
+  // Open the devtools.
+  mainWindow.openDevTools();
 
   mainWindow.webContents.on('did-finish-load', function() {
     mainWindow.setTitle(title);
@@ -242,11 +245,6 @@ function createWindow(data, title) {
     // when you should delete the corresponding element.
     mainWindow = null;
   });
-}
-
-function ipcTest(){
-  window = BrowserWindow.getFocusedWindow();
-  window.webContents.send('ipcTest');
 }
 
 function openFile() {
@@ -301,6 +299,7 @@ function importExcel() {
     var worksheet = workbook.Sheets[first_sheet_name];
 
     popup = new BrowserWindow({width: 300, height: 150, 'always-on-top': true});
+
     popup.loadUrl('file://' + __dirname + '/comma-chameleon/views/select_worksheet.html');
 
     popup.webContents.on('did-finish-load', function() {
@@ -323,8 +322,6 @@ function importExcel() {
   });
 }
 
-// tools
-
 function validateFile() {
   window = BrowserWindow.getFocusedWindow();
   window.webContents.send('validate');
@@ -334,6 +331,7 @@ function generateSchemaFromHeader() {
   window = BrowserWindow.getFocusedWindow();
   window.webContents.send('schemaFromHeaders');
 }
+
 
 function fixRaggedRowsFile() {
   window = BrowserWindow.getFocusedWindow();

@@ -4,6 +4,7 @@
 
 A desktop CSV editor with validation magic - Built with electron.js
 
+<<<<<<< HEAD
 ## Download app
 
 Choose a platform:
@@ -20,6 +21,12 @@ Choose a platform:
 brew install node
 npm install bower electron-prebuilt -g
 cd app/
+=======
+## Setup
+
+```
+brew install node
+npm install bower jasmine electron-prebuilt -g
 npm install
 bower install
 ```
@@ -29,6 +36,7 @@ Then to open the app run:
 ```
 electron .
 ```
+<<<<<<< HEAD
 
 ## Building a new package
 
@@ -39,3 +47,4 @@ brew install wine # This allows us to specify the icon for Windows pacakges
 npm i electron-packager -g
 script/build
 ```
+
