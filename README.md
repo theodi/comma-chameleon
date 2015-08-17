@@ -18,6 +18,7 @@ Choose a platform:
 
 ```
 brew install node
+npm install bower electron-prebuilt -g
 cd app/
 npm install
 bower install
