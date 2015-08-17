@@ -4,7 +4,7 @@
 
 A desktop CSV editor with validation magic - Built with electron.js
 
-<<<<<<< HEAD
+
 ## Download app
 
 Choose a platform:
@@ -36,7 +36,6 @@ Then to open the app run:
 ```
 electron .
 ```
-<<<<<<< HEAD
 
 ## Building a new package
 
