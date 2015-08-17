@@ -5,5 +5,5 @@ bower_components/
 node_modules/
 fixtures/
 .idea/
-packages/*/**
+packages/
 
