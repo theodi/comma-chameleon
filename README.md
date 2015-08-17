@@ -37,5 +37,5 @@ electron .
 ```
 brew install wine # This allows us to specify the icon for Windows pacakges
 npm i electron-packager -g
-electron-packager app/ comma-chameleon --platform=all --arch=all --version=0.30.4 --icon=resources/icon.icns --out=packages --overwrite
+script/build
 ```
