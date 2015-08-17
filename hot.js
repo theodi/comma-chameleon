@@ -1,6 +1,7 @@
 var ipc = require('ipc');
 var fs = require('fs');
-var validationNotes = require('./validation_notes.json')
+var schemawizard = require('./schemawizard.js');
+var validationNotes = require('./validation_notes.json');
 
 var container = document.getElementById("editor");
 var hot = new Handsontable(container, {
@@ -19,11 +20,13 @@ container.addEventListener('contextmenu', function (e) {
     columnLeft.enabled = false
   }
   menu.popup(remote.getCurrentWindow());
-  rowAbove.enabled = true
-  columnLeft.enabled = true
+  rowAbove.enabled = true;
+  columnLeft.enabled = true;
 }, false);
 
 ipc.on('loadData', function(data) {
+
+  //call to jquery csv parser
   try {
     csv = $.csv.toArrays(data);
     hot.loadData(csv);
@@ -31,6 +34,8 @@ ipc.on('loadData', function(data) {
   } catch(e) {
     alert('An error has occurred: '+e.message)
   }
+  hot.loadData(csv);
+  fixRaggedRows(csv);
 });
 
 ipc.on('saveData', function(fileName) {
@@ -48,6 +53,27 @@ ipc.on('getCSV', function() {
 ipc.on('validate', function() {
   validate();
 });
+
+ipc.on('schemaFromHeaders', function(){
+  ipc.send('jsonHeaders',schemawizard.createSchema(returnHeaderRow()));
+  schemawizard.createSchema(returnHeaderRow());
+});
+
+function returnHeaderRow() {
+  // function that extracts header data for use in schema wizard
+  try {
+    headerArray = hot.getData()[0];
+  } catch (err) {
+    console.log("attempting to get the first row has failed");
+  }
+
+  hot.getData()[0].forEach(function (contents) {
+    if (contents === "" || contents === null) {
+      headerArray = false;
+    }
+  });
+  return headerArray;
+}
 
 ipc.on('ragged_rows', function() {
   csv = hot.getData();
