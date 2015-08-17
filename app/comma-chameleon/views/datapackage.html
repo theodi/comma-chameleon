@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Export as datapackage</title>
+    <link rel="stylesheet" href="../../bower_components/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.css" />
+    <link rel="stylesheet" href="../css/datapackage.css" />
+    <script>
+    window.$ = window.jQuery = require('../../bower_components/jquery/dist/jquery.js');
+    </script>
+    <script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../../bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"></script>
+
+  </head>
+  <body>
+    <div class="container-fluid">
+      <form id="datapackage">
+        <div class="form-group">
+          <label for="name">Dataset name</label>
+          <input type="text" class="form-control" id="name" name="name" placeholder="Dataset name">
+        </div>
+        <div class="form-group">
+          <label for="title">Dataset title</label>
+          <input type="text" class="form-control" id="title" name="title" placeholder="Dataset title">
+        </div>
+        <div class="form-group">
+          <label for="description">Dataset description</label>
+          <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="license">License</label>
+          <select id="license" name="license" class="form-control">
+            <option value="">Please select...</option>
+            <option value="cc-by">Creative Commons Attribution</option>
+            <option value="cc-by-sa">Creative Commons Attribution Share-Alike</option>
+            <option value="cc-zero">Creative Commons CCZero</option>
+            <option value="ogl-uk">UK Open Government Licence</option>
+            <option value="odc-by">Open Data Commons Attribution License</option>
+            <option value="odc-odbl">Open Data Commons Open Database License (ODbL)</option>
+            <option value="odc-pddl">Open Data Commons Public Domain Dedication and Licence (PDDL)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="keywords">Keywords (Comma seperated)</label><br />
+          <input type="text" id="keywords" data-role="tagsinput" class="form-control" id="keywords" name="keywords">
+        </div>
+        <div class="well">
+          <button id="submit" class="btn btn-default">Go</button> <button id="cancel" class="btn btn-default">Cancel</button>
+        </div>
+      </form>
+      <div id="headers">
+        <label>Generate Headers?</label>
+        <input type="radio" name="group1" value="true" /> Yes
+        <input type="radio" name="group1" value="false" /> No<br />
+        <p id="status" />
+      </div>
+    </div>
+    <script>
+    var ipc = require('ipc');
+
+    jQuery.fn.serializeObject = function() {
+      var arrayData, objectData;
+      arrayData = this.serializeArray();
+      objectData = {};
+
+      $.each(arrayData, function() {
+        var value;
+
+        if (this.value != null) {
+          value = this.value;
+        } else {
+          value = '';
+        }
+
+        if (objectData[this.name] != null) {
+          if (!objectData[this.name].push) {
+            objectData[this.name] = [objectData[this.name]];
+          }
+
+          objectData[this.name].push(value);
+        } else {
+          objectData[this.name] = value;
+        }
+      });
+
+      return objectData;
+      };
+
+    // integrating the schema generation
+
+    $(function () {
+      var rGrp = $("input[name=group1]");
+      rGrp.click(function () {
+        var checkedRadio = rGrp.filter(":checked");
+        console.log(checkedRadio.val());
+      });
+    });
+
+    $('#submit').click(function(e) {
+      datapackage = $('#datapackage').serializeObject();
+      // serialise the wizard from the div
+      var includeHeaders = headerOptionClicked();
+      // retrieve a value for headers from the radio box
+      ipc.send('sendDatapackage', datapackage, includeHeaders);
+    });
+
+    $('#cancel').click(function() {
+      ipc.send('datapackageCanceled');
+    });
+
+      function headerOptionClicked(){
+        var rGrp = $("input[name=group1]");
+        if(rGrp.filter(":checked")["length"] > 0){
+          var includeHeaders = rGrp.filter(":checked").val();
+        } else{
+          includeHeaders = false;
+        }
+        return includeHeaders;
+      }
+    </script>
+  </body>
+</html>
