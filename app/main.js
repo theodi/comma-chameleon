@@ -152,6 +152,7 @@ app.on('ready', function() {
       ]
     },
     {
+
       label: 'Tools',
       submenu: [
         {
@@ -162,6 +163,11 @@ app.on('ready', function() {
         {
           label: 'Fix Ragged Rows',
           click: function() { fixRaggedRowsFile(); }
+
+        },
+        {
+          label: 'Generate Header',
+          click: function(){ generateSchemaFromHeader(); }
         }
       ]
     },
@@ -241,6 +247,11 @@ function createWindow(data, title) {
   });
 }
 
+function ipcTest(){
+  window = BrowserWindow.getFocusedWindow();
+  window.webContents.send('ipcTest');
+}
+
 function openFile() {
     Dialog.showOpenDialog(
         { filters: [
@@ -315,9 +326,16 @@ function importExcel() {
   });
 }
 
+// tools
+
 function validateFile() {
   window = BrowserWindow.getFocusedWindow();
   window.webContents.send('validate');
+}
+
+function generateSchemaFromHeader() {
+  window = BrowserWindow.getFocusedWindow();
+  window.webContents.send('schemaFromHeaders');
 }
 
 function fixRaggedRowsFile() {
