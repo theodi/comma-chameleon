@@ -33,6 +33,11 @@ ipc.on('loadData', function(data) {
   }
 });
 
+ipc.on('resized', function() {
+  data = hot.getData();
+  hot.loadData(data);
+});
+
 ipc.on('saveData', function(fileName) {
   data = $.csv.fromArrays(hot.getData());
   fs.writeFile(fileName, data, function (err) {
