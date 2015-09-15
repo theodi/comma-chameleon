@@ -86,7 +86,7 @@ function datapackageJson(data, headers) {
       "schema": headers
     }
   ]
-  console.log("all those assignments went fine, behold the data "+JSON.stringify(data));
+  //console.log("all those assignments went fine, behold the data "+JSON.stringify(data));
   return data
 }
 
