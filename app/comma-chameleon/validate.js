@@ -52,10 +52,10 @@ function getValidation(content) {
 
 function displayValidationMessages(validation) {
   var $messagePanel = $('#message-panel');
-  $messagePanel.html("<h4>Validation results <img src='" + validation.badges.png  +"' /></h4>")
+  $messagePanel.html("<h4>Validation results <img src='" + validation.badges.png  +"' /></h4>");
   var resultsTemplate = _.template('<p><%= validation.errors.length %> errors, <%= validation.warnings.length %> warnings and <%= validation.info.length %> info messages:</p>')
   $messagePanel.append(resultsTemplate({'validation': validation}));
-
+//TODO the errorText function below is truncated and isn't doing what it should be doing
   var messageTemplate = _.template('<div><h5><%= errorText(type) %></h5><p><%= errorGuidance(type, row, col) %></p></div>');
   var messages = _.flatten([
     _.map(validation.errors,   function(d) { return _.extend({}, d, { msg_type: 'error' }) }),
