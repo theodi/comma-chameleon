@@ -40,3 +40,9 @@ brew install wine # This allows us to specify the icon for Windows pacakges
 npm i electron-packager -g
 script/build
 ```
+
+## Test
+prerequisites
+npm i electron-prebuilt --save-dev
+npm i electron-mocha --save-dev
+npm i expect.js --save-dev
