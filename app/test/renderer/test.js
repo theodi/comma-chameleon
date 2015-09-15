@@ -17,13 +17,18 @@ describe('describe: test 2', function () {
 describe('populate a web page and check that everything is there', function(){
 
   it('loads a web page with HTML', function(){
-    var html = '<div></div><div></div><div></div>';
-    //console.log($(document.body).append(html));
-    //console.log(window.document.body);
-    window.document.body.appendChild(html);
-    //window.document.body.append(html);
-    //$(document.body).append(html);
-    console.log(document.body);
+    //var html = '<div></div><div></div><div></div>';
+    ////console.log($(document.body).append(html));
+    ////console.log(window.document.body);
+    //window.document.body.appendChild(html);
+    ////window.document.body.append(html);
+    ////$(document.body).append(html);
+    //console.log(document.body);
+
+    it('has document', function () {
+      var div = document.createElement('div')
+      expect(div.nodeName).eql('DIV')
+    })
 
   })
 
