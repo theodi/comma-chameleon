@@ -99,14 +99,20 @@ function generateDatapackage(fileName, data, csv) {
   zipData = zip.generate({base64:false,compression:'DEFLATE'});
   Fs.writeFileSync(fileName, zipData, 'binary');
 }
+
+function helloworld(){
+  return "HELLO WORLD"
+}
+
 // define interface to module
 module.exports = {
-  exportDatapackage: exportdata
+  exportDatapackage: exportdata,
 };
 if (process.env.NODE_ENV === 'test') {
   // now I need to work out how to access environment
   module.exports._private = {
     packageToJson: datapackageJson,
-    zipPackage: generateDatapackage
+    zipPackage: generateDatapackage,
+    hello: helloworld
   };
 }
