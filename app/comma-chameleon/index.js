@@ -3,17 +3,22 @@
  */
 'require strict';
 
-//ipc.on('ragged_rows', function() {
-//  csv = hot.getData();
-//  fixRaggedRows(csv);
-//});
-//
-//ipc.on('schemaFromHeaders', function(){
-//  ipc.send('jsonHeaders',schemawizard.createSchema(returnHeaderRow()));
-//  schemawizard.createSchema(returnHeaderRow());
-//});
-//
-//ipc.on('validate', function() {
-//  validate();
-//});
+var ipc = require('ipc');
 
+
+ipc.on('validate', function() {
+  validate();
+});
+
+ipc.on('schemaFromHeaders', function(){
+  ipc.send('jsonHeaders',schemawizard.createSchema(returnHeaderRow()));
+  schemawizard.createSchema(returnHeaderRow());
+});
+
+ipc.on('ragged_rows', function() {
+  var rows = require('../ragged-rows');
+  csv = hot.getData();
+  console.log(typeof rows);
+  console.log(typeof csv);
+  rows.fixRaggedRows(csv);
+});
