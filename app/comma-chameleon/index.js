@@ -6,9 +6,10 @@
 var ipc = require('ipc');
 var schemawizard = require('../schemawizard.js');
 var rows = require('../ragged-rows');
+var validation = require('../validate');
 
 ipc.on('validate', function() {
-  validate();
+  validation.validate();
 });
 
 ipc.on('schemaFromHeaders', function(){

@@ -8,8 +8,8 @@
 
 // Splits validation returned from CSVLint into errors, warnings and info messages
 
-function validate() {
-  data = $.csv.fromArrays(hot.getData());
+function validation() {
+  var data = $.csv.fromArrays(hot.getData());
   $('#right-panel').removeClass("hidden")
   $('#message-panel').html("<div class=\"validation-load\"><p><span class=\"glyphicon glyphicon-refresh spinning\"></span></p><p>Loading validation results...</p></div>");
   getValidation(data).then(function(json_validation) {
@@ -134,3 +134,8 @@ $('button[data-dismiss=alert]').click(function() {
   $(this).parent('.alert').addClass('hidden')
 })
 
+module.exports = {
+  validate: validation,
+  apiReq: getValidation,
+  display: displayValidationMessages
+}
