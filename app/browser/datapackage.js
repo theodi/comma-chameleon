@@ -75,7 +75,7 @@ var exportdata = function() {
 }
 
 function datapackageJson(data, headers) {
-  console.log("within schema forming function with params: "+data+"and"+headers);
+  //console.log(data);
   data.keywords = data.keywords.split(",");
   //console.log(data.keywords);
   data.resources = [
@@ -86,7 +86,6 @@ function datapackageJson(data, headers) {
       "schema": headers
     }
   ]
-  console.log("all those assignments went fine, behold the data "+JSON.stringify(data));
   return data
 }
 
@@ -100,22 +99,16 @@ function generateDatapackage(fileName, data, csv) {
   Fs.writeFileSync(fileName, zipData, 'binary');
 }
 
-function helloworld(){
-  return "HELLO WORLD"
-}
-
 // define interface to module
 module.exports = {
   exportDatapackage: exportdata,
-
 };
 if (process.env.NODE_ENV === 'test') {
   console.log("private testing enabled");
   // now I need to work out how to access environment
   module.exports._private = {
-    packageToJson: datapackageJson,
-    zipPackage: generateDatapackage,
-    hello: helloworld
+    inputToVocab: datapackageJson,
+    zipPackage: generateDatapackage
   }
 } else {
   console.log("dev environment");
