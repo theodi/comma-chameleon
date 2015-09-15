@@ -1,13 +1,30 @@
-ipc.on('validate', function() {
-  validate();
-});
-
+//ipc.on('validate', function() {
+//  validate();
+//});
+'use strict'
 // How to use:
 // getValidation("Example,CSV,content\na,b,c\n")
 //  .then(function(validation) {console.log(validation)})
 
+// Splits validation returned from CSVLint into errors, warnings and info messages
+
+function validate() {
+  data = $.csv.fromArrays(hot.getData());
+  $('#right-panel').removeClass("hidden")
+  $('#message-panel').html("<div class=\"validation-load\"><p><span class=\"glyphicon glyphicon-refresh spinning\"></span></p><p>Loading validation results...</p></div>");
+  getValidation(data).then(function(json_validation) {
+    var errors = json_validation.validation.errors
+    var warnings = json_validation.validation.warnings
+    var info_messages = json_validation.validation.info
+    console.error(errors)
+    console.warn(warnings)
+    console.info(info_messages);
+    displayValidationMessages(json_validation.validation);
+  });
+}
+
 function getValidation(content) {
-  request = require('request');
+  var request = require('request');
   content = new Buffer(content).toString("base64");
   content = "editor.csv;data:text/csv;base64," + content;
   return new Promise(function(resolve, reject) {
@@ -33,27 +50,10 @@ function getValidation(content) {
   });
 }
 
-// Splits validation returned from CSVLint into errors, warnings and info messages
-
-function validate() {
-  data = $.csv.fromArrays(hot.getData());
-  $('#right-panel').removeClass("hidden")
-  $('#message-panel').html("<div class=\"validation-load\"><p><span class=\"glyphicon glyphicon-refresh spinning\"></span></p><p>Loading validation results...</p></div>");
-  getValidation(data).then(function(json_validation) {
-    errors = json_validation.validation.errors
-    warnings = json_validation.validation.warnings
-    info_messages = json_validation.validation.info
-    console.error(errors)
-    console.warn(warnings)
-    console.info(info_messages);
-    displayValidationMessages(json_validation.validation);
-  });
-}
-
 function displayValidationMessages(validation) {
   var $messagePanel = $('#message-panel');
   $messagePanel.html("<h4>Validation results <img src='" + validation.badges.png  +"' /></h4>")
-  resultsTemplate = _.template('<p><%= validation.errors.length %> errors, <%= validation.warnings.length %> warnings and <%= validation.info.length %> info messages:</p>')
+  var resultsTemplate = _.template('<p><%= validation.errors.length %> errors, <%= validation.warnings.length %> warnings and <%= validation.info.length %> info messages:</p>')
   $messagePanel.append(resultsTemplate({'validation': validation}));
 
   var messageTemplate = _.template('<div><h5><%= errorText(type) %></h5><p><%= errorGuidance(type, row, col) %></p></div>');
@@ -125,11 +125,12 @@ function errorText(error) {
 }
 
 function errorGuidance(error, row, column) {
-  guidance = validationNotes.errors[error + '_guidance_html']
-  guidance_template = _.template(guidance)
+  var guidance = validationNotes.errors[error + '_guidance_html']
+  var guidance_template = _.template(guidance)
   return guidance_template({row: row, column: column})
 }
 
 $('button[data-dismiss=alert]').click(function() {
   $(this).parent('.alert').addClass('hidden')
 })
+

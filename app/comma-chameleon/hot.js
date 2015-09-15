@@ -1,6 +1,8 @@
 var ipc = require('ipc');
 var fs = require('fs');
 var validationNotes = require('../validation_notes.json')
+var rows = require('../ragged-rows');
+
 
 var container = document.getElementById("editor");
 var hot = new Handsontable(container, {
@@ -27,7 +29,8 @@ ipc.on('loadData', function(data) {
   try {
     csv = $.csv.toArrays(data);
     hot.loadData(csv);
-    fixRaggedRows(csv);
+    //var rows = require('../ragged-rows');
+    rows.fixRaggedRows(csv);
   } catch(e) {
     alert('An error has occurred: '+e.message)
   }
