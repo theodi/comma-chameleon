@@ -4,9 +4,10 @@ var Fs = require('fs');
 var ipc = require('ipc');
 var path = require('path');
 
-var exports = module.exports = {};
+//var exports = module.exports = {};
 
-exports.exportDatapackage = function() {
+
+var exportdata = function() {
   var window = BrowserWindow.getFocusedWindow();
 
   datapackage = new BrowserWindow({width: 450, height: 600, 'always-on-top': true});
@@ -74,7 +75,7 @@ exports.exportDatapackage = function() {
 }
 
 function datapackageJson(data, headers) {
-  //debugger
+  debugger
   console.log("within schema forming function with params: "+data+"and"+headers);
   data.keywords = data.keywords.split(",");
   //console.log(data.keywords);
@@ -86,7 +87,7 @@ function datapackageJson(data, headers) {
       "schema": headers
     }
   ]
-  //console.log("all those assignments went fine, behold the data "+JSON.stringify(data));
+  console.log("all those assignments went fine, behold the data "+JSON.stringify(data));
   return data
 }
 
@@ -99,3 +100,7 @@ function generateDatapackage(fileName, data, csv) {
   zipData = zip.generate({base64:false,compression:'DEFLATE'});
   Fs.writeFileSync(fileName, zipData, 'binary');
 }
+
+module.exports = {
+  exportDatapackage: exportdata
+};
