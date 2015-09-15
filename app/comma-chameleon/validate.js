@@ -8,14 +8,15 @@
 
 // Splits validation returned from CSVLint into errors, warnings and info messages
 
-function validation() {
-  var data = $.csv.fromArrays(hot.getData());
+function validation(data) {
+  //var data = $.csv.fromArrays(hot.getData());
+  //console.log(JSON.stringify(data));
   $('#right-panel').removeClass("hidden")
   $('#message-panel').html("<div class=\"validation-load\"><p><span class=\"glyphicon glyphicon-refresh spinning\"></span></p><p>Loading validation results...</p></div>");
   getValidation(data).then(function(json_validation) {
-    var errors = json_validation.validation.errors
-    var warnings = json_validation.validation.warnings
-    var info_messages = json_validation.validation.info
+    var errors = json_validation.validation.errors;
+    var warnings = json_validation.validation.warnings;
+    var info_messages = json_validation.validation.info;
     console.error(errors)
     console.warn(warnings)
     console.info(info_messages);
@@ -56,6 +57,7 @@ function displayValidationMessages(validation) {
   var resultsTemplate = _.template('<p><%= validation.errors.length %> errors, <%= validation.warnings.length %> warnings and <%= validation.info.length %> info messages:</p>')
   $messagePanel.append(resultsTemplate({'validation': validation}));
 //TODO the errorText function below is truncated and isn't doing what it should be doing
+
   var messageTemplate = _.template('<div><h5><%= errorText(type) %></h5><p><%= errorGuidance(type, row, col) %></p></div>');
   var messages = _.flatten([
     _.map(validation.errors,   function(d) { return _.extend({}, d, { msg_type: 'error' }) }),
@@ -138,4 +140,9 @@ module.exports = {
   validate: validation,
   apiReq: getValidation,
   display: displayValidationMessages
+}
+if (process.env.NODE_ENV === 'test') {
+  module.exports._private = {
+
+  }
 }

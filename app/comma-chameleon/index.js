@@ -9,7 +9,8 @@ var rows = require('../ragged-rows');
 var validation = require('../validate');
 
 ipc.on('validate', function() {
-  validation.validate();
+  var data = $.csv.fromArrays(hot.getData());
+  validation.validate(data);
 });
 
 ipc.on('schemaFromHeaders', function(){

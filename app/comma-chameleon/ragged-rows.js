@@ -54,3 +54,10 @@
 module.exports = {
   fixRaggedRows: amendRows
 };
+if (process.env.NODE_ENV === 'test') {
+  module.exports._private = {
+    maxColumns: getMaxColumns,
+    fix: fixCell,
+    update: updateTable
+  }
+}
