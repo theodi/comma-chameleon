@@ -75,7 +75,6 @@ var exportdata = function() {
 }
 
 function datapackageJson(data, headers) {
-  debugger
   console.log("within schema forming function with params: "+data+"and"+headers);
   data.keywords = data.keywords.split(",");
   //console.log(data.keywords);
@@ -100,7 +99,14 @@ function generateDatapackage(fileName, data, csv) {
   zipData = zip.generate({base64:false,compression:'DEFLATE'});
   Fs.writeFileSync(fileName, zipData, 'binary');
 }
-
+// define interface to module
 module.exports = {
   exportDatapackage: exportdata
 };
+if (process.env.NODE_ENV === 'test') {
+  // now I need to work out how to access environment
+  module.exports._private = {
+    packageToJson: datapackageJson,
+    zipPackage: generateDatapackage
+  };
+}
