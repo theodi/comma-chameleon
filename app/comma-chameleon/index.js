@@ -4,15 +4,24 @@
 'require strict';
 
 var ipc = require('ipc');
-
+var schemawizard = require('../schemawizard.js');
 
 ipc.on('validate', function() {
   validate();
 });
 
 ipc.on('schemaFromHeaders', function(){
-  ipc.send('jsonHeaders',schemawizard.createSchema(returnHeaderRow()));
-  schemawizard.createSchema(returnHeaderRow());
+  try {
+    var assumedHeader = hot.getData()[0];
+    console.log(typeof assumedHeader); // fine
+
+  } catch (err) {
+    console.log("attempting to get the first row has failed");
+    console.log(err);
+  }
+  var header = schemawizard.returnHeaderRow(assumedHeader);
+  ipc.send('jsonHeaders',schemawizard.createSchema(header));
+  schemawizard.createSchema(header);
 });
 
 ipc.on('ragged_rows', function() {
