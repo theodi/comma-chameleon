@@ -107,12 +107,16 @@ function helloworld(){
 // define interface to module
 module.exports = {
   exportDatapackage: exportdata,
+
 };
 if (process.env.NODE_ENV === 'test') {
+  console.log("private testing enabled");
   // now I need to work out how to access environment
   module.exports._private = {
     packageToJson: datapackageJson,
     zipPackage: generateDatapackage,
     hello: helloworld
-  };
+  }
+} else {
+  console.log("dev environment");
 }
