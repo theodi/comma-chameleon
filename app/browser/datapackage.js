@@ -90,12 +90,12 @@ function datapackageJson(data_arg, headers) {
   return data_arg
 }
 
-function generateDatapackage(fileName, data, csv) {
+function generateDatapackage(fileName, data_arg, csv) {
   // this function is only triggered after the user confirms the name of what they wish to save the package as
-  console.log("within async triggered generate data package function "+data);
+  console.log("within async triggered generate data package function "+data_arg);
   zip = new require('node-zip')();
-  zip.file('datapackage.json', JSON.stringify(data,null, 2));
-  zip.file('data/' + data.name + '.csv', csv);
+  zip.file('datapackage.json', JSON.stringify(data_arg,null, 2));
+  zip.file('data/' + data_arg.name + '.csv', csv);
   zipData = zip.generate({base64:false,compression:'DEFLATE'});
   Fs.writeFileSync(fileName, zipData, 'binary');
 }
