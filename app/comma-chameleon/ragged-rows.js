@@ -44,7 +44,7 @@ function fixRaggedRows(csv_sheet, row) {
 function getMaxColumns(csv_array) {
   var max_columns = 0
   for (var i = 0; i < csv_array.length; i++) {
-    var col_length = csv_array[i].length
+    var col_length = csv_array[i].length;
     if (col_length > max_columns) {
       max_columns = col_length
     }
@@ -52,17 +52,17 @@ function getMaxColumns(csv_array) {
   return max_columns
 }
 
-function fixCell(csv_array,y,x) {
-  csv_array[y].push("")
+function fixCell(csv_array,row) {
+  csv_array[row].push("")
 }
 
-function logChanges(x,y){
-  var logMsg = "Cell (" + String.fromCharCode(97 + x).toUpperCase() + "," + (y + 1) + ") has been added to file"
+function logChanges(col,row){
+  var logMsg = "Cell (" + String.fromCharCode(97 + col).toUpperCase() + "," + (row + 1) + ") has been added to file"
   return logMsg
 }
 
 function updateTable(csv_array) {
   hot.updateSettings ({
-    data: csv_array,
+    data: csv_array
   });
 }
