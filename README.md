@@ -49,6 +49,10 @@ npm i electron-mocha --save-dev
 npm i chai --save-dev
 ```
 
+[Electron-Mocha](https://github.com/jprichardson/electron-mocha) has been adopted for testing, it enables both DOM and node.js testing and provides command line options to
+enable testing of both
+Testing DOM with electon-mocha follows the same invocation and declaration patterns as [jsdom()](https://www.npmjs.com/package/mocha-jsdom)
+
 Javascript is followed the `module.exports` pattern for module interface
 Tests have adopted a provisional pattern of using underscore `_` to denote private methods and making them available to
  the unit test environment through the following addition to the `module.exports` pattern
