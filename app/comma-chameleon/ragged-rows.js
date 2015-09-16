@@ -2,25 +2,11 @@
 
 ipc.on('ragged_rows', function() {
   csv = hot.getData();
-  //var confirmation = confirmRaggedRows(csv);
-  //if(confirmation["ragged"] && prompt()){
-  //  //fixRaggedRows();
-  //}
-  //console.log(confirmation["ragged"]);
-  //console.log(confirmRaggedRows(csv)["ragged"]);
-  //if(confirmRaggedRows(csv)["ragged"] && prompt()){
-  //  console.log("conulted baybee");
-  //}
-  //console.log(Object.getOwnPropertyNames(confirmRaggedRows(csv)));
   fixRaggedRows(csv);
 });
 
 // Fills undefined cells with an empty string, keeping the table in a
 // rectangular format
-
-//function gogo(){
-//  if(confirmRaggedRows(csv))
-//}
 
 function confirmRaggedRows(csv_sheet){
   var ragged_rows = false;
@@ -36,25 +22,22 @@ function confirmRaggedRows(csv_sheet){
   }
 }
 
-function prompt_consent(){
-  return confirm("Your file has ragged rows, do you want to correct this?");
-}
-
-function fixRaggedRows(csv_sheet, kwa) {
+function fixRaggedRows(csv_sheet, row) {
   var $messagePanel = $('#message-panel');
   var ragged_rows = 0;
-  var y = kwa === undefined ? 0 : kwa;
+  var y = row === undefined ? 0 : row;
   // eval to left of colon if true and right of colon if false
 
   for (y; y < csv_sheet.length; y++) {
     for (var x = 0; x < getMaxColumns(csv_sheet); x++) {
       if (hot.getDataAtCell(y,x) === undefined) {
+        fixCell(csv_sheet,y,x);
+        var amendment = logChanges(x,y);
         $('#right-panel').removeClass("hidden");
-        $messagePanel.append('<p>' + fixCell(csv_sheet,y,x) + '<p>')
+        $messagePanel.append('<p>' + amendment + '<p>')
       }
     }
   }
-
   updateTable(csv_sheet);
 }
 
@@ -71,8 +54,10 @@ function getMaxColumns(csv_array) {
 
 function fixCell(csv_array,y,x) {
   csv_array[y].push("")
+}
+
+function logChanges(x,y){
   var logMsg = "Cell (" + String.fromCharCode(97 + x).toUpperCase() + "," + (y + 1) + ") has been added to file"
-  //console.log(logMsg)
   return logMsg
 }
 
