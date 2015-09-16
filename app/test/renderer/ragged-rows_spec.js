@@ -3,8 +3,9 @@
  */
 process.env.NODE_ENV = 'test'
 
-var assert = require('assert')
-var expect = require('expect.js')
+var assert = require('chai').assert
+var expect = require('chai').expect
+var should = require('chai').should();
 
 var rows = require('./../../comma-chameleon/ragged-rows')
 

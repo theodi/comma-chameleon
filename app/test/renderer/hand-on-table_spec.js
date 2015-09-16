@@ -1,6 +1,7 @@
 /**
  * Created by stephenfortune on 16/09/15.
  */
+var assert = require('chai').assert;
 var expect = require('chai').expect;
 var should = require('chai').should();
 var hotController = require('./../../comma-chameleon/hot.js'); // failing probably cause it cant access the bower_components
