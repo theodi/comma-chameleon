@@ -2,6 +2,7 @@
 //var fs = require('fs');
 //var validationNotes = require('../validation_notes.json')
 //var rows = require('../ragged-rows');
+Handsontable = require('./../../bower_components/handsontable/dist/handsontable.full.js');
 
 var initialise = function(container){
 
