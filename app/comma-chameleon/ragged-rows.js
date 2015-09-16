@@ -23,18 +23,16 @@ function confirmRaggedRows(csv_sheet){
 }
 
 function fixRaggedRows(csv_sheet, row) {
-  var $messagePanel = $('#message-panel');
-  var ragged_rows = 0;
+
   var y = row === undefined ? 0 : row;
   // eval to left of colon if true and right of colon if false
 
   for (y; y < csv_sheet.length; y++) {
     for (var x = 0; x < getMaxColumns(csv_sheet); x++) {
       if (hot.getDataAtCell(y,x) === undefined) {
+        $('#right-panel').removeClass("hidden")
         fixCell(csv_sheet,y,x);
-        var amendment = logChanges(x,y);
-        $('#right-panel').removeClass("hidden");
-        $messagePanel.append('<p>' + amendment + '<p>')
+        logChanges(x,y);
       }
     }
   }
@@ -53,11 +51,14 @@ function getMaxColumns(csv_array) {
 }
 
 function fixCell(csv_array,row) {
-  csv_array[row].push("")
+  csv_array[row].push("");
 }
 
 function logChanges(col,row){
-  var logMsg = "Cell (" + String.fromCharCode(97 + col).toUpperCase() + "," + (row + 1) + ") has been added to file"
+
+  var logMsg = "Cell (" + String.fromCharCode(97 + col).toUpperCase() + "," + (row + 1) + ") has been added to file";
+  var $messagePanel = $('#message-panel');
+  $messagePanel.append('<p>' + logMsg + '<p>');
   return logMsg
 }
 
