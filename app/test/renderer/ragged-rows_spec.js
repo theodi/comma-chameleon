@@ -32,7 +32,9 @@ describe('testing ragged row functions against 2D array', function(){
 
   });
 
-  it('ragged array and yes to prompt equates to change on HandsOnTable object')
+  it('ragged array and yes to prompt equates to change on HandsOnTable object', function(){
+
+  });
 
 
 })
