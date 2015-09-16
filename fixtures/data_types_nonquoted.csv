@@ -1,0 +1,2 @@
+String,Integer,Float,Double,URL,boolean,date dashes,date slashes,Date & time,year,time
+just some text,2,2.0143567,2.04,http://www.commachameleon.org,TRUE,2015-08-14,2015/08/14,08/14/15 11:03 AM,2015,11:03:24 AM

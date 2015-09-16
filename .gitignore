@@ -3,7 +3,6 @@ npm-debug.log
 debug.log
 bower_components/
 node_modules/
-fixtures/
 .idea/
 packages/
 
