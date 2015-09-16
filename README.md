@@ -41,8 +41,32 @@ npm i electron-packager -g
 script/build
 ```
 
-## Test
+## Testing
 prerequisites
+```
 npm i electron-prebuilt --save-dev
 npm i electron-mocha --save-dev
-npm i expect.js --save-dev
+npm i chai --save-dev
+```
+
+Javascript is followed the `module.exports` pattern for module interface
+Tests have adopted a provisional pattern of using underscore `_` to denote private methods and making them available to
+ the unit test environment through the following addition to the `module.exports` pattern
+ ```
+ module.exports = {
+   // public interface
+ };
+ if (process.env.NODE_ENV === 'test') {
+   module.exports._private = {
+    // private methods made available for unit tests
+   }
+ }
+
+Tests set a local NODE_ENV paramter when executing
+
+##running the tests
+to run tests for the main (i.e. runtime) javascript:
+    electron-mocha app/test/main/
+
+to run tests for the renderer (i.e. client facing/side) javascript:
+    electron-mocha --renderer app/test/renderer/
