@@ -2,34 +2,60 @@
 
 ipc.on('ragged_rows', function() {
   csv = hot.getData();
+  //var confirmation = confirmRaggedRows(csv);
+  //if(confirmation["ragged"] && prompt()){
+  //  //fixRaggedRows();
+  //}
+  //console.log(confirmation["ragged"]);
+  //console.log(confirmRaggedRows(csv)["ragged"]);
+  //if(confirmRaggedRows(csv)["ragged"] && prompt()){
+  //  console.log("conulted baybee");
+  //}
+  //console.log(Object.getOwnPropertyNames(confirmRaggedRows(csv)));
   fixRaggedRows(csv);
 });
 
 // Fills undefined cells with an empty string, keeping the table in a
 // rectangular format
 
-function fixRaggedRows(csv_sheet) {
-  var $messagePanel = $('#message-panel');
-  var ragged_rows = 0;
-  //
+//function gogo(){
+//  if(confirmRaggedRows(csv))
+//}
+
+function confirmRaggedRows(csv_sheet){
+  var ragged_rows = false;
+  var resume = 0;
   for (var y = 0; y < csv_sheet.length; y++) {
     for (var x = 0; x < getMaxColumns(csv_sheet); x++) {
       if (hot.getDataAtCell(y,x) === undefined) {
-        if (ragged_rows == 0) {
-          if (confirm("Your file has ragged rows, do you want to correct this?")) {
-            $('#right-panel').removeClass("hidden")
-            ragged_rows = 1
-            $messagePanel.append('<p>' + fixCell(csv_sheet,y,x) + '<p>')
-          }
-          else {ragged_rows = -1}
-        }
-        else if (ragged_rows == 1) {
-          $messagePanel.append('<p>' + fixCell(csv_sheet,y,x) + '<p>')
-        }
+        ragged_rows = true;
+        resume = y;
+        return({ragged: ragged_rows, resume: y});
       }
     }
   }
-  updateTable(csv_sheet)
+}
+
+function prompt_consent(){
+  return confirm("Your file has ragged rows, do you want to correct this?");
+}
+
+function fixRaggedRows(csv_sheet, kwa) {
+  var $messagePanel = $('#message-panel');
+  var ragged_rows = 0;
+  var y = kwa === undefined ? 0 : kwa;
+  // eval to left of colon if true and right of colon if false
+
+  for (y; y < csv_sheet.length; y++) {
+    for (var x = 0; x < getMaxColumns(csv_sheet); x++) {
+      if (hot.getDataAtCell(y,x) === undefined) {
+        $('#right-panel').removeClass("hidden");
+        $messagePanel.append('<p>' + fixCell(csv_sheet,y,x) + '<p>')
+      }
+    }
+  }
+
+  updateTable(csv_sheet);
 }
 
 function getMaxColumns(csv_array) {
@@ -46,7 +72,7 @@ function getMaxColumns(csv_array) {
 function fixCell(csv_array,y,x) {
   csv_array[y].push("")
   var logMsg = "Cell (" + String.fromCharCode(97 + x).toUpperCase() + "," + (y + 1) + ") has been added to file"
-  console.log(logMsg)
+  //console.log(logMsg)
   return logMsg
 }
 

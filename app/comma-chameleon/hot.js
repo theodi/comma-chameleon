@@ -27,7 +27,8 @@ ipc.on('loadData', function(data) {
   try {
     csv = $.csv.toArrays(data);
     hot.loadData(csv);
-    fixRaggedRows(csv);
+    var proceed = confirmRaggedRows(csv) === undefined ? false : confirmRaggedRows(csv); // assign to false for when window opens or dud file loads
+    if(proceed["ragged"] && prompt_consent()){fixRaggedRows(csv, proceed["resume"]);}
   } catch(e) {
     alert('An error has occurred: '+e.message)
   }
