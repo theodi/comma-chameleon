@@ -31,11 +31,8 @@ describe("testing datapackage", function(){
       title: 'title'
     }
     var vocab = datapackage._private.inputToVocab(input); // creates object
-    //console.log(vocab);
-    expect(vocab).to.only.have.keys(['description', 'keywords', 'license', 'name', 'title', 'resources']);
-    expect(vocab['resources'][0]).to.only.have.keys(['name', 'path', 'mediatype', 'schema']);
-    //expect(datapackage._private.inputToVocab).to.be('Array');
-    //expect({ a: 'b', c: 'd' }).to.only.have.keys(['a', 'c']);
+    expect(vocab).to.have.all.keys('description','keywords', 'license', 'name', 'title', 'resources');
+    expect(vocab['resources'][0]).to.have.all.keys('name', 'path', 'mediatype', 'schema');
 
   });
 })
