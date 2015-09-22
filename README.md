@@ -18,17 +18,17 @@ Choose a platform:
 
 ```
 brew install node
-npm install bower electron-prebuilt -g
-cd app/
 npm install
+cd app/
 bower install
 ```
 
 Then to open the app run:
 
 ```
-electron .
-# assumes you have remained in the /app directory
+cd .. # begin from root directory
+npm start
+# it is also possible to run electron app/ to begin the electron app
 ```
 
 ## Building a new package
@@ -42,16 +42,15 @@ script/build
 ```
 
 ## Testing
-prerequisites
+
 ```
-npm i electron-prebuilt --save-dev
-npm i electron-mocha --save-dev
-npm i chai --save-dev
+electron-mocha app/test/main/ # run tests for the runtime components provided by Electron
+electron-mocha --renderer app/test/renderer/ # run tests that execute client side
 ```
 
 [Electron-Mocha](https://github.com/jprichardson/electron-mocha) has been adopted for testing, it enables both DOM and node.js testing and provides command line options to
 enable testing of both
-Testing DOM with electon-mocha follows the same invocation and declaration patterns as [jsdom()](https://www.npmjs.com/package/mocha-jsdom)
+Testing DOM with electon-mocha follows the same invocation and declaration patterns as [jsdom()](https://www.npmjs.com/package/mocha-jsdom) but provides genuine DOM access
 
 Javascript is followed the `module.exports` pattern for module interface
 Tests have adopted a provisional pattern of using underscore `_` to denote private methods and making them available to
