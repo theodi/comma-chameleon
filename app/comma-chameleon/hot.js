@@ -1,6 +1,6 @@
 var ipc = require('ipc');
 var fs = require('fs');
-var validationNotes = require('../validation_notes.json')
+var validationNotes = require('../validation_notes.json');
 
 var container = document.getElementById("editor");
 var hot = new Handsontable(container, {
@@ -23,11 +23,18 @@ container.addEventListener('contextmenu', function (e) {
   columnLeft.enabled = true
 }, false);
 
+function prompt_consent(){
+  return confirm("Your file has ragged rows, do you want to correct this?");
+}
+
 ipc.on('loadData', function(data) {
   try {
     csv = $.csv.toArrays(data);
     hot.loadData(csv);
-    fixRaggedRows(csv);
+    var proceed = confirmRaggedRows(csv) === undefined ? false : confirmRaggedRows(csv);
+    // assign to false for when window opens or dud file loads
+    if(proceed["ragged"] && prompt_consent()){fixRaggedRows(csv, proceed["resume"]);}
+    // TODO maybe too terse? resume attribute is employed so that any time taken in reading a CSV is not duplicated in second loop
   } catch(e) {
     alert('An error has occurred: '+e.message)
   }
