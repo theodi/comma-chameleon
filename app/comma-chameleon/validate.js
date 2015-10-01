@@ -52,12 +52,15 @@ function getValidation(content) {
 }
 
 function displayValidationMessages(validation) {
+  console.log(JSON.stringify(validation,null, 2));
   var $messagePanel = $('#message-panel');
   $messagePanel.html("<h4>Validation results <img src='" + validation.badges.png  +"' /></h4>");
   var resultsTemplate = _.template('<p><%= validation.errors.length %> errors, <%= validation.warnings.length %> warnings and <%= validation.info.length %> info messages:</p>')
   $messagePanel.append(resultsTemplate({'validation': validation}));
 //TODO the errorText function below is truncated and isn't doing what it should be doing
-
+  var printErrs = validation.errors[0];
+  console.log(errorText(type));
+  console.log(errorGuidance(type, row, col));
   var messageTemplate = _.template('<div><h5><%= errorText(type) %></h5><p><%= errorGuidance(type, row, col) %></p></div>');
   var messages = _.flatten([
     _.map(validation.errors,   function(d) { return _.extend({}, d, { msg_type: 'error' }) }),
@@ -122,15 +125,7 @@ function bgColorRenderer(color) {
   }
 }
 
-function errorText(error) {
-  return validationNotes.errors[error]
-}
 
-function errorGuidance(error, row, column) {
-  var guidance = validationNotes.errors[error + '_guidance_html']
-  var guidance_template = _.template(guidance)
-  return guidance_template({row: row, column: column})
-}
 
 $('button[data-dismiss=alert]').click(function() {
   $(this).parent('.alert').addClass('hidden')
