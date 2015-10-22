@@ -4,7 +4,9 @@
   "license": "MIT",
   "main": "main.js",
   "scripts": {
-    "start": "electron app"
+    "start": "electron app",
+    "mocha-main": "electron-mocha app/test/main/",
+    "mocha-renderer": "electron-mocha --renderer app/test/renderer/"
   },
   "repository": {
     "type": "git",
