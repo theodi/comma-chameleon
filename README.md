@@ -16,12 +16,14 @@ Choose a platform:
 
 ##Development setup
 
+you can use npm to install all relevant packages using the following set of commands
 ```
 brew install node
 npm install
 cd app/
 bower install
 ```
+
 
 Then to open the app run:
 
@@ -31,18 +33,15 @@ npm start
 # it is also possible to run electron app/ to begin the electron app
 ```
 
-## Building a new package
-
-(This assumes you're running OSX)
-
-```
-brew install wine # This allows us to specify the icon for Windows pacakges
-npm i electron-packager -g
-script/build
-```
-<<<<<<< HEAD
-
 ## Testing
+
+two npm scripts have been specified to run the electron-mocha tests. At time of development the repository has not developed
+an integrated way of testing Electron's respective `renderer` and `main` procesess and requires different args and paths to
+execute.
+The tests can be invoked by
+`npm run mocha-main`
+`npm run mocha-renderer`
+below are the args and paths. However it is not possible to run these commands unless you install electron-mocha globally
 
 ```
 electron-mocha app/test/main/ # run tests for the runtime components provided by Electron
@@ -74,5 +73,14 @@ to run tests for the main (i.e. runtime) javascript:
 
 to run tests for the renderer (i.e. client facing/side) javascript:
     electron-mocha --renderer app/test/renderer/
-=======
->>>>>>> master
+
+## Building a new package
+
+(This assumes you're running OSX)
+
+```
+brew install wine # This allows us to specify the icon for Windows pacakges
+npm i electron-packager -g
+script/build
+```
+
