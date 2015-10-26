@@ -7,17 +7,45 @@ var should = require('chai').should();
 var hotController = require('./../../comma-chameleon/hot.js'); // failing probably cause it cant access the bower_components
 var handMadeHOT = require('./../../bower_components/handsontable/dist/handsontable.full.js');
 
+beforeEach(function () {
+  try {
+
+    //hotController.create(hotView);
+    //console.log(typeof hotView);
+    //console.log(JSON.stringify(hotView,null,2));
+    hotView = document.createElement('div');
+
+    //assert.strictEqual(div.nodeName, 'DIV')
+    hot = hotController.create(hotView);
+    console.log("success");
+    //console.log(hotController);
+  } catch (e) {
+
+    console.log('wtf');
+    //console.log(e instanceof TypeError);
+    console.log(e.message);
+    console.log(e.name);
+    console.log(e.fileName);
+    console.log(e.lineNumber);
+    console.log(e.columnNumber);
+    console.log(e.stack);
+  }
+
+});
+
+
+
 describe('loading Hands On Table library into workview', function(){
 
   it('constructs a Hands On Table element from source', function(){
-    var hotView = document.createElement('div');
+
     var data = [
       ["", "Ford", "Volvo", "Toyota", "Honda"],
       ["2014", 10, 11, 12, 13],
       ["2015", 20, 11, 14, 13],
       ["2016", 30, 15, 12, 13]
     ];
-    //var hotView = new handMadeHOT(hotView, '"col1","col2","col3"\r\n"Foo","Bar","Baz"');
+    //console.log(JSON.stringify(hotView,null,2));
     var hot = new handMadeHOT(hotView,{
       data: data,
       colHeaders: true,
@@ -29,15 +57,18 @@ describe('loading Hands On Table library into workview', function(){
   });
 
   it('constructs hands on table from programs source files', function(){
-    var hotView = document.createElement('div');
+    //var hotView = document.createElement('div');
+    //console.log(JSON.stringify(hotView,null,2));
+
     var data = [
       ["", "Ford", "Volvo", "Toyota", "Honda"],
       ["2014", 10, 11, 12, 13],
       ["2015", 20, 11, 14, 13],
       ["2016", 30, 15, 12, 13]
     ];
-    var hot = hotController.create(hotView);
+
     hot.loadData(data);
+
     expect(hot.getData()).to.equal(data);
   });
 
