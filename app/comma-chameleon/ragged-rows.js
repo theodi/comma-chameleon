@@ -35,7 +35,8 @@
     //$('#right-panel').removeClass("hidden");
     //var $messagePanel = $('#message-panel');
     var messagePanel = document.getElementById('message-panel');
-    console.log(messagePanel);
+
+    //console.dir(messagePanel);
     //$messagePanel.append('<p>' + fixCell(sheet,y,x) + '<p>');
     messagePanel.innerHTML += '<p>' + fixCell(sheet,y,x) + '<p>';
   }
