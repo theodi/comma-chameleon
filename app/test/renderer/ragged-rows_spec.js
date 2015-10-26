@@ -8,6 +8,8 @@ var expect = require('chai').expect
 var should = require('chai').should();
 
 var hotController = require('./../../comma-chameleon/hot.js');
+var raggedRows = require('./../../comma-chameleon/ragged-rows.js');
+var $ = require('./../../bower_components/jquery/dist/jquery.js');
 
 
 beforeEach(function () {
@@ -31,7 +33,7 @@ describe('testing ragged row functions against 2D array', function(){
     ];
 
     hot.loadData(data);
-    //raggedRows.fixRaggedRows(hot.getData());
+    raggedRows.fixRaggedRows(hot.getData());
 
   });
 
