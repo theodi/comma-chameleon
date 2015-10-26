@@ -8,29 +8,8 @@ var hotController = require('./../../comma-chameleon/hot.js'); // failing probab
 var handMadeHOT = require('./../../bower_components/handsontable/dist/handsontable.full.js');
 
 beforeEach(function () {
-  try {
-
-    //hotController.create(hotView);
-    //console.log(typeof hotView);
-    //console.log(JSON.stringify(hotView,null,2));
     hotView = document.createElement('div');
-
-    //assert.strictEqual(div.nodeName, 'DIV')
     hot = hotController.create(hotView);
-    console.log("success");
-    //console.log(hotController);
-  } catch (e) {
-
-    console.log('wtf');
-    //console.log(e instanceof TypeError);
-    console.log(e.message);
-    console.log(e.name);
-    console.log(e.fileName);
-    console.log(e.lineNumber);
-    console.log(e.columnNumber);
-    console.log(e.stack);
-  }
-
 });
 
 
