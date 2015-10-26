@@ -4,7 +4,7 @@
   // rectangular format
 
   var amendRows = function(worksheet) {
-    var $messagePanel = $('#message-panel');
+
     var ragged_rows = 0;
     //
     for (var y = 0; y < worksheet.length; y++) {
@@ -16,17 +16,24 @@
             if (confirm("Your file has ragged rows, do you want to correct this?")) {
               $('#right-panel').removeClass("hidden");
               ragged_rows = 1
-              $messagePanel.append('<p>' + fixCell(worksheet,y,x) + '<p>')
+              reportFix(worksheet,y,x);
+              //$messagePanel.append('<p>' + fixCell(worksheet,y,x) + '<p>')
             }
             else {ragged_rows = -1}
           }
           else if (ragged_rows == 1) {
-            $messagePanel.append('<p>' + fixCell(worksheet,y,x) + '<p>')
+            reportFix(worksheet,y,x);
+            //$messagePanel.append('<p>' + fixCell(worksheet,y,x) + '<p>')
           }
         }
       }
     }
     updateTable(worksheet)
+  }
+
+  var reportFix = function(sheet,y,x){
+    var $messagePanel = $('#message-panel');
+    $messagePanel.append('<p>' + fixCell(sheet,y,x) + '<p>')
   }
 
   function getMaxColumns(csv_array) {
