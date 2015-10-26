@@ -14,7 +14,7 @@
           if (ragged_rows == 0) {
             // this is a way of prompting once and then proceeding to fix every other ragged instance
             if (confirm("Your file has ragged rows, do you want to correct this?")) {
-              $('#right-panel').removeClass("hidden");
+
               ragged_rows = 1
               reportFix(worksheet,y,x);
               //$messagePanel.append('<p>' + fixCell(worksheet,y,x) + '<p>')
@@ -32,8 +32,12 @@
   }
 
   var reportFix = function(sheet,y,x){
-    var $messagePanel = $('#message-panel');
-    $messagePanel.append('<p>' + fixCell(sheet,y,x) + '<p>')
+    //$('#right-panel').removeClass("hidden");
+    //var $messagePanel = $('#message-panel');
+    var messagePanel = document.getElementById('message-panel');
+    console.log(messagePanel);
+    //$messagePanel.append('<p>' + fixCell(sheet,y,x) + '<p>');
+    messagePanel.innerHTML += '<p>' + fixCell(sheet,y,x) + '<p>';
   }
 
   function getMaxColumns(csv_array) {
