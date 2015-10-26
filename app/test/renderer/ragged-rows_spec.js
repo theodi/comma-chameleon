@@ -22,8 +22,29 @@ describe('testing ragged row functions against 2D array', function(){
 
   it('checks a loaded CSV and returns prompt on first discovery of ragged row', function(){
 
-    var panel = document.createElement('div');
-    panel.id = "#right-panel";
+    rpanel = document.createElement('div');
+    rpanel.setAttribute("id", "right-panel");
+    mpanel = document.createElement('div');
+    mpanel.setAttribute("id","message-panel");
+    var newContent = document.createTextNode("  ");
+    mpanel.appendChild(newContent); //add the text node to the newly created div.
+    // add the newly created element and its content into the DOM
+    var currentDiv = document.getElementById("div1");
+    document.body.insertBefore(mpanel, currentDiv);
+
+    //try {
+    //      console.log(mpanel.nodeName);
+    //
+    //} catch (e) {
+    //  console.log(e instanceof TypeError); // true
+    //  console.log(e.message);              // "null has no properties"
+    //  console.log(e.name);                 // "TypeError"
+    //  console.log(e.fileName);             // "Scratchpad/1"
+    //  console.log(e.lineNumber);           // 2
+    //  console.log(e.columnNumber);         // 2
+    //  console.log(e.stack);
+    //}
+    console.log(mpanel.innerHTML);
 
     var data = [
       ["", "Ford", "Volvo", "Toyota", "Honda"],
