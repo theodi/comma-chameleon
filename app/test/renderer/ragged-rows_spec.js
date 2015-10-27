@@ -26,24 +26,8 @@ describe('testing ragged row functions against 2D array', function(){
     rpanel.setAttribute("id", "right-panel");
     mpanel = document.createElement('div');
     mpanel.setAttribute("id","message-panel");
-    var newContent = document.createTextNode("  ");
-    mpanel.appendChild(newContent); //add the text node to the newly created div.
-    // add the newly created element and its content into the DOM
-    var currentDiv = document.getElementById("div1");
-    document.body.insertBefore(mpanel, currentDiv);
+    document.body.appendChild(mpanel);
 
-    //try {
-    //      console.log(mpanel.nodeName);
-    //
-    //} catch (e) {
-    //  console.log(e instanceof TypeError); // true
-    //  console.log(e.message);              // "null has no properties"
-    //  console.log(e.name);                 // "TypeError"
-    //  console.log(e.fileName);             // "Scratchpad/1"
-    //  console.log(e.lineNumber);           // 2
-    //  console.log(e.columnNumber);         // 2
-    //  console.log(e.stack);
-    //}
     console.log(mpanel.innerHTML);
 
     var data = [
@@ -55,6 +39,9 @@ describe('testing ragged row functions against 2D array', function(){
 
     hot.loadData(data);
     raggedRows.fixRaggedRows(hot.getData());
+    expect(mpanel.innerText).to.not.equal("");
+    //expect(mpanel.innerText).to.equal("Cell (E,3) has been added to file");
+    expect(mpanel.innerText).to.have.string('has been added to file');
 
   });
 
