@@ -1,8 +1,8 @@
 /**
  * Created by stephenfortune on 15/09/15.
  */
-var assert = require('chai').assert
-var expect = require('chai').expect
+var assert = require('chai').assert;
+var expect = require('chai').expect;
 var should = require('chai').should();
 
 
@@ -19,7 +19,6 @@ describe('populate a web page and check that everything is there', function(){
     var targetdiv = document.createElement('div');
     targetdiv.innerHTML = "populated";
     expect(targetdiv === div);
-    //targetdiv.innerText.should.equal(div.innerText)
     expect(targetdiv.innerText).to.not.equal(div.innerText)
   })
 
