@@ -39,8 +39,6 @@ describe('testing ragged row functions against 2D array', function(){
 
     hot.loadData(data);
     raggedRows.fixRaggedRows(hot.getData());
-    expect(mpanel.innerText).to.not.equal("");
-    //expect(mpanel.innerText).to.equal("Cell (E,3) has been added to file");
     expect(mpanel.innerText).to.have.string('has been added to file');
 
   });
