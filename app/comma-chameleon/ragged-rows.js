@@ -32,12 +32,12 @@
   }
 
   var reportFix = function(sheet,y,x){
-    //$('#right-panel').removeClass("hidden");
-    //var $messagePanel = $('#message-panel');
+    document.querySelector('#right-panel').classList.remove('hidden');
+
     var messagePanel = document.getElementById('message-panel');
 
     //console.dir(messagePanel);
-    //$messagePanel.append('<p>' + fixCell(sheet,y,x) + '<p>');
+
     messagePanel.innerHTML += '<p>' + fixCell(sheet,y,x) + '<p>';
   }
 
