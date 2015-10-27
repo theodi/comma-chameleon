@@ -61,7 +61,7 @@ describe('testing ragged row functions against 2D array', function(){
 
   });
 
-  it('ragged array and yes to prompt equates to change on HandsOnTable object', function(){
+  it.skip('ragged array and yes to prompt equates to change on HandsOnTable object', function(){
     var data = [
       ["", "Ford", "Volvo", "Toyota", "Honda"],
       ["2014", 10, 11, 12, 13],
@@ -76,7 +76,7 @@ describe('testing ragged row functions against 2D array', function(){
   });
 
 
-  it('if ragged rows present and user consent it parses the entire CSV', function(){
+  it.skip('if ragged rows present and user consent it parses the entire CSV', function(){
 
     var data = [
       ["", "Ford", "Volvo", "Toyota", "Honda"],
