@@ -1,8 +1,3 @@
-//var ipc = require('ipc');
-//var fs = require('fs');
-//var validationNotes = require('../validation_notes.json')
-//var rows = require('../ragged-rows');
-//Handsontable = require('./../../bower_components/handsontable/dist/handsontable.full.js');
 Handsontable = require('./../bower_components/handsontable/dist/handsontable.full.js');
 
 var initialise = function(container){
@@ -17,6 +12,7 @@ var initialise = function(container){
 }
 
 module.exports = {
-  create: initialise
+  create: initialise,
+  // returns the HoT object
 }
 
