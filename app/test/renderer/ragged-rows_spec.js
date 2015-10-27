@@ -11,6 +11,14 @@ var hotController = require('./../../comma-chameleon/hot.js');
 var raggedRows = require('./../../comma-chameleon/ragged-rows.js');
 var $ = require('./../../bower_components/jquery/dist/jquery.js');
 
+before(function(){
+  rpanel = document.createElement('div');
+  rpanel.setAttribute("id", "right-panel");
+  mpanel = document.createElement('div');
+  mpanel.setAttribute("id","message-panel");
+  document.body.appendChild(mpanel);
+  document.body.appendChild(rpanel);
+})
 
 beforeEach(function () {
   hotView = document.createElement('div');
@@ -21,14 +29,6 @@ beforeEach(function () {
 describe('testing ragged row functions against 2D array', function(){
 
   it('checks a loaded CSV and returns prompt on first discovery of ragged row', function(){
-
-    rpanel = document.createElement('div');
-    rpanel.setAttribute("id", "right-panel");
-    mpanel = document.createElement('div');
-    mpanel.setAttribute("id","message-panel");
-    document.body.appendChild(mpanel);
-
-    console.log(mpanel.innerHTML);
 
     var data = [
       ["", "Ford", "Volvo", "Toyota", "Honda"],
