@@ -17,13 +17,11 @@
 
               ragged_rows = 1
               reportFix(worksheet,y,x);
-              //$messagePanel.append('<p>' + fixCell(worksheet,y,x) + '<p>')
             }
             else {ragged_rows = -1}
           }
           else if (ragged_rows == 1) {
             reportFix(worksheet,y,x);
-            //$messagePanel.append('<p>' + fixCell(worksheet,y,x) + '<p>')
           }
         }
       }
@@ -35,9 +33,6 @@
     document.querySelector('#right-panel').classList.remove('hidden');
 
     var messagePanel = document.getElementById('message-panel');
-
-    //console.dir(messagePanel);
-
     messagePanel.innerHTML += '<p>' + fixCell(sheet,y,x) + '<p>';
   }
 
@@ -53,9 +48,9 @@
   }
 
   function fixCell(csv_array,y,x) {
-    csv_array[y].push("")
+    csv_array[y].push("");
     var logMsg = "Cell (" + String.fromCharCode(97 + x).toUpperCase() + "," + (y + 1) + ") has been added to file";
-    console.log(logMsg)
+    console.log(logMsg);
     return logMsg
   }
 

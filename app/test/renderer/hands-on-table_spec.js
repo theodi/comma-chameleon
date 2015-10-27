@@ -12,8 +12,6 @@ beforeEach(function () {
     hot = hotController.create(hotView);
 });
 
-
-
 describe('loading Hands On Table library into workview', function(){
 
   it('constructs a Hands On Table element from source', function(){
@@ -24,7 +22,6 @@ describe('loading Hands On Table library into workview', function(){
       ["2015", 20, 11, 14, 13],
       ["2016", 30, 15, 12, 13]
     ];
-    //console.log(JSON.stringify(hotView,null,2));
     var hot = new handMadeHOT(hotView,{
       data: data,
       colHeaders: true,
@@ -36,8 +33,6 @@ describe('loading Hands On Table library into workview', function(){
   });
 
   it('constructs hands on table from programs source files', function(){
-    //var hotView = document.createElement('div');
-    //console.log(JSON.stringify(hotView,null,2));
 
     var data = [
       ["", "Ford", "Volvo", "Toyota", "Honda"],
