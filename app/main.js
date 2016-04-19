@@ -239,6 +239,10 @@ function createWindow(data, title) {
     // when you should delete the corresponding element.
     mainWindow = null;
   });
+
+  mainWindow.on('resize', function() {
+    mainWindow.webContents.send('resized');
+  })
 }
 
 function openFile() {
