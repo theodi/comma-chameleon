@@ -6,7 +6,8 @@ var initialise = function(container){
     colHeaders: true,
     rowHeaders: true,
     columnSorting: true,
-    contextMenu: false
+    contextMenu: false,
+    autoRowSize: true
   });
   return hot;
 }
@@ -15,4 +16,3 @@ module.exports = {
   create: initialise,
   // returns the HoT object
 }
-
