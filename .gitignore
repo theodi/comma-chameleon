@@ -1,9 +1,6 @@
 .DS_Store
 npm-debug.log
 debug.log
-bower_components/
+app/bower_components/
 node_modules/
-fixtures/
 .idea/
-packages/
-

@@ -1,46 +1,18 @@
-var ipc = require('ipc');
-var fs = require('fs');
-var validationNotes = require('../validation_notes.json')
+Handsontable = require('./../bower_components/handsontable/dist/handsontable.full.js');
 
-var container = document.getElementById("editor");
-var hot = new Handsontable(container, {
-  colHeaders: true,
-  rowHeaders: true,
-  columnSorting: true,
-  contextMenu: false
-});
+var initialise = function(container){
 
-container.addEventListener('contextmenu', function (e) {
-  e.preventDefault();
-  if (hot.getSelected()[0] == 0) {
-    rowAbove.enabled = false
-  }
-  if (hot.getSelected()[1] == 0) {
-    columnLeft.enabled = false
-  }
-  menu.popup(remote.getCurrentWindow());
-  rowAbove.enabled = true
-  columnLeft.enabled = true
-}, false);
-
-ipc.on('loadData', function(data) {
-  try {
-    csv = $.csv.toArrays(data);
-    hot.loadData(csv);
-    fixRaggedRows(csv);
-  } catch(e) {
-    alert('An error has occurred: '+e.message)
-  }
-});
-
-ipc.on('saveData', function(fileName) {
-  data = $.csv.fromArrays(hot.getData());
-  fs.writeFile(fileName, data, function (err) {
+  var hot = new Handsontable(container, {
+    colHeaders: true,
+    rowHeaders: true,
+    columnSorting: true,
+    contextMenu: false
   });
-  document.title = fileName;
-});
+  return hot;
+}
 
-ipc.on('getCSV', function() {
-  data = $.csv.fromArrays(hot.getData());
-  ipc.send('sendCSV', data);
-})
+module.exports = {
+  create: initialise,
+  // returns the HoT object
+}
+

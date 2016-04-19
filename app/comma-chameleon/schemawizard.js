@@ -1,16 +1,10 @@
 /**
  * Created by stephenfortune on 13/08/15.
  */
-var ipc = require('ipc');
-var exports = module.exports = {};
-
-var Schema = function(){
-
-}
-
+'require strict';
 // do not know how to handle exports when creating an object
 
-exports.createSchema = function(headerArray){
+var headerToVocab = function(headerArray){
   // a JSON parser
 
   if(headerArray == false){
@@ -31,8 +25,22 @@ exports.createSchema = function(headerArray){
         }
       }
     );
-    //console.log(JSON.stringify(schemaInWaiting,null,4));
   });
-  //console.log(schemaInWaiting,null,4);
   return schemaInWaiting;
+}
+
+var headerRow = function(rowArray) {
+  // function that extracts header data for use in schema wizard
+  // TODO feel like handsontable must have this functionality built in
+  rowArray.forEach(function (contents) {
+    if (contents === "" || contents === null) {
+      headerArray = false;
+    }
+  });
+  return rowArray;
+}
+
+module.exports = {
+  returnHeaderRow: headerRow,
+  createSchema: headerToVocab
 }

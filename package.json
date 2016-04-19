@@ -1,0 +1,25 @@
+{
+  "name": "comma-chameleon",
+  "version": "0.1.0",
+  "license": "MIT",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron app",
+    "mocha-main": "electron-mocha app/test/main/",
+    "mocha-renderer": "electron-mocha --renderer --no-timeouts app/test/renderer/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/theodi/comma-chameleon.git"
+  },
+  "dependencies": {
+    "request": "^2.60.0",
+    "xlsx": "^0.8.0",
+    "node-zip": "^1.1.1"
+  },
+  "devDependencies": {
+    "chai": "^3.2.0",
+    "electron-mocha": "^0.3.1",
+    "electron-prebuilt": "^0.33.0"
+  }
+}

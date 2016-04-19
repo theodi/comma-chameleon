@@ -322,11 +322,13 @@ function validateFile() {
 }
 
 function generateSchemaFromHeader() {
+  // requires that schema.js has loaded
   window = BrowserWindow.getFocusedWindow();
   window.webContents.send('schemaFromHeaders');
 }
 
 function fixRaggedRowsFile() {
+  // requires that ragged-rows.js has loaded
   window = BrowserWindow.getFocusedWindow();
   window.webContents.send('ragged_rows');
 }

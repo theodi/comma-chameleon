@@ -1,0 +1,39 @@
+{
+  "fields": [
+    {
+      "name": "Username",
+      "constraints": {
+        "required": true,
+        "unique": true,
+        "minLength": 5,
+        "maxLength": 10,
+        "pattern": "^[A-Za-z0-9_]*$"
+      }
+    },
+    {
+      "name": "Age",
+      "constraints": {
+        "type": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger",
+        "minimum": "13",
+        "maximum": "99"
+      }
+    },
+    {
+      "name": "Height",
+      "constraints": {
+        "type": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger",
+        "minimum": "20"
+      }
+    },
+    {
+      "name": "Weight",
+      "constraints": {
+        "type": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger",
+        "maximum": "500"
+      }
+    },
+    {
+      "name": "Password"
+    }
+  ]
+}
