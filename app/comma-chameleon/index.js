@@ -47,8 +47,7 @@ ipc.on('saveData', function(fileName) {
 });
 
 ipc.on('resized', function() {
-  data = hot.getData();
-  hot.loadData(data);
+  hot.render()
 });
 
 ipc.on('getCSV', function() {
