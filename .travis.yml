@@ -6,5 +6,4 @@ before_script:
   - npm install bower
   - bower install --config.cwd=app/
 script:
-  - electron-mocha app/test/main/
-  - electron-mocha --renderer app/test/renderer/
+  - npm run mocha-all
