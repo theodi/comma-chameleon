@@ -14,13 +14,14 @@
     "url": "https://github.com/theodi/comma-chameleon.git"
   },
   "dependencies": {
+    "node-zip": "^1.1.1",
     "request": "^2.60.0",
-    "xlsx": "^0.8.0",
-    "node-zip": "^1.1.1"
+    "xlsx": "^0.8.0"
   },
   "devDependencies": {
     "chai": "^3.2.0",
     "electron-mocha": "^0.3.1",
-    "electron-prebuilt": "^0.33.0"
+    "electron-prebuilt": "^0.37.6",
+    "electron-debug": "^0.6.0"
   }
 }

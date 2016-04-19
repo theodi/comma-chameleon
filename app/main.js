@@ -7,8 +7,9 @@ var Fs = require('fs');
 var XLSX = require('xlsx');
 var ipc = require('ipc');
 
-
 var datapackage = require('./browser/datapackage');
+
+require('electron-debug')({showDevTools: true})
 
 // Report crashes to our server.
 require('crash-reporter').start();
@@ -223,10 +224,6 @@ function createWindow(data, title) {
 
   mainWindow.loadUrl('file://' + __dirname + '/comma-chameleon/views/index.html');
 
-  // Open the devtools.
-  mainWindow.openDevTools();
-
-
   mainWindow.webContents.on('did-finish-load', function() {
     mainWindow.setTitle(title);
     mainWindow.webContents.send('loadData', data);
@@ -239,6 +236,10 @@ function createWindow(data, title) {
     // when you should delete the corresponding element.
     mainWindow = null;
   });
+
+  mainWindow.on('resize', function() {
+    mainWindow.webContents.send('resized');
+  })
 }
 
 function openFile() {

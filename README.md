@@ -21,13 +21,14 @@ you can use npm to install all relevant packages using the following set of comm
 ```
 brew install node
 npm install
+npm install -g bower
 bower install --config.cwd=app/
 ```
 
 Then to open the app run:
 
 ```
-electron app
+npm start
 ```
 
 ## Testing

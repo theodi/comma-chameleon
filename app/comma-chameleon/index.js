@@ -46,6 +46,10 @@ ipc.on('saveData', function(fileName) {
   document.title = fileName;
 });
 
+ipc.on('resized', function() {
+  hot.render()
+});
+
 ipc.on('getCSV', function() {
   data = $.csv.fromArrays(hot.getData());
   ipc.send('sendCSV', data);
