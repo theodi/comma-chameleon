@@ -40,7 +40,7 @@ Assuming you have installed `electron-mocha` globally (via `npm i electron-mocha
 npm run mocha-all
 ```
 
-Or to run the main and renderer tests seperately, you can run:
+Or to run the main and renderer tests separately, you can run:
 
 ```
 npm run mocha-main  # run tests for the runtime components provided by Electron
