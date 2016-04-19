@@ -21,59 +21,38 @@ you can use npm to install all relevant packages using the following set of comm
 ```
 brew install node
 npm install
-cd app/
-bower install
+bower install --config.cwd=app/
 ```
-
 
 Then to open the app run:
 
 ```
-cd .. # begin from root directory
-npm start
-# it is also possible to run electron app/ to begin the electron app
+electron app
 ```
 
 ## Testing
 
-two npm scripts have been specified to run the electron-mocha tests. At time of development the repository has not developed
-an integrated way of testing Electron's respective `renderer` and `main` procesess and requires different args and paths to
-execute.
-The tests can be invoked by
-`npm run mocha-main`
-`npm run mocha-renderer`
-below are the args and paths. However it is not possible to run these commands unless you install electron-mocha globally
+[Electron-Mocha](https://github.com/jprichardson/electron-mocha) has been adopted for testing, it enables both DOM and node.js testing and provides command line options to enable testing of both.
+
+Assuming you have installed `electron-mocha` globally (via `npm i electron-mocha -g`), you can run the tests like this:
 
 ```
-electron-mocha app/test/main/ # run tests for the runtime components provided by Electron
+npm run mocha-all
+```
+
+Or to run the main and renderer tests seperately, you can run:
+
+```
+npm run mocha-main  # run tests for the runtime components provided by Electron
+npm run mocha-renderer # run tests that execute client side
+```
+
+Otherwise you can run:
+
+```
+electron-mocha app/test/main/
 electron-mocha --renderer app/test/renderer/ # run tests that execute client side
 ```
-
-[Electron-Mocha](https://github.com/jprichardson/electron-mocha) has been adopted for testing, it enables both DOM and node.js testing and provides command line options to
-enable testing of both
-Testing DOM with electon-mocha follows the same invocation and declaration patterns as [jsdom()](https://www.npmjs.com/package/mocha-jsdom) but provides genuine DOM access
-
-Javascript is followed the `module.exports` pattern for module interface
-Tests have adopted a provisional pattern of using underscore `_` to denote private methods and making them available to
- the unit test environment through the following addition to the `module.exports` pattern
- ```
- module.exports = {
-   // public interface
- };
- if (process.env.NODE_ENV === 'test') {
-   module.exports._private = {
-    // private methods made available for unit tests
-   }
- }
-
-Tests set a local NODE_ENV paramter when executing
-
-##running the tests
-to run tests for the main (i.e. runtime) javascript:
-    electron-mocha app/test/main/
-
-to run tests for the renderer (i.e. client facing/side) javascript:
-    electron-mocha --renderer app/test/renderer/
 
 ## Building a new package
 

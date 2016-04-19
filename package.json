@@ -6,7 +6,8 @@
   "scripts": {
     "start": "electron app",
     "mocha-main": "electron-mocha app/test/main/",
-    "mocha-renderer": "electron-mocha --renderer --no-timeouts app/test/renderer/"
+    "mocha-renderer": "electron-mocha --renderer --no-timeouts app/test/renderer/",
+    "mocha-all": "electron-mocha app/test/main/ && electron-mocha --renderer --no-timeouts app/test/renderer/"
   },
   "repository": {
     "type": "git",
