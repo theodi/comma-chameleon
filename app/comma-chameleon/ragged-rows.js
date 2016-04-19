@@ -3,7 +3,8 @@
   // Fills undefined cells with an empty string, keeping the table in a
   // rectangular format
 
-  var amendRows = function(worksheet) {
+  var amendRows = function(worksheet, autoConfirm) {
+    autoConfirm = typeof autoConfirm !== 'undefined' ? autoConfirm : false;
 
     var ragged_rows = 0;
     //
@@ -13,12 +14,13 @@
           // only triggers if a cell returns undefined
           if (ragged_rows == 0) {
             // this is a way of prompting once and then proceeding to fix every other ragged instance
-            if (confirm("Your file has ragged rows, do you want to correct this?")) {
+            if (autoConfirm == true || confirm("Your file has ragged rows, do you want to correct this?")) {
 
               ragged_rows = 1
               reportFix(worksheet,y,x);
+            } else {
+              ragged_rows = -1
             }
-            else {ragged_rows = -1}
           }
           else if (ragged_rows == 1) {
             reportFix(worksheet,y,x);

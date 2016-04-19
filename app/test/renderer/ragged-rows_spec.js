@@ -54,14 +54,12 @@ describe('testing ragged row functions against 2D array', function(){
     ];
 
     hot.loadData(data);
-    raggedRows.fixRaggedRows(hot.getData());
-    //TODO code that automates the answer of yes to modal dialog
-    //TODO a spy that confirms modal dialog closed
-    //expect(mpanel.innerText).to.have.string('has been added to file'); TODO uncomment once the above refactor done
+    raggedRows.fixRaggedRows(hot.getData(), true);
+    expect(mpanel.innerText).to.have.string('has been added to file')
 
   });
 
-  it.skip('ragged array and yes to prompt equates to change on HandsOnTable object', function(){
+  it('ragged array and yes to prompt equates to change on HandsOnTable object', function(){
     var data = [
       ["", "Ford", "Volvo", "Toyota", "Honda"],
       ["2014", 10, 11, 12, 13],
@@ -70,13 +68,12 @@ describe('testing ragged row functions against 2D array', function(){
     ];
 
     hot.loadData(data);
-    raggedRows.fixRaggedRows(hot.getData());
-    //TODO code that automates the answer of yes to modal dialog
-    //expect(mpanel.innerText).to.have.string('has been added to file'); TODO uncomment once the above refactor done
+    raggedRows.fixRaggedRows(hot.getData(), true);
+    expect(mpanel.innerText).to.have.string('has been added to file')
   });
 
 
-  it.skip('if ragged rows present and user consent it parses the entire CSV', function(){
+  it('if ragged rows present and user consent it parses the entire CSV', function(){
 
     var data = [
       ["", "Ford", "Volvo", "Toyota", "Honda"],
@@ -89,10 +86,8 @@ describe('testing ragged row functions against 2D array', function(){
     ];
 
     hot.loadData(data);
-    raggedRows.fixRaggedRows(hot.getData());
-    //expect(mpanel.innerText).to.have.string('has been added to file');
-    //TODO - an assertion that determines that the above should have been added twice
-
+    raggedRows.fixRaggedRows(hot.getData(), true);
+    expect(mpanel.innerText).to.have.string('has been added to file');
   });
 
 
