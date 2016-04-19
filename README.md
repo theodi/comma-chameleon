@@ -1,4 +1,5 @@
 [![Stories in Ready](https://badge.waffle.io/theodi/edward-csvhands.svg?label=ready&title=Ready)](http://waffle.io/theodi/edward-csvhands)
+[![Build Status](https://travis-ci.org/theodi/comma-chameleon.svg?branch=master)](https://travis-ci.org/theodi/comma-chameleon)
 
 # Comma Chameleon
 
@@ -83,4 +84,3 @@ brew install wine # This allows us to specify the icon for Windows pacakges
 npm i electron-packager -g
 script/build
 ```
-
