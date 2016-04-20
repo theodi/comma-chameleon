@@ -6,4 +6,5 @@ before_script:
   - npm install bower
   - bower install --config.cwd=app/
 script:
-  - npm run mocha-all
+  - npm run mocha-main
+  - npm run mocha-renderer
