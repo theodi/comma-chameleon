@@ -5,23 +5,15 @@
 
 var ipc = require('ipc');
 var fs = require('fs');
+
 var hotController = require('../hot.js');
 var schemawizard = require('../schemawizard.js');
 var rows = require('../ragged-rows');
 var validation = require('../validate');
+var file = require('../file-actions');
 
 var container = document.getElementById("editor");
 var hot = hotController.create(container);
-
-function openFile(data) {
-  try {
-    csv = $.csv.toArrays(data);
-    hot.loadData(csv);
-    rows.fixRaggedRows(csv);
-  } catch(e) {
-    alert('An error has occurred: '+e.message)
-  }
-}
 
 container.ondragover = function () {
   return false;
@@ -33,10 +25,10 @@ container.ondragleave = container.ondragend = function () {
 
 container.ondrop = function (e) {
   e.preventDefault();
-  var file = e.dataTransfer.files[0];
-  console.log('File you dragged here is', file.path);
-  fs.readFile(file.path, 'utf-8', function (err, data) {
-    openFile(data)
+  var f = e.dataTransfer.files[0];
+  fs.readFile(f.path, 'utf-8', function (err, data) {
+    arrays = file.open(hot, data)
+    rows.fixRaggedRows(arrays);
   });
 };
 
@@ -56,7 +48,8 @@ container.addEventListener('contextmenu', function (e) {
 // runtime renderer call & response
 
 ipc.on('loadData', function(data) {
-  openFile(data)
+  arrays = file.open(hot, data)
+  rows.fixRaggedRows(arrays);
 });
 
 ipc.on('saveData', function(fileName) {
