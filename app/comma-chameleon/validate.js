@@ -118,10 +118,30 @@ var messageTemplate = _.template('<div><h5><%= errorText(type) %></h5><p><%= err
     errorGuidance: function(error, row, column) {
       var guidance = validationNotes.errors[error + '_guidance_html']
       var guidance_template = _.template(guidance)
-      return guidance_template({row: row, column: column})
-    }
+      return guidance_template({row: row, column: numToCol(column)})
+    },
+    numToCol: numToCol
   }
 });
+
+var numToCol = function(number){
+    var numeric = (number - 1) % 26;
+    var letter = chr(65 + numeric);
+    var number2 = parseInt((number - 1) / 26);
+    if (number2 > 0) {
+        return numToCol(number2) + letter;
+    } else {
+        return letter;
+    }
+}
+
+var chr = function(codePt) {
+  if (codePt > 0xFFFF) {
+      codePt -= 0x10000;
+      return String.fromCharCode(0xD800 + (codePt >> 10), 0xDC00 + (codePt & 0x3FF));
+  }
+  return String.fromCharCode(codePt);
+}
 
 $('button[data-dismiss=alert]').click(function() {
   $(this).parent('.alert').addClass('hidden')
@@ -137,6 +157,7 @@ if (process.env.NODE_ENV === 'test') {
     clearHighlights,
     scrollToCell,
     displayValidationMessages,
-    getValidation
+    getValidation,
+    numToCol
   }
 }
