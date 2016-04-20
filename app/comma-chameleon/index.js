@@ -5,13 +5,32 @@
 
 var ipc = require('ipc');
 var fs = require('fs');
+
 var hotController = require('../hot.js');
 var schemawizard = require('../schemawizard.js');
 var rows = require('../ragged-rows');
 var validation = require('../validate');
+var file = require('../file-actions');
 
 var container = document.getElementById("editor");
 var hot = hotController.create(container);
+
+container.ondragover = function () {
+  return false;
+};
+
+container.ondragleave = container.ondragend = function () {
+  return false;
+};
+
+container.ondrop = function (e) {
+  e.preventDefault();
+  var f = e.dataTransfer.files[0];
+  fs.readFile(f.path, 'utf-8', function (err, data) {
+    arrays = file.open(hot, data)
+    rows.fixRaggedRows(arrays);
+  });
+};
 
 container.addEventListener('contextmenu', function (e) {
   e.preventDefault();
@@ -29,14 +48,8 @@ container.addEventListener('contextmenu', function (e) {
 // runtime renderer call & response
 
 ipc.on('loadData', function(data) {
-  try {
-    csv = $.csv.toArrays(data);
-    hot.loadData(csv);
-    //var rows = require('../ragged-rows');
-    rows.fixRaggedRows(csv);
-  } catch(e) {
-    alert('An error has occurred: '+e.message)
-  }
+  arrays = file.open(hot, data)
+  rows.fixRaggedRows(arrays);
 });
 
 ipc.on('saveData', function(fileName) {
@@ -74,7 +87,6 @@ ipc.on('schemaFromHeaders', function(){
 });
 
 ipc.on('ragged_rows', function() {
-
   csv = hot.getData();
   console.log(typeof rows);
   console.log(typeof csv);
