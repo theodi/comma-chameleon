@@ -48,7 +48,7 @@ var getValidation = function(content) {
 var displayValidationMessages = function(validation) {
   var $messagePanel = $('#message-panel');
   $messagePanel.html("<h4>Validation results <img src='" + validation.badges.png  +"' /></h4>");
-  var resultsTemplate = _.template('<p><%= validation.errors.length %> errors, <%= validation.warnings.length %> warnings and <%= validation.info.length %> info messages. Click on an error message to see where the error occurred:</p>')
+  var resultsTemplate = _.template('<p><%= validation.errors.length %> errors, <%= validation.warnings.length %> warnings and <%= Math.max(0, validation.info.length - 1) %> info messages. Click on an error message to see where the error occurred:</p>')
   $messagePanel.append(resultsTemplate({'validation': validation}));
   var printErrs = validation.errors[0];
   var messages = _.flatten([
@@ -58,6 +58,8 @@ var displayValidationMessages = function(validation) {
   ]);
   if (messages.length) {
     var elements = _.map(messages, function(message) {
+      // Assumed header doesn't make sense in this context, so remove it
+      if (message.type == 'assumed_header') { return; }
       return $(messageTemplate(message)).data(message)
         .addClass('message')
         .addClass('validation-' + message.msg_type);
