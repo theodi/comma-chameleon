@@ -22,6 +22,24 @@ function openFile(data) {
     alert('An error has occurred: '+e.message)
   }
 }
+
+container.ondragover = function () {
+  return false;
+};
+
+container.ondragleave = container.ondragend = function () {
+  return false;
+};
+
+container.ondrop = function (e) {
+  e.preventDefault();
+  var file = e.dataTransfer.files[0];
+  console.log('File you dragged here is', file.path);
+  fs.readFile(file.path, 'utf-8', function (err, data) {
+    openFile(data)
+  });
+};
+
 container.addEventListener('contextmenu', function (e) {
   e.preventDefault();
   if (hot.getSelected()[0] == 0) {
@@ -76,7 +94,6 @@ ipc.on('schemaFromHeaders', function(){
 });
 
 ipc.on('ragged_rows', function() {
-
   csv = hot.getData();
   console.log(typeof rows);
   console.log(typeof csv);
