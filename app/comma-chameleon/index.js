@@ -13,6 +13,15 @@ var validation = require('../validate');
 var container = document.getElementById("editor");
 var hot = hotController.create(container);
 
+function openFile(data) {
+  try {
+    csv = $.csv.toArrays(data);
+    hot.loadData(csv);
+    rows.fixRaggedRows(csv);
+  } catch(e) {
+    alert('An error has occurred: '+e.message)
+  }
+}
 container.addEventListener('contextmenu', function (e) {
   e.preventDefault();
   if (hot.getSelected()[0] == 0) {
@@ -29,14 +38,7 @@ container.addEventListener('contextmenu', function (e) {
 // runtime renderer call & response
 
 ipc.on('loadData', function(data) {
-  try {
-    csv = $.csv.toArrays(data);
-    hot.loadData(csv);
-    //var rows = require('../ragged-rows');
-    rows.fixRaggedRows(csv);
-  } catch(e) {
-    alert('An error has occurred: '+e.message)
-  }
+  openFile(data)
 });
 
 ipc.on('saveData', function(fileName) {
