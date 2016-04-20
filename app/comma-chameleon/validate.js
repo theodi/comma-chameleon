@@ -48,7 +48,7 @@ var getValidation = function(content) {
 var displayValidationMessages = function(validation) {
   var $messagePanel = $('#message-panel');
   $messagePanel.html("<h4>Validation results <img src='" + validation.badges.png  +"' /></h4>");
-  var resultsTemplate = _.template('<p><%= validation.errors.length %> errors, <%= validation.warnings.length %> warnings and <%= validation.info.length %> info messages:</p>')
+  var resultsTemplate = _.template('<p><%= validation.errors.length %> errors, <%= validation.warnings.length %> warnings and <%= validation.info.length %> info messages. Click on an error message to see where the error occurred:</p>')
   $messagePanel.append(resultsTemplate({'validation': validation}));
   var printErrs = validation.errors[0];
   var messages = _.flatten([
