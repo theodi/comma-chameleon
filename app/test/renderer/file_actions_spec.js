@@ -7,17 +7,16 @@ var expect = chai.expect
 var should = chai.should();
 
 var $ = require('./../../bower_components/jquery/dist/jquery.js');
-
-$(document.body).append("<div id='editor'></div>")
-$(document.body).append("<div id='message-panel'></div>")
-
-var container = document.getElementById("editor");
 var hotController = require('../../comma-chameleon/hot.js');
-var hot = hotController.create(container);
-
 var rows = require('./../../comma-chameleon/ragged-rows');
 var file_actions = require('./../../comma-chameleon/file-actions');
 var fs = require('fs');
+
+beforeEach(function () {
+  hotView = document.createElement('div');
+  document.body.appendChild(hotView);
+  hot = hotController.create(hotView);
+});
 
 describe('open file', function() {
 
