@@ -2,9 +2,23 @@ language: node_js
 node_js:
 - '0.11'
 before_script:
-  - export DISPLAY=:99.0; sh -e /etc/init.d/xvfb start
-  - npm install bower
-  - bower install --config.cwd=app/
+- export DISPLAY=:99.0; sh -e /etc/init.d/xvfb start
+- npm install bower
+- bower install --config.cwd=app/
 script:
-  - npm run mocha-main
-  - npm run mocha-renderer
+- npm run mocha-main
+- npm run mocha-renderer
+before_deploy:
+- scripts/build
+deploy:
+  provider: releases
+  api_key:
+    secure: gs5TwjMZLLerU7NGVnRR1zq4FyEtDY2UnpeHfTh62gJYxC1+vkaYE5TrRQqyg6DmAuILfFldRdVv17buqDMQdPNiL9ODMuQvqxK5sgEngiKKYR0+PhqHAHh/Py13tk4wjnygAspjryS2Vc1JfR9VOItrsYppicm6NPkIxujwxnOzE3uDnRYq1CHNnKOAT/1cSbf4Ir6UymIx6udVblahEp9LGGlDLDkQATdW43hOERW/zgjWPGd0pCAula0RGcN9TOj0yDAZ8QjJOl+g1X+QnZ6wViAEdnWSKk81dJJ6FeBcGVqryYkxJK1M7hNadmbo8x1URw4eX+FIz8lfJqII9taIZTIivPC/zXnRH5TkOq/skZDEP4Xm5xrJYCY7oo1QlY0Qv64VtX9la6kFwqlyeUtwp8DetRr3a2TykBnFzJUXbnn+YRX4dq3uimOpKRKJJZZAvTNXQJXWCdcSoJedKyo/XQs4r0ldknWdI8FrOTV6UpYrVAU3/xPDgm5WaVZqcHzOOcaGI/8a6Rnb/HpyWaxkz3F4G2GDx5e99635ZfyG1s/emAAtZhgMd499G5NCbiFcwUJ2Sktal6xTA0pFntm0f050juxA9Ej1Ylyz1Z+OfTVeOG/alwK3RRiGVqjFrpzCtpeNejcRGKa0wv9cX4I0rJfM/PK3rrsEcpyAwdo=
+  file:
+    - packages/comma-chameleon-darwin-x64.tar.gz
+    - packages/comma-chameleon-darwin-ia32tar.gz
+    - packages/comma-chameleon-linux-x64.tar.gz
+    - packages/comma-chameleon-win32-ia32.tar.gz
+  on:
+    repo: theodi/comma-chameleon
+    tags: true
