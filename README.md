@@ -7,13 +7,7 @@ A desktop CSV editor with validation magic - Built with electron.js
 
 ## Download app
 
-Choose a platform:
-
-* [OSX](https://github.com/theodi/comma-chameleon/releases/download/0.1.0/comma-chameleon-darwin-x64.tar.gz)
-* [Linux 32 bit](https://github.com/theodi/comma-chameleon/releases/download/0.1.0/comma-chameleon-linux-ia32.tar.gz)
-* [Linux 64 bit](https://github.com/theodi/comma-chameleon/releases/download/0.1.0/comma-chameleon-linux-x64.tar.gz)
-* [Windows 32 bit](https://github.com/theodi/comma-chameleon/releases/download/0.1.0/comma-chameleon-win32-ia32.tar.gz)
-* [Windows 64 bit](https://github.com/theodi/comma-chameleon/releases/download/0.1.0/comma-chameleon-win32-x64.tar.gz)
+Choose a platform from the [Releases page](https://github.com/theodi/comma-chameleon/releases/latest)
 
 ##Development setup
 
