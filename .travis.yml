@@ -9,6 +9,7 @@ script:
 - npm run mocha-main
 - npm run mocha-renderer
 before_deploy:
+- npm install electron-packager -g
 - scripts/build
 deploy:
   provider: releases
