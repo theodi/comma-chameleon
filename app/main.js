@@ -1,11 +1,11 @@
-var app = require('app');  // Module to control application life.
-var request = require('request');
-var BrowserWindow = require('browser-window');  // Module to create native browser window.
-var Menu = require('menu');
-var Dialog = require('dialog');
-var Fs = require('fs');
-var XLSX = require('xlsx');
-var ipc = require('ipc');
+global.app = require('app');  // Module to control application life.
+global.request = require('request');
+global.BrowserWindow = require('browser-window');  // Module to create native browser window.
+global.Menu = require('menu');
+global.Dialog = require('dialog');
+global.Fs = require('fs');
+global.XLSX = require('xlsx');
+global.ipc = require('ipc');
 
 var datapackage = require('./browser/datapackage');
 
