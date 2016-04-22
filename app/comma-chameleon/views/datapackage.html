@@ -16,12 +16,12 @@
     <div class="container-fluid">
       <form id="datapackage">
         <div class="form-group">
-          <label for="name">Dataset name</label>
-          <input type="text" class="form-control" id="name" name="name" placeholder="Dataset name">
-        </div>
-        <div class="form-group">
           <label for="title">Dataset title</label>
           <input type="text" class="form-control" id="title" name="title" placeholder="Dataset title">
+        </div>
+        <div class="form-group">
+          <label for="name">Dataset name</label>
+          <input type="text" class="form-control" id="name" name="name" placeholder="Dataset name">
         </div>
         <div class="form-group">
           <label for="description">Dataset description</label>
@@ -108,6 +108,11 @@
       ipc.send('datapackageCanceled');
     });
 
+    $('#title').on('input keyup', function() {
+      title = $(this).val()
+      $('#name').val(slugify(title))
+    })
+
       function headerOptionClicked(){
         var rGrp = $("input[name=group1]");
         if(rGrp.filter(":checked")["length"] > 0){
@@ -116,6 +121,15 @@
           includeHeaders = false;
         }
         return includeHeaders;
+      }
+
+      function slugify(text) {
+        return text.toString().toLowerCase()
+          .replace(/\s+/g, '-')           // Replace spaces with -
+          .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
+          .replace(/\-\-+/g, '-')         // Replace multiple - with single -
+          .replace(/^-+/, '')             // Trim - from start of text
+          .replace(/-+$/, '');            // Trim - from end of text
       }
     </script>
   </body>
