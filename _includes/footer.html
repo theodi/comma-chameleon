@@ -4,7 +4,7 @@
     <!-- START: Copyright Notice -->
     <div class="six columns">
       <p class="footer-copyright">Header photo by <a href="https://www.flickr.com/photos/24592211@N05/15925665874/in/photolist-qgicC7-ymFP-qoaSsc-3f4W-bdF7ZD-ayCym5-c1chXG-2A5wdh-4ECM3n-jM1ai-dZKxm-abDzjC-8jEq7j-KrvuK-6kSUpx-xXyVGb-kzFh3-nPeVR-cs9Smu-cdEV9C-q6VQ6Z-q6Msi7-KPLe1-dhewL2-eTSCFG-qaRoxQ-ejHvYZ-qm4Myy-eEAtEU-oTrYTx-noQbYS-o5frcn-tzvS6-dp7bBD-dp7igd-qAjb1g-5VRV9K-84CDS4-3key1o-CUUnjm-aoY3Dw-38VzF5-38R28i-aDfXWu-72DCfA-9ECJb9-dfejEU-pro5jN-rLW6M-prmJUY">Bhavik Thaker</a>.</p>
-      <div class="footer-copyright" id='odi-logo'>An experiment by</div>
+      <div class="footer-copyright" id='odi-logo'>An experiment by:<br /></div>
     </div>
     <div class="six columns">
       <p class="footer-copyright">HTML, CSS, images, and design are based on a design <a href="https://github.com/sudomesh/peoplesopen-front">forked from PeoplesOpen.Net</a> which was, in turn, forked from <a href="http://martini.codegangsta.io/">Martini’s template</a>, reused here under the MIT License.</p>
@@ -70,8 +70,12 @@ var odi_path = [
 ]
 
 
-var colour = '#fa8100'
 var logo = SVG('odi-logo')
+
+logo.width('45%')
+logo.height('100%')
+logo.id('odi-logo')
+
 logo.viewbox({
   x: 0,
   y: 0,
@@ -79,8 +83,7 @@ logo.viewbox({
   height: 202
 })
 
-var badge = logo.path(odi_path.join(' ')) //.fill(colour)
-
+var badge = logo.path(odi_path.join(' ')).fill('#fff')
 
 logo.viewbox({
   x: 0,
@@ -104,7 +107,8 @@ text.font({
   size: 90,
   anchor: 'left',
   weight: 'bold',
-  leading: 0.8
+  leading: 0.8,
+  fill: '#fff'
 })
 
 var group = logo.group()
