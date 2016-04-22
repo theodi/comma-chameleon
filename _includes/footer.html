@@ -21,5 +21,16 @@
 <script src="js/plugins/waypoints.min.js"></script>
 <script src="js/plugins/placeholders.js"></script>
 <script src="js/theme.js"></script>
+<script>
+  $.get('https://api.github.com/repos/theodi/comma-chameleon/releases', function(data) {
+    console.log(data[0].assets)
+    assets = data[0].assets
+    $('#win32').attr('href', assets[3].browser_download_url)
+    $('#win64').attr('href', assets[4].browser_download_url)
+    $('#osx').attr('href', assets[0].browser_download_url)
+    $('#linux32').attr('href', assets[1].browser_download_url)
+    $('#linux64').attr('href', assets[2].browser_download_url)
+  })
+</script>
 </body>
 </html>
