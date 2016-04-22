@@ -6,17 +6,18 @@ global.Dialog = require('dialog');
 global.Fs = require('fs');
 global.XLSX = require('xlsx');
 global.ipc = require('ipc');
-global.utils = require('./browser/utils');
 
-var datapackage = require('./browser/datapackage');
-var schema = require('./browser/schema')
-var excel = require('./browser/excel')
-var file = require('./browser/file')
-var tools = require('./browser/file')
+global.utils = require('./browser/utils');
+global.datapackage = require('./browser/datapackage');
+global.schema = require('./browser/schema')
+global.excel = require('./browser/excel')
+global.file = require('./browser/file')
+global.tools = require('./browser/tools')
 
 require('electron-debug')({showDevTools: true})
 require('crash-reporter').start();
 
+var template = require('./browser/menu').menu
 var mainWindow = null;
 
 app.on('window-all-closed', function() {
@@ -26,8 +27,6 @@ app.on('window-all-closed', function() {
 });
 
 app.on('ready', function() {
-  var template = require('./browser/menu').menu
-
   menu = Menu.buildFromTemplate(template);
   Menu.setApplicationMenu(menu);
 
