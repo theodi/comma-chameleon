@@ -128,11 +128,11 @@ exports.menu = [
       {
         label: 'Validate',
         accelerator: 'Shift+CmdOrCtrl+V',
-        click: function() { validateFile(); }
+        click: function() { tools.validateFile(); }
       },
       {
         label: 'Fix Ragged Rows',
-        click: function() { fixRaggedRowsFile(); }
+        click: function() { tools.fixRaggedRowsFile(); }
       },
       {
         label: 'Generate template from Schema...',
@@ -145,7 +145,7 @@ exports.menu = [
       },
       {
         label: 'Generate Header',
-        click: function(){ generateSchemaFromHeader(); }
+        click: function(){ tools.generateSchemaFromHeader(); }
       }
     ]
   },

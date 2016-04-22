@@ -12,6 +12,7 @@ var datapackage = require('./browser/datapackage');
 var schema = require('./browser/schema')
 var excel = require('./browser/excel')
 var file = require('./browser/file')
+var tools = require('./browser/file')
 
 require('electron-debug')({showDevTools: true})
 require('crash-reporter').start();
@@ -32,22 +33,3 @@ app.on('ready', function() {
 
   utils.createWindow();
 });
-
-// tools
-
-function validateFile() {
-  window = BrowserWindow.getFocusedWindow();
-  window.webContents.send('validate');
-}
-
-function generateSchemaFromHeader() {
-  // requires that schema.js has loaded
-  window = BrowserWindow.getFocusedWindow();
-  window.webContents.send('schemaFromHeaders');
-}
-
-function fixRaggedRowsFile() {
-  // requires that ragged-rows.js has loaded
-  window = BrowserWindow.getFocusedWindow();
-  window.webContents.send('ragged_rows');
-}
