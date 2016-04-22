@@ -6,6 +6,7 @@ global.Dialog = require('dialog');
 global.Fs = require('fs');
 global.XLSX = require('xlsx');
 global.ipc = require('ipc');
+global.utils = require('./browser/utils');
 
 var datapackage = require('./browser/datapackage');
 
@@ -78,7 +79,7 @@ app.on('ready', function() {
         {
           label: 'New',
           accelerator: 'CmdOrCtrl+N',
-          click: function() { createWindow(); }
+          click: function() { utils.createWindow(); }
         },
         {
           type: 'separator'
@@ -211,42 +212,13 @@ app.on('ready', function() {
   Menu.setApplicationMenu(menu);
 
   // Create the browser window.
-  createWindow();
+  utils.createWindow();
 });
-
-function createWindow(data, title) {
-  data = typeof data !== 'undefined' ? data : '"","",""';
-  title = typeof title !== 'undefined' ? title : "Untitled.csv";
-
-  mainWindow = new BrowserWindow({width: 800, height: 600});
-
-  // and load the index.html of the app.
-
-  mainWindow.loadUrl('file://' + __dirname + '/comma-chameleon/views/index.html');
-
-  mainWindow.webContents.on('did-finish-load', function() {
-    mainWindow.setTitle(title);
-    mainWindow.webContents.send('loadData', data);
-  });
-
-  // Emitted when the window is closed.
-  mainWindow.on('closed', function() {
-    // Dereference the window object, usually you would store windows
-    // in an array if your app supports multi windows, this is the time
-    // when you should delete the corresponding element.
-    mainWindow = null;
-  });
-
-  mainWindow.on('resize', function() {
-    mainWindow.webContents.send('resized');
-  })
-}
 
 function openFile() {
     Dialog.showOpenDialog(
         { filters: [
             { name: 'csv files', extensions: ['csv'] },
-            { name: 'json schemas', extensions: ['json'] }
         ]}, function (fileNames) {
             if (fileNames === undefined) {
                 return;
@@ -254,8 +226,8 @@ function openFile() {
                 console.log("the file processed = "+JSON.stringify(fileNames));
                 var fileName = fileNames[0];
                 Fs.readFile(fileName, 'utf-8', function (err, data) {
-                    createWindow(data, fileName);
-                    enableSave();
+                    utils.createWindow(data, fileName);
+                    utils.enableSave();
                 });
             }
         });
@@ -268,7 +240,7 @@ function saveFileAs() {
   ]}, function (fileName) {
     if (fileName === undefined) return;
     window.webContents.send('saveData', fileName);
-    enableSave();
+    utils.enableSave();
   });
 }
 
@@ -276,11 +248,6 @@ function saveFile() {
   window = BrowserWindow.getFocusedWindow();
   fileName = window.getTitle();
   window.webContents.send('saveData', fileName);
-}
-
-function enableSave() {
-  item = Menu.getApplicationMenu().items[1].submenu.items[5]
-  item.enabled = true
 }
 
 function importExcel() {
@@ -301,7 +268,7 @@ function importExcel() {
       ipc.once('worksheetSelected', function(e, sheet_name) {
         data = XLSX.utils.sheet_to_csv(workbook.Sheets[sheet_name]);
         popup.close();
-        createWindow(data);
+        utils.createWindow(data);
       });
 
       ipc.once('worksheetCanceled', function() {
