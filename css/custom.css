@@ -94,18 +94,6 @@ sixteen.colgrid .row .pull_eight.twelve.columns {
   height: 100%;
 }
 
-.download-options {
-  display: table;
-  margin: 0 auto;
-}
-
-.download-options a {
-  display: table-cell;
-  width: 25%;
-  padding: 0 20px;
-  color: #fff;
-}
-
 .download-options a i {
   color: #fff;
   font-size: 45px;
