@@ -103,3 +103,10 @@ sixteen.colgrid .row .pull_eight.twelve.columns {
 .features-item img {
   height: 220px;
 }
+
+.comma-chameleon {
+  border-radius: 50%;
+  height: 100px;
+  width: 100px;
+  margin: 20px 0 0 0;
+}
