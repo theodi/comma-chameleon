@@ -4,6 +4,7 @@
     <!-- START: Copyright Notice -->
     <div class="six columns">
       <p class="footer-copyright">Header photo by <a href="https://www.flickr.com/photos/24592211@N05/15925665874/in/photolist-qgicC7-ymFP-qoaSsc-3f4W-bdF7ZD-ayCym5-c1chXG-2A5wdh-4ECM3n-jM1ai-dZKxm-abDzjC-8jEq7j-KrvuK-6kSUpx-xXyVGb-kzFh3-nPeVR-cs9Smu-cdEV9C-q6VQ6Z-q6Msi7-KPLe1-dhewL2-eTSCFG-qaRoxQ-ejHvYZ-qm4Myy-eEAtEU-oTrYTx-noQbYS-o5frcn-tzvS6-dp7bBD-dp7igd-qAjb1g-5VRV9K-84CDS4-3key1o-CUUnjm-aoY3Dw-38VzF5-38R28i-aDfXWu-72DCfA-9ECJb9-dfejEU-pro5jN-rLW6M-prmJUY">Bhavik Thaker</a>.</p>
+      <div class="footer-copyright" id='odi-logo'>An experiment by</div>
     </div>
     <div class="footer-copyright" style="float:right;text-align:right; width: 50%;">
       <p>HTML, CSS, images, and design are based on a design <a href="https://github.com/sudomesh/peoplesopen-front">forked from PeoplesOpen.Net</a> which was, in turn, forked from <a href="http://martini.codegangsta.io/">Martini’s template</a>, reused here under the MIT License.</p>
@@ -31,5 +32,92 @@
     $('#linux64').attr('href', assets[2].browser_download_url)
   })
 </script>
+
+<script>
+var odi_path = [
+  /* move to start */
+  'M 193 64',
+
+  /* 'O' */
+  'c -5 -12.4 -12.4 -23.8 -22.2 -33.6',
+  'c -18.9 -18.9 -43.9 -29.3 -70.6 -29.3',
+  'c -26.7 0 -51.8 10.4 -70.6 29.3',
+  'c -18.9 18.9 -29.2 43.9 -29.2 70.6',
+  'c 0 26.7 10.4 51.8 29.2 70.6',
+  'c 18.9 18.9 43.9 29.3 70.6 29.3',
+  'c 26.7 0 51.8 -10.4 70.6 -29.3',
+  'c 9.7 -9.7 17.2 -21.1 22.2 -33.6',
+
+  /* bottom of 'D' */
+  'v 61.3',
+  'h 84.8',
+  'c 14.7 0 28.4 -2.4 40.9 -7',
+  'c 12.3 -4.6 23.1 -11.3 32 -19.9',
+  'c 10 -9.6 17.4 -21.2 22.2 -34.3',
+
+  /* 'I' */
+  'v 61',
+  'h 93.5',
+  'v -197',
+  'h -93.5',
+  'v 61.1',
+
+  /* top of 'D' */
+  'c -4.8 -13.2 -12.2 -24.7 -22.2 -34.3',
+  'c -9 -8.6 -19.8 -15.3 -32 -19.9',
+  'c -12.5 -4.6 -26.2 -7 -40.9 -7',
+  'h -84.8',
+  'v 61.4'
+]
+
+
+var colour = '#fa8100'
+var logo = SVG('odi-logo')
+logo.viewbox({
+  x: 0,
+  y: 0,
+  width: 467,
+  height: 202
+})
+
+var badge = logo.path(odi_path.join(' ')) //.fill(colour)
+
+
+logo.viewbox({
+  x: 0,
+  y: 0,
+  width: 830,
+  height: 200
+})
+
+var text = logo.text(function(add) {
+  add.tspan('open').newLine()
+  add.tspan('data').newLine()
+  add.tspan('institute').newLine()
+})
+
+
+//text.fill('#fa8100')
+
+text.move(482, -10)
+text.font({
+  family: 'Helvetica Neue',
+  size: 90,
+  anchor: 'left',
+  weight: 'bold',
+  leading: 0.8
+})
+
+var group = logo.group()
+group.add(badge)
+group.add(text)
+
+group.linkTo(function(link) {
+  link.to('//theodi.org')
+})
+</script>
+
+
+
 </body>
 </html>
