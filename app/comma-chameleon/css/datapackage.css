@@ -4,6 +4,10 @@ body, html {
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
+.form-wrapper {
+  margin: 20px 0;
+}
+
 .well {
   position: absolute;
   bottom: 0;

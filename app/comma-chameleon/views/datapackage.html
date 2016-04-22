@@ -15,45 +15,47 @@
   <body>
     <div class="container-fluid">
       <form id="datapackage">
-        <div class="form-group">
-          <label for="title">Dataset title</label>
-          <input type="text" class="form-control" id="title" name="title" placeholder="Dataset title">
-        </div>
-        <div class="form-group">
-          <label for="name">Dataset name</label>
-          <input type="text" class="form-control" id="name" name="name" placeholder="Dataset name">
-        </div>
-        <div class="form-group">
-          <label for="description">Dataset description</label>
-          <textarea class="form-control" id="description" name="description" rows="3"></textarea>
-        </div>
-        <div class="form-group">
-          <label for="license">License</label>
-          <select id="license" name="license" class="form-control">
-            <option value="">Please select...</option>
-            <option value="cc-by">Creative Commons Attribution</option>
-            <option value="cc-by-sa">Creative Commons Attribution Share-Alike</option>
-            <option value="cc-zero">Creative Commons CCZero</option>
-            <option value="ogl-uk">UK Open Government Licence</option>
-            <option value="odc-by">Open Data Commons Attribution License</option>
-            <option value="odc-odbl">Open Data Commons Open Database License (ODbL)</option>
-            <option value="odc-pddl">Open Data Commons Public Domain Dedication and Licence (PDDL)</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="keywords">Keywords (Comma seperated)</label><br />
-          <input type="text" id="keywords" data-role="tagsinput" class="form-control" id="keywords" name="keywords">
+        <div class="form-wrapper">
+          <div class="form-group">
+            <label for="title">Dataset title</label>
+            <input type="text" class="form-control" id="title" name="title" placeholder="Dataset title">
+          </div>
+          <div class="form-group">
+            <label for="name">Dataset name</label>
+            <input type="text" class="form-control" id="name" name="name" placeholder="Dataset name">
+          </div>
+          <div class="form-group">
+            <label for="description">Dataset description</label>
+            <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="license">License</label>
+            <select id="license" name="license" class="form-control">
+              <option value="">Please select...</option>
+              <option value="cc-by">Creative Commons Attribution</option>
+              <option value="cc-by-sa">Creative Commons Attribution Share-Alike</option>
+              <option value="cc-zero">Creative Commons CCZero</option>
+              <option value="ogl-uk">UK Open Government Licence</option>
+              <option value="odc-by">Open Data Commons Attribution License</option>
+              <option value="odc-odbl">Open Data Commons Open Database License (ODbL)</option>
+              <option value="odc-pddl">Open Data Commons Public Domain Dedication and Licence (PDDL)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="keywords">Keywords (Comma seperated)</label><br />
+            <input type="text" id="keywords" data-role="tagsinput" class="form-control" id="keywords" name="keywords">
+          </div>
+          <div id="headers">
+            <label>Generate Headers?</label>
+            <input type="radio" name="group1" value="true" checked="checked" /> Yes
+            <input type="radio" name="group1" value="false" /> No<br />
+            <p id="status" />
+          </div>
         </div>
         <div class="well">
           <button id="submit" class="btn btn-default">Go</button> <button id="cancel" class="btn btn-default">Cancel</button>
         </div>
       </form>
-      <div id="headers">
-        <label>Generate Headers?</label>
-        <input type="radio" name="group1" value="true" /> Yes
-        <input type="radio" name="group1" value="false" /> No<br />
-        <p id="status" />
-      </div>
     </div>
     <script>
     var ipc = require('ipc');
