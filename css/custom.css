@@ -94,6 +94,14 @@ sixteen.colgrid .row .pull_eight.twelve.columns {
   height: 100%;
 }
 
+.download-options p {
+  text-align: center;
+}
+
+.download-options a {
+  color: #fff;
+}
+
 .download-options a i {
   color: #fff;
   font-size: 45px;
