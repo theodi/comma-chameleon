@@ -4,6 +4,10 @@ body, html {
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
+.form-wrapper {
+  margin: 20px 0;
+}
+
 .well {
   position: absolute;
   bottom: 0;
@@ -13,4 +17,8 @@ body, html {
   border-radius: 0;
   border-bottom: 0;
   padding: 7px;
+}
+
+.bootstrap-tagsinput {
+  width: 100%;
 }
