@@ -9,20 +9,31 @@ function generateTemplate() {
               var fileName = fileNames[0];
               Fs.readFile(fileName, 'utf-8', function (err, data) {
                   data = templateFromSchema(data);
-                  utils.createWindow(data, 'Untitled.csv');
-                  utils.enableSave();
+                  if (data) {
+                    utils.createWindow(data, 'Untitled.csv');
+                    utils.enableSave();
+                  }
               });
           }
       });
 }
 
 function templateFromSchema(schema) {
-  schema = JSON.parse(schema)
-  header = schema.fields.map(function(field) {
-    return '"' + field.name + '"'
-  })
-  row = new Array(schema.fields.length)
-  return header.join(',') + '\r\n' + row.join(',')
+  try {
+    schema = JSON.parse(schema)
+    header = schema.fields.map(function(field) {
+      return '"' + field.name + '"'
+    })
+    row = new Array(schema.fields.length)
+    return header.join(',') + '\r\n' + row.join(',')
+  } catch(err) {
+    Dialog.showMessageBox({
+      type: "error",
+      buttons: ["OK"],
+      title: "Error parsing schema file",
+      message: "Sorry, we couldn't parse your schema file.\r\nPlease check your file and try again"
+    })
+  }
 }
 
 module.exports = {

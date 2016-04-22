@@ -20,8 +20,9 @@
   },
   "devDependencies": {
     "chai": "^3.2.0",
+    "electron-debug": "^0.6.0",
     "electron-mocha": "^0.3.1",
     "electron-prebuilt": "^0.37.6",
-    "electron-debug": "^0.6.0"
+    "sinon": "^1.17.3"
   }
 }
