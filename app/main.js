@@ -10,27 +10,20 @@ global.utils = require('./browser/utils');
 
 var datapackage = require('./browser/datapackage');
 var schema = require('./browser/schema')
+var excel = require('./browser/excel')
+var file = require('./browser/file')
 
 require('electron-debug')({showDevTools: true})
-
-// Report crashes to our server.
 require('crash-reporter').start();
 
-// Keep a global reference of the window object, if you don't, the window will
-// be closed automatically when the JavaScript object is GCed.
 var mainWindow = null;
 
-// Quit when all windows are closed.
 app.on('window-all-closed', function() {
-  // On OS X it is common for applications and their menu bar
-  // to stay active until the user quits explicitly with Cmd + Q
   if (process.platform != 'darwin') {
     app.quit();
   }
 });
 
-// This method will be called when Electron has finished
-// initialization and is ready to create browser windows.
 app.on('ready', function() {
   var template = [
     {
@@ -88,12 +81,12 @@ app.on('ready', function() {
         {
           label: 'Open..',
           accelerator: 'CmdOrCtrl+O',
-          click: function() { openFile(); }
+          click: function() { file.openFile(); }
         },
         {
           label: 'Import Excel file',
           accelerator: 'CmdOrCtrl+I',
-          click: function() { importExcel(); }
+          click: function() { excel.importExcel(); }
         },
         {
           type: 'separator'
@@ -101,14 +94,14 @@ app.on('ready', function() {
         {
           label: 'Save',
           accelerator: 'CmdOrCtrl+S',
-          click: function() { saveFile(); },
+          click: function() { file.saveFile(); },
           enabled: false,
           id: 'save'
         },
         {
           label: 'Save As..',
           accelerator: 'Shift+CmdOrCtrl+S',
-          click: function() { saveFileAs(); }
+          click: function() { file.saveFileAs(); }
         },
         {
           label: 'Export as Datapackage',
@@ -218,73 +211,6 @@ app.on('ready', function() {
   // Create the browser window.
   utils.createWindow();
 });
-
-function openFile() {
-    Dialog.showOpenDialog(
-        { filters: [
-            { name: 'csv files', extensions: ['csv'] },
-        ]}, function (fileNames) {
-            if (fileNames === undefined) {
-                return;
-            } else {
-                console.log("the file processed = "+JSON.stringify(fileNames));
-                var fileName = fileNames[0];
-                Fs.readFile(fileName, 'utf-8', function (err, data) {
-                    utils.createWindow(data, fileName);
-                    utils.enableSave();
-                });
-            }
-        });
-}
-
-function saveFileAs() {
-  window = BrowserWindow.getFocusedWindow();
-  Dialog.showSaveDialog({ filters: [
-    { name: 'text', extensions: ['csv'] }
-  ]}, function (fileName) {
-    if (fileName === undefined) return;
-    window.webContents.send('saveData', fileName);
-    utils.enableSave();
-  });
-}
-
-function saveFile() {
-  window = BrowserWindow.getFocusedWindow();
-  fileName = window.getTitle();
-  window.webContents.send('saveData', fileName);
-}
-
-function importExcel() {
-  Dialog.showOpenDialog({ filters: [
-    { name: 'text', extensions: ['xlsx', 'xls'] }
-  ]}, function (fileNames) {
-    if (fileNames === undefined) return;
-    var fileName = fileNames[0];
-    var workbook = XLSX.readFile(fileName);
-    var first_sheet_name = workbook.SheetNames[0];
-    var worksheet = workbook.Sheets[first_sheet_name];
-
-    popup = new BrowserWindow({width: 300, height: 150, 'always-on-top': true});
-    popup.loadUrl('file://' + __dirname + '/comma-chameleon/views/select_worksheet.html');
-    popup.webContents.on('did-finish-load', function() {
-      popup.webContents.send('loadSheets', workbook.SheetNames);
-
-      ipc.once('worksheetSelected', function(e, sheet_name) {
-        data = XLSX.utils.sheet_to_csv(workbook.Sheets[sheet_name]);
-        popup.close();
-        utils.createWindow(data);
-      });
-
-      ipc.once('worksheetCanceled', function() {
-        popup.close();
-      });
-    });
-
-    popup.on('closed', function() {
-      popup = null;
-    });
-  });
-}
 
 // tools
 
