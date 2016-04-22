@@ -9,6 +9,7 @@ global.ipc = require('ipc');
 global.utils = require('./browser/utils');
 
 var datapackage = require('./browser/datapackage');
+var schema = require('./browser/schema')
 
 require('electron-debug')({showDevTools: true})
 
@@ -166,7 +167,10 @@ app.on('ready', function() {
         {
           label: 'Fix Ragged Rows',
           click: function() { fixRaggedRowsFile(); }
-
+        },
+        {
+          label: 'Generate template from Schema...',
+          click: function() { schema.generateTemplate(); }
         },
         {
           label: 'Toggle DevTools',

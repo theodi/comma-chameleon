@@ -1,0 +1,143 @@
+{
+  "title": "UK Government Organagram",
+  "description": "Draft schema for validating CSV files collected as part of publishing UK Government organagrams",
+  "fields": [
+     {
+        "name": "Post Unique Reference",
+        "title": "Post Unique Reference",
+        "description": "Unique id for a post",
+        "constraints": {
+		"required": true,
+		"unique": true,
+		"type": "http://www.w3.org/2001/XMLSchema#int"
+        }
+     },
+     {
+        "name": "Name",
+        "title": "Name",
+        "description": "Name of person in role",
+        "constraints": {
+		"required": true
+        }
+     },
+     {
+        "name": "Grade",
+        "title": "Grade",
+        "description": "Grade of role",
+        "constraints": {
+		"required": true
+        }
+     },
+     {
+        "name": "Job Title",
+        "title": "Job Title",
+        "description": "title of the role",
+        "constraints": {
+		"required": true
+        }
+     },
+     {
+        "name": "Job/Team Function",
+        "title": "Job/Team Function",
+        "description": "",
+        "constraints": {
+		"required": true
+        }
+     },
+     {
+        "name": "Parent Department",
+        "title": "Parent Department",
+        "description": "the department for the role",
+        "constraints": {
+		"required": true
+        }
+     },
+     {
+        "name": "Organisation",
+        "title": "Organisation",
+        "description": "the organisation",
+        "constraints": {
+		"required": true
+        }
+     },
+     {
+        "name": "Unit",
+        "title": "Unit",
+        "description": "unit with the organisation",
+        "constraints": {
+		"required": false
+        }
+     },
+     {
+        "name": "Contact Phone",
+        "title": "Contact Phone",
+        "description": "contact phone number",
+        "constraints": {
+		"required": false
+        }
+     },
+     {
+        "name": "Contact E-mail",
+        "title": "Contact Email",
+        "description": "contact email address",
+        "constraints": {
+		"required": false
+        }
+     },
+     {
+        "name": "Reports to Senior Post",
+        "constraints": {
+		"required": true
+        }
+     },
+     {
+        "name": "Salary Cost of Reports (%)",
+        "title": "Salary Cost of Reports (%)",
+        "constraints": {
+		"required": true,
+		"type": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        }
+     },
+     {
+        "name": "FTE",
+        "title": "FTE",
+        "constraints": {
+		"required": true
+        }
+     },
+     {
+        "name": "Actual Pay Floor (%)",
+        "title": "Actual Pay Floor (%)",
+        "constraints": {
+		"required": true,
+		"type": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        }
+     },
+     {
+        "name": "Actual Pay Ceiling (%)",
+        "title": "Actual Pay Ceiling (%)",
+        "constraints": {
+		"required": true,
+		"type": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        }
+     },
+     {
+        "name": "Profession",
+        "title": "Profession",
+        "constraints": {
+		"required": true
+        }
+     },
+     {
+        "name": "Notes"
+     },
+     {
+        "name": "Valid?",
+        "title": "Valid?",
+        "constraints": {
+		"required": true,
+		"type": "http://www.w3.org/2001/XMLSchema#boolean"
+        }
+     }
+  ]
+}
