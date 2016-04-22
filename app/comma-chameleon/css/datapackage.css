@@ -18,3 +18,7 @@ body, html {
   border-bottom: 0;
   padding: 7px;
 }
+
+.bootstrap-tagsinput {
+  width: 100%;
+}
