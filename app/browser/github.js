@@ -44,7 +44,7 @@ var exportToGithub = function() {
         method: 'POST',
         json: true,
         formData: {
-          'token': apiKey,
+          'api_key': apiKey,
           'dataset[name]': dataset.name,
           'dataset[description]': dataset.description,
           'dataset[publisher-name]': dataset['publisher-name'],
