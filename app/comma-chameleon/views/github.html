@@ -8,6 +8,11 @@
     <script>
     window.$ = window.jQuery = require('../../bower_components/jquery/dist/jquery.js');
     const {shell} = require('electron');
+    var ipc = require("electron").ipcRenderer;
+
+    ipc.once('apiKey', function(event, key) {
+      console.log(key)
+    })
     </script>
     <script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="../../bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"></script>
@@ -15,8 +20,7 @@
   </head>
   <body>
     <div class="container-fluid">
-      <a href='#' class='btn btn-success' id='signin-to-github'>Signin to Github</a>
-      <form id="github" class='hidden'>
+      <form id="github">
         <div class="form-wrapper">
           <div class="form-group">
             <label for="title">Dataset title</label>
@@ -59,10 +63,5 @@
         </div>
       </form>
     </div>
-    <script>
-      $('#signin-to-github').click(function() {
-        shell.openExternal('http://git-data-publisher.herokuapp.com/auth/github?format=json')
-      })
-    </script>
   </body>
 </html>
