@@ -10,9 +10,6 @@
     const {shell} = require('electron');
     var ipc = require("electron").ipcRenderer;
 
-    ipc.once('apiKey', function(event, key) {
-      console.log(key)
-    })
     </script>
     <script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="../../bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"></script>
@@ -22,46 +19,70 @@
     <div class="container-fluid">
       <form id="github">
         <div class="form-wrapper">
-          <div class="form-group">
-            <label for="title">Dataset title</label>
-            <input type="text" class="form-control" id="title" name="title" placeholder="Dataset title" autofocus>
-          </div>
+
           <div class="form-group">
             <label for="name">Dataset name</label>
-            <input type="text" class="form-control" id="name" name="name" placeholder="Dataset name">
+            <input type="text" class="form-control" id="name" name="name" placeholder="Dataset name" autofocus>
           </div>
+
           <div class="form-group">
             <label for="description">Dataset description</label>
             <textarea class="form-control" id="description" name="description" rows="3"></textarea>
           </div>
+
           <div class="form-group">
-            <label for="license">License</label>
-            <select id="license" name="license" class="form-control">
-              <option value="">Please select...</option>
-              <option value="cc-by">Creative Commons Attribution</option>
-              <option value="cc-by-sa">Creative Commons Attribution Share-Alike</option>
-              <option value="cc-zero">Creative Commons CCZero</option>
-              <option value="ogl-uk">UK Open Government Licence</option>
-              <option value="odc-by">Open Data Commons Attribution License</option>
-              <option value="odc-odbl">Open Data Commons Open Database License (ODbL)</option>
-              <option value="odc-pddl">Open Data Commons Public Domain Dedication and Licence (PDDL)</option>
+            <label for="publisher-name">Publisher name</label>
+            <input type="text" class="form-control" id="publisher-name" name="publisher-name"></input>
+          </div>
+
+          <div class="form-group">
+            <label for="publisher-url">Publisher URL</label>
+            <input type="text" class="form-control" id="publisher-url" name="publisher-url"></input>
+          </div>
+
+          <div class="form-group">
+            <label class="control-label" for="dataset[license]">License</label>
+            <select class="form-control" id="_dataset[license]" name="[dataset[license]]">
+              <option value="CC-BY-4.0">Creative Commons Attribution 4.0</option>
+              <option value="CC-BY-SA-4.0">Creative Commons Attribution Share-Alike 4.0</option>
+              <option value="CC0-1.0">CC0 1.0</option>
+              <option value="OGL-UK-3.0">Open Government Licence 3.0 (United Kingdom)</option>
+              <option value="ODC-BY-1.0">Open Data Commons Attribution License 1.0</option>
+              <option value="ODC-PDDL-1.0">Open Data Commons Public Domain Dedication and Licence 1.0</option>
             </select>
           </div>
+
           <div class="form-group">
-            <label for="keywords">Keywords (Comma seperated)</label><br />
-            <input type="text" id="keywords" class="form-control" data-role="tagsinput" name="keywords">
+            <label class="control-label" for="dataset[frequency]">Publication frequency</label>
+            <select class="form-control" id="_dataset[frequency]" name="[dataset[frequency]]">
+              <option value="One-off">One-off</option>
+              <option value="Annual">Annual</option>
+              <option value="Every working day">Every working day</option>
+              <option value="Daily">Daily</option>
+              <option value="Monthly">Monthly</option>
+              <option value="Every minute">Every minute</option>
+              <option value="Every quarter">Every quarter</option>
+              <option value="Half yearly">Half yearly</option>
+              <option value="Weekly">Weekly</option>
+            </select>
           </div>
-          <div id="headers">
-            <label>Generate Headers?</label>
-            <input type="radio" name="group1" value="true" checked="checked" /> Yes
-            <input type="radio" name="group1" value="false" /> No<br />
-            <p id="status" />
-          </div>
+
         </div>
         <div class="well">
-          <button id="submit" class="btn btn-default">Go</button> <button id="cancel" class="btn btn-default">Cancel</button>
+          <button id="submit" class="btn btn-default">Go</button><button id="cancel" class="btn btn-default">Cancel</button>
         </div>
       </form>
     </div>
   </body>
+  <script>
+  ipc.once('apiKey', function(event, key) {
+    var key = key
+    $("#submit").click(function(e) {
+      e.preventDefault();
+      github = $('#github').find(':input').serialize();
+      console.log(github);
+      ipc.send('sendToGithub', github, key);
+    })
+  })
+  </script>
 </html>

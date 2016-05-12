@@ -83,6 +83,7 @@ exports.menu = [
       },
       {
         label: 'Export to Github',
+        accelerator: 'CmdOrCtrl+G',
         click: function() { github.exportToGithub(); }
       }
     ]

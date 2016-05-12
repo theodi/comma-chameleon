@@ -3,6 +3,8 @@ var Dialog = require('dialog');
 var Fs = require('fs');
 var ipc = require('ipc');
 var path = require('path');
+var temp = require('temp');
+var request = require('request');
 
 var exportToGithub = function() {
   var window = BrowserWindow.getFocusedWindow();
@@ -25,6 +27,32 @@ var exportToGithub = function() {
     datapackage = null;
   });
 
+  ipc.on('sendToGithub', function(e, data, apiKey) {
+    window.webContents.send('getCSV');
+    var tmpPath = temp.path({ suffix: '.csv' })
+    ipc.once('sendCSV', function(e, csv) {
+      Fs.writeFileSync(tmpPath, csv, 'utf8');
+
+      var formData = {
+        dataset: data,
+        files: [
+          {
+            title: 'fuckpants',
+            description: 'words',
+            file: Fs.createReadStream(tmpPath)
+          }
+        ],
+        token: apiKey
+      }
+
+      request.post('http://git-data-publisher.herokuapp.com/datasets', {
+        form: formData,
+        headers: {
+          'content-type': 'application/json'
+        }
+      })
+    })
+  })
 }
 
 module.exports = {
