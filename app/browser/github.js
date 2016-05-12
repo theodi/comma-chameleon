@@ -57,8 +57,6 @@ var exportToGithub = function() {
         }
       }
 
-      console.log(opts)
-
       request(opts, function(err, resp, body) {
         console.log(err, body);
       })
