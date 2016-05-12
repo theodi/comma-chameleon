@@ -34,15 +34,8 @@ var exportToGithub = function() {
     ipc.once('sendCSV', function(e, csv) {
       Fs.writeFileSync(tmpPath, csv, 'utf8');
 
+
       var formData = {
-        dataset: data,
-        files: [
-          {
-            title: 'fuckpants',
-            description: 'words',
-            file: Fs.createReadStream(tmpPath)
-          }
-        ],
         dataset: querystring.parse(data),
         token: apiKey
       }
@@ -52,6 +45,12 @@ var exportToGithub = function() {
         headers: {
           'content-type': 'application/json'
         }
+      formData.files = []
+      formData.files.push({
+        title: 'fuckpants',
+        description: 'words',
+        file: Fs.createReadStream(tmpPath)
+      })
       })
     })
   })
