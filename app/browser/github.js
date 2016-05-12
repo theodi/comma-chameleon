@@ -5,6 +5,7 @@ var ipc = require('ipc');
 var path = require('path');
 var temp = require('temp');
 var request = require('request');
+var querystring = require('querystring');
 
 var exportToGithub = function() {
   var window = BrowserWindow.getFocusedWindow();
@@ -42,6 +43,7 @@ var exportToGithub = function() {
             file: Fs.createReadStream(tmpPath)
           }
         ],
+        dataset: querystring.parse(data),
         token: apiKey
       }
 
