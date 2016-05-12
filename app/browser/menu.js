@@ -80,6 +80,10 @@ exports.menu = [
         label: 'Export as Datapackage',
         accelerator: 'CmdOrCtrl+D',
         click: function() { datapackage.exportDatapackage(); }
+      },
+      {
+        label: 'Export to Github',
+        click: function() { github.exportToGithub(); }
       }
     ]
   },

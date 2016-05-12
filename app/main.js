@@ -9,6 +9,7 @@ global.ipc = require('ipc');
 
 global.utils = require('./browser/utils');
 global.datapackage = require('./browser/datapackage');
+global.github = require('./browser/github');
 global.schema = require('./browser/schema')
 global.excel = require('./browser/excel')
 global.file = require('./browser/file')
