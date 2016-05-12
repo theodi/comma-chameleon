@@ -6,15 +6,18 @@ var path = require('path');
 var temp = require('temp');
 var request = require('request');
 var querystring = require('querystring');
+var escape = require('escape-regexp');
 
 var exportToGithub = function() {
   var window = BrowserWindow.getFocusedWindow();
+  var rootURL = 'http://git-data-publisher.herokuapp.com'
 
   github = new BrowserWindow({width: 450, height: 600, 'always-on-top': true});
-  github.loadUrl('http://git-data-publisher.herokuapp.com/auth/github?referer=comma-chameleon');
+  github.loadUrl(rootURL + '/auth/github?referer=comma-chameleon');
 
   github.webContents.on('did-get-redirect-request', function(event, oldUrl, newUrl){
-    match = newUrl.match(/git-data-publisher\.herokuapp\.com\/redirect\?api_key=([a-z0-9]+)/)
+    regex = escape(rootURL + '/redirect?api_key=') + '([a-z0-9]+)'
+    match = newUrl.match(new RegExp(regex))
     if (match) {
       api_key = match[1]
       github.loadUrl('file://' + __dirname + '/../comma-chameleon/views/github.html')
@@ -40,17 +43,15 @@ var exportToGithub = function() {
         token: apiKey
       }
 
-      request.post('http://git-data-publisher.herokuapp.com/datasets', {
-        form: formData,
-        headers: {
-          'content-type': 'application/json'
-        }
       formData.files = []
       formData.files.push({
         title: 'fuckpants',
         description: 'words',
         file: Fs.createReadStream(tmpPath)
       })
+
+      request.post(rootURL + '/datasets', {
+        form: formData
       })
     })
   })
