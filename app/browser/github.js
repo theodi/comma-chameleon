@@ -37,21 +37,30 @@ var exportToGithub = function() {
     ipc.once('sendCSV', function(e, csv) {
       Fs.writeFileSync(tmpPath, csv, 'utf8');
 
+      dataset = querystring.parse(data)
 
-      var formData = {
-        dataset: querystring.parse(data),
-        token: apiKey
+      var opts = {
+        url: rootURL + '/datasets',
+        method: 'POST',
+        json: true,
+        formData: {
+          'token': apiKey,
+          'dataset[name]': dataset.name,
+          'dataset[description]': dataset.description,
+          'dataset[publisher-name]': dataset['publisher-name'],
+          'dataset[publisher-url]': dataset['publisher-url'],
+          'dataset[license]': dataset.license,
+          'dataset[frequency]': dataset.frequency,
+          'files[][title]': 'a file',
+          'files[][description]': 'some words',
+          'files[][file]': Fs.createReadStream(tmpPath),
+        }
       }
 
-      formData.files = []
-      formData.files.push({
-        title: 'fuckpants',
-        description: 'words',
-        file: Fs.createReadStream(tmpPath)
-      })
+      console.log(opts)
 
-      request.post(rootURL + '/datasets', {
-        form: formData
+      request(opts, function(err, resp, body) {
+        console.log(err, body);
       })
     })
   })
