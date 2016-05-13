@@ -10,7 +10,7 @@ var path = require('path');
 var exportdata = function() {
   var window = BrowserWindow.getFocusedWindow();
 
-  datapackage = new BrowserWindow({width: 450, height: 600, 'always-on-top': true});
+  datapackage = new BrowserWindow({width: 450, height: 600, 'alwaysOnTop': true});
   datapackage.loadURL('file://' + __dirname + '/../comma-chameleon/views/datapackage.html');
 
   datapackage.on('closed', function() {

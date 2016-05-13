@@ -69,7 +69,7 @@ var uploadToGithub = function(parentWindow, data, apiKey) {
 var exportToGithub = function() {
   parentWindow = BrowserWindow.getFocusedWindow();
 
-  githubWindow = new BrowserWindow({width: 450, height: 600, 'always-on-top': true});
+  githubWindow = new BrowserWindow({width: 450, height: 600, 'alwaysOnTop': true});
   githubWindow.loadURL(rootURL + '/auth/github?referer=comma-chameleon');
 
   githubWindow.webContents.on('did-get-redirect-request', function(event, oldUrl, newUrl){
