@@ -48,7 +48,14 @@ var postData = function(dataset, file, apiKey) {
   }
 
   request.post(opts, function(err, resp, body) {
-    console.log(err, body);
+    displayResult(body)
+  })
+}
+
+var displayResult = function(dataset) {
+  githubWindow.loadURL('file://' + __dirname + '/../comma-chameleon/views/github-success.html')
+  githubWindow.webContents.on('dom-ready', function() {
+    githubWindow.webContents.send('ghPagesUrl', dataset.gh_pages_url)
   })
 }
 
