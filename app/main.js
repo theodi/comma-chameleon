@@ -16,7 +16,11 @@ global.file = require('./browser/file')
 global.tools = require('./browser/tools')
 
 require('electron-debug')({showDevTools: true})
-require('crash-reporter').start();
+/*require('crash-reporter').start(
+  {
+    companyName: 'Open Data Institute'
+  }
+);*/
 
 var template = require('./browser/menu').menu
 var mainWindow = null;
