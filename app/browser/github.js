@@ -8,60 +8,84 @@ var request = require('request');
 var querystring = require('querystring');
 var escape = require('escape-regexp');
 
+var rootURL = 'http://git-data-publisher.herokuapp.com'
+
+var loadWindow = function(githubWindow, apiKey) {
+  githubWindow.loadUrl('file://' + __dirname + '/../comma-chameleon/views/github.html')
+  githubWindow.webContents.on('dom-ready', function() {
+    githubWindow.webContents.send('apiKey', apiKey)
+  })
+}
+
+var checkForAPIKey = function(url) {
+  regex = escape(rootURL + '/redirect?api_key=') + '([a-z0-9]+)'
+  match = url.match(new RegExp(regex))
+  return match
+}
+
+var writeData = function(csv) {
+  tmpPath = temp.path({ suffix: '.csv' })
+  Fs.writeFileSync(tmpPath, csv, 'utf8');
+  return tmpPath
+}
+
+var postData = function(dataset, file, apiKey) {
+  var opts = {
+    url: rootURL + '/datasets',
+    method: 'POST',
+    json: true,
+    formData: {
+      'api_key': apiKey,
+      'dataset[name]': dataset.name,
+      'dataset[description]': dataset.description,
+      'dataset[publisher-name]': dataset['publisher-name'],
+      'dataset[publisher-url]': dataset['publisher-url'],
+      'dataset[license]': dataset.license,
+      'dataset[frequency]': dataset.frequency,
+      'files[][title]': 'a file',
+      'files[][description]': 'some words',
+      'files[][file]': Fs.createReadStream(file),
+    }
+  }
+
+  console.log(opts)
+
+  request(opts, function(err, resp, body) {
+    console.log(err, body);
+  })
+}
+
+var uploadToGithub = function(parentWindow, data, apiKey) {
+  parentWindow.webContents.send('getCSV');
+
+  ipc.once('sendCSV', function(e, csv) {
+    console.log('got here');
+    dataset = querystring.parse(data);
+    file = writeData(csv);
+    postData(dataset, file, apiKey);
+  })
+}
+
 var exportToGithub = function() {
-  var window = BrowserWindow.getFocusedWindow();
-  var rootURL = 'http://git-data-publisher.herokuapp.com'
+  parentWindow = BrowserWindow.getFocusedWindow();
 
-  github = new BrowserWindow({width: 450, height: 600, 'always-on-top': true});
-  github.loadUrl(rootURL + '/auth/github?referer=comma-chameleon');
+  githubWindow = new BrowserWindow({width: 450, height: 600, 'always-on-top': true});
+  githubWindow.loadUrl(rootURL + '/auth/github?referer=comma-chameleon');
 
-  github.webContents.on('did-get-redirect-request', function(event, oldUrl, newUrl){
-    regex = escape(rootURL + '/redirect?api_key=') + '([a-z0-9]+)'
-    match = newUrl.match(new RegExp(regex))
+  githubWindow.webContents.on('did-get-redirect-request', function(event, oldUrl, newUrl){
+    match = checkForAPIKey(newUrl);
     if (match) {
-      api_key = match[1]
-      github.loadUrl('file://' + __dirname + '/../comma-chameleon/views/github.html')
-      github.webContents.on('dom-ready', function() {
-        github.webContents.send('apiKey', api_key)
-      })
+      loadWindow(githubWindow, match[1])
     }
   })
 
-  github.on('closed', function() {
-    datapackage = null;
-  });
-
   ipc.on('sendToGithub', function(e, data, apiKey) {
-    window.webContents.send('getCSV');
-    var tmpPath = temp.path({ suffix: '.csv' })
-    ipc.once('sendCSV', function(e, csv) {
-      Fs.writeFileSync(tmpPath, csv, 'utf8');
-
-      dataset = querystring.parse(data)
-
-      var opts = {
-        url: rootURL + '/datasets',
-        method: 'POST',
-        json: true,
-        formData: {
-          'api_key': apiKey,
-          'dataset[name]': dataset.name,
-          'dataset[description]': dataset.description,
-          'dataset[publisher-name]': dataset['publisher-name'],
-          'dataset[publisher-url]': dataset['publisher-url'],
-          'dataset[license]': dataset.license,
-          'dataset[frequency]': dataset.frequency,
-          'files[][title]': 'a file',
-          'files[][description]': 'some words',
-          'files[][file]': Fs.createReadStream(tmpPath),
-        }
-      }
-
-      request(opts, function(err, resp, body) {
-        console.log(err, body);
-      })
-    })
+    uploadToGithub(parentWindow, data, apiKey);
   })
+
+  githubWindow.on('closed', function() {
+    githubWindow = null;
+  });
 }
 
 module.exports = {
