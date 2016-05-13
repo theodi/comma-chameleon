@@ -32,7 +32,6 @@ var writeData = function(csv) {
 var postData = function(dataset, file, apiKey) {
   var opts = {
     url: rootURL + '/datasets',
-    method: 'POST',
     json: true,
     formData: {
       'api_key': apiKey,
@@ -48,9 +47,7 @@ var postData = function(dataset, file, apiKey) {
     }
   }
 
-  console.log(opts)
-
-  request(opts, function(err, resp, body) {
+  request.post(opts, function(err, resp, body) {
     console.log(err, body);
   })
 }
@@ -59,7 +56,6 @@ var uploadToGithub = function(parentWindow, data, apiKey) {
   parentWindow.webContents.send('getCSV');
 
   ipc.once('sendCSV', function(e, csv) {
-    console.log('got here');
     dataset = querystring.parse(data);
     file = writeData(csv);
     postData(dataset, file, apiKey);
@@ -91,3 +87,14 @@ var exportToGithub = function() {
 module.exports = {
   exportToGithub: exportToGithub
 };
+
+if (process.env.NODE_ENV === 'test') {
+  module.exports._private = {
+    loadWindow: loadWindow,
+    checkForAPIKey: checkForAPIKey,
+    writeData: writeData,
+    postData: postData,
+    uploadToGithub: uploadToGithub,
+    request: request
+  }
+}
