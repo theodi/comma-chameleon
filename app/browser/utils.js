@@ -4,7 +4,7 @@ function createWindow(data, title) {
 
   mainWindow = new BrowserWindow({width: 800, height: 600});
 
-  mainWindow.loadUrl('file://' + __dirname + '/../comma-chameleon/views/index.html');
+  mainWindow.loadURL('file://' + __dirname + '/../comma-chameleon/views/index.html');
 
   mainWindow.webContents.on('did-finish-load', function() {
     mainWindow.setTitle(title);

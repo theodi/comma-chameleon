@@ -11,7 +11,7 @@ var escape = require('escape-regexp');
 var rootURL = 'http://git-data-publisher.herokuapp.com'
 
 var loadWindow = function(githubWindow, apiKey) {
-  githubWindow.loadUrl('file://' + __dirname + '/../comma-chameleon/views/github.html')
+  githubWindow.loadURL('file://' + __dirname + '/../comma-chameleon/views/github.html')
   githubWindow.webContents.on('dom-ready', function() {
     githubWindow.webContents.send('apiKey', apiKey)
   })
@@ -70,7 +70,7 @@ var exportToGithub = function() {
   parentWindow = BrowserWindow.getFocusedWindow();
 
   githubWindow = new BrowserWindow({width: 450, height: 600, 'always-on-top': true});
-  githubWindow.loadUrl(rootURL + '/auth/github?referer=comma-chameleon');
+  githubWindow.loadURL(rootURL + '/auth/github?referer=comma-chameleon');
 
   githubWindow.webContents.on('did-get-redirect-request', function(event, oldUrl, newUrl){
     match = checkForAPIKey(newUrl);
