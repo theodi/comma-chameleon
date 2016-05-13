@@ -58,7 +58,7 @@
       </form>
     </div>
     <script>
-    var ipc = require('ipc');
+    var ipc = require("electron").ipcMain;
 
     jQuery.fn.serializeObject = function() {
       var arrayData, objectData;

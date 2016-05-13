@@ -5,7 +5,7 @@ global.Menu = require('menu');
 global.Dialog = require('dialog');
 global.Fs = require('fs');
 global.XLSX = require('xlsx');
-global.ipc = require('ipc');
+global.ipc = require("electron").ipcMain;
 
 global.utils = require('./browser/utils');
 global.datapackage = require('./browser/datapackage');
