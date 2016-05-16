@@ -4,7 +4,8 @@
   "license": "MIT",
   "main": "main.js",
   "scripts": {
-    "start": "electron app",
+    "start": "node ./scripts/page-build.js && electron app",
+    "build": "node ./scripts/page-build.js",
     "mocha-main": "electron-mocha app/test/main/",
     "mocha-renderer": "electron-mocha --renderer --no-timeouts app/test/renderer/",
     "mocha-all": "electron-mocha app/test/main/ && electron-mocha --renderer --no-timeouts app/test/renderer/"
@@ -25,6 +26,8 @@
     "electron-debug": "^0.6.0",
     "electron-mocha": "^0.3.1",
     "electron-prebuilt": "^0.37.6",
-    "sinon": "^1.17.3"
+    "sinon": "^1.17.3",
+    "handlebars": "^4.0.5",
+    "handlebars-layouts": "^3.1.3"
   }
 }
