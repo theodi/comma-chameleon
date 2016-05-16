@@ -8,7 +8,7 @@ var request = require('request');
 var querystring = require('querystring');
 var escape = require('escape-regexp');
 
-var rootURL = 'http://octopub.herokuapp.com'
+var rootURL = 'https://octopub.io'
 
 var loadWindow = function(githubWindow, apiKey) {
   githubWindow.loadURL('file://' + __dirname + '/../comma-chameleon/views/github.html')
