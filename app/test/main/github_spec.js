@@ -13,13 +13,13 @@ describe('github', function() {
 
   describe('checkForAPIKey', function() {
     it('extracts the API key from a URL', function() {
-      url = 'http://git-data-publisher.herokuapp.com/redirect?api_key=foobarbaz'
+      url = 'http://octopub.herokuapp.com/redirect?api_key=foobarbaz'
       expect(github._private.checkForAPIKey(url)[0]).to.eq(url)
       expect(github._private.checkForAPIKey(url)[1]).to.eq('foobarbaz')
     })
 
     it('returns nothing when the url does not match', function() {
-      url = 'http://git-data-publisher.herokuapp.com/foo'
+      url = 'http://octopub.herokuapp.com/foo'
       expect(github._private.checkForAPIKey(url)).to.eq(null)
     })
   })
@@ -50,7 +50,7 @@ describe('github', function() {
       github._private.postData(dataset, file, "bogus-key")
 
       expect(stub.calledWithMatch({
-        url: 'http://git-data-publisher.herokuapp.com/datasets',
+        url: 'http://octopub.herokuapp.com/datasets',
         json: true,
         formData: {
          'api_key': 'bogus-key',
