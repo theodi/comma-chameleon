@@ -1,0 +1,23 @@
+{{#extend "layout" pageTitle="Export to Github - Success!" containerClass="container-fluid"}}
+
+  {{#content "body"}}
+    <h2>Congratulations!</h2>
+
+    <p>Your data is published at <a href="#" id="pages-url"></a></p>
+  {{/content}}
+
+  {{#content "foot" mode="prepend"}}
+    <script>
+    ipc.once('ghPagesUrl', function(event, url) {
+      $('#pages-url').attr('href', url)
+      $('#pages-url').html(url)
+    })
+
+    $(document).on('click', 'a[href^="http"]', function(event) {
+        event.preventDefault();
+        shell.openExternal(this.href);
+    });
+    </script>
+  {{/content}}
+
+{{/extend}}

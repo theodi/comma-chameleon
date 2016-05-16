@@ -1,0 +1,88 @@
+{{#extend "layout" pageTitle="Export to Github" containerClass="container-fluid"}}
+
+  {{#content "head" mode="append"}}
+    <link rel="stylesheet" href="../../bower_components/components-font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="../../bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.css" />
+    <link rel="stylesheet" href="../css/datapackage.css" />
+  {{/content}}
+
+  {{#content "body"}}
+    <form id="github">
+      <div class="form-wrapper">
+
+        <div class="form-group">
+          <label for="name">Dataset name</label>
+          <input type="text" class="form-control" id="name" name="name" placeholder="Dataset name" autofocus>
+        </div>
+
+        <div class="form-group">
+          <label for="description">Dataset description</label>
+          <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="publisher_name">Publisher name</label>
+          <input type="text" class="form-control" id="publisher_name" name="publisher_name"></input>
+        </div>
+
+        <div class="form-group">
+          <label for="publisher_url">Publisher URL</label>
+          <input type="text" class="form-control" id="publisher_url" name="publisher_url"></input>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label" for="license">License</label>
+          <select class="form-control" id="license" name="license">
+            <option value="CC-BY-4.0">Creative Commons Attribution 4.0</option>
+            <option value="CC-BY-SA-4.0">Creative Commons Attribution Share-Alike 4.0</option>
+            <option value="CC0-1.0">CC0 1.0</option>
+            <option value="OGL-UK-3.0">Open Government Licence 3.0 (United Kingdom)</option>
+            <option value="ODC-BY-1.0">Open Data Commons Attribution License 1.0</option>
+            <option value="ODC-PDDL-1.0">Open Data Commons Public Domain Dedication and Licence 1.0</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label" for="frequency">Publication frequency</label>
+          <select class="form-control" id="frequency" name="frequency">
+            <option value="One-off">One-off</option>
+            <option value="Annual">Annual</option>
+            <option value="Every working day">Every working day</option>
+            <option value="Daily">Daily</option>
+            <option value="Monthly">Monthly</option>
+            <option value="Every minute">Every minute</option>
+            <option value="Every quarter">Every quarter</option>
+            <option value="Half yearly">Half yearly</option>
+            <option value="Weekly">Weekly</option>
+          </select>
+        </div>
+
+      </div>
+      <div class="well">
+        <button id="submit" class="btn btn-default">Go
+          <i id='spinner' class="fa fa-spinner fa-pulse margin-bottom hidden"></i></button>
+        <button id="cancel" class="btn btn-default">Cancel</button>
+      </div>
+    </form>
+  {{/content}}
+
+  {{#content "foot" mode="prepend"}}
+    <script src="../../bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"></script>
+    <script>
+      ipc.once('apiKey', function(event, key) {
+        var key = key
+        $("#submit").click(function(e) {
+          e.preventDefault();
+          $("#spinner").removeClass('hidden');
+          github = $('#github').find(':input').serialize();
+          ipc.send('sendToGithub', github, key);
+        })
+      })
+
+      $("#cancel").click(function(e) {
+        window.close()
+      })
+    </script>
+  {{/content}}
+
+{{/extend}}
