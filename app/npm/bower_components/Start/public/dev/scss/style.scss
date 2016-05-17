@@ -1,0 +1,9 @@
+// ---- Normalize ---- //
+@import '../../vendor/modularized-normalize-scss/_normalize';
+
+// ---- Compass ---- //
+@import 'compass';
+
+*, *:before, *:after {
+    @include box-sizing('border-box');
+}
