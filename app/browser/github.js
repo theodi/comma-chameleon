@@ -7,6 +7,7 @@ var temp = require('temp');
 var request = require('request');
 var querystring = require('querystring');
 var escape = require('escape-regexp');
+var slugify = require('slugify');
 
 var rootURL = 'https://octopub.io'
 
@@ -23,13 +24,14 @@ var checkForAPIKey = function(url) {
   return match
 }
 
-var writeData = function(csv) {
-  tmpPath = temp.path({ suffix: '.csv' })
-  Fs.writeFileSync(tmpPath, csv, 'utf8');
-  return tmpPath
+var writeData = function(csv, filename) {
+  path = '/tmp/'+ slugify(filename) + '.csv'
+  Fs.writeFileSync(path, csv, 'utf8');
+  return path
 }
 
 var postData = function(dataset, file, apiKey) {
+  console.log(dataset)
   var opts = {
     url: rootURL + '/datasets',
     json: true,
@@ -41,8 +43,8 @@ var postData = function(dataset, file, apiKey) {
       'dataset[publisher_url]': dataset['publisher_url'],
       'dataset[license]': dataset.license,
       'dataset[frequency]': dataset.frequency,
-      'files[][title]': 'a file',
-      'files[][description]': 'some words',
+      'files[][title]': dataset.file_name,
+      'files[][description]': dataset.file_description,
       'files[][file]': Fs.createReadStream(file),
     }
   }
@@ -63,8 +65,9 @@ var uploadToGithub = function(parentWindow, data, apiKey) {
   parentWindow.webContents.send('getCSV');
 
   ipc.once('sendCSV', function(e, csv) {
+    console.log(data)
     dataset = querystring.parse(data);
-    file = writeData(csv);
+    file = writeData(csv, dataset.file_name);
     postData(dataset, file, apiKey);
   })
 }
