@@ -10,8 +10,8 @@ var escape = require('escape-regexp');
 
 var rootURL = 'https://octopub.io'
 
-var loadWindow = function(githubWindow, apiKey) {
-  githubWindow.loadURL('file://' + __dirname + '/../comma-chameleon/views/github.html')
+var loadWindow = function(githubWindow, apiKey, viewName) {
+  githubWindow.loadURL('file://' + __dirname + '/../comma-chameleon/views/' + viewName + '.html')
   githubWindow.webContents.on('dom-ready', function() {
     githubWindow.webContents.send('apiKey', apiKey)
   })
@@ -70,17 +70,7 @@ var uploadToGithub = function(parentWindow, data, apiKey) {
 }
 
 var exportToGithub = function() {
-  parentWindow = BrowserWindow.getFocusedWindow();
-
-  githubWindow = new BrowserWindow({width: 450, height: 600, 'alwaysOnTop': true});
-  githubWindow.loadURL(rootURL + '/auth/github?referer=comma-chameleon');
-
-  githubWindow.webContents.on('did-get-redirect-request', function(event, oldUrl, newUrl){
-    match = checkForAPIKey(newUrl);
-    if (match) {
-      loadWindow(githubWindow, match[1])
-    }
-  })
+  githubWindow = authAndLoad('github')
 
   ipc.on('sendToGithub', function(e, data, apiKey) {
     uploadToGithub(parentWindow, data, apiKey);
@@ -91,8 +81,28 @@ var exportToGithub = function() {
   });
 }
 
+var authAndLoad = function(viewName) {
+  parentWindow = BrowserWindow.getFocusedWindow();
+
+  githubWindow = new BrowserWindow({width: 450, height: 600, 'alwaysOnTop': true});
+  githubWindow.loadURL(rootURL + '/auth/github?referer=comma-chameleon');
+
+  githubWindow.webContents.on('did-get-redirect-request', function(event, oldUrl, newUrl){
+    match = checkForAPIKey(newUrl);
+    if (match) {
+      loadWindow(githubWindow, match[1], viewName)
+    }
+  })
+
+  return githubWindow;
+}
+
+var addFileToGithub = function() {
+}
+
 module.exports = {
-  exportToGithub: exportToGithub
+  exportToGithub: exportToGithub,
+  addFileToGithub: addFileToGithub
 };
 
 if (process.env.NODE_ENV === 'test') {

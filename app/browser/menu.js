@@ -82,9 +82,18 @@ exports.menu = [
         click: function() { datapackage.exportDatapackage(); }
       },
       {
-        label: 'Export to Github',
-        accelerator: 'CmdOrCtrl+G',
-        click: function() { github.exportToGithub(); }
+        label: 'Github',
+        submenu: [
+          {
+            label: 'Export to Github',
+            accelerator: 'CmdOrCtrl+G',
+            click: function() { github.exportToGithub(); }
+          },
+          {
+            label: 'Add file to Github',
+            click: function() { github.addFileToGithub(); }
+          }
+        ]
       }
     ]
   },
