@@ -8,7 +8,7 @@ function importExcel() {
     var first_sheet_name = workbook.SheetNames[0];
     var worksheet = workbook.Sheets[first_sheet_name];
 
-    popup = new BrowserWindow({width: 300, height: 150, 'alwaysOnTop': true});
+    popup = new BrowserWindow({width: 300, height: 150});
     popup.loadURL('file://' + __dirname + '/../comma-chameleon/views/select_worksheet.html');
     popup.webContents.on('did-finish-load', function() {
       popup.webContents.send('loadSheets', workbook.SheetNames);

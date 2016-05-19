@@ -80,7 +80,7 @@ var exportToGithub = function() {
 var authAndLoad = function(viewName) {
   parentWindow = BrowserWindow.getFocusedWindow();
 
-  githubWindow = new BrowserWindow({width: 450, height: 600, 'alwaysOnTop': true});
+  githubWindow = new BrowserWindow({width: 450, height: 600});
   githubWindow.loadURL(rootURL + '/auth/github?referer=comma-chameleon');
 
   githubWindow.webContents.on('did-get-redirect-request', function(event, oldUrl, newUrl){
