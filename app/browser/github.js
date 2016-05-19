@@ -70,15 +70,11 @@ var uploadToGithub = function(parentWindow, data, apiKey) {
 }
 
 var exportToGithub = function() {
-  githubWindow = authAndLoad('github')
+  authAndLoad('github')
 
   ipc.on('sendToGithub', function(e, data, apiKey) {
     uploadToGithub(parentWindow, data, apiKey);
   })
-
-  githubWindow.on('closed', function() {
-    githubWindow = null;
-  });
 }
 
 var authAndLoad = function(viewName) {
@@ -94,10 +90,13 @@ var authAndLoad = function(viewName) {
     }
   })
 
-  return githubWindow;
+  githubWindow.on('closed', function() {
+    githubWindow = null;
+  });
 }
 
 var addFileToGithub = function() {
+  authAndLoad('choose-repo')
 }
 
 module.exports = {
