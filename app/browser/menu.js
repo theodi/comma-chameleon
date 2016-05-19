@@ -91,6 +91,7 @@ exports.menu = [
           },
           {
             label: 'Add file to Github',
+            accelerator: 'CmdOrCtrl+Shift+G',
             click: function() { github.addFileToGithub(); }
           }
         ]

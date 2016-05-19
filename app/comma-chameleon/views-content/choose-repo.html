@@ -32,11 +32,17 @@
     var key = key
     $.get('https://octopub.io/dashboard.json?api_key='+ key, function(data) {
       select = $('#dataset')
-      debugger;
       $.each(data.datasets, function(i, repo) {
         select.append($("<option></option>")
                     .attr("value",repo.id)
                     .text(repo.name));
+      })
+
+      $("#submit").click(function(e) {
+        e.preventDefault();
+        $("#spinner").removeClass('hidden');
+        github = $('#github').find(':input').serialize();
+        ipc.send('addFileToExisting', $('#dataset').val(), key);
       })
     })
   });

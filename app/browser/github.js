@@ -72,7 +72,7 @@ var uploadToGithub = function(parentWindow, data, apiKey) {
 var exportToGithub = function() {
   authAndLoad('github')
 
-  ipc.on('sendToGithub', function(e, data, apiKey) {
+  ipc.once('sendToGithub', function(e, data, apiKey) {
     uploadToGithub(parentWindow, data, apiKey);
   })
 }
@@ -97,6 +97,29 @@ var authAndLoad = function(viewName) {
 
 var addFileToGithub = function() {
   authAndLoad('choose-repo')
+
+  ipc.on('addFileToExisting', function(e, dataSetID, apiKey) {
+    parentWindow.webContents.send('getCSV');
+
+    ipc.once('sendCSV', function(e, csv) {
+      file = writeData(csv);
+
+      var opts = {
+        url: rootURL + '/datasets/' + dataSetID,
+        json: true,
+        formData: {
+          'api_key': apiKey,
+          'files[][title]': 'a file',
+          'files[][description]': 'some words',
+          'files[][file]': Fs.createReadStream(file),
+        }
+      }
+
+      request.put(opts, function(err, resp, body) {
+        displayResult(body)
+      })
+    })
+  })
 }
 
 module.exports = {
