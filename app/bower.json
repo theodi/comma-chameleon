@@ -11,6 +11,7 @@
     "jquery-csv": "*",
     "bootstrap": "3.3.5",
     "bootstrap-tagsinput": "0.8.0",
-    "lodash": "~3.10.1"
+    "lodash": "~3.10.1",
+    "components-font-awesome": "*"
   }
 }

@@ -1,7 +1,7 @@
 var BrowserWindow = require('browser-window');
 var Dialog = require('dialog');
 var Fs = require('fs');
-var ipc = require('ipc');
+var ipc = require("electron").ipcMain;
 var path = require('path');
 
 //var exports = module.exports = {};
@@ -10,8 +10,8 @@ var path = require('path');
 var exportdata = function() {
   var window = BrowserWindow.getFocusedWindow();
 
-  datapackage = new BrowserWindow({width: 450, height: 600, 'always-on-top': true});
-  datapackage.loadUrl('file://' + __dirname + '/../comma-chameleon/views/datapackage.html');
+  datapackage = new BrowserWindow({width: 450, height: 600});
+  datapackage.loadURL('file://' + __dirname + '/../comma-chameleon/views/datapackage.html');
 
   datapackage.on('closed', function() {
     datapackage = null;

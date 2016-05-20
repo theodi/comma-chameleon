@@ -1,0 +1,38 @@
+{{#extend "layout" pageTitle="Select worksheet" containerClass="container-fluid"}}
+
+  {{#content "head" mode="append"}}
+  <link rel="stylesheet" href="../css/select-worksheet.css" />
+
+  {{/content}}
+
+  {{#content "body"}}
+    <p><select id="worksheets" class="form-control"></select></p>
+    <div class="well">
+      <button id="submit" class="btn btn-default">Go</button> <button id="cancel" class="btn btn-default">Cancel</button>
+    </div>
+  {{/content}}
+
+  {{#content "foot" mode="prepend"}}
+  <script>
+    ipc.on('loadSheets', function(e, sheets) {
+      console.log(sheets)
+      worksheets = $('#worksheets')
+      $.each(sheets, function( i, sheet ){
+        worksheets.append($("<option></option>")
+          .attr("value",sheet)
+          .text(sheet))
+      });
+
+      $('#submit').click(function(e) {
+        ipc.send('worksheetSelected', $('#worksheets').val());
+        e.preventDefault();
+      })
+
+      $('#cancel').click(function() {
+        ipc.send('worksheetCanceled');
+      })
+    });
+  </script>
+  {{/content}}
+
+{{/extend}}

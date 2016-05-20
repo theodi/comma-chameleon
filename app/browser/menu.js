@@ -1,9 +1,9 @@
 exports.menu = [
   {
-    label: 'Electron',
+    label: 'Comma Chameleon',
     submenu: [
       {
-        label: 'About Electron',
+        label: 'About Comma Chameleon',
         selector: 'orderFrontStandardAboutPanel:'
       },
       {
@@ -17,7 +17,7 @@ exports.menu = [
         type: 'separator'
       },
       {
-        label: 'Hide Electron',
+        label: 'Hide Comma Chameleon',
         accelerator: 'CmdOrCtrl+H',
         selector: 'hide:'
       },
@@ -80,6 +80,21 @@ exports.menu = [
         label: 'Export as Datapackage',
         accelerator: 'CmdOrCtrl+D',
         click: function() { datapackage.exportDatapackage(); }
+      },
+      {
+        label: 'Github',
+        submenu: [
+          {
+            label: 'Export to Github',
+            accelerator: 'CmdOrCtrl+G',
+            click: function() { github.exportToGithub(); }
+          },
+          {
+            label: 'Add file to Github',
+            accelerator: 'CmdOrCtrl+Shift+G',
+            click: function() { github.addFileToGithub(); }
+          }
+        ]
       }
     ]
   },

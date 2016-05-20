@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{pageTitle}}</title>
+    <link rel="stylesheet" href="../../bower_components/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../bower_components/components-font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="../css/default.css" />
+
+    {{#block "head"}}
+    {{/block}}
+  </head>
+  <body>
+    <div id="container" class="{{containerClass}}">
+      {{#block "body"}}
+      {{/block}}
+    </div>
+  </body>
+  <script>
+    window.$ = window.jQuery = require('../../bower_components/jquery/dist/jquery.js');
+    const {shell} = require('electron');
+    var ipc = require("electron").ipcRenderer;
+  </script>
+  <script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  {{#block "foot"}}
+  {{/block}}
+</html>

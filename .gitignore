@@ -6,3 +6,4 @@ node_modules/
 .idea/
 packages
 _site
+app/comma-chameleon/views

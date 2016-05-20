@@ -1,0 +1,26 @@
+{
+  "name": "Start",
+  "version": "1.0.0",
+  "homepage": "https://github.com/hyanmandian/start",
+  "authors": [
+    "Hyan Mandian <hyanmandian@hotmail.com>"
+  ],
+  "description": "Start your project on the right foot!",
+  "keywords": [
+    "boilerplate",
+    "start",
+    "html5",
+    "sass",
+    "gulp",
+    "front-end",
+    "web"
+  ],
+  "ignore": [
+    "node_modules"
+  ],
+  "devDependencies": {
+    "modularized-normalize-scss": "~3.0.0",
+    "jquery": "~1.11.0",
+    "modernizr": "~2.7.1"
+  }
+}

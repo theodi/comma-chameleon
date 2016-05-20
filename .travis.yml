@@ -5,6 +5,7 @@ before_script:
 - export DISPLAY=:99.0; sh -e /etc/init.d/xvfb start
 - npm install bower
 - bower install --config.cwd=app/
+- npm install
 script:
 - npm run mocha-main
 - npm run mocha-renderer

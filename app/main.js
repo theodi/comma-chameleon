@@ -5,17 +5,22 @@ global.Menu = require('menu');
 global.Dialog = require('dialog');
 global.Fs = require('fs');
 global.XLSX = require('xlsx');
-global.ipc = require('ipc');
+global.ipc = require("electron").ipcMain;
 
 global.utils = require('./browser/utils');
 global.datapackage = require('./browser/datapackage');
+global.github = require('./browser/github');
 global.schema = require('./browser/schema')
 global.excel = require('./browser/excel')
 global.file = require('./browser/file')
 global.tools = require('./browser/tools')
 
 require('electron-debug')({showDevTools: true})
-require('crash-reporter').start();
+/*require('crash-reporter').start(
+  {
+    companyName: 'Open Data Institute'
+  }
+);*/
 
 var template = require('./browser/menu').menu
 var mainWindow = null;

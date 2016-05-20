@@ -3,6 +3,7 @@
 # Copy `node_modules` into the app directory - this is annoying, but a side effect of the original architecture. We should probably change this
 cp -r node_modules app
 
+node ./scripts/page-build.js
 electron-packager app/ comma-chameleon --platform=all --arch=all --version=0.37.6 --icon=resources/icon.icns --out=packages --overwrite
 
 for Dir in $(find ./packages/* -maxdepth 0 -type d );
