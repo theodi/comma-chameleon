@@ -16,7 +16,7 @@ you can use npm to install all relevant packages using the following set of comm
 brew install node
 npm install
 npm install -g bower
-bower install --config.cwd=app/
+bower install
 ```
 
 Then to open the app run:
@@ -32,21 +32,21 @@ npm start
 Assuming you have installed `electron-mocha` globally (via `npm i electron-mocha -g`), you can run the tests like this:
 
 ```
-npm run mocha-all
+npm run test
 ```
 
 Or to run the main and renderer tests separately, you can run:
 
 ```
-npm run mocha-main  # run tests for the runtime components provided by Electron
-npm run mocha-renderer # run tests that execute client side
+npm run test-main  # run tests for the runtime components provided by Electron
+npm run test-renderer # run tests that execute client side
 ```
 
 Otherwise you can run:
 
 ```
-electron-mocha app/test/main/
-electron-mocha --renderer app/test/renderer/ # run tests that execute client side
+electron-mocha test/main/
+electron-mocha --renderer test/renderer/ # run tests that execute client side
 ```
 
 ## Building a new package

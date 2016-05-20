@@ -7,7 +7,6 @@ var github = require('./../../browser/github')
 var sinon = require('sinon')
 
 var Fs = require('fs');
-var BrowserWindow = require('browser-window');
 
 describe('github', function() {
 
