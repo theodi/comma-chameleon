@@ -1,9 +1,9 @@
 exports.menu = [
   {
-    label: 'Electron',
+    label: 'Comma Chameleon',
     submenu: [
       {
-        label: 'About Electron',
+        label: 'About Comma Chameleon',
         selector: 'orderFrontStandardAboutPanel:'
       },
       {
@@ -17,7 +17,7 @@ exports.menu = [
         type: 'separator'
       },
       {
-        label: 'Hide Electron',
+        label: 'Hide Comma Chameleon',
         accelerator: 'CmdOrCtrl+H',
         selector: 'hide:'
       },
