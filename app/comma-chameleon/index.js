@@ -1,9 +1,4 @@
-/**
- * Created by stephenfortune on 15/09/15.
- */
-'require strict';
-
-var ipc = require('ipc');
+var ipc = require('electron').ipcRenderer;
 var fs = require('fs');
 
 var hotController = require('../hot.js');
@@ -47,12 +42,12 @@ container.addEventListener('contextmenu', function (e) {
 
 // runtime renderer call & response
 
-ipc.on('loadData', function(data) {
+ipc.on('loadData', function(e, data) {
   arrays = file.open(hot, data)
   rows.fixRaggedRows(arrays);
 });
 
-ipc.on('saveData', function(fileName) {
+ipc.on('saveData', function(e, fileName) {
   data = $.csv.fromArrays(hot.getData());
   fs.writeFile(fileName, data, function (err) {
   });
