@@ -7,6 +7,7 @@
   {{/content}}
 
   {{#content "body"}}
+    <div class='alert alert-warning hidden' id='schema-error'>You're a git</div>
     <form id="github">
       <div class="form-wrapper">
 
@@ -56,6 +57,10 @@
       })
     })
   });
+
+  ipc.once('schemaError', function(event) {
+    $('#schema-error').removeClass('hidden')
+  })
 </script>
 {{/content}}
 

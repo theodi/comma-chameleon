@@ -66,7 +66,11 @@ var putData = function(dataset, file, apiKey) {
   }
 
   request.put(opts, function(err, resp, body) {
-    displayResult(body)
+    if (resp.statusCode >= 400) {
+      ipc.send('schemaError')
+    } else {
+      displayResult(body)
+    }
   })
 }
 
