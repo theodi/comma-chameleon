@@ -28,7 +28,7 @@
     "chai": "^3.2.0",
     "electron-debug": "^0.6.0",
     "electron-mocha": "^2.1.0",
-    "electron-prebuilt": "^0.37.6",
+    "electron-prebuilt": "^1.0.1",
     "sinon": "^1.17.3",
     "handlebars": "^4.0.5",
     "handlebars-layouts": "^3.1.3"
