@@ -1,5 +1,8 @@
-var BrowserWindow = require('browser-window');
-var Dialog = require('dialog');
+global.electron = require('electron')
+
+global.BrowserWindow = electron.BrowserWindow
+global.Dialog = electron.dialog;
+
 var Fs = require('fs');
 var ipc = require("electron").ipcMain;
 var path = require('path');

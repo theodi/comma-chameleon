@@ -1,5 +1,5 @@
-var fs = require('fs');
-var $ = jQuery = require('./../bower_components/jquery/dist/jquery.js');
+const fs = require('fs');
+const $ = jQuery = require('./../bower_components/jquery/dist/jquery.js');
 require('./../bower_components/jquery-csv/src/jquery.csv.js')
 
 var openFile = function(hot, data) {

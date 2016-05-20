@@ -1,6 +1,5 @@
-var remote = require('remote');
-var Menu = remote.require('menu');
-var MenuItem = remote.require('menu-item');
+const {remote} = require('electron');
+const {Menu, MenuItem} = remote;
 
 var menu = new Menu();
 
