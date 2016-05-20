@@ -11,6 +11,16 @@
       <div class="form-wrapper">
 
         <div class="form-group">
+          <label for="file_name">File name</label>
+          <input type="text" class="form-control" id="file_name" name="file_name">
+        </div>
+
+        <div class="form-group">
+          <label for="file_description">File description</label>
+          <textarea class="form-control" id="file_description" name="file_description"></textarea>
+        </div>
+
+        <div class="form-group">
           <label class="control-label" for="repos">Choose Dataset</label>
           <select class="form-control" id="dataset" name="dataset">
             <option>--- Please Select---</option>
@@ -42,7 +52,7 @@
         e.preventDefault();
         $("#spinner").removeClass('hidden');
         github = $('#github').find(':input').serialize();
-        ipc.send('addFileToExisting', $('#dataset').val(), key);
+        ipc.send('addFileToExisting', github, key);
       })
     })
   });

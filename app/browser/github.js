@@ -53,16 +53,14 @@ var postData = function(dataset, file, apiKey) {
   })
 }
 
-var putData = function(csv, dataSetID, apiKey) {
-  file = writeData(csv, 'a file');
-
+var putData = function(dataset, file, apiKey) {
   var opts = {
-    url: rootURL + '/datasets/' + dataSetID,
+    url: rootURL + '/datasets/' + dataset.dataset,
     json: true,
     formData: {
       'api_key': apiKey,
-      'files[][title]': 'a file',
-      'files[][description]': 'some words',
+      'files[][title]': dataset.file_name,
+      'files[][description]': dataset.file_description,
       'files[][file]': Fs.createReadStream(file),
     }
   }
@@ -118,11 +116,13 @@ var authAndLoad = function(viewName) {
 var addFileToGithub = function() {
   authAndLoad('choose-repo')
 
-  ipc.on('addFileToExisting', function(e, dataSetID, apiKey) {
+  ipc.on('addFileToExisting', function(e, data, apiKey) {
     parentWindow.webContents.send('getCSV');
 
     ipc.once('sendCSV', function(e, csv) {
-      putData(csv, dataSetID)
+      dataset = querystring.parse(data);
+      file = writeData(csv, dataset.file_name);
+      putData(dataset, file, apiKey)
     })
   })
 }
