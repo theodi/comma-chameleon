@@ -4,11 +4,12 @@
   "license": "MIT",
   "main": "main.js",
   "scripts": {
-    "build": "node ./scripts/page-build.js",
-    "mocha-main": "electron-mocha app/test/main/",
-    "mocha-renderer": "electron-mocha --renderer --no-timeouts app/test/renderer/",
-    "mocha-all": "electron-mocha app/test/main/ && electron-mocha --renderer --no-timeouts app/test/renderer/"
     "start": "node ./scripts/page-build.js && electron .",
+    "test": "electron-mocha test/main/ && electron-mocha --renderer --no-timeouts test/renderer/",
+    "test-main": "electron-mocha test/main/",
+    "test-renderer": "electron-mocha --renderer --no-timeouts test/renderer/",
+    "page-build": "node ./scripts/page-build.js",
+    "build": "./scripts/build"
   },
   "repository": {
     "type": "git",

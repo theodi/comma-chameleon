@@ -7,8 +7,7 @@ before_script:
 - bower install --config.cwd=app/
 - npm install
 script:
-- npm run mocha-main
-- npm run mocha-renderer
+- npm test
 before_deploy:
 - sudo apt-get install wine
 - npm install electron-packager@7.0.0 -g
