@@ -13,7 +13,7 @@ describe('github', function() {
 
   describe('checkForAPIKey', function() {
     it('extracts the API key from a URL', function() {
-      url = 'http://octopub.herokuapp.com/redirect?api_key=foobarbaz'
+      url = 'https://octopub.io/redirect?api_key=foobarbaz'
       expect(github._private.checkForAPIKey(url)[0]).to.eq(url)
       expect(github._private.checkForAPIKey(url)[1]).to.eq('foobarbaz')
     })
@@ -27,7 +27,9 @@ describe('github', function() {
   describe('writeData', function() {
     it('writes a data to a file', function() {
       data = 'here,is,some,data'
-      path = github._private.writeData(data)
+      filename = 'My File Name'
+      path = github._private.writeData(data, filename)
+      expect(path).to.eq('/tmp/my-file-name.csv')
       expect(Fs.readFileSync(path, 'utf8')).to.eq(data)
     })
   })
@@ -37,8 +39,10 @@ describe('github', function() {
       dataset = {
         "name": 'My awesome dataset',
         "description": 'My awesome description',
-        "publisher-name": "Publisher Name",
-        "publisher-url": "http://example.com",
+        "file_name": "My File Name",
+        "file_description": "My File Description",
+        "publisher_name": "Publisher Name",
+        "publisher_url": "http://example.com",
         "license": "CC-ZERO",
         "frequency": "monthly"
       }
@@ -49,23 +53,46 @@ describe('github', function() {
 
       github._private.postData(dataset, file, "bogus-key")
 
-      expect(stub.calledWithMatch({
-        url: 'http://octopub.herokuapp.com/datasets',
+      opts = {
+        url: 'https://octopub.io/datasets',
         json: true,
         formData: {
          'api_key': 'bogus-key',
          'dataset[name]': 'My awesome dataset',
          'dataset[description]': 'My awesome description',
-         'dataset[publisher-name]': 'Publisher Name',
-         'dataset[publisher-url]': 'http://example.com',
+         'dataset[publisher_name]': 'Publisher Name',
+         'dataset[publisher_url]': 'http://example.com',
          'dataset[license]': 'CC-ZERO',
          'dataset[frequency]': 'monthly',
-         'files[][title]': 'a file',
-         'files[][description]': 'some words',
+         'files[][title]': 'My File Name',
+         'files[][description]': 'My File Description',
          'files[][file]': sinon.match.instanceOf(Fs.ReadStream)
         }
-      })).to.eq(true)
+      }
 
+      expect(stub.calledWithMatch(opts)).to.eq(true)
+    })
+  })
+
+  describe('putData', function() {
+    it('puts data to the right place', function() {
+      csv = "foo,bar,baz"
+
+      opts = {
+        url: 'https://octopub.io/datasets/123',
+        json: true,
+        formData: {
+          'api_key': 'bogus-key',
+          'files[][title]': 'a file',
+          'files[][description]': 'some words',
+          'files[][file]': sinon.match.instanceOf(Fs.ReadStream),
+        }
+      }
+
+      stub = sinon.stub(github._private.request, 'put')
+      github._private.putData(csv, 123, "bogus-key")
+
+      expect(stub.calledWithMatch(opts)).to.eq(true)
     })
   })
 

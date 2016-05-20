@@ -19,14 +19,14 @@
     "mkdirp": "^0.5.1",
     "node-zip": "^1.1.1",
     "request": "^2.72.0",
-    "slugify": "^0.1.1",
+    "slug": "^0.9.1",
     "temp": "^0.8.3",
     "xlsx": "^0.8.0"
   },
   "devDependencies": {
     "chai": "^3.2.0",
     "electron-debug": "^0.6.0",
-    "electron-mocha": "^0.3.1",
+    "electron-mocha": "^2.1.0",
     "electron-prebuilt": "^0.37.6",
     "sinon": "^1.17.3",
     "handlebars": "^4.0.5",

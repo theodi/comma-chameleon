@@ -7,7 +7,7 @@ var temp = require('temp');
 var request = require('request');
 var querystring = require('querystring');
 var escape = require('escape-regexp');
-var slugify = require('slugify');
+var slug = require('slug');
 
 var rootURL = 'https://octopub.io'
 
@@ -25,13 +25,12 @@ var checkForAPIKey = function(url) {
 }
 
 var writeData = function(csv, filename) {
-  path = '/tmp/'+ slugify(filename) + '.csv'
+  path = '/tmp/'+ slug(filename, {lower: true}) + '.csv'
   Fs.writeFileSync(path, csv, 'utf8');
   return path
 }
 
 var postData = function(dataset, file, apiKey) {
-  console.log(dataset)
   var opts = {
     url: rootURL + '/datasets',
     json: true,
@@ -54,6 +53,25 @@ var postData = function(dataset, file, apiKey) {
   })
 }
 
+var putData = function(csv, dataSetID, apiKey) {
+  file = writeData(csv, 'a file');
+
+  var opts = {
+    url: rootURL + '/datasets/' + dataSetID,
+    json: true,
+    formData: {
+      'api_key': apiKey,
+      'files[][title]': 'a file',
+      'files[][description]': 'some words',
+      'files[][file]': Fs.createReadStream(file),
+    }
+  }
+
+  request.put(opts, function(err, resp, body) {
+    displayResult(body)
+  })
+}
+
 var displayResult = function(dataset) {
   githubWindow.loadURL('file://' + __dirname + '/../comma-chameleon/views/github-success.html')
   githubWindow.webContents.on('dom-ready', function() {
@@ -65,7 +83,6 @@ var uploadToGithub = function(parentWindow, data, apiKey) {
   parentWindow.webContents.send('getCSV');
 
   ipc.once('sendCSV', function(e, csv) {
-    console.log(data)
     dataset = querystring.parse(data);
     file = writeData(csv, dataset.file_name);
     postData(dataset, file, apiKey);
@@ -105,22 +122,7 @@ var addFileToGithub = function() {
     parentWindow.webContents.send('getCSV');
 
     ipc.once('sendCSV', function(e, csv) {
-      file = writeData(csv);
-
-      var opts = {
-        url: rootURL + '/datasets/' + dataSetID,
-        json: true,
-        formData: {
-          'api_key': apiKey,
-          'files[][title]': 'a file',
-          'files[][description]': 'some words',
-          'files[][file]': Fs.createReadStream(file),
-        }
-      }
-
-      request.put(opts, function(err, resp, body) {
-        displayResult(body)
-      })
+      putData(csv, dataSetID)
     })
   })
 }
@@ -136,6 +138,7 @@ if (process.env.NODE_ENV === 'test') {
     checkForAPIKey: checkForAPIKey,
     writeData: writeData,
     postData: postData,
+    putData: putData,
     uploadToGithub: uploadToGithub,
     request: request
   }
