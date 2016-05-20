@@ -7,7 +7,9 @@
   {{/content}}
 
   {{#content "body"}}
-    <div class='alert alert-warning hidden' id='schema-error'>You're a git</div>
+    <div class="row hidden" id="schema-error">
+      <div class='alert alert-warning'>The data you are trying to add does not match the dataset's schema. Please edit your data try again</div>
+    </div>
     <form id="github">
       <div class="form-wrapper">
 
@@ -59,6 +61,7 @@
   });
 
   ipc.once('schemaError', function(event) {
+    $('#spinner').addClass('hidden')
     $('#schema-error').removeClass('hidden')
   })
 </script>
