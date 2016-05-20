@@ -7,7 +7,7 @@ var temp = require('temp');
 var request = require('request');
 var querystring = require('querystring');
 var escape = require('escape-regexp');
-var slugify = require('slugify');
+var slug = require('slug');
 
 var rootURL = 'https://octopub.io'
 
@@ -25,13 +25,12 @@ var checkForAPIKey = function(url) {
 }
 
 var writeData = function(csv, filename) {
-  path = '/tmp/'+ slugify(filename) + '.csv'
+  path = '/tmp/'+ slug(filename, {lower: true}) + '.csv'
   Fs.writeFileSync(path, csv, 'utf8');
   return path
 }
 
 var postData = function(dataset, file, apiKey) {
-  console.log(dataset)
   var opts = {
     url: rootURL + '/datasets',
     json: true,
