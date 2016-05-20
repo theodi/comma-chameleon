@@ -71,7 +71,28 @@ describe('github', function() {
       }
 
       expect(stub.calledWithMatch(opts)).to.eq(true)
+    })
+  })
 
+  describe('putData', function() {
+    it('puts data to the right place', function() {
+      csv = "foo,bar,baz"
+
+      opts = {
+        url: 'https://octopub.io/datasets/123',
+        json: true,
+        formData: {
+          'api_key': 'bogus-key',
+          'files[][title]': 'a file',
+          'files[][description]': 'some words',
+          'files[][file]': sinon.match.instanceOf(Fs.ReadStream),
+        }
+      }
+
+      stub = sinon.stub(github._private.request, 'put')
+      github._private.putData(csv, 123, "bogus-key")
+
+      expect(stub.calledWithMatch(opts)).to.eq(true)
     })
   })
 
