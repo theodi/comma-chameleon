@@ -2,14 +2,15 @@
 
   {{#content "head" mode="append"}}
   <link rel="stylesheet" href="../css/select-worksheet.css" />
-
   {{/content}}
 
   {{#content "body"}}
+  <form>
     <p><select id="worksheets" class="form-control"></select></p>
     <div class="well">
       <button id="submit" class="btn btn-default">Go</button> <button id="cancel" class="btn btn-default">Cancel</button>
     </div>
+  </form>
   {{/content}}
 
   {{#content "foot" mode="prepend"}}
