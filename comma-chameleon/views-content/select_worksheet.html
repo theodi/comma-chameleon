@@ -16,7 +16,6 @@
   {{#content "foot" mode="prepend"}}
   <script>
     ipc.on('loadSheets', function(e, sheets) {
-      console.log(sheets)
       worksheets = $('#worksheets')
       $.each(sheets, function( i, sheet ){
         worksheets.append($("<option></option>")
