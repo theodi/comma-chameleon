@@ -28,7 +28,7 @@ describe('github', function() {
       data = 'here,is,some,data'
       filename = 'My File Name'
       path = github._private.writeData(data, filename)
-      expect(path).to.eq('/tmp/my-file-name.csv')
+      expect(path).to.eq(require('os-tmpdir')() + '/my-file-name.csv')
       expect(Fs.readFileSync(path, 'utf8')).to.eq(data)
     })
   })

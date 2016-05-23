@@ -19,6 +19,7 @@
     "escape-regexp": "0.0.1",
     "mkdirp": "^0.5.1",
     "node-zip": "^1.1.1",
+    "os-tmpdir": "^1.0.1",
     "request": "^2.72.0",
     "slug": "^0.9.1",
     "temp": "^0.8.3",
