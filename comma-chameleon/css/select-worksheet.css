@@ -8,7 +8,7 @@ body, html {
   position: absolute;
   bottom: 0;
   width: 100%;
-  margin: 0;
+  margin: 0 0 0 -15px;
   text-align: right;
   border-radius: 0;
   border-bottom: 0;

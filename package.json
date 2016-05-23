@@ -4,11 +4,12 @@
   "license": "MIT",
   "main": "main.js",
   "scripts": {
-    "start": "node ./scripts/page-build.js && electron app",
-    "build": "node ./scripts/page-build.js",
-    "mocha-main": "electron-mocha app/test/main/",
-    "mocha-renderer": "electron-mocha --renderer --no-timeouts app/test/renderer/",
-    "mocha-all": "electron-mocha app/test/main/ && electron-mocha --renderer --no-timeouts app/test/renderer/"
+    "start": "node ./scripts/page-build.js && electron .",
+    "test": "electron-mocha test/main/ && electron-mocha --renderer --no-timeouts test/renderer/",
+    "test-main": "electron-mocha test/main/",
+    "test-renderer": "electron-mocha --renderer --no-timeouts test/renderer/",
+    "page-build": "node ./scripts/page-build.js",
+    "build": "./scripts/build"
   },
   "repository": {
     "type": "git",
@@ -18,6 +19,7 @@
     "escape-regexp": "0.0.1",
     "mkdirp": "^0.5.1",
     "node-zip": "^1.1.1",
+    "os-tmpdir": "^1.0.1",
     "request": "^2.72.0",
     "slug": "^0.9.1",
     "temp": "^0.8.3",
@@ -28,7 +30,7 @@
     "chai": "^3.2.0",
     "electron-debug": "^0.6.0",
     "electron-mocha": "^2.1.0",
-    "electron-prebuilt": "^0.37.6",
+    "electron-prebuilt": "^1.0.1",
     "sinon": "^1.17.3",
     "handlebars": "^4.0.5",
     "handlebars-layouts": "^3.1.3"

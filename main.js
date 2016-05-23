@@ -1,8 +1,11 @@
-global.app = require('app');  // Module to control application life.
-global.request = require('request');
-global.BrowserWindow = require('browser-window');  // Module to create native browser window.
-global.Menu = require('menu');
-global.Dialog = require('dialog');
+global.electron = require('electron')
+
+global.app = electron.app
+global.request = electron.request
+global.BrowserWindow = electron.BrowserWindow
+global.Menu = electron.Menu
+global.Dialog = electron.dialog;
+
 global.Fs = require('fs');
 global.XLSX = require('xlsx');
 global.ipc = require("electron").ipcMain;

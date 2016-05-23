@@ -1,9 +1,9 @@
 .DS_Store
 npm-debug.log
 debug.log
-app/bower_components/
+bower_components/
 node_modules/
 .idea/
 packages
 _site
-app/comma-chameleon/views
+comma-chameleon/views

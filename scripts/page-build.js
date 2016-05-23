@@ -5,13 +5,13 @@ let fs = require('fs');
 let path = require('path');
 let mkdirp = require('mkdirp');
 
-mkdirp.sync(path.join(__dirname, '../app/comma-chameleon/views'));
+mkdirp.sync(path.join(__dirname, '../comma-chameleon/views'));
 
-let input = path.join(__dirname, '../app/comma-chameleon/views-content');
+let input = path.join(__dirname, '../comma-chameleon/views-content');
 let pageFiles = fs.readdirSync(input);
-let output = path.join(__dirname, '../app/comma-chameleon/views');
+let output = path.join(__dirname, '../comma-chameleon/views');
 
-let layoutPath = path.join(__dirname, '../app/comma-chameleon/layouts/layout.hbs');
+let layoutPath = path.join(__dirname, '../comma-chameleon/layouts/layout.hbs');
 
 // Register helpers
 handlebars.registerHelper(layouts(handlebars));
@@ -22,7 +22,7 @@ handlebars.registerPartial('layout', fs.readFileSync(layoutPath, 'utf8'));
 function buildPages(files) {
   files.forEach((file) => {
 
-    let HTMLPath = path.join(__dirname, `../app/comma-chameleon/views-content/${file}`);
+    let HTMLPath = path.join(__dirname, `../comma-chameleon/views-content/${file}`);
 
     // Compile template
     let template = handlebars.compile(fs.readFileSync(HTMLPath, 'utf8'));
