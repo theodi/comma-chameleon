@@ -4,13 +4,30 @@ var exec = require('child_process').exec;
 var ipc = require("electron").ipcMain;
 var path = require('path')
 
-function validateFile() {
-  window = BrowserWindow.getFocusedWindow()
+function validateWithSchema() {
+  var window = BrowserWindow.getFocusedWindow()
+  Dialog.showOpenDialog(
+      { filters: [
+          { name: 'json schemas', extensions: ['json'] }
+      ]}, function (fileNames) {
+          if (fileNames === undefined) {
+              return;
+          } else {
+              var fileName = fileNames[0];
+              validateFile(fileName, window)
+          }
+      });
+}
+
+function validateFile(schema, window) {
+  if (window == undefined) {
+    window = BrowserWindow.getFocusedWindow()
+  }
   window.webContents.send('fetchData')
   window.webContents.send('validationStarted')
   ipc.on('dataSent', function(e, csv) {
     file = writeTmpFile(csv)
-    exec(csvlintPath() + file, function(error, stdout){
+    exec(csvlintPath(schema) + file, function(error, stdout){
       window.webContents.send('validationResults', stdout)
     });
   })
@@ -22,13 +39,19 @@ function writeTmpFile(csv) {
   return tmpPath
 }
 
-function csvlintPath() {
-  p = require('path').join(__dirname, '..', 'bin', 'csvlint')
+function csvlintPath(schema) {
+  if (schema === undefined) {
+    p = require('path').join(__dirname, '..', 'bin', 'csvlint')
+  } else {
+    p = require('path').join(__dirname, '..', 'bin', 'csvlint')
+    p += ' --schema=' + schema
+  }
   return p + ' --json '
 }
 
 module.exports = {
-  validateFile
+  validateFile,
+  validateWithSchema
 };
 
 if (process.env.NODE_ENV === 'test') {

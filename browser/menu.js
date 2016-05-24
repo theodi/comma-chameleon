@@ -146,6 +146,10 @@ exports.menu = [
         click: function() { validate.validateFile(); }
       },
       {
+        label: 'Validate with schema',
+        click: function() { validate.validateWithSchema(); }
+      },
+      {
         label: 'Fix Ragged Rows',
         click: function() { tools.fixRaggedRowsFile(); }
       },
