@@ -33,4 +33,10 @@ function buildPages(files) {
   });
 }
 
-buildPages(pageFiles);
+function start() {
+  buildPages(pageFiles);
+}
+
+module.exports = {
+  start
+};
