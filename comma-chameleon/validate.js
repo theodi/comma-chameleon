@@ -9,45 +9,19 @@ var colors = {
   info: 'rgba(99, 149, 215, 0.6)'
 };
 
-var validation = function(data) {
+var showLoader = function() {
   $('#right-panel').removeClass("hidden")
   $('#message-panel').html("<div class=\"validation-load\"><p><span class=\"glyphicon glyphicon-refresh spinning\"></span></p><p>Loading validation results...</p></div>");
-  getValidation(data).then(function(json_validation) {
-    displayValidationMessages(json_validation.validation);
-    highlightCells();
-  });
 }
 
-var getValidation = function(content) {
-  var request = require('request');
-  content = new Buffer(content).toString("base64");
-  content = "editor.csv;data:text/csv;base64," + content;
-  return new Promise(function(resolve, reject) {
-    request.post("http://csvlint.io/package.json", { formData: {"files_data[]": content } }, function(error, response, body) {
-
-      if (error) return reject(error);
-
-      var packageURL = JSON.parse(response.body).package.url;
-      var interval = setInterval(function() {
-        request.get(packageURL + ".json", function(error, response, body) {
-          try {
-            var validationURL = JSON.parse(body).package.validations[0].url;
-            clearInterval(interval);
-            request.get(validationURL + ".json", function(error, response, body) {
-              if (error) return reject(error);
-              resolve(JSON.parse(body));
-            });
-          } catch(e) {}
-        });
-      }, 1000);
-
-    });
-  });
+var displayResults = function(results) {
+  displayValidationMessages(JSON.parse(results).validation);
+  highlightCells();
 }
 
 var displayValidationMessages = function(validation) {
   var $messagePanel = $('#message-panel');
-  $messagePanel.html("<h4>Validation results <img src='" + validation.badges.png  +"' /></h4>");
+  $messagePanel.html("<h4>Validation results <img src='../img/"+ validation.state +".svg' /></h4>");
   var resultsTemplate = _.template('<p><%= validation.errors.length %> errors, <%= validation.warnings.length %> warnings and <%= Math.max(0, validation.info.length - 1) %> info messages. Click on an error message to see where the error occurred:</p>')
   $messagePanel.append(resultsTemplate({'validation': validation}));
   var printErrs = validation.errors[0];
@@ -150,7 +124,8 @@ $('button[data-dismiss=alert]').click(function() {
 })
 
 module.exports = {
-  validate: validation,
+  showLoader,
+  displayResults
 }
 
 if (process.env.NODE_ENV === 'test') {
@@ -159,7 +134,6 @@ if (process.env.NODE_ENV === 'test') {
     clearHighlights,
     scrollToCell,
     displayValidationMessages,
-    getValidation,
     numToCol
   }
 }
