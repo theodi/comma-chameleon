@@ -4,7 +4,7 @@ let exec = require('child_process').exec;
 let path = require('path');
 var pageBuild = require('./page-build')
 
-let csvlintVersion = '0.3.1'
+let csvlintVersion = '0.3.2'
 let electronVersion = '1.0.1'
 
 let platforms = {

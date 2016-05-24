@@ -86,18 +86,19 @@ var bgColorRenderer = function(color) {
   }
 }
 
-var messageTemplate = _.template('<div><h5><%= errorText(type) %></h5><p><%= errorGuidance(type, row, col) %></p></div>', {
+var messageTemplate = _.template('<div><h5><%= errorText(data) %></h5><p><%= errorGuidance(data) %></p></div>', {
   imports: {
-    errorText: function(error) {
-      return validationNotes.errors[error]
+    errorText: function(data) {
+      return validationNotes.errors[data.type]
     },
-    errorGuidance: function(error, row, column) {
-      var guidance = validationNotes.errors[error + '_guidance_html']
+    errorGuidance: function(data) {
+      var guidance = validationNotes.errors[data.type + '_guidance_html']
       var guidance_template = _.template(guidance)
-      return guidance_template({row: row, column: numToCol(column)})
+      return guidance_template(data)
     },
     numToCol: numToCol
-  }
+  },
+  variable: 'data'
 });
 
 var numToCol = function(number){

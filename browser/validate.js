@@ -40,10 +40,8 @@ function writeTmpFile(csv) {
 }
 
 function csvlintPath(schema) {
-  if (schema === undefined) {
-    p = require('path').join(__dirname, '..', 'bin', 'csvlint')
-  } else {
-    p = require('path').join(__dirname, '..', 'bin', 'csvlint')
+  p = require('path').join(__dirname, '..', 'bin', 'csvlint')
+  if (schema !== undefined) {
     p += ' --schema=' + schema
   }
   return p + ' --json '
