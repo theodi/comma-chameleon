@@ -54,7 +54,7 @@ exports.menu = [
       {
         label: 'Open..',
         accelerator: 'CmdOrCtrl+O',
-        click: function() { file.openFile(); }
+        click: function() { fileActions.openFile(); }
       },
       {
         label: 'Import Excel file',
@@ -67,14 +67,14 @@ exports.menu = [
       {
         label: 'Save',
         accelerator: 'CmdOrCtrl+S',
-        click: function() { file.saveFile(); },
+        click: function() { fileActions.saveFile(); },
         enabled: false,
         id: 'save'
       },
       {
         label: 'Save As..',
         accelerator: 'Shift+CmdOrCtrl+S',
-        click: function() { file.saveFileAs(); }
+        click: function() { fileActions.saveFileAs(); }
       },
       {
         label: 'Export as Datapackage',

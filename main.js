@@ -15,7 +15,7 @@ global.datapackage = require('./browser/datapackage');
 global.github = require('./browser/github');
 global.schema = require('./browser/schema')
 global.excel = require('./browser/excel')
-global.file = require('./browser/file')
+global.fileActions = require('./browser/file')
 global.tools = require('./browser/tools')
 
 require('electron-debug')({showDevTools: true})
