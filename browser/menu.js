@@ -143,7 +143,7 @@ exports.menu = [
       {
         label: 'Validate',
         accelerator: 'Shift+CmdOrCtrl+V',
-        click: function() { tools.validateFile(); }
+        click: function() { validate.validateFile(); }
       },
       {
         label: 'Fix Ragged Rows',

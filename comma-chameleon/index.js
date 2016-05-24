@@ -87,3 +87,10 @@ ipc.on('ragged_rows', function() {
   console.log(typeof csv);
   rows.fixRaggedRows(csv);
 });
+
+ipc.on('fetchData', function() {
+  console.log('recieving')
+  csv = $.csv.fromArrays(hot.getData());
+  console.log(csv)
+  ipc.send('dataSent', csv)
+})
