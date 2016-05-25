@@ -25,6 +25,8 @@ Then to open the app run:
 npm start
 ```
 
+This will download the non-js dependencies (namely [CSVlint.sh](https://github.com/theodi/csvlint.sh)), build the [handlebars](http://handlebarsjs.com/) views (from `comma-chameleon/views-content`) and start the app.
+
 ## Testing
 
 [Electron-Mocha](https://github.com/jprichardson/electron-mocha) has been adopted for testing, it enables both DOM and node.js testing and provides command line options to enable testing of both.
@@ -56,5 +58,7 @@ electron-mocha --renderer test/renderer/ # run tests that execute client side
 ```
 brew install wine # This allows us to specify the icon for Windows pacakges
 npm i electron-packager -g
-script/build
+gulp build
 ```
+
+You can also build a package for a specific platform by running `gulp build --platform={one of 'linux', 'darwin' or 'win32'}`.

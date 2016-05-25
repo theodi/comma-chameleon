@@ -1,8 +1,3 @@
-function validateFile() {
-  window = BrowserWindow.getFocusedWindow();
-  window.webContents.send('validate');
-}
-
 function generateSchemaFromHeader() {
   window = BrowserWindow.getFocusedWindow();
   window.webContents.send('schemaFromHeaders');
@@ -14,7 +9,6 @@ function fixRaggedRowsFile() {
 }
 
 module.exports = {
-  validateFile,
   generateSchemaFromHeader,
   fixRaggedRowsFile
 };

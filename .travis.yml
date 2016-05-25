@@ -10,8 +10,9 @@ script:
 - npm test
 before_deploy:
 - sudo apt-get install wine
+- npm install -g gulp
 - npm install electron-packager@7.0.0 -g
-- scripts/build
+- gulp build
 deploy:
   provider: releases
   skip_cleanup: true

@@ -9,64 +9,34 @@ var colors = {
   info: 'rgba(99, 149, 215, 0.6)'
 };
 
-var validation = function(data) {
+var showLoader = function() {
   $('#right-panel').removeClass("hidden")
   $('#message-panel').html("<div class=\"validation-load\"><p><span class=\"glyphicon glyphicon-refresh spinning\"></span></p><p>Loading validation results...</p></div>");
-  getValidation(data).then(function(json_validation) {
-    displayValidationMessages(json_validation.validation);
-    highlightCells();
-  });
 }
 
-var getValidation = function(content) {
-  var request = require('request');
-  content = new Buffer(content).toString("base64");
-  content = "editor.csv;data:text/csv;base64," + content;
-  return new Promise(function(resolve, reject) {
-    request.post("http://csvlint.io/package.json", { formData: {"files_data[]": content } }, function(error, response, body) {
-
-      if (error) return reject(error);
-
-      var packageURL = JSON.parse(response.body).package.url;
-      var interval = setInterval(function() {
-        request.get(packageURL + ".json", function(error, response, body) {
-          try {
-            var validationURL = JSON.parse(body).package.validations[0].url;
-            clearInterval(interval);
-            request.get(validationURL + ".json", function(error, response, body) {
-              if (error) return reject(error);
-              resolve(JSON.parse(body));
-            });
-          } catch(e) {}
-        });
-      }, 1000);
-
-    });
-  });
+var displayResults = function(results) {
+  displayValidationMessages(JSON.parse(results).validation);
+  highlightCells();
 }
 
 var displayValidationMessages = function(validation) {
   var $messagePanel = $('#message-panel');
-  $messagePanel.html("<h4>Validation results <img src='" + validation.badges.png  +"' /></h4>");
-  var resultsTemplate = _.template('<p><%= validation.errors.length %> errors, <%= validation.warnings.length %> warnings and <%= Math.max(0, validation.info.length - 1) %> info messages. Click on an error message to see where the error occurred:</p>')
-  $messagePanel.append(resultsTemplate({'validation': validation}));
-  var printErrs = validation.errors[0];
+  $messagePanel.html("<h4>Validation results <img src='../img/"+ validation.state +".svg' /></h4>");
+  var resultsTemplate = _.template('<p><%= validation.errors.length %> errors and <%= validation.warnings.length %> warnings. Click on an error message to see where the error occurred:</p>')
   var messages = _.flatten([
     _.map(validation.errors,   function(d) { return _.extend({}, d, { msg_type: 'error' }) }),
     _.map(validation.warnings, function(d) { return _.extend({}, d, { msg_type: 'warning' }) }),
-    _.map(validation.info,     function(d) { return _.extend({}, d, { msg_type: 'info' }) })
   ]);
-  if (messages.length) {
+  if (messages.length > 0) {
+    $messagePanel.append(resultsTemplate({'validation': validation}));
     var elements = _.map(messages, function(message) {
-      // Assumed header doesn't make sense in this context, so remove it
-      if (message.type == 'assumed_header') { return; }
       return $(messageTemplate(message)).data(message)
         .addClass('message')
         .addClass('validation-' + message.msg_type);
     });
     $messagePanel.append(elements);
   } else {
-    $messagePanel.append('<p>CSV Valid!</p>');
+    $messagePanel.append('<p>Congratulations! Your CSV appears to be valid.</p>');
   }
 }
 
@@ -83,8 +53,14 @@ var highlightCell = function(d) {
   hot.updateSettings({
     // set the new renderer for every cell
     cells: function (row, col, prop) {
-      if (row === d.row - 1 || col === d.col - 1) {
-      return { renderer: bgColorRenderer(colors[d.msg_type]) };
+      if (d.row && d.col) {
+        if (row === d.row - 1 && col === d.col - 1) {
+          return { renderer: bgColorRenderer(colors[d.msg_type]) };
+        }
+      } else {
+        if (row === d.row - 1 || col === d.col - 1) {
+          return { renderer: bgColorRenderer(colors[d.msg_type]) };
+        }
       }
       return {};
     }
@@ -112,18 +88,20 @@ var bgColorRenderer = function(color) {
   }
 }
 
-var messageTemplate = _.template('<div><h5><%= errorText(type) %></h5><p><%= errorGuidance(type, row, col) %></p></div>', {
+var messageTemplate = _.template('<div><h5><%= errorText(data) %></h5><p><%= errorGuidance(data) %></p></div>', {
   imports: {
-    errorText: function(error) {
-      return validationNotes.errors[error]
+    errorText: function(data) {
+      return validationNotes.errors[data.type]
     },
-    errorGuidance: function(error, row, column) {
-      var guidance = validationNotes.errors[error + '_guidance_html']
+    errorGuidance: function(data) {
+      var guidance = validationNotes.errors[data.type + '_guidance_html']
       var guidance_template = _.template(guidance)
-      return guidance_template({row: row, column: numToCol(column)})
+      data.column = numToCol(data.col)
+      return guidance_template(data)
     },
     numToCol: numToCol
-  }
+  },
+  variable: 'data'
 });
 
 var numToCol = function(number){
@@ -150,7 +128,8 @@ $('button[data-dismiss=alert]').click(function() {
 })
 
 module.exports = {
-  validate: validation,
+  showLoader,
+  displayResults
 }
 
 if (process.env.NODE_ENV === 'test') {
@@ -159,7 +138,6 @@ if (process.env.NODE_ENV === 'test') {
     clearHighlights,
     scrollToCell,
     displayValidationMessages,
-    getValidation,
     numToCol
   }
 }

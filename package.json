@@ -4,12 +4,10 @@
   "license": "MIT",
   "main": "main.js",
   "scripts": {
-    "start": "node ./scripts/page-build.js && electron .",
+    "start": "gulp prebuild && electron .",
     "test": "electron-mocha test/main/ && electron-mocha --renderer --no-timeouts test/renderer/",
     "test-main": "electron-mocha test/main/",
-    "test-renderer": "electron-mocha --renderer --no-timeouts test/renderer/",
-    "page-build": "node ./scripts/page-build.js",
-    "build": "./scripts/build"
+    "test-renderer": "electron-mocha --renderer --no-timeouts test/renderer/"
   },
   "repository": {
     "type": "git",
@@ -26,13 +24,15 @@
     "xlsx": "^0.8.0"
   },
   "devDependencies": {
-    "pryjs": "^1.0.2",
     "chai": "^3.2.0",
     "electron-debug": "^0.6.0",
     "electron-mocha": "^2.1.0",
     "electron-prebuilt": "^1.0.1",
-    "sinon": "^1.17.3",
+    "gulp": "^3.9.1",
     "handlebars": "^4.0.5",
-    "handlebars-layouts": "^3.1.3"
+    "handlebars-layouts": "^3.1.3",
+    "pryjs": "^1.0.2",
+    "sinon": "^1.17.3",
+    "yargs": "^4.7.1"
   }
 }

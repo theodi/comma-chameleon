@@ -17,6 +17,7 @@ global.schema = require('./browser/schema')
 global.excel = require('./browser/excel')
 global.fileActions = require('./browser/file')
 global.tools = require('./browser/tools')
+global.validate = require('./browser/validate')
 
 require('electron-debug')({showDevTools: true})
 /*require('crash-reporter').start(
