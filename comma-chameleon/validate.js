@@ -57,8 +57,14 @@ var highlightCell = function(d) {
   hot.updateSettings({
     // set the new renderer for every cell
     cells: function (row, col, prop) {
-      if (row === d.row - 1 || col === d.col - 1) {
-      return { renderer: bgColorRenderer(colors[d.msg_type]) };
+      if (d.row && d.col) {
+        if (row === d.row - 1 && col === d.col - 1) {
+          return { renderer: bgColorRenderer(colors[d.msg_type]) };
+        }
+      } else {
+        if (row === d.row - 1 || col === d.col - 1) {
+          return { renderer: bgColorRenderer(colors[d.msg_type]) };
+        }
       }
       return {};
     }
