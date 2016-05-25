@@ -49,6 +49,10 @@ exports.menu = [
         click: function() { utils.createWindow(); }
       },
       {
+        label: 'New from Schema...',
+        click: function() { schema.generateTemplate(); }
+      },
+      {
         type: 'separator'
       },
       {
@@ -141,21 +145,8 @@ exports.menu = [
     label: 'Tools',
     submenu: [
       {
-        label: 'Validate',
-        accelerator: 'Shift+CmdOrCtrl+V',
-        click: function() { validate.validateFile(); }
-      },
-      {
-        label: 'Validate with schema',
-        click: function() { validate.validateWithSchema(); }
-      },
-      {
         label: 'Fix Ragged Rows',
         click: function() { tools.fixRaggedRowsFile(); }
-      },
-      {
-        label: 'Generate template from Schema...',
-        click: function() { schema.generateTemplate(); }
       },
       {
         label: 'Toggle DevTools',
@@ -165,7 +156,19 @@ exports.menu = [
       {
         label: 'Generate Header',
         click: function(){ tools.generateSchemaFromHeader(); }
-      }
+      },
+      {
+        type: 'separator'
+      },
+      {
+        label: 'Validate',
+        accelerator: 'Shift+CmdOrCtrl+V',
+        click: function() { validate.validateFile(); }
+      },
+      {
+        label: 'Validate with schema',
+        click: function() { validate.validateWithSchema(); }
+      },
     ]
   },
 
