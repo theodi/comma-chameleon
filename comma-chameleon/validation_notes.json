@@ -14,8 +14,6 @@
     "invalid_encoding_guidance_html": "Your CSV appears to be encoded in <code><%= encoding %></code>, but invalid characters were found.This can often be caused by copying and pasting data from a different source.",
     "line_breaks": "Inconsistent Line Breaks",
     "line_breaks_guidance_html": "Your CSV has inconsistent line breaks (or your schema specified one line break style and the file uses another). You should make sure all line breaks arein the same form (i.e. CR-LF, or just LF). We recommend using CR-LF for maximum compatibility.",
-    "nonrfc_line_breaks": "Non-standard Line Breaks",
-    "nonrfc_line_breaks_guidance_html": "Your CSV appears to use <code><%= linebreak %></code> line-breaks. While this will be fine in most cases, <a href=\"http://tools.ietf.org/html/rfc4180\">RFC 4180</a> specifies that CSV files should use <code>CR-LF</code> (a carriage-return and line-feed pair, e.g. <code>\\r\\n</code>). This may be labelled as \"Windows line endings\" on some systems.",
     "no_content_type": "no content type",
     "no_content_type_guidance_html": "Your CSV file is being delivered without a <code>Content-Type</code> header.<br>We recommend that you configure your server to deliver CSV files with a <code>Content-Type</code> header of <code>text/csv; charset=utf-8</code>",
     "no_encoding": "No encoding",

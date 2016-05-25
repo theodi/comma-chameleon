@@ -49,9 +49,9 @@ describe("displayValidationMessages", function() {
       validate._private.displayValidationMessages(validation)
       expect($('#message-panel').html()).to.have.string('Validation result')
       expect($('#message-panel img').attr('src')).to.equal('../img/warnings.svg')
-      expect($('#message-panel p').html()).to.have.string('0 errors, 2 warnings and 0 info messages')
-      expect($('#message-panel div:eq(0)').html()).to.have.string('<h5>Inconsistent value</h5><p>The data in column M is inconsistent with others values in the same column.\n</p>')
-      expect($('#message-panel div:eq(1)').html()).to.have.string('<h5>Inconsistent value</h5><p>The data in column W is inconsistent with others values in the same column.\n</p>')
+      expect($('#message-panel p').html()).to.have.string('0 errors and 2 warnings')
+      expect($('#message-panel div:eq(0)').html()).to.have.string('<h5>Inconsistent value</h5><p>The data in column M is inconsistent with others values in the same column.</p>')
+      expect($('#message-panel div:eq(1)').html()).to.have.string('<h5>Inconsistent value</h5><p>The data in column W is inconsistent with others values in the same column.</p>')
     })
 
     it('should display a message is the CSV is valid', function() {
@@ -59,13 +59,13 @@ describe("displayValidationMessages", function() {
       validation.errors = []
       validation.info = []
       validate._private.displayValidationMessages(validation)
-      expect($('#message-panel').html()).to.have.string('CSV Valid!')
+      expect($('#message-panel').html()).to.have.string('Congratulations! Your CSV appears to be valid.')
     })
 
     it('does not display minus info messages', function() {
       validation.info = []
       validate._private.displayValidationMessages(validation)
-      expect($('#message-panel p').html()).to.have.string('0 errors, 2 warnings and 0 info messages')
+      expect($('#message-panel p').html()).to.have.string('0 errors and 2 warnings')
     })
 
 })
