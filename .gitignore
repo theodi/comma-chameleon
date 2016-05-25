@@ -3,3 +3,8 @@ _site
 .jekyll-metadata
 app
 node_modules
+bin
+bower_components
+comma-chameleon
+npm
+packages
