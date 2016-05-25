@@ -25,7 +25,7 @@ function validateFile(schema, window) {
   }
   window.webContents.send('fetchData')
   window.webContents.send('validationStarted')
-  ipc.on('dataSent', function(e, csv) {
+  ipc.once('dataSent', function(e, csv) {
     file = writeTmpFile(csv)
     exec(csvlintPath(schema) + file, function(error, stdout){
       window.webContents.send('validationResults', stdout)
