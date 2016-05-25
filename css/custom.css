@@ -122,3 +122,20 @@ sixteen.colgrid .row .pull_eight.twelve.columns {
 #odi-logo {
   margin: 5px 0;
 }
+
+#features img {
+}
+
+.feature {
+  margin: 40px auto;
+}
+
+.featureimg {
+  float: right;
+  width: 300px;
+  text-align: center;
+  margin-left: 40px;
+}
+
+.featureimg img {
+}
