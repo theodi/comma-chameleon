@@ -1,5 +1,6 @@
 [![Stories in Ready](https://badge.waffle.io/theodi/edward-csvhands.svg?label=ready&title=Ready)](http://waffle.io/theodi/edward-csvhands)
 [![Build Status](https://travis-ci.org/theodi/comma-chameleon.svg?branch=master)](https://travis-ci.org/theodi/comma-chameleon)
+[![Dependency Status](https://dependencyci.com/github/theodi/comma-chameleon/badge)](https://dependencyci.com/github/theodi/comma-chameleon)
 
 # Comma Chameleon
 
@@ -9,7 +10,7 @@ A desktop CSV editor with validation magic - Built with electron.js
 
 Choose a platform from the [Releases page](https://github.com/theodi/comma-chameleon/releases/latest)
 
-##Development setup
+## Development setup
 
 you can use npm to install all relevant packages using the following set of commands
 ```
