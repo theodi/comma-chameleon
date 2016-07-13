@@ -6,7 +6,7 @@ process.env.NODE_ENV = 'test' // this variable is set to permit access to the pa
 var assert = require('chai').assert;
 var expect = require('chai').expect;
 var should = require('chai').should();
-var datapackage = require('./../../browser/datapackage')
+var datapackage = require('./../../main/datapackage')
 
 describe("methods access for datapackage object", function(){
   //console.log(JSON.stringify(process.env));

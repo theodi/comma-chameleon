@@ -21,7 +21,7 @@ var displayResults = function(results) {
 
 var displayValidationMessages = function(validation) {
   var $messagePanel = $('#message-panel');
-  $messagePanel.html("<h4>Validation results <img src='../img/"+ validation.state +".svg' /></h4>");
+  $messagePanel.html("<h4>Validation results <img src='../assets/img/"+ validation.state +".svg' /></h4>");
   var resultsTemplate = _.template('<p><%= validation.errors.length %> errors and <%= validation.warnings.length %> warnings. Click on an error message to see where the error occurred:</p>')
   var messages = _.flatten([
     _.map(validation.errors,   function(d) { return _.extend({}, d, { msg_type: 'error' }) }),

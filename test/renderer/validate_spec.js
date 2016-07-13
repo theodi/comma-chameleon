@@ -6,7 +6,7 @@ var assert = chai.assert
 var expect = chai.expect
 var should = chai.should();
 
-var validate = require('./../../comma-chameleon/validate');
+var validate = require('./../../renderer/validate');
 var $ = require('./../../bower_components/jquery/dist/jquery.js');
 
 before(function(){
@@ -48,7 +48,7 @@ describe("displayValidationMessages", function() {
     it('should display validation results', function() {
       validate._private.displayValidationMessages(validation)
       expect($('#message-panel').html()).to.have.string('Validation result')
-      expect($('#message-panel img').attr('src')).to.equal('../img/warnings.svg')
+      expect($('#message-panel img').attr('src')).to.equal('../assets/img/warnings.svg')
       expect($('#message-panel p').html()).to.have.string('0 errors and 2 warnings')
       expect($('#message-panel div:eq(0)').html()).to.have.string('<h5>Inconsistent value</h5><p>The data in column M is inconsistent with others values in the same column.</p>')
       expect($('#message-panel div:eq(1)').html()).to.have.string('<h5>Inconsistent value</h5><p>The data in column W is inconsistent with others values in the same column.</p>')

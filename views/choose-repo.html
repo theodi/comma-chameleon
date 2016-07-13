@@ -1,12 +1,17 @@
-{{#extend "layout" pageTitle="Choose repo to export to" containerClass="container-fluid"}}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Choose repo to export to</title>
+    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../bower_components/components-font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="../assets/css/default.css" />
 
-  {{#content "head" mode="append"}}
-    <link rel="stylesheet" href="../../bower_components/components-font-awesome/css/font-awesome.min.css" />
-    <link rel="stylesheet" href="../../bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.css" />
-    <link rel="stylesheet" href="../css/datapackage.css" />
-  {{/content}}
-
-  {{#content "body"}}
+    <link rel="stylesheet" href="../bower_components/components-font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="../bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.css" />
+    <link rel="stylesheet" href="../assets/css/datapackage.css" />
+  </head>
+  <body>
+    <div id="container" class="container-fluid">
     <div class="row hidden" id="schema-error">
       <div class='alert alert-warning'>The data you are trying to add does not match the dataset's schema. Please edit your data try again</div>
     </div>
@@ -37,9 +42,14 @@
         <button id="cancel" class="btn btn-default">Cancel</button>
       </div>
     </form>
-  {{/content}}
-
-{{#content "foot" mode="prepend"}}
+    </div>
+  </body>
+  <script>
+    window.$ = window.jQuery = require('../bower_components/jquery/dist/jquery.js');
+    const {shell} = require('electron');
+    var ipc = require("electron").ipcRenderer;
+  </script>
+  <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script>
   ipc.once('apiKey', function(event, key) {
     var key = key
@@ -65,6 +75,4 @@
     $('#schema-error').removeClass('hidden')
   })
 </script>
-{{/content}}
-
-{{/extend}}
+</html>

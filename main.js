@@ -10,14 +10,14 @@ global.Fs = require('fs');
 global.XLSX = require('xlsx');
 global.ipc = require("electron").ipcMain;
 
-global.utils = require('./browser/utils');
-global.datapackage = require('./browser/datapackage');
-global.github = require('./browser/github');
-global.schema = require('./browser/schema')
-global.excel = require('./browser/excel')
-global.fileActions = require('./browser/file')
-global.tools = require('./browser/tools')
-global.validate = require('./browser/validate')
+global.utils = require('./main/utils');
+global.datapackage = require('./main/datapackage');
+global.github = require('./main/github');
+global.schema = require('./main/schema')
+global.excel = require('./main/excel')
+global.fileActions = require('./main/file')
+global.tools = require('./main/tools')
+global.validate = require('./main/validate')
 
 require('electron-debug')({showDevTools: true})
 /*require('crash-reporter').start(
@@ -26,7 +26,7 @@ require('electron-debug')({showDevTools: true})
   }
 );*/
 
-var template = require('./browser/menu').menu
+var template = require('./main/menu').menu
 var mainWindow = null;
 
 app.on('window-all-closed', function() {

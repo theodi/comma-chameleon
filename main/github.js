@@ -16,7 +16,7 @@ var tmpdir = require('os-tmpdir')();
 var rootURL = 'https://octopub.io'
 
 var loadWindow = function(githubWindow, apiKey, viewName) {
-  githubWindow.loadURL('file://' + __dirname + '/../comma-chameleon/views/' + viewName + '.html')
+  githubWindow.loadURL('file://' + __dirname + '/../views/' + viewName + '.html')
   githubWindow.webContents.on('dom-ready', function() {
     githubWindow.webContents.send('apiKey', apiKey)
   })
@@ -79,7 +79,7 @@ var putData = function(dataset, file, apiKey) {
 }
 
 var displayResult = function(dataset) {
-  githubWindow.loadURL('file://' + __dirname + '/../comma-chameleon/views/github-success.html')
+  githubWindow.loadURL('file://' + __dirname + '/../views/github-success.html')
   githubWindow.webContents.on('dom-ready', function() {
     githubWindow.webContents.send('ghPagesUrl', dataset.gh_pages_url)
   })

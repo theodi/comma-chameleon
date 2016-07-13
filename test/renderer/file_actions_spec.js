@@ -7,9 +7,9 @@ var expect = chai.expect
 var should = chai.should();
 
 var $ = require('./../../bower_components/jquery/dist/jquery.js');
-var hotController = require('../../comma-chameleon/hot.js');
-var rows = require('./../../comma-chameleon/ragged-rows');
-var file_actions = require('./../../comma-chameleon/file-actions');
+var hotController = require('../../renderer/hot.js');
+var rows = require('./../../renderer/ragged-rows');
+var file_actions = require('./../../renderer/file-actions');
 var fs = require('fs');
 
 beforeEach(function () {
