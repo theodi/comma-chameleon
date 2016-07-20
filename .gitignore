@@ -8,3 +8,6 @@ packages
 _site
 comma-chameleon/views
 bin
+views/*.html
+!views/views-content/*.html
+!views/layouts/*.html

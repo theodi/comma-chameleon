@@ -7,7 +7,7 @@ var sinon = require('sinon')
 
 require('../../main')
 
-var schema = require('../../browser/schema')
+var schema = require('../../main/schema')
 
 describe("methods access for datapackage object", function(){
   it('can successfully import an exported function and access private methods', function(){

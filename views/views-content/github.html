@@ -1,9 +1,9 @@
 {{#extend "layout" pageTitle="Export to Github" containerClass="container-fluid"}}
 
   {{#content "head" mode="append"}}
-    <link rel="stylesheet" href="../../bower_components/components-font-awesome/css/font-awesome.min.css" />
-    <link rel="stylesheet" href="../../bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.css" />
-    <link rel="stylesheet" href="../css/datapackage.css" />
+    <link rel="stylesheet" href="../bower_components/components-font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="../bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.css" />
+    <link rel="stylesheet" href="../assets/css/datapackage.css" />
   {{/content}}
 
   {{#content "body"}}
@@ -88,7 +88,7 @@
   {{/content}}
 
   {{#content "foot" mode="prepend"}}
-    <script src="../../bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"></script>
+    <script src="../bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"></script>
     <script>
       ipc.once('apiKey', function(event, key) {
         var key = key

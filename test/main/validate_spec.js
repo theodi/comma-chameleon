@@ -6,7 +6,7 @@ var should = require('chai').should();
 var sinon = require('sinon');
 
 require('../../main')
-var validate = require('./../../browser/validate');
+var validate = require('./../../main/validate');
 
 var Fs = require('fs');
 

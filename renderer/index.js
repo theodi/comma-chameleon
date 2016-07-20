@@ -1,11 +1,11 @@
 var ipc = require('electron').ipcRenderer;
 var fs = require('fs');
 
-var hotController = require('../hot.js');
-var schemawizard = require('../schemawizard.js');
-var rows = require('../ragged-rows');
-var validation = require('../validate');
-var file = require('../file-actions');
+var hotController = require('../renderer/hot.js');
+var schemawizard = require('../renderer/schemawizard.js');
+var rows = require('../renderer/ragged-rows.js');
+var validation = require('../renderer/validate.js');
+var file = require('../renderer/file-actions.js');
 
 var container = document.getElementById("editor");
 var hot = hotController.create(container);

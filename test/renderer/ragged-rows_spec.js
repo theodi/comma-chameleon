@@ -7,8 +7,8 @@ var assert = require('chai').assert
 var expect = require('chai').expect
 var should = require('chai').should();
 
-var hotController = require('./../../comma-chameleon/hot.js');
-var raggedRows = require('./../../comma-chameleon/ragged-rows.js');
+var hotController = require('./../../renderer/hot.js');
+var raggedRows = require('./../../renderer/ragged-rows.js');
 var $ = require('./../../bower_components/jquery/dist/jquery.js');
 
 before(function(){
