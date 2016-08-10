@@ -43,21 +43,27 @@
 <script>
   ipc.once('apiKey', function(event, key) {
     var key = key
-    $.get('https://octopub.io/dashboard.json?api_key='+ key, function(data) {
-      select = $('#dataset')
-      $.each(data.datasets, function(i, repo) {
-        select.append($("<option></option>")
-                    .attr("value",repo.id)
-                    .text(repo.name));
-      })
 
-      $("#submit").click(function(e) {
-        e.preventDefault();
-        $("#spinner").removeClass('hidden');
-        github = $('#github').find(':input').serialize();
-        ipc.send('addFileToExisting', github, key);
-      })
-    })
+    $.ajax({
+         url: "https://octopub.io/api/user/datasets.json",
+         type: "GET",
+         beforeSend: function(xhr){xhr.setRequestHeader('Authorization', key);},
+         success: function(data) {
+           select = $('#dataset')
+           $.each(data, function(i, repo) {
+             select.append($("<option></option>")
+                         .attr("value",repo.id)
+                         .text(repo.name));
+           })
+
+           $("#submit").click(function(e) {
+             e.preventDefault();
+             $("#spinner").removeClass('hidden');
+             github = $('#github').find(':input').serialize();
+             ipc.send('addFileToExisting', github, key);
+           })
+         }
+      });
   });
 
   ipc.once('schemaError', function(event) {

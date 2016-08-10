@@ -36,53 +36,83 @@ var writeData = function(csv, filename) {
 
 var postData = function(dataset, file, apiKey) {
   var opts = {
-    url: rootURL + '/datasets',
+    url: rootURL + '/api/datasets',
     json: true,
+    headers: {
+      'Authorization': apiKey
+    },
     formData: {
-      'api_key': apiKey,
       'dataset[name]': dataset.name,
       'dataset[description]': dataset.description,
       'dataset[publisher_name]': dataset['publisher_name'],
       'dataset[publisher_url]': dataset['publisher_url'],
       'dataset[license]': dataset.license,
       'dataset[frequency]': dataset.frequency,
-      'files[][title]': dataset.file_name,
-      'files[][description]': dataset.file_description,
-      'files[][file]': Fs.createReadStream(file),
+      'file[title]': dataset.file_name,
+      'file[description]': dataset.file_description,
+      'file[file]': Fs.createReadStream(file),
     }
   }
 
   request.post(opts, function(err, resp, body) {
-    displayResult(body)
+    displayResult(body, apiKey)
   })
 }
 
 var putData = function(dataset, file, apiKey) {
   var opts = {
-    url: rootURL + '/datasets/' + dataset.dataset,
+    url: rootURL + '/api/datasets/' + dataset.dataset + '/files',
     json: true,
+    headers: {
+      'Authorization': apiKey
+    },
     formData: {
-      'api_key': apiKey,
-      'files[][title]': dataset.file_name,
-      'files[][description]': dataset.file_description,
-      'files[][file]': Fs.createReadStream(file),
+      'file[title]': dataset.file_name,
+      'file[description]': dataset.file_description,
+      'file[file]': Fs.createReadStream(file),
     }
   }
 
-  request.put(opts, function(err, resp, body) {
+  request.post(opts, function(err, resp, body) {
     if (resp.statusCode >= 400) {
       githubWindow.webContents.send('schemaError')
     } else {
-      displayResult(body)
+      displayResult(body, apiKey)
     }
   })
 }
 
-var displayResult = function(dataset) {
-  githubWindow.loadURL('file://' + __dirname + '/../views/github-success.html')
-  githubWindow.webContents.on('dom-ready', function() {
-    githubWindow.webContents.send('ghPagesUrl', dataset.gh_pages_url)
+var displayResult = function(job, apiKey) {
+  waitForDataset(job.job_url, apiKey, function(ghPagesUrl) {
+    githubWindow.loadURL('file://' + __dirname + '/../views/github-success.html')
+    githubWindow.webContents.on('dom-ready', function() {
+      githubWindow.webContents.send('ghPagesUrl', ghPagesUrl)
+    })
   })
+}
+
+var waitForDataset = function(jobURL, apiKey, callback) {
+  url = rootURL + jobURL
+
+  options = {
+    json: true,
+    headers: {
+      'Authorization': apiKey
+    },
+    url: url
+  }
+
+  var checkURL = setInterval(function(){
+    request.get(options, function(err, resp, body) {
+      if (body.dataset_url) {
+        options.url = rootURL + body.dataset_url
+        request.get(options, function(err, resp, body) {
+          clearInterval(checkURL)
+          callback(body.gh_pages_url)
+        })
+      }
+    })
+  }, 5000);
 }
 
 var uploadToGithub = function(parentWindow, data, apiKey) {
