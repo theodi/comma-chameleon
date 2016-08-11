@@ -7,11 +7,9 @@
   {{/content}}
 
   {{#content "body"}}
-    <div class="row hidden" id="schema-error">
-      <div class='alert alert-warning'>The data you are trying to add does not match the dataset's schema. Please edit your data try again</div>
-    </div>
     <form id="github">
       <div class="form-wrapper">
+        <div class="alert alert-danger hidden" role="alert" id="errors"></div>
 
         <div class="form-group">
           <label for="file_name">File name</label>
@@ -67,9 +65,15 @@
       });
   });
 
-  ipc.once('schemaError', function(event) {
+  ipc.once('errors', function(event, e) {
     $('#spinner').addClass('hidden')
-    $('#schema-error').removeClass('hidden')
+    $('#errors').removeClass('hidden')
+    text = '<p><strong>Sorry, there were some errors:</strong></p>'
+    if (e.class == String) {
+      errors = e.split(',')
+    }
+    text += e.join('<br>')
+    $('#errors').html(text)
   })
 </script>
 {{/content}}

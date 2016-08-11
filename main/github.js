@@ -74,21 +74,26 @@ var putData = function(dataset, file, apiKey) {
   }
 
   request.post(opts, function(err, resp, body) {
-    if (resp.statusCode >= 400) {
-      githubWindow.webContents.send('schemaError')
-    } else {
-      displayResult(body, apiKey)
-    }
+    displayResult(body, apiKey)
   })
 }
 
-var displayResult = function(job, apiKey) {
-  waitForDataset(job.job_url, apiKey, function(ghPagesUrl) {
-    githubWindow.loadURL('file://' + __dirname + '/../views/github-success.html')
-    githubWindow.webContents.on('dom-ready', function() {
-      githubWindow.webContents.send('ghPagesUrl', ghPagesUrl)
+var displayResult = function(result, apiKey) {
+  if (result.errors) {
+    console.log(result.errors)
+    githubWindow.webContents.send('errors', result.errors)
+  } else {
+    waitForDataset(result.job_url, apiKey, function(type, result) {
+      if (type == 'error') {
+        githubWindow.webContents.send('errors', result)
+      } else {
+        githubWindow.loadURL('file://' + __dirname + '/../views/github-success.html')
+        githubWindow.webContents.on('dom-ready', function() {
+          githubWindow.webContents.send('ghPagesUrl', result)
+        })
+      }
     })
-  })
+  }
 }
 
 var waitForDataset = function(jobURL, apiKey, callback) {
@@ -108,8 +113,11 @@ var waitForDataset = function(jobURL, apiKey, callback) {
         options.url = rootURL + body.dataset_url
         request.get(options, function(err, resp, body) {
           clearInterval(checkURL)
-          callback(body.gh_pages_url)
+          callback('success', body.gh_pages_url)
         })
+      } else if(body.errors) {
+        clearInterval(checkURL)
+        callback('error', body.errors)
       }
     })
   }, 5000);
@@ -156,6 +164,7 @@ var addFileToGithub = function() {
 
   ipc.on('addFileToExisting', function(e, data, apiKey) {
     parentWindow.webContents.send('getCSV');
+    console.log(data)
 
     ipc.once('sendCSV', function(e, csv) {
       dataset = querystring.parse(data);
