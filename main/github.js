@@ -13,7 +13,7 @@ var escape = require('escape-regexp');
 var slug = require('slug');
 var tmpdir = require('os-tmpdir')();
 
-var rootURL = 'https://octopub.io'
+var rootURL = process.env.NODE_ENV == 'development' ? 'http://git-data-publisher.dev' : 'https://octopub.io'
 
 var loadWindow = function(githubWindow, apiKey, viewName) {
   githubWindow.loadURL('file://' + __dirname + '/../views/' + viewName + '.html')

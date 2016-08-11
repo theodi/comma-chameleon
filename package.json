@@ -4,7 +4,7 @@
   "license": "MIT",
   "main": "main.js",
   "scripts": {
-    "start": "gulp prebuild && electron .",
+    "start": "gulp prebuild && NODE_ENV=development electron .",
     "test": "electron-mocha test/main/ && electron-mocha --renderer --no-timeouts test/renderer/",
     "test-main": "electron-mocha test/main/",
     "test-renderer": "electron-mocha --renderer --no-timeouts test/renderer/"

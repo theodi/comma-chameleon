@@ -43,9 +43,10 @@
 <script>
   ipc.once('apiKey', function(event, key) {
     var key = key
+    var rootURL = process.env.NODE_ENV == 'development' ? 'http://git-data-publisher.dev' : 'https://octopub.io'
 
     $.ajax({
-         url: "https://octopub.io/api/user/datasets.json",
+         url: rootURL + "/api/user/datasets.json",
          type: "GET",
          beforeSend: function(xhr){xhr.setRequestHeader('Authorization', key);},
          success: function(data) {
