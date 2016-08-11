@@ -53,23 +53,27 @@ describe('github', function() {
       github._private.postData(dataset, file, "bogus-key")
 
       opts = {
-        url: 'https://octopub.io/datasets',
+        url: 'https://octopub.io/api/datasets',
         json: true,
+        headers: {
+          'Authorization': 'bogus-key'
+        },
         formData: {
-         'api_key': 'bogus-key',
          'dataset[name]': 'My awesome dataset',
          'dataset[description]': 'My awesome description',
          'dataset[publisher_name]': 'Publisher Name',
          'dataset[publisher_url]': 'http://example.com',
          'dataset[license]': 'CC-ZERO',
          'dataset[frequency]': 'monthly',
-         'files[][title]': 'My File Name',
-         'files[][description]': 'My File Description',
-         'files[][file]': sinon.match.instanceOf(Fs.ReadStream)
+         'file[title]': 'My File Name',
+         'file[description]': 'My File Description',
+         'file[file]': sinon.match.instanceOf(Fs.ReadStream)
         }
       }
 
       expect(stub.calledWithMatch(opts)).to.eq(true)
+
+      github._private.request.post.restore()
     })
   })
 
@@ -83,21 +87,25 @@ describe('github', function() {
         file_description: 'My file description'
       }
 
-      stub = sinon.stub(github._private.request, 'put')
+      stub = sinon.stub(github._private.request, 'post')
       github._private.putData(dataset, file, "bogus-key")
 
       opts = {
-        url: 'https://octopub.io/datasets/123',
+        url: 'https://octopub.io/api/datasets/123/files',
         json: true,
+        headers: {
+          'Authorization': 'bogus-key'
+        },
         formData: {
-          'api_key': 'bogus-key',
-          'files[][title]': 'My file name',
-          'files[][description]': 'My file description',
-          'files[][file]': sinon.match.instanceOf(Fs.ReadStream),
+          'file[title]': 'My file name',
+          'file[description]': 'My file description',
+          'file[file]': sinon.match.instanceOf(Fs.ReadStream),
         }
       }
 
       expect(stub.calledWithMatch(opts)).to.eq(true)
+
+      github._private.request.post.restore()
     })
   })
 

@@ -10,6 +10,10 @@
     <form id="github">
       <div class="form-wrapper">
 
+        <div class="alert alert-danger hidden" role="alert" id="errors">
+
+        </div>
+
         <div class="form-group">
           <label for="name">Dataset name</label>
           <input type="text" class="form-control" id="name" name="name" placeholder="Dataset name" autofocus>
@@ -114,6 +118,16 @@
 
       $("#cancel").click(function(e) {
         window.close()
+      })
+
+      ipc.once('errors', function(event, errors) {
+        $('#errors').removeClass('hidden')
+        text = '<p><strong>Sorry, there were some errors:</strong></p>'
+        if (errors.class == String) {
+          e = errors.split(',')
+        }
+        text += errors.join('<br>')
+        $('#errors').html(text)
       })
     </script>
   {{/content}}

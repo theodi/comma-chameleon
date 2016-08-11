@@ -13,7 +13,7 @@ var escape = require('escape-regexp');
 var slug = require('slug');
 var tmpdir = require('os-tmpdir')();
 
-var rootURL = 'https://octopub.io'
+var rootURL = process.env.NODE_ENV == 'development' ? 'http://git-data-publisher.dev' : 'https://octopub.io'
 
 var loadWindow = function(githubWindow, apiKey, viewName) {
   githubWindow.loadURL('file://' + __dirname + '/../views/' + viewName + '.html')
@@ -36,53 +36,91 @@ var writeData = function(csv, filename) {
 
 var postData = function(dataset, file, apiKey) {
   var opts = {
-    url: rootURL + '/datasets',
+    url: rootURL + '/api/datasets',
     json: true,
+    headers: {
+      'Authorization': apiKey
+    },
     formData: {
-      'api_key': apiKey,
       'dataset[name]': dataset.name,
       'dataset[description]': dataset.description,
       'dataset[publisher_name]': dataset['publisher_name'],
       'dataset[publisher_url]': dataset['publisher_url'],
       'dataset[license]': dataset.license,
       'dataset[frequency]': dataset.frequency,
-      'files[][title]': dataset.file_name,
-      'files[][description]': dataset.file_description,
-      'files[][file]': Fs.createReadStream(file),
+      'file[title]': dataset.file_name,
+      'file[description]': dataset.file_description,
+      'file[file]': Fs.createReadStream(file),
     }
   }
 
   request.post(opts, function(err, resp, body) {
-    displayResult(body)
+    displayResult(body, apiKey)
   })
 }
 
 var putData = function(dataset, file, apiKey) {
   var opts = {
-    url: rootURL + '/datasets/' + dataset.dataset,
+    url: rootURL + '/api/datasets/' + dataset.dataset + '/files',
     json: true,
+    headers: {
+      'Authorization': apiKey
+    },
     formData: {
-      'api_key': apiKey,
-      'files[][title]': dataset.file_name,
-      'files[][description]': dataset.file_description,
-      'files[][file]': Fs.createReadStream(file),
+      'file[title]': dataset.file_name,
+      'file[description]': dataset.file_description,
+      'file[file]': Fs.createReadStream(file),
     }
   }
 
-  request.put(opts, function(err, resp, body) {
-    if (resp.statusCode >= 400) {
-      githubWindow.webContents.send('schemaError')
-    } else {
-      displayResult(body)
-    }
+  request.post(opts, function(err, resp, body) {
+    displayResult(body, apiKey)
   })
 }
 
-var displayResult = function(dataset) {
-  githubWindow.loadURL('file://' + __dirname + '/../views/github-success.html')
-  githubWindow.webContents.on('dom-ready', function() {
-    githubWindow.webContents.send('ghPagesUrl', dataset.gh_pages_url)
-  })
+var displayResult = function(result, apiKey) {
+  if (result.errors) {
+    console.log(result.errors)
+    githubWindow.webContents.send('errors', result.errors)
+  } else {
+    waitForDataset(result.job_url, apiKey, function(type, result) {
+      if (type == 'error') {
+        githubWindow.webContents.send('errors', result)
+      } else {
+        githubWindow.loadURL('file://' + __dirname + '/../views/github-success.html')
+        githubWindow.webContents.on('dom-ready', function() {
+          githubWindow.webContents.send('ghPagesUrl', result)
+        })
+      }
+    })
+  }
+}
+
+var waitForDataset = function(jobURL, apiKey, callback) {
+  url = rootURL + jobURL
+
+  options = {
+    json: true,
+    headers: {
+      'Authorization': apiKey
+    },
+    url: url
+  }
+
+  var checkURL = setInterval(function(){
+    request.get(options, function(err, resp, body) {
+      if (body.dataset_url) {
+        options.url = rootURL + body.dataset_url
+        request.get(options, function(err, resp, body) {
+          clearInterval(checkURL)
+          callback('success', body.gh_pages_url)
+        })
+      } else if(body.errors) {
+        clearInterval(checkURL)
+        callback('error', body.errors)
+      }
+    })
+  }, 5000);
 }
 
 var uploadToGithub = function(parentWindow, data, apiKey) {
@@ -126,6 +164,7 @@ var addFileToGithub = function() {
 
   ipc.on('addFileToExisting', function(e, data, apiKey) {
     parentWindow.webContents.send('getCSV');
+    console.log(data)
 
     ipc.once('sendCSV', function(e, csv) {
       dataset = querystring.parse(data);
