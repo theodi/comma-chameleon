@@ -72,7 +72,6 @@ exports.menu = [
         label: 'Save',
         accelerator: 'CmdOrCtrl+S',
         click: function() { fileActions.saveFile(); },
-        enabled: false,
         id: 'save'
       },
       {
