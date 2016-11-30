@@ -48,10 +48,7 @@ ipc.on('loadData', function(e, data) {
 });
 
 ipc.on('saveData', function(e, fileName) {
-  data = $.csv.fromArrays(hot.getData());
-  fs.writeFile(fileName, data, function (err) {
-  });
-  document.title = fileName;
+  file.save(hot, fileName);
 });
 
 ipc.on('resized', function() {
