@@ -37,8 +37,10 @@ var openFile = function(hot, data, format) {
   return arrays
 }
 
-var saveFile = function(hot, fileName) {
-  data = $.csv.fromArrays(hot.getData());
+var saveFile = function(hot, fileName, format) {
+  // if function is called without a format param
+  // jquery-csv will assume default delimiter/separator values
+  data = $.csv.fromArrays(hot.getData(), format);
   fs.writeFile(fileName, data, function (err) {
   });
   document.title = fileName;

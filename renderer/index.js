@@ -48,8 +48,8 @@ ipc.on('loadData', function(e, data, format) {
   rows.fixRaggedRows(arrays);
 });
 
-ipc.on('saveData', function(e, fileName) {
-  file.save(hot, fileName);
+ipc.on('saveData', function(e, fileName, format) {
+  file.save(hot, fileName, format);
 });
 
 ipc.on('resized', function() {

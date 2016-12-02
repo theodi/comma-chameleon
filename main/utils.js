@@ -8,6 +8,7 @@ function createWindow(data, title, format) {
   format = typeof format !== 'undefined' ? format : file.formats.csv.options;
 
   mainWindow = new BrowserWindow({width: 800, height: 600});
+  mainWindow.format = format;
 
   mainWindow.loadURL('file://' + __dirname + '/../views/index.html');
 

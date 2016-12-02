@@ -22,7 +22,7 @@ function saveFileAs() {
 function saveFile() {
   window = BrowserWindow.getFocusedWindow();
   fileName = window.getTitle();
-  window.webContents.send('saveData', fileName);
+  window.webContents.send('saveData', fileName, window.format);
 }
 
 function readFile(fileNames, format) {
