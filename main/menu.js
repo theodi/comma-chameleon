@@ -72,7 +72,13 @@ exports.menu = [
             click: function() {
               fileActions.openFile(file.formats.tsv.filters, file.formats.tsv.options);
             }
-          }
+          },
+          {
+            label: file.formats.semicolon.label,
+            click: function() {
+              fileActions.openFile(file.formats.semicolon.filters, file.formats.semicolon.options);
+            }
+          },
         ]
       },
       {

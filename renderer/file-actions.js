@@ -19,6 +19,13 @@ var formats = {
     ],
     options: { separator: "\t", delimiter: '"'}
   },
+  semicolon: {
+    label: 'Semicolon separated',
+    filters: [
+      { name: 'csv files', extensions: ['csv'] }
+    ],
+    options: { separator: ';', delimiter: '"'}
+  },
   //.. + we can add more
 }
 
