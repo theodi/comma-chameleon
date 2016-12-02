@@ -22,7 +22,8 @@ container.ondrop = function (e) {
   e.preventDefault();
   var f = e.dataTransfer.files[0];
   fs.readFile(f.path, 'utf-8', function (err, data) {
-    arrays = file.open(hot, data)
+    // if we're dragging a file in, default the format to comma-separated
+    arrays = file.open(hot, data, file.formats.csv.options);
     rows.fixRaggedRows(arrays);
   });
 };
@@ -42,8 +43,8 @@ container.addEventListener('contextmenu', function (e) {
 
 // runtime renderer call & response
 
-ipc.on('loadData', function(e, data) {
-  arrays = file.open(hot, data)
+ipc.on('loadData', function(e, data, format) {
+  arrays = file.open(hot, data, format)
   rows.fixRaggedRows(arrays);
 });
 

@@ -1,3 +1,5 @@
+var file = require('../renderer/file-actions.js');
+
 exports.menu = [
   {
     label: 'Comma Chameleon',
@@ -56,9 +58,22 @@ exports.menu = [
         type: 'separator'
       },
       {
-        label: 'Open..',
-        accelerator: 'CmdOrCtrl+O',
-        click: function() { fileActions.openFile(); }
+        label: 'Open File..',
+        submenu: [
+          {
+            label: file.formats.csv.label,
+            accelerator: 'CmdOrCtrl+O',
+            click: function() {
+              fileActions.openFile(file.formats.csv.filters, file.formats.csv.options);
+            }
+          },
+          {
+            label: file.formats.tsv.label,
+            click: function() {
+              fileActions.openFile(file.formats.tsv.filters, file.formats.tsv.options);
+            }
+          }
+        ]
       },
       {
         label: 'Import Excel file',

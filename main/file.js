@@ -1,14 +1,9 @@
-function openFile() {
+function openFile(filters, options) {
   Dialog.showOpenDialog({
-      filters: [
-        {
-          name: 'csv files',
-          extensions: ['csv']
-        }
-      ]
+      filters: filters
     },
     function(fileNames) {
-      readFile(fileNames)
+      readFile(fileNames, options);
     }
   );
 }
@@ -30,13 +25,13 @@ function saveFile() {
   window.webContents.send('saveData', fileName);
 }
 
-function readFile(fileNames) {
+function readFile(fileNames, format) {
   if (fileNames === undefined) {
     return;
   } else {
     var fileName = fileNames[0];
     Fs.readFile(fileName, 'utf-8', function (err, data) {
-        utils.createWindow(data, fileName);
+        utils.createWindow(data, fileName, format);
         utils.enableSave();
     });
   }
