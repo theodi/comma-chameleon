@@ -5,7 +5,7 @@ function createWindow(data, title, format) {
   // if window is not initialized with any data, init with 3 blank cells
   data = typeof data !== 'undefined' ? data : '"","",""';
   // if window is not initialized with a format, default to csv
-  format = typeof format !== 'undefined' ? format : file.formats.csv.options;
+  format = typeof format !== 'undefined' ? format : file.formats.csv;
 
   mainWindow = new BrowserWindow({width: 800, height: 600});
   mainWindow.format = format;

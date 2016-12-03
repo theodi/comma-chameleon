@@ -1,6 +1,6 @@
-function openFile(filters, format) {
+function openFile(format) {
   Dialog.showOpenDialog({
-      filters: filters
+      filters: format.filters
     },
     function(fileNames) {
       readFile(fileNames, format);
@@ -8,9 +8,9 @@ function openFile(filters, format) {
   );
 }
 
-function saveFileAs(filters, format) {
+function saveFileAs(format) {
   window = BrowserWindow.getFocusedWindow();
-  Dialog.showSaveDialog({ filters: filters }, function (fileName) {
+  Dialog.showSaveDialog({ filters: format.filters }, function (fileName) {
     if (fileName === undefined) return;
     window.webContents.send('saveData', fileName, format);
     utils.enableSave();

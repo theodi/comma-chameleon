@@ -36,17 +36,23 @@ var formats = {
 }
 
 var openFile = function(hot, data, format) {
-  // if function is called without a format param
-  // jquery-csv will assume default delimiter/separator values
-  var arrays = $.csv.toArrays(data, format);
+  // if no format specified, default to csv
+  if (typeof format === 'undefined') {
+    var arrays = $.csv.toArrays(data);
+  } else {
+    var arrays = $.csv.toArrays(data, format.options);
+  }
   hot.loadData(arrays);
   return arrays
 }
 
 var saveFile = function(hot, fileName, format) {
-  // if function is called without a format param
-  // jquery-csv will assume default delimiter/separator values
-  data = $.csv.fromArrays(hot.getData(), format);
+  // if no format specified, default to csv
+  if (typeof format === 'undefined') {
+    data = $.csv.fromArrays(hot.getData());
+  } else {
+    data = $.csv.fromArrays(hot.getData(), format.options);
+  }
   fs.writeFile(fileName, data, function (err) {
   });
   document.title = fileName;

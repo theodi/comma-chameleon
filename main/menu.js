@@ -6,11 +6,11 @@ var save_submenu = [];
 for (format in file.formats) {
   var open_option = {
     label: file.formats[format].label,
-    click: (function(filters, options) {
+    click: (function(format) {
       return function() {
-        fileActions.openFile(filters, options);
+        fileActions.openFile(format);
       }
-    }(file.formats[format].filters, file.formats[format].options)),
+    }(file.formats[format])),
   }
   if (format === 'csv') {
     open_option.accelerator = 'CmdOrCtrl+O';
@@ -19,11 +19,11 @@ for (format in file.formats) {
 
   var save_option = {
     label: file.formats[format].label,
-    click: (function(filters, options) {
+    click: (function(format) {
       return function() {
-        fileActions.saveFileAs(filters, options);
+        fileActions.saveFileAs(format);
       }
-    }(file.formats[format].filters, file.formats[format].options)),
+    }(file.formats[format])),
   }
   if (format === 'csv') {
     save_option.accelerator = 'Shift+CmdOrCtrl+S';
