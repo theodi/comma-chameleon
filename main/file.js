@@ -14,6 +14,7 @@ function saveFileAs(format) {
     if (fileName === undefined) return;
     window.webContents.send('saveData', fileName, format);
     utils.enableSave();
+    window.format = format;
   });
 }
 
