@@ -29,10 +29,20 @@ describe("testing datapackage", function(){
       license: 'cc-by-sa',
       name: 'name',
       title: 'title'
-    }
-    var vocab = datapackage._private.inputToVocab(input); // creates object
+    };
+
+    var vocab = datapackage._private.inputToVocab(input, {}, {
+      label: 'Comma separated',
+      filters: [
+        { name: 'csv files', extensions: ['csv'] }
+      ],
+      options: { separator: ',', delimiter: '"'},
+      mime_type: 'text/csv',
+      default_extension: 'csv',
+    }); // creates object
+
     expect(vocab).to.have.all.keys('description','keywords', 'license', 'name', 'title', 'resources');
     expect(vocab['resources'][0]).to.have.all.keys('name', 'path', 'mediatype', 'schema');
 
   });
-})
+});
