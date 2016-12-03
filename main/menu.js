@@ -1,5 +1,37 @@
 var file = require('../renderer/file-actions.js');
 
+// build 'Open..' and 'Save As..' submenus
+var open_submenu = [];
+var save_submenu = [];
+for (format in file.formats) {
+  var open_option = {
+    label: file.formats[format].label,
+    click: (function(filters, options) {
+      return function() {
+        fileActions.openFile(filters, options);
+      }
+    }(file.formats[format].filters, file.formats[format].options)),
+  }
+  if (format === 'csv') {
+    open_option.accelerator = 'CmdOrCtrl+O';
+  }
+  open_submenu.push(open_option);
+
+  var save_option = {
+    label: file.formats[format].label,
+    click: (function(filters, options) {
+      return function() {
+        fileActions.saveFileAs(filters, options);
+      }
+    }(file.formats[format].filters, file.formats[format].options)),
+  }
+  if (format === 'csv') {
+    save_option.accelerator = 'Shift+CmdOrCtrl+S';
+  }
+  save_submenu.push(save_option);
+}
+
+
 exports.menu = [
   {
     label: 'Comma Chameleon',
@@ -59,27 +91,7 @@ exports.menu = [
       },
       {
         label: 'Open File..',
-        submenu: [
-          {
-            label: file.formats.csv.label,
-            accelerator: 'CmdOrCtrl+O',
-            click: function() {
-              fileActions.openFile(file.formats.csv.filters, file.formats.csv.options);
-            }
-          },
-          {
-            label: file.formats.tsv.label,
-            click: function() {
-              fileActions.openFile(file.formats.tsv.filters, file.formats.tsv.options);
-            }
-          },
-          {
-            label: file.formats.semicolon.label,
-            click: function() {
-              fileActions.openFile(file.formats.semicolon.filters, file.formats.semicolon.options);
-            }
-          },
-        ]
+        submenu: open_submenu,
       },
       {
         label: 'Import Excel file',
@@ -97,27 +109,7 @@ exports.menu = [
       },
       {
         label: 'Save As..',
-        submenu: [
-          {
-            label: file.formats.csv.label,
-            accelerator: 'Shift+CmdOrCtrl+S',
-            click: function () {
-              fileActions.saveFileAs(file.formats.csv.filters, file.formats.csv.options);
-            }
-          },
-          {
-            label: file.formats.tsv.label,
-            click: function () {
-              fileActions.saveFileAs(file.formats.tsv.filters, file.formats.tsv.options);
-            }
-          },
-          {
-            label: file.formats.semicolon.label,
-            click: function () {
-              fileActions.saveFileAs(file.formats.semicolon.filters, file.formats.semicolon.options);
-            }
-          },
-        ]
+        submenu: save_submenu,
       },
       {
         label: 'Export as Datapackage',
