@@ -97,8 +97,27 @@ exports.menu = [
       },
       {
         label: 'Save As..',
-        accelerator: 'Shift+CmdOrCtrl+S',
-        click: function() { fileActions.saveFileAs(); }
+        submenu: [
+          {
+            label: file.formats.csv.label,
+            accelerator: 'Shift+CmdOrCtrl+S',
+            click: function () {
+              fileActions.saveFileAs(file.formats.csv.filters, file.formats.csv.options);
+            }
+          },
+          {
+            label: file.formats.tsv.label,
+            click: function () {
+              fileActions.saveFileAs(file.formats.tsv.filters, file.formats.tsv.options);
+            }
+          },
+          {
+            label: file.formats.semicolon.label,
+            click: function () {
+              fileActions.saveFileAs(file.formats.semicolon.filters, file.formats.semicolon.options);
+            }
+          },
+        ]
       },
       {
         label: 'Export as Datapackage',

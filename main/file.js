@@ -1,20 +1,18 @@
-function openFile(filters, options) {
+function openFile(filters, format) {
   Dialog.showOpenDialog({
       filters: filters
     },
     function(fileNames) {
-      readFile(fileNames, options);
+      readFile(fileNames, format);
     }
   );
 }
 
-function saveFileAs() {
+function saveFileAs(filters, format) {
   window = BrowserWindow.getFocusedWindow();
-  Dialog.showSaveDialog({ filters: [
-    { name: 'text', extensions: ['csv'] }
-  ]}, function (fileName) {
+  Dialog.showSaveDialog({ filters: filters }, function (fileName) {
     if (fileName === undefined) return;
-    window.webContents.send('saveData', fileName);
+    window.webContents.send('saveData', fileName, format);
     utils.enableSave();
   });
 }
