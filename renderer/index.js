@@ -56,8 +56,12 @@ ipc.on('resized', function() {
   hot.render()
 });
 
-ipc.on('getCSV', function() {
-  data = $.csv.fromArrays(hot.getData());
+ipc.on('getCSV', function(e, format) {
+  if (typeof format === 'undefined') {
+    var data = $.csv.fromArrays(hot.getData());
+  } else {
+    var data = $.csv.fromArrays(hot.getData(), format.options);
+  }
   ipc.send('sendCSV', data);
 })
 
@@ -70,7 +74,6 @@ ipc.on('schemaFromHeaders', function(){
   try {
     var assumedHeader = hot.getData()[0];
     var header = schemawizard.returnHeaderRow(assumedHeader);
-    //console.log(header);
     ipc.send('jsonHeaders',schemawizard.createSchema(header));
     schemawizard.createSchema(header);
   } catch (err) {

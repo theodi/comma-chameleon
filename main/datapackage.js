@@ -19,31 +19,31 @@ var exportdata = function() {
 
   ipc.once('sendDatapackage', function(e, data, includeHeaders) {
     var currentFileName = window.getTitle();
-    var suggestedFileName = path.basename(currentFileName).replace('.csv', '');
+    var suggestedFileName = path.basename(currentFileName).replace(path.extname(currentFileName), '');
 
     var thatData = data;
 
     if(includeHeaders === "true"){
       window.webContents.send('schemaFromHeaders');
-      ipc.on('jsonHeaders', function(event, json){
-        datapackageJson(thatData, json);
+      ipc.on('jsonHeaders', function(event, json) {
+        datapackageJson(thatData, json, window.format);
       });
     } else {
-      datapackageJson(thatData);
+      datapackageJson(thatData, {}, window.format);
     }
 
     Dialog.showSaveDialog({
-      defaultPath: suggestedFileName+".zip",
+      defaultPath: suggestedFileName + ".zip",
       filters: [
         { name: 'text', extensions: ['zip'] }
       ],
     }, function (fileName) {
       if (fileName === undefined) return;
       datapackage.close();
-      window.webContents.send('getCSV');
+      window.webContents.send('getCSV', window.format);
 
       ipc.once('sendCSV', function(e, csv) {
-        generateDatapackage(fileName, data, csv)
+        generateDatapackage(fileName, data, csv, window.format);
       });
     });
   });
@@ -53,23 +53,23 @@ var exportdata = function() {
   });
 }
 
-function datapackageJson(data_arg, headers) {
+function datapackageJson(data_arg, headers, format) {
   data_arg.keywords = data_arg.keywords.split(",");
   data_arg.resources = [
     {
       "name": data_arg.name,
-      "path": "data/" + data_arg.name + ".csv",
-      "mediatype": "text/csv",
+      "path": "data/" + data_arg.name + "." + format.default_extension,
+      "mediatype": format.mime_type,
       "schema": headers
     }
   ]
   return data_arg
 }
 
-function generateDatapackage(fileName, data_arg, csv) {
+function generateDatapackage(fileName, data_arg, csv, format) {
   zip = new require('node-zip')();
-  zip.file('datapackage.json', JSON.stringify(data_arg,null, 2));
-  zip.file('data/' + data_arg.name + '.csv', csv);
+  zip.file('datapackage.json', JSON.stringify(data_arg, null, 2));
+  zip.file('data/' + data_arg.name + '.' + format.default_extension, csv);
   zipData = zip.generate({base64:false,compression:'DEFLATE'});
   Fs.writeFileSync(fileName, zipData, 'binary');
 }
