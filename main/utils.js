@@ -1,11 +1,11 @@
-var file = require('../renderer/file-actions.js');
+var file_formats = require('../renderer/file-actions.js').formats;
 
 function createWindow(data, title, format) {
   title = typeof title !== 'undefined' ? title : "Untitled.csv";
   // if window is not initialized with any data, init with 3 blank cells
   data = typeof data !== 'undefined' ? data : '"","",""';
   // if window is not initialized with a format, default to csv
-  format = typeof format !== 'undefined' ? format : file.formats.csv;
+  format = typeof format !== 'undefined' ? format : file_formats.csv;
 
   mainWindow = new BrowserWindow({width: 800, height: 600});
   mainWindow.format = format;

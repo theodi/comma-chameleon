@@ -1,16 +1,16 @@
-var file = require('../renderer/file-actions.js');
+var file_formats = require('../renderer/file-actions.js').formats;
 
 // build 'Open..' and 'Save As..' submenus
 var open_submenu = [];
 var save_submenu = [];
-for (format in file.formats) {
+for (format in file_formats) {
   var open_option = {
-    label: file.formats[format].label,
+    label: file_formats[format].label,
     click: (function(format) {
       return function() {
         fileActions.openFile(format);
       }
-    }(file.formats[format])),
+    }(file_formats[format])),
   }
   if (format === 'csv') {
     open_option.accelerator = 'CmdOrCtrl+O';
@@ -18,12 +18,12 @@ for (format in file.formats) {
   open_submenu.push(open_option);
 
   var save_option = {
-    label: file.formats[format].label,
+    label: file_formats[format].label,
     click: (function(format) {
       return function() {
         fileActions.saveFileAs(format);
       }
-    }(file.formats[format])),
+    }(file_formats[format])),
   }
   if (format === 'csv') {
     save_option.accelerator = 'Shift+CmdOrCtrl+S';
