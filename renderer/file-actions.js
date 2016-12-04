@@ -2,6 +2,11 @@ const fs = require('fs');
 const $ = jQuery = require('./../bower_components/jquery/dist/jquery.js');
 require('./../bower_components/jquery-csv/src/jquery.csv.js')
 
+/**
+ * Definitions for supported file types
+ *
+ * Add more objects here to support additional formats
+ */
 var formats = {
   csv: {
     label: 'Comma separated',
@@ -32,7 +37,6 @@ var formats = {
     mime_type: 'text/csv',
     default_extension: 'csv',
   },
-  //.. + we can add more
 }
 
 var openFile = function(hot, data, format) {

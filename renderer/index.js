@@ -57,6 +57,7 @@ ipc.on('resized', function() {
 });
 
 ipc.on('getCSV', function(e, format) {
+  // if no format specified, default to csv
   if (typeof format === 'undefined') {
     var data = $.csv.fromArrays(hot.getData());
   } else {
