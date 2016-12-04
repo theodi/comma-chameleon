@@ -23,12 +23,12 @@ function createWindow(data, title, format) {
 
   mainWindow.on('resize', function() {
     mainWindow.webContents.send('resized');
-  })
+  });
 }
 
 function enableSave() {
-  item = Menu.getApplicationMenu().items[1].submenu.items[5]
-  item.enabled = true
+  var item = Menu.getApplicationMenu().items[1].submenu.items[5];
+  item.enabled = true;
 }
 
 module.exports = {

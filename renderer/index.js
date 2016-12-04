@@ -23,7 +23,7 @@ container.ondrop = function (e) {
   var f = e.dataTransfer.files[0];
   fs.readFile(f.path, 'utf-8', function (err, data) {
     // if we're dragging a file in, default the format to comma-separated
-    arrays = file.open(hot, data, file.formats.csv.options);
+    var arrays = file.open(hot, data, file.formats.csv.options);
     rows.fixRaggedRows(arrays);
   });
 };
@@ -31,20 +31,20 @@ container.ondrop = function (e) {
 container.addEventListener('contextmenu', function (e) {
   e.preventDefault();
   if (hot.getSelected()[0] == 0) {
-    rowAbove.enabled = false
+    rowAbove.enabled = false;
   }
   if (hot.getSelected()[1] == 0) {
-    columnLeft.enabled = false
+    columnLeft.enabled = false;
   }
   menu.popup(remote.getCurrentWindow());
-  rowAbove.enabled = true
-  columnLeft.enabled = true
+  rowAbove.enabled = true;
+  columnLeft.enabled = true;
 }, false);
 
 // runtime renderer call & response
 
 ipc.on('loadData', function(e, data, format) {
-  arrays = file.open(hot, data, format)
+  var arrays = file.open(hot, data, format);
   rows.fixRaggedRows(arrays);
 });
 
@@ -53,18 +53,19 @@ ipc.on('saveData', function(e, fileName, format) {
 });
 
 ipc.on('resized', function() {
-  hot.render()
+  hot.render();
 });
 
 ipc.on('getCSV', function(e, format) {
+  var data;
   // if no format specified, default to csv
   if (typeof format === 'undefined') {
-    var data = $.csv.fromArrays(hot.getData());
+    data = $.csv.fromArrays(hot.getData());
   } else {
-    var data = $.csv.fromArrays(hot.getData(), format.options);
+    data = $.csv.fromArrays(hot.getData(), format.options);
   }
   ipc.send('sendCSV', data);
-})
+});
 
 ipc.on('validate', function() {
   var data = $.csv.fromArrays(hot.getData(), file.formats.csv);
@@ -84,23 +85,23 @@ ipc.on('schemaFromHeaders', function(){
 });
 
 ipc.on('ragged_rows', function() {
-  csv = hot.getData();
+  var csv = hot.getData();
   console.log(typeof rows);
   console.log(typeof csv);
   rows.fixRaggedRows(csv);
 });
 
 ipc.on('fetchData', function() {
-  console.log('recieving')
+  console.log('recieving');
   var csv = $.csv.fromArrays(hot.getData(), file.formats.csv);
-  console.log(csv)
-  ipc.send('dataSent', csv)
-})
+  console.log(csv);
+  ipc.send('dataSent', csv);
+});
 
 ipc.on('validationStarted', function() {
-  validation.showLoader()
-})
+  validation.showLoader();
+});
 
 ipc.on('validationResults', function(e, results) {
-  validation.displayResults(results)
-})
+  validation.displayResults(results);
+});

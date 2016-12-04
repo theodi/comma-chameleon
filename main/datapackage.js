@@ -1,6 +1,6 @@
-global.electron = require('electron')
+global.electron = require('electron');
 
-global.BrowserWindow = electron.BrowserWindow
+global.BrowserWindow = electron.BrowserWindow;
 global.Dialog = electron.dialog;
 
 var Fs = require('fs');
@@ -51,7 +51,7 @@ var exportdata = function() {
   ipc.once('datapackageCanceled', function() {
     datapackage.close();
   });
-}
+};
 
 function datapackageJson(data_arg, headers, format) {
   data_arg.keywords = data_arg.keywords.split(",");
@@ -62,8 +62,8 @@ function datapackageJson(data_arg, headers, format) {
       "mediatype": format.mime_type,
       "schema": headers
     }
-  ]
-  return data_arg
+  ];
+  return data_arg;
 }
 
 function generateDatapackage(fileName, data_arg, csv, format) {
@@ -82,5 +82,5 @@ if (process.env.NODE_ENV === 'test') {
   module.exports._private = {
     inputToVocab: datapackageJson,
     zipPackage: generateDatapackage
-  }
+  };
 }

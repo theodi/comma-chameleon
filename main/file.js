@@ -20,7 +20,7 @@ function saveFileAs(format) {
 
 function saveFile() {
   window = BrowserWindow.getFocusedWindow();
-  fileName = window.getTitle();
+  var fileName = window.getTitle();
   window.webContents.send('saveData', fileName, window.format);
 }
 

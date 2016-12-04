@@ -1,6 +1,6 @@
 const fs = require('fs');
 const $ = jQuery = require('./../bower_components/jquery/dist/jquery.js');
-require('./../bower_components/jquery-csv/src/jquery.csv.js')
+require('./../bower_components/jquery-csv/src/jquery.csv.js');
 
 /**
  * Definitions for supported file types
@@ -37,20 +37,22 @@ var formats = {
     mime_type: 'text/csv',
     default_extension: 'csv',
   },
-}
+};
 
 var openFile = function(hot, data, format) {
+  var arrays;
   // if no format specified, default to csv
   if (typeof format === 'undefined') {
-    var arrays = $.csv.toArrays(data);
+    arrays = $.csv.toArrays(data);
   } else {
-    var arrays = $.csv.toArrays(data, format.options);
+    arrays = $.csv.toArrays(data, format.options);
   }
   hot.loadData(arrays);
-  return arrays
-}
+  return arrays;
+};
 
 var saveFile = function(hot, fileName, format) {
+  var data;
   // if no format specified, default to csv
   if (typeof format === 'undefined') {
     data = $.csv.fromArrays(hot.getData());
@@ -60,10 +62,10 @@ var saveFile = function(hot, fileName, format) {
   fs.writeFile(fileName, data, function (err) {
   });
   document.title = fileName;
-}
+};
 
 module.exports = {
   formats: formats,
   open: openFile,
   save: saveFile
-}
+};
