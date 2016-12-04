@@ -67,7 +67,7 @@ ipc.on('getCSV', function(e, format) {
 })
 
 ipc.on('validate', function() {
-  var data = $.csv.fromArrays(hot.getData());
+  var data = $.csv.fromArrays(hot.getData(), file.formats.csv);
   validation.validate(data);
 });
 
@@ -92,7 +92,7 @@ ipc.on('ragged_rows', function() {
 
 ipc.on('fetchData', function() {
   console.log('recieving')
-  csv = $.csv.fromArrays(hot.getData());
+  var csv = $.csv.fromArrays(hot.getData(), file.formats.csv);
   console.log(csv)
   ipc.send('dataSent', csv)
 })
