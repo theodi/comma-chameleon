@@ -1,3 +1,37 @@
+var file_formats = require('../renderer/file-actions.js').formats;
+
+// build 'Open..' and 'Save As..' submenus
+var open_submenu = [];
+var save_submenu = [];
+for (var format in file_formats) {
+  var open_option = {
+    label: file_formats[format].label,
+    click: (function(format) {
+      return function() {
+        fileActions.openFile(format);
+      };
+    }(file_formats[format])),
+  };
+  if (format === 'csv') {
+    open_option.accelerator = 'CmdOrCtrl+O';
+  }
+  open_submenu.push(open_option);
+
+  var save_option = {
+    label: file_formats[format].label,
+    click: (function(format) {
+      return function() {
+        fileActions.saveFileAs(format);
+      };
+    }(file_formats[format])),
+  };
+  if (format === 'csv') {
+    save_option.accelerator = 'Shift+CmdOrCtrl+S';
+  }
+  save_submenu.push(save_option);
+}
+
+
 exports.menu = [
   {
     label: 'Comma Chameleon',
@@ -56,9 +90,8 @@ exports.menu = [
         type: 'separator'
       },
       {
-        label: 'Open..',
-        accelerator: 'CmdOrCtrl+O',
-        click: function() { fileActions.openFile(); }
+        label: 'Open File..',
+        submenu: open_submenu,
       },
       {
         label: 'Import Excel file',
@@ -76,8 +109,7 @@ exports.menu = [
       },
       {
         label: 'Save As..',
-        accelerator: 'Shift+CmdOrCtrl+S',
-        click: function() { fileActions.saveFileAs(); }
+        submenu: save_submenu,
       },
       {
         label: 'Export as Datapackage',

@@ -1,42 +1,36 @@
-function openFile() {
+function openFile(format) {
   Dialog.showOpenDialog({
-      filters: [
-        {
-          name: 'csv files',
-          extensions: ['csv']
-        }
-      ]
+      filters: format.filters
     },
     function(fileNames) {
-      readFile(fileNames)
+      readFile(fileNames, format);
     }
   );
 }
 
-function saveFileAs() {
+function saveFileAs(format) {
   window = BrowserWindow.getFocusedWindow();
-  Dialog.showSaveDialog({ filters: [
-    { name: 'text', extensions: ['csv'] }
-  ]}, function (fileName) {
+  Dialog.showSaveDialog({ filters: format.filters }, function (fileName) {
     if (fileName === undefined) return;
-    window.webContents.send('saveData', fileName);
+    window.webContents.send('saveData', fileName, format);
     utils.enableSave();
+    window.format = format;
   });
 }
 
 function saveFile() {
   window = BrowserWindow.getFocusedWindow();
-  fileName = window.getTitle();
-  window.webContents.send('saveData', fileName);
+  var fileName = window.getTitle();
+  window.webContents.send('saveData', fileName, window.format);
 }
 
-function readFile(fileNames) {
+function readFile(fileNames, format) {
   if (fileNames === undefined) {
     return;
   } else {
     var fileName = fileNames[0];
     Fs.readFile(fileName, 'utf-8', function (err, data) {
-        utils.createWindow(data, fileName);
+        utils.createWindow(data, fileName, format);
         utils.enableSave();
     });
   }

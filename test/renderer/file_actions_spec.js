@@ -1,9 +1,9 @@
-process.env.NODE_ENV = 'test'
+process.env.NODE_ENV = 'test';
 
-var chai = require('chai')
+var chai = require('chai');
 
-var assert = chai.assert
-var expect = chai.expect
+var assert = chai.assert;
+var expect = chai.expect;
 var should = chai.should();
 
 var $ = require('./../../bower_components/jquery/dist/jquery.js');
@@ -18,28 +18,52 @@ beforeEach(function () {
   hot = hotController.create(hotView);
 });
 
-describe('open file', function() {
+describe('open file (comma separated)', function() {
 
-  it('opens a file', function() {
-    data = "foo,bar,baz\r\n1,2,3\r\n4,5,6"
-    file_actions.open(hot, data)
-    expect(hot.getData()).to.eql([['foo', 'bar', 'baz'],['1','2','3'],['4','5','6']])
-  })
+  it('opens a file (comma separated)', function() {
+    var data = "foo,bar,baz\r\n1,2,3\r\n4,5,6";
+    file_actions.open(hot, data);
+    expect(hot.getData()).to.eql([['foo', 'bar', 'baz'],['1','2','3'],['4','5','6']]);
+  });
 
-})
+});
+
+describe('open file (semicolon separated)', function() {
+
+  it('opens a file (semicolon separated)', function() {
+    var data = "foo;bar;baz\r\n1;2;3\r\n4;5;6";
+    file_actions.open(hot, data, file_actions.formats.semicolon);
+    expect(hot.getData()).to.eql([['foo', 'bar', 'baz'],['1','2','3'],['4','5','6']]);
+  });
+
+});
 
 describe('save file', function() {
 
   it('saves a file', function() {
-    data = "foo,bar,baz\r\n1,2,3\r\n4,5,6"
-    file_actions.open(hot, data)
-    file_actions.save(hot, '/tmp/mycsv.csv')
+    var data = "foo,bar,baz\r\n1,2,3\r\n4,5,6\r\n";
+    file_actions.open(hot, data);
+    file_actions.save(hot, '/tmp/mycsv.csv');
 
     fs.readFile('/tmp/mycsv.csv', 'utf-8', function (err, d) {
-      expect(d).to.eq(data)
-    })
+      expect(d).to.eq(data);
+    });
 
-    expect(document.title).to.eq('/tmp/mycsv.csv')
-  })
+    expect(document.title).to.eq('/tmp/mycsv.csv');
+  });
 
-})
+});
+
+describe('convert file', function() {
+
+  it('converts a file from csv to tsv', function() {
+    var data = "foo,bar,baz\r\n1,2,3\r\n4,5,6";
+    file_actions.open(hot, data);
+    file_actions.save(hot, '/tmp/mytsv.tsv', file_actions.formats.tsv);
+
+    fs.readFile('/tmp/mytsv.tsv', 'utf-8', function (err, d) {
+      expect(d).to.eq("foo\tbar\tbaz\r\n1\t2\t3\r\n4\t5\t6\r\n");
+    });
+  });
+
+});
