@@ -11,7 +11,7 @@ script:
 before_deploy:
 - sudo apt-get install wine
 - npm install -g gulp
-- npm install electron-packager@7.0.0 -g
+- npm install electron-packager -g
 - gulp build
 deploy:
   provider: releases
