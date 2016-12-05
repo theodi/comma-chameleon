@@ -1,3 +1,5 @@
+dist: trusty
+sudo: true
 language: node_js
 node_js:
 - '5.1.0'
@@ -9,10 +11,12 @@ before_script:
 script:
 - npm test
 before_deploy:
-- sudo apt-get install wine
+- sudo dpkg --add-architecture i386
+- sudo apt-get -qq update
+- sudo apt-get install wine1.6
 - npm install -g gulp
 - npm install electron-packager -g
-- travis_wait gulp build
+- gulp build
 deploy:
   provider: releases
   skip_cleanup: true
