@@ -21,11 +21,11 @@
     "request": "^2.72.0",
     "slug": "^0.9.1",
     "temp": "^0.8.3",
-    "xlsx": "^0.8.0"
+    "xlsx": "^0.8.0",
+    "electron-debug": "^0.6.0"
   },
   "devDependencies": {
     "chai": "^3.2.0",
-    "electron-debug": "^0.6.0",
     "electron-mocha": "^2.1.0",
     "electron-prebuilt": "^1.0.1",
     "gulp": "^3.9.1",
