@@ -12,7 +12,7 @@ before_deploy:
 - sudo apt-get install wine
 - npm install -g gulp
 - npm install electron-packager -g
-- gulp build
+- travis_wait gulp build
 deploy:
   provider: releases
   skip_cleanup: true
