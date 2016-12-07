@@ -10,7 +10,7 @@ var path = require('path');
 var exportdata = function() {
   var window = BrowserWindow.getFocusedWindow();
 
-  datapackage = new BrowserWindow({width: 450, height: 600});
+  var datapackage = new BrowserWindow({width: 450, height: 600});
   datapackage.loadURL('file://' + __dirname + '/../views/datapackage.html');
 
   datapackage.on('closed', function() {
