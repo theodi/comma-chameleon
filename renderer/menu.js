@@ -6,34 +6,42 @@ var menu = new Menu();
 var rowAbove = new MenuItem({
   label: 'Insert row above',
   click: function() {
-    hot.alter('insert_row', hot.getSelected()[0] - 1)
-    hot.deselectCell()
+    var range = hot.getSelectedRange();
+    var start = Math.min(range.from.row, range.to.row);
+    hot.alter('insert_row', start);
+    hot.deselectCell();
   }
-})
+});
 
 var rowBelow = new MenuItem({
   label: 'Insert row below',
   click: function() {
-    hot.alter('insert_row', hot.getSelected()[0] + 1)
-    hot.deselectCell()
+    var range = hot.getSelectedRange();
+    var end = Math.max(range.from.row, range.to.row);
+    hot.alter('insert_row', (end + 1));
+    hot.deselectCell();
   }
-})
+});
 
 var columnLeft = new MenuItem({
   label: 'Insert column left',
   click: function() {
-    hot.alter('insert_col', hot.getSelected()[1] - 1)
-    hot.deselectCell()
+    var range = hot.getSelectedRange();
+    var start = Math.min(range.from.col, range.to.col);
+    hot.alter('insert_col', start);
+    hot.deselectCell();
   }
-})
+});
 
 var columnRight = new MenuItem({
   label: 'Insert column right',
   click: function() {
-    hot.alter('insert_col', hot.getSelected()[1] + 1)
-    hot.deselectCell()
+    var range = hot.getSelectedRange();
+    var end = Math.max(range.from.col, range.to.col);
+    hot.alter('insert_col', (end + 1));
+    hot.deselectCell();
   }
-})
+});
 
 var removeRow = new MenuItem({
   label: 'Remove row(s)',

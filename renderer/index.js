@@ -30,12 +30,6 @@ container.ondrop = function (e) {
 
 container.addEventListener('contextmenu', function (e) {
   e.preventDefault();
-  if (hot.getSelected()[0] == 0) {
-    rowAbove.enabled = false;
-  }
-  if (hot.getSelected()[1] == 0) {
-    columnLeft.enabled = false;
-  }
   menu.popup(remote.getCurrentWindow());
   rowAbove.enabled = true;
   columnLeft.enabled = true;
