@@ -9,13 +9,23 @@ let electronVersion = '1.0.1'
 
 let platforms = {
   "darwin": 'csvlint-' + csvlintVersion + '-osx.tar.gz',
-  "linux": 'csvlint-' + csvlintVersion + '-linux-x86.tar.gz',
+  "linux": {
+    'ia32': 'csvlint-' + csvlintVersion + '-linux-x86.tar.gz',
+    'x64': 'csvlint-' + csvlintVersion + '-linux-x86_64.tar.gz',
+  },
   "win32": 'csvlint-' + csvlintVersion + '-win32.zip'
 }
 
-let getCSVLint = function(platform) {
-  var filename = platforms[platform]
+let getCSVLint = function(platform, arch) {
+  var filename;
+  if (platform === 'linux') {
+    filename = platforms[platform][arch];
+  } else {
+    filename = platforms[platform];
+  }
+
   execSync('curl -L -O --fail https://github.com/theodi/csvlint.sh/releases/download/'+ csvlintVersion +'/' + filename)
+
   if (platform == "win32") {
     execSync('unzip ' + filename)
     execSync('mv csvlint-'+ csvlintVersion +'-win32/ bin/')
@@ -28,10 +38,20 @@ let getCSVLint = function(platform) {
 }
 
 let buildPlatform = function(platform) {
-  pageBuild.start()
-  getCSVLint(platform)
-  execSync('electron-packager . comma-chameleon --platform='+ platform +' --arch=all --version='+ electronVersion +' --icon=resources/icon.icns --out=packages --overwrite')
-  execSync('rm -rf bin/')
+  pageBuild.start();
+
+  var architectures;
+  if (platform === 'linux') {
+    architectures = ['ia32', 'x64'];
+  } else {
+    architectures = ['all'];
+  }
+
+  for (var i = 0; i < architectures.length; i++) {
+    getCSVLint(platform, architectures[i]);
+    execSync('electron-packager . comma-chameleon --platform='+ platform +' --arch='+ architectures[i] +' --version='+ electronVersion +' --icon=resources/icon.icns --out=packages --overwrite');
+    execSync('rm -rf bin/');
+  }
 }
 
 let zipPackages = function() {
