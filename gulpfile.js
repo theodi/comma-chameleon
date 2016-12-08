@@ -1,7 +1,8 @@
 var gulp = require('gulp');
 var fs = require('fs');
+var os = require('os');
 var exec = require('child_process').exec;
-var argv = require('yargs').argv
+var argv = require('yargs').argv;
 
 var build = require('./scripts/build')
 var pageBuild = require('./scripts/page-build')
@@ -23,6 +24,6 @@ gulp.task('build', function() {
 });
 
 gulp.task('prebuild', function() {
-  if (!fs.existsSync('./bin')) build.getCSVLint(require('os').platform())
+  if (!fs.existsSync('./bin')) build.getCSVLint(os.platform(), os.arch());
   pageBuild.start();
 });
