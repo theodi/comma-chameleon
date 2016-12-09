@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 var $ = require('./../bower_components/jquery/dist/jquery.js');
 var _ = require('./../bower_components/lodash/lodash.js');
 var validationNotes = require('./validation_notes.json')
@@ -8,11 +8,6 @@ var colors = {
   warning: 'rgba(255, 152, 66, 0.6)',
   info: 'rgba(99, 149, 215, 0.6)'
 };
-
-var showLoader = function() {
-  $('#right-panel').removeClass("hidden")
-  $('#message-panel').html("<div class=\"validation-load\"><p><span class=\"glyphicon glyphicon-refresh spinning\"></span></p><p>Loading validation results...</p></div>");
-}
 
 var displayResults = function(results) {
   displayValidationMessages(JSON.parse(results).validation);
@@ -128,7 +123,6 @@ $('button[data-dismiss=alert]').click(function() {
 })
 
 module.exports = {
-  showLoader,
   displayResults
 }
 
