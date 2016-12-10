@@ -276,6 +276,13 @@ exports.menu = [
   },
   {
     label: 'Help',
-    submenu: []
+    submenu: [
+      {
+        label: 'Editor Keyboard Shortcuts',
+        click: function() {
+          help.showKeyboardHelp();
+        }
+      }
+    ]
   }
 ];
