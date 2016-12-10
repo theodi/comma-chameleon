@@ -44,7 +44,71 @@ var initialise = function(container) {
   return hot;
 };
 
+var insertRowAbove = function() {
+  var range = hot.getSelectedRange();
+  var start = Math.min(range.from.row, range.to.row);
+  hot.alter('insert_row', start);
+  hot.deselectCell();
+};
+
+var insertRowBelow = function() {
+  var range = hot.getSelectedRange();
+  var end = Math.max(range.from.row, range.to.row);
+  hot.alter('insert_row', (end + 1));
+  hot.deselectCell();
+};
+
+var insertColumnLeft = function() {
+  var range = hot.getSelectedRange();
+  var start = Math.min(range.from.col, range.to.col);
+  hot.alter('insert_col', start);
+  hot.deselectCell();
+};
+
+var insertColumnRight = function() {
+  var range = hot.getSelectedRange();
+  var end = Math.max(range.from.col, range.to.col);
+  hot.alter('insert_col', (end + 1));
+  hot.deselectCell();
+};
+
+var removeRows = function() {
+  var range = hot.getSelectedRange();
+
+  var start = Math.min(range.from.row, range.to.row);
+  var end   = Math.max(range.from.row, range.to.row);
+
+  for (var row = start; row <= end; row++) {
+    // rows are re-indexed after each remove
+    // so always remove 'start'
+    hot.alter('remove_row', start);
+  }
+
+  hot.deselectCell();
+};
+
+var removeColumns = function() {
+  var range = hot.getSelectedRange();
+
+  var start = Math.min(range.from.col, range.to.col);
+  var end   = Math.max(range.from.col, range.to.col);
+
+  for (var col = start; col <= end; col++) {
+    // cols are re-indexed after each remove
+    // so always remove 'start'
+    hot.alter('remove_col', start);
+  }
+
+  hot.deselectCell();
+};
+
 module.exports = {
+  insertRowAbove: insertRowAbove,
+  insertRowBelow: insertRowBelow,
+  insertColumnLeft: insertColumnLeft,
+  insertColumnRight: insertColumnRight,
+  removeRows: removeRows,
+  removeColumns: removeColumns,
   create: initialise,
   // returns the HoT object
-}
+};
