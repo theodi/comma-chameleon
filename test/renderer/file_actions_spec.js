@@ -11,6 +11,7 @@ var hotController = require('../../renderer/hot.js');
 var rows = require('./../../renderer/ragged-rows');
 var file_actions = require('./../../renderer/file-actions');
 var fs = require('fs');
+var os = require('os');
 
 beforeEach(function () {
   hotView = document.createElement('div');
@@ -43,13 +44,13 @@ describe('save file', function() {
   it('saves a file', function() {
     var data = "foo,bar,baz\r\n1,2,3\r\n4,5,6\r\n";
     file_actions.open(hot, data);
-    file_actions.save(hot, '/tmp/mycsv.csv');
+    file_actions.save(hot, os.tmpdir() + '/mycsv.csv');
 
-    fs.readFile('/tmp/mycsv.csv', 'utf-8', function (err, d) {
+    fs.readFile(os.tmpdir() + '/mycsv.csv', 'utf-8', function (err, d) {
       expect(d).to.eq(data);
     });
 
-    expect(document.title).to.eq('/tmp/mycsv.csv');
+    expect(document.title).to.eq(os.tmpdir() + '/mycsv.csv');
   });
 
 });
@@ -59,9 +60,9 @@ describe('convert file', function() {
   it('converts a file from csv to tsv', function() {
     var data = "foo,bar,baz\r\n1,2,3\r\n4,5,6";
     file_actions.open(hot, data);
-    file_actions.save(hot, '/tmp/mytsv.tsv', file_actions.formats.tsv);
+    file_actions.save(hot, os.tmpdir() + '/mytsv.tsv', file_actions.formats.tsv);
 
-    fs.readFile('/tmp/mytsv.tsv', 'utf-8', function (err, d) {
+    fs.readFile(os.tmpdir() + '/mytsv.tsv', 'utf-8', function (err, d) {
       expect(d).to.eq("foo\tbar\tbaz\r\n1\t2\t3\r\n4\t5\t6\r\n");
     });
   });
