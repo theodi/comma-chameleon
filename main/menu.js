@@ -168,7 +168,52 @@ exports.menu = [
         label: 'Select All',
         accelerator: 'CmdOrCtrl+A',
         selector: 'selectAll:'
-      }
+      },
+      {
+        type: 'separator'
+      },
+      {
+        label: 'Insert row above',
+        click: function() {
+          mainWindow.webContents.send('insertRowAbove');
+        }
+      },
+      {
+        label: 'Insert row below',
+        click: function() {
+          mainWindow.webContents.send('insertRowBelow');
+        }
+      },
+      {
+        type: 'separator'
+      },
+      {
+        label: 'Insert column left',
+        click: function() {
+          mainWindow.webContents.send('insertColumnLeft');
+        }
+      },
+      {
+        label: 'Insert column right',
+        click: function() {
+          mainWindow.webContents.send('insertColumnRight');
+        }
+      },
+      {
+        type: 'separator'
+      },
+      {
+        label: 'Remove row(s)',
+        click: function() {
+          mainWindow.webContents.send('removeRows');
+        }
+      },
+      {
+        label: 'Remove column(s)',
+        click: function() {
+          mainWindow.webContents.send('removeColumns');
+        }
+      },
     ]
   },
   {
