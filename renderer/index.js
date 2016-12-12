@@ -6,6 +6,7 @@ var schemawizard = require('../renderer/schemawizard.js');
 var rows = require('../renderer/ragged-rows.js');
 var validation = require('../renderer/validate.js');
 var file = require('../renderer/file-actions.js');
+var loader = require('../renderer/loader.js');
 
 var container = document.getElementById("editor");
 var hot = hotController.create(container);
@@ -93,7 +94,7 @@ ipc.on('fetchData', function() {
 });
 
 ipc.on('validationStarted', function() {
-  validation.showLoader();
+  loader.showLoader('Loading validation results...');
 });
 
 ipc.on('validationResults', function(e, results) {
