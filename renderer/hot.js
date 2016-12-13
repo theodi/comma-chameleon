@@ -9,6 +9,7 @@ var initialise = function(container) {
     columnSorting: true,
     contextMenu: false,
     autoRowSize: true,
+    enterBeginsEditing: false,
     afterInit: function() {
       loader.showLoader('Loading...');
     },
