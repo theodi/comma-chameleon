@@ -10,6 +10,14 @@ var initialise = function(container) {
     contextMenu: false,
     autoRowSize: true,
     enterBeginsEditing: false,
+    tabMoves: function(event) {
+      var selection = hot.getSelected();
+      next = hot.getCell(selection[0], selection[1] + 1)
+      if (next == null) {
+       hot.alter('insert_col', selection[1] + 1);
+      }
+      return {row: 0, col: 1}
+    },
     afterInit: function() {
       loader.showLoader('Loading...');
     },
