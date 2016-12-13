@@ -24,6 +24,14 @@ var initialise = function(container) {
     afterLoadData: function() {
       loader.hideLoader();
     },
+    enterMoves: function(event) {
+      var selection = hot.getSelected();
+      next = hot.getCell(selection[0] + 1, selection[1])
+      if (next == null) {
+       hot.alter('insert_row', selection[1] + 1);
+      }
+      return {row: 1, col: 0}
+    }
   });
   return hot;
 };
