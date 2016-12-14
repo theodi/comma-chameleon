@@ -45,6 +45,7 @@ var initialise = function(container) {
 };
 
 var insertRowAbove = function(deselect) {
+  hot.getActiveEditor().finishEditing(true);
   var range = hot.getSelectedRange();
   if (typeof range === 'undefined') { return; }
   var start = Math.min(range.from.row, range.to.row);
@@ -55,6 +56,7 @@ var insertRowAbove = function(deselect) {
 };
 
 var insertRowBelow = function(deselect) {
+  hot.getActiveEditor().finishEditing(true);
   var range = hot.getSelectedRange();
   if (typeof range === 'undefined') { return; }
   var end = Math.max(range.from.row, range.to.row);
@@ -65,6 +67,7 @@ var insertRowBelow = function(deselect) {
 };
 
 var insertColumnLeft = function(deselect) {
+  hot.getActiveEditor().finishEditing(true);
   var range = hot.getSelectedRange();
   if (typeof range === 'undefined') { return; }
   var start = Math.min(range.from.col, range.to.col);
@@ -75,6 +78,7 @@ var insertColumnLeft = function(deselect) {
 };
 
 var insertColumnRight = function(deselect) {
+  hot.getActiveEditor().finishEditing(true);
   var range = hot.getSelectedRange();
   if (typeof range === 'undefined') { return; }
   var end = Math.max(range.from.col, range.to.col);
