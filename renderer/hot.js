@@ -44,36 +44,44 @@ var initialise = function(container) {
   return hot;
 };
 
-var insertRowAbove = function() {
+var insertRowAbove = function(deselect) {
   var range = hot.getSelectedRange();
   if (typeof range === 'undefined') { return; }
   var start = Math.min(range.from.row, range.to.row);
   hot.alter('insert_row', start);
-  hot.deselectCell();
+  if (deselect) {
+    hot.deselectCell();
+  }
 };
 
-var insertRowBelow = function() {
+var insertRowBelow = function(deselect) {
   var range = hot.getSelectedRange();
   if (typeof range === 'undefined') { return; }
   var end = Math.max(range.from.row, range.to.row);
   hot.alter('insert_row', (end + 1));
-  hot.deselectCell();
+  if (deselect) {
+    hot.deselectCell();
+  }
 };
 
-var insertColumnLeft = function() {
+var insertColumnLeft = function(deselect) {
   var range = hot.getSelectedRange();
   if (typeof range === 'undefined') { return; }
   var start = Math.min(range.from.col, range.to.col);
   hot.alter('insert_col', start);
-  hot.deselectCell();
+  if (deselect) {
+    hot.deselectCell();
+  }
 };
 
-var insertColumnRight = function() {
+var insertColumnRight = function(deselect) {
   var range = hot.getSelectedRange();
   if (typeof range === 'undefined') { return; }
   var end = Math.max(range.from.col, range.to.col);
   hot.alter('insert_col', (end + 1));
-  hot.deselectCell();
+  if (deselect) {
+    hot.deselectCell();
+  }
 };
 
 var removeRows = function() {

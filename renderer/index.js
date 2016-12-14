@@ -102,19 +102,19 @@ ipc.on('validationResults', function(e, results) {
 });
 
 ipc.on('insertRowAbove', function() {
-  hotController.insertRowAbove();
+  hotController.insertRowAbove(false);
 });
 
 ipc.on('insertRowBelow', function() {
-  hotController.insertRowBelow();
+  hotController.insertRowBelow(false);
 });
 
 ipc.on('insertColumnLeft', function() {
-  hotController.insertColumnLeft();
+  hotController.insertColumnLeft(false);
 });
 
 ipc.on('insertColumnRight', function() {
-  hotController.insertColumnRight();
+  hotController.insertColumnRight(false);
 });
 
 ipc.on('removeRows', function() {

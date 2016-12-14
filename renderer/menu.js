@@ -8,28 +8,28 @@ var menu = new Menu();
 var rowAbove = new MenuItem({
   label: 'Insert row above',
   click: function() {
-    hotController.insertRowAbove();
+    hotController.insertRowAbove(true);
   }
 });
 
 var rowBelow = new MenuItem({
   label: 'Insert row below',
   click: function() {
-    hotController.insertRowBelow();
+    hotController.insertRowBelow(true);
   }
 });
 
 var columnLeft = new MenuItem({
   label: 'Insert column left',
   click: function() {
-    hotController.insertColumnLeft();
+    hotController.insertColumnLeft(true);
   }
 });
 
 var columnRight = new MenuItem({
   label: 'Insert column right',
   click: function() {
-    hotController.insertColumnRight();
+    hotController.insertColumnRight(true);
   }
 });
 
