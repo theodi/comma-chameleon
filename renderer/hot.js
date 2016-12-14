@@ -11,10 +11,12 @@ var initialise = function(container) {
     autoRowSize: true,
     enterBeginsEditing: false,
     tabMoves: function(event) {
-      var selection = hot.getSelected();
-      next = hot.getCell(selection[0], selection[1] + 1)
-      if (next == null) {
-       hot.alter('insert_col', selection[1] + 1);
+      if (!event.shiftKey) {
+        var selection = hot.getSelected();
+        next = hot.getCell(selection[0], selection[1] + 1)
+        if (next == null) {
+         hot.alter('insert_col', selection[1] + 1);
+        }
       }
       return {row: 0, col: 1}
     },
