@@ -174,14 +174,14 @@ exports.menu = [
       },
       {
         label: 'Insert row above',
-        accelerator: 'Alt+W',
+        accelerator: 'Alt+K',
         click: function() {
           mainWindow.webContents.send('insertRowAbove');
         }
       },
       {
         label: 'Insert row below',
-        accelerator: 'Alt+S',
+        accelerator: 'Alt+J',
         click: function() {
           mainWindow.webContents.send('insertRowBelow');
         }
@@ -191,14 +191,14 @@ exports.menu = [
       },
       {
         label: 'Insert column left',
-        accelerator: 'Alt+A',
+        accelerator: 'Alt+H',
         click: function() {
           mainWindow.webContents.send('insertColumnLeft');
         }
       },
       {
         label: 'Insert column right',
-        accelerator: 'Alt+D',
+        accelerator: 'Alt+L',
         click: function() {
           mainWindow.webContents.send('insertColumnRight');
         }
