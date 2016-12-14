@@ -27,10 +27,12 @@ var initialise = function(container) {
       loader.hideLoader();
     },
     enterMoves: function(event) {
-      var selection = hot.getSelected();
-      next = hot.getCell(selection[0] + 1, selection[1])
-      if (next == null) {
-       hot.alter('insert_row', selection[0] + 1);
+      if (!event.shiftKey) {
+        var selection = hot.getSelected();
+        next = hot.getCell(selection[0] + 1, selection[1])
+        if (next == null) {
+         hot.alter('insert_row', selection[0] + 1);
+        }
       }
       return {row: 1, col: 0}
     }
