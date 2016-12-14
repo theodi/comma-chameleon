@@ -32,9 +32,13 @@ var initialise = function(container) {
         next = hot.getCell(selection[0] + 1, selection[1])
         if (next == null) {
          hot.alter('insert_row', selection[0] + 1);
-        }
-      }
-      return {row: 1, col: 0}
+         return {row: 1, col: 0 - selection[1]}
+       } else {
+         return {row: 1, col: 0}
+       }
+     } else {
+       return {row: 1, col: 0}
+     }
     }
   });
   return hot;
