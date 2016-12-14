@@ -30,7 +30,7 @@ var initialise = function(container) {
       var selection = hot.getSelected();
       next = hot.getCell(selection[0] + 1, selection[1])
       if (next == null) {
-       hot.alter('insert_row', selection[1] + 1);
+       hot.alter('insert_row', selection[0] + 1);
       }
       return {row: 1, col: 0}
     }
