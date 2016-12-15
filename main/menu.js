@@ -52,12 +52,12 @@ exports.menu = [
       },
       {
         label: 'Hide Comma Chameleon',
-        accelerator: 'CmdOrCtrl+H',
+        accelerator: 'Cmd+H',
         selector: 'hide:'
       },
       {
         label: 'Hide Others',
-        accelerator: 'CmdOrCtrl+Shift+H',
+        accelerator: 'Cmd+Shift+H',
         selector: 'hideOtherApplications:'
       },
       {
@@ -174,14 +174,14 @@ exports.menu = [
       },
       {
         label: 'Insert row above',
-        accelerator: 'Alt+K',
+        accelerator: 'Ctrl+K',
         click: function() {
           mainWindow.webContents.send('insertRowAbove');
         }
       },
       {
         label: 'Insert row below',
-        accelerator: 'Alt+J',
+        accelerator: 'Ctrl+J',
         click: function() {
           mainWindow.webContents.send('insertRowBelow');
         }
@@ -191,14 +191,14 @@ exports.menu = [
       },
       {
         label: 'Insert column left',
-        accelerator: 'Alt+H',
+        accelerator: 'Ctrl+H',
         click: function() {
           mainWindow.webContents.send('insertColumnLeft');
         }
       },
       {
         label: 'Insert column right',
-        accelerator: 'Alt+L',
+        accelerator: 'Ctrl+L',
         click: function() {
           mainWindow.webContents.send('insertColumnRight');
         }
