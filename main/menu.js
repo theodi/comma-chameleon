@@ -52,12 +52,12 @@ exports.menu = [
       },
       {
         label: 'Hide Comma Chameleon',
-        accelerator: 'Cmd+H',
+        accelerator: 'CmdOrCtrl+H',
         selector: 'hide:'
       },
       {
         label: 'Hide Others',
-        accelerator: 'Cmd+Shift+H',
+        accelerator: 'CmdOrCtrl+Shift+H',
         selector: 'hideOtherApplications:'
       },
       {
@@ -95,7 +95,6 @@ exports.menu = [
       },
       {
         label: 'Import Excel file',
-        accelerator: 'CmdOrCtrl+I',
         click: function() { excel.importExcel(); }
       },
       {
@@ -174,14 +173,14 @@ exports.menu = [
       },
       {
         label: 'Insert row above',
-        accelerator: 'Ctrl+K',
+        accelerator: 'CmdOrCtrl+I',
         click: function() {
           mainWindow.webContents.send('insertRowAbove');
         }
       },
       {
         label: 'Insert row below',
-        accelerator: 'Ctrl+J',
+        accelerator: 'CmdOrCtrl+K',
         click: function() {
           mainWindow.webContents.send('insertRowBelow');
         }
@@ -191,14 +190,14 @@ exports.menu = [
       },
       {
         label: 'Insert column left',
-        accelerator: 'Ctrl+H',
+        accelerator: 'CmdOrCtrl+J',
         click: function() {
           mainWindow.webContents.send('insertColumnLeft');
         }
       },
       {
         label: 'Insert column right',
-        accelerator: 'Ctrl+L',
+        accelerator: 'CmdOrCtrl+L',
         click: function() {
           mainWindow.webContents.send('insertColumnRight');
         }
