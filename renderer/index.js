@@ -100,3 +100,27 @@ ipc.on('validationStarted', function() {
 ipc.on('validationResults', function(e, results) {
   validation.displayResults(results);
 });
+
+ipc.on('insertRowAbove', function() {
+  hotController.insertRowAbove(false);
+});
+
+ipc.on('insertRowBelow', function() {
+  hotController.insertRowBelow(false);
+});
+
+ipc.on('insertColumnLeft', function() {
+  hotController.insertColumnLeft(false);
+});
+
+ipc.on('insertColumnRight', function() {
+  hotController.insertColumnRight(false);
+});
+
+ipc.on('removeRows', function() {
+  hotController.removeRows();
+});
+
+ipc.on('removeColumns', function() {
+  hotController.removeColumns();
+});

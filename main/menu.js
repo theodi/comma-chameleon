@@ -95,7 +95,6 @@ exports.menu = [
       },
       {
         label: 'Import Excel file',
-        accelerator: 'CmdOrCtrl+I',
         click: function() { excel.importExcel(); }
       },
       {
@@ -168,7 +167,56 @@ exports.menu = [
         label: 'Select All',
         accelerator: 'CmdOrCtrl+A',
         selector: 'selectAll:'
-      }
+      },
+      {
+        type: 'separator'
+      },
+      {
+        label: 'Insert row above',
+        accelerator: 'CmdOrCtrl+I',
+        click: function() {
+          mainWindow.webContents.send('insertRowAbove');
+        }
+      },
+      {
+        label: 'Insert row below',
+        accelerator: 'CmdOrCtrl+K',
+        click: function() {
+          mainWindow.webContents.send('insertRowBelow');
+        }
+      },
+      {
+        type: 'separator'
+      },
+      {
+        label: 'Insert column left',
+        accelerator: 'CmdOrCtrl+J',
+        click: function() {
+          mainWindow.webContents.send('insertColumnLeft');
+        }
+      },
+      {
+        label: 'Insert column right',
+        accelerator: 'CmdOrCtrl+L',
+        click: function() {
+          mainWindow.webContents.send('insertColumnRight');
+        }
+      },
+      {
+        type: 'separator'
+      },
+      {
+        label: 'Remove row(s)',
+        click: function() {
+          mainWindow.webContents.send('removeRows');
+        }
+      },
+      {
+        label: 'Remove column(s)',
+        click: function() {
+          mainWindow.webContents.send('removeColumns');
+        }
+      },
     ]
   },
   {
@@ -227,6 +275,13 @@ exports.menu = [
   },
   {
     label: 'Help',
-    submenu: []
+    submenu: [
+      {
+        label: 'Editor Keyboard Shortcuts',
+        click: function() {
+          help.showKeyboardHelp();
+        }
+      }
+    ]
   }
 ];

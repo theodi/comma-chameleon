@@ -18,6 +18,7 @@ global.excel = require('./main/excel')
 global.fileActions = require('./main/file')
 global.tools = require('./main/tools')
 global.validate = require('./main/validate')
+global.help = require('./main/help');
 
 require('electron-debug')({showDevTools: true})
 /*require('crash-reporter').start(
