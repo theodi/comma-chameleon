@@ -8,20 +8,19 @@ var hotController = require('./../../renderer/hot.js'); // failing probably caus
 var handMadeHOT = require('./../../bower_components/handsontable/dist/handsontable.full.js');
 
 beforeEach(function () {
-    hotView = document.createElement('div');
-    hot = hotController.create(hotView);
+  hotView = document.createElement('div');
+  hot = hotController.create(hotView);
+  data = [
+    ["", "Ford", "Volvo", "Toyota", "Honda"],
+    ["2014", 10, 11, 12, 13],
+    ["2015", 20, 11, 14, 13],
+    ["2016", 30, 15, 12, 13],
+  ];
 });
 
 describe('loading Hands On Table library into workview', function(){
 
   it('constructs a Hands On Table element from source', function(){
-
-    var data = [
-      ["", "Ford", "Volvo", "Toyota", "Honda"],
-      ["2014", 10, 11, 12, 13],
-      ["2015", 20, 11, 14, 13],
-      ["2016", 30, 15, 12, 13]
-    ];
     var hot = new handMadeHOT(hotView,{
       data: data,
       colHeaders: true,
@@ -33,16 +32,7 @@ describe('loading Hands On Table library into workview', function(){
   });
 
   it('constructs hands on table from programs source files', function(){
-
-    var data = [
-      ["", "Ford", "Volvo", "Toyota", "Honda"],
-      ["2014", 10, 11, 12, 13],
-      ["2015", 20, 11, 14, 13],
-      ["2016", 30, 15, 12, 13]
-    ];
-
     hot.loadData(data);
-
     expect(hot.getData()).to.equal(data);
   });
 
