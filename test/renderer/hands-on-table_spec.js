@@ -32,8 +32,10 @@ describe('loading Hands On Table library into workview', function(){
   });
 
   it('constructs hands on table from programs source files', function(){
+    hot.addHook('afterLoadData', function() {
+      expect(hot.getData()).to.equal(data);
+    });
     hot.loadData(data);
-    expect(hot.getData()).to.equal(data);
   });
 
 });
