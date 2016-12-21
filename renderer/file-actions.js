@@ -51,7 +51,7 @@ var openFile = function(hot, data, format) {
   return arrays;
 };
 
-var saveFile = function(hot, fileName, format) {
+var saveFile = function(hot, fileName, format, callback) {
   var data;
   // if no format specified, default to csv
   if (typeof format === 'undefined') {
@@ -59,8 +59,12 @@ var saveFile = function(hot, fileName, format) {
   } else {
     data = $.csv.fromArrays(hot.getData(), format.options);
   }
-  fs.writeFile(fileName, data, function (err) {
-  });
+  if (typeof callback === 'undefined') {
+    fs.writeFile(fileName, data, function (err) {
+    });
+  } else {
+    fs.writeFile(fileName, data, callback);
+  }
   document.title = fileName;
 };
 
