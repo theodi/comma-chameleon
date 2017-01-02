@@ -38,6 +38,7 @@ function readFile(fileNames, format) {
 
 module.exports = {
   openFile,
+  readFile,
   saveFileAs,
   saveFile
 };
