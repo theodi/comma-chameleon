@@ -40,5 +40,20 @@ app.on('ready', function() {
   menu = Menu.buildFromTemplate(template);
   Menu.setApplicationMenu(menu);
 
-  utils.createWindow();
+  filename = null;
+  if (process.env.NODE_ENV === 'development') {
+    if (process.argv[2] && process.argv[2][0] !== '-') {
+      filename = process.argv[2];
+    }
+  } else {
+    if (process.argv[1] && process.argv[1][0] !== '-') {
+      filename = process.argv[1];
+    }
+  }
+
+  if (filename) {
+    fileActions.readFile([filename]);
+  } else {
+    utils.createWindow();
+  }
 });
