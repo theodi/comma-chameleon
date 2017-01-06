@@ -138,12 +138,16 @@ exports.menu = [
       {
         label: 'Undo',
         accelerator: 'CmdOrCtrl+Z',
-        selector: 'undo:'
+        click: function() {
+          mainWindow.webContents.send('editUndo');
+        }
       },
       {
         label: 'Redo',
         accelerator: 'Shift+CmdOrCtrl+Z',
-        selector: 'redo:'
+        click: function() {
+          mainWindow.webContents.send('editRedo');
+        }
       },
       {
         type: 'separator'
@@ -151,22 +155,31 @@ exports.menu = [
       {
         label: 'Cut',
         accelerator: 'CmdOrCtrl+X',
-        selector: 'cut:'
+        click: function() {
+          mainWindow.webContents.send('editCut');
+        }
       },
       {
         label: 'Copy',
         accelerator: 'CmdOrCtrl+C',
-        selector: 'copy:'
+        selector: 'copy:',
+        click: function() {
+          mainWindow.webContents.send('editCopy');
+        }
       },
       {
         label: 'Paste',
         accelerator: 'CmdOrCtrl+V',
-        selector: 'paste:'
+        click: function() {
+          mainWindow.webContents.send('editPaste');
+        }
       },
       {
         label: 'Select All',
         accelerator: 'CmdOrCtrl+A',
-        selector: 'selectAll:'
+        click: function() {
+          mainWindow.webContents.send('editSelectAll');
+        }
       },
       {
         type: 'separator'

@@ -101,6 +101,35 @@ ipc.on('validationResults', function(e, results) {
   validation.displayResults(results);
 });
 
+ipc.on('editUndo', function() {
+  if (hot.isUndoAvailable) {
+    hot.undo();
+  }
+});
+
+ipc.on('editRedo', function() {
+  if (hot.isRedoAvailable) {
+    hot.redo();
+  }
+});
+
+ipc.on('editCopy', function() {
+  hot.copyPaste.setCopyableText();
+});
+
+ipc.on('editCut', function() {
+  hot.copyPaste.setCopyableText();
+  hot.copyPaste.triggerCut();
+});
+
+ipc.on('editPaste', function() {
+  hot.copyPaste.triggerPaste();
+});
+
+ipc.on('editSelectAll', function() {
+  hot.selectCell(0, 0, (hot.countRows()-1), (hot.countCols()-1));
+});
+
 ipc.on('insertRowAbove', function() {
   hotController.insertRowAbove(false);
 });
