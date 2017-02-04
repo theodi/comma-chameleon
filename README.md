@@ -6,6 +6,8 @@
 
 A desktop CSV editor with validation magic - Built with electron.js
 
+See [https://comma-chameleon.io/](https://comma-chameleon.io/) for features and screenshots
+
 ## Download app
 
 Choose a platform from the [Releases page](https://github.com/theodi/comma-chameleon/releases/latest)
