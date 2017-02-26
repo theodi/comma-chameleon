@@ -1,4 +1,5 @@
 'use strict';
+var Handsontable = require('./../bower_components/handsontable/dist/handsontable.full.js');
 var $ = require('./../bower_components/jquery/dist/jquery.js');
 var _ = require('./../bower_components/lodash/lodash.js');
 var validationNotes = require('./validation_notes.json');

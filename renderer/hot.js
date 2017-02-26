@@ -1,4 +1,4 @@
-Handsontable = require('./../bower_components/handsontable/dist/handsontable.full.js');
+var Handsontable = require('./../bower_components/handsontable/dist/handsontable.full.js');
 var loader = require('../renderer/loader.js');
 
 var initialise = function(container) {
