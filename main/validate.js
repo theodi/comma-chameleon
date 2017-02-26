@@ -2,10 +2,10 @@ var Fs = require('fs');
 var temp = require('temp');
 var exec = require('child_process').exec;
 var ipc = require("electron").ipcMain;
-var path = require('path')
+var path = require('path');
 
 function validateWithSchema() {
-  var window = BrowserWindow.getFocusedWindow()
+  var window = BrowserWindow.getFocusedWindow();
   Dialog.showOpenDialog(
       { filters: [
           { name: 'json schemas', extensions: ['json'] }
@@ -14,37 +14,37 @@ function validateWithSchema() {
               return;
           } else {
               var fileName = fileNames[0];
-              validateFile(fileName, window)
+              validateFile(fileName, window);
           }
       });
 }
 
 function validateFile(schema, window) {
   if (window == undefined) {
-    window = BrowserWindow.getFocusedWindow()
+    window = BrowserWindow.getFocusedWindow();
   }
-  window.webContents.send('fetchData')
-  window.webContents.send('validationStarted')
+  window.webContents.send('fetchData');
+  window.webContents.send('validationStarted');
   ipc.once('dataSent', function(e, csv) {
-    file = writeTmpFile(csv)
+    file = writeTmpFile(csv);
     exec(csvlintPath(schema) + file, function(error, stdout){
-      window.webContents.send('validationResults', stdout)
+      window.webContents.send('validationResults', stdout);
     });
-  })
+  });
 }
 
 function writeTmpFile(csv) {
-  tmpPath = temp.path({ suffix: '.csv' })
+  tmpPath = temp.path({ suffix: '.csv' });
   Fs.writeFileSync(tmpPath, csv, 'utf8');
-  return tmpPath
+  return tmpPath;
 }
 
 function csvlintPath(schema) {
-  p = require('path').join(__dirname, '..', 'bin', 'csvlint')
+  p = require('path').join(__dirname, '..', 'bin', 'csvlint');
   if (schema !== undefined) {
-    p += ' --schema=' + schema
+    p += ' --schema=' + schema;
   }
-  return p + ' --json '
+  return p + ' --json ';
 }
 
 module.exports = {
@@ -56,5 +56,5 @@ if (process.env.NODE_ENV === 'test') {
   module.exports._private = {
     writeTmpFile,
     csvlintPath
-  }
+  };
 }
