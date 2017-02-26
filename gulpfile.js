@@ -12,7 +12,7 @@ gulp.task('page-build', function() {
 });
 
 gulp.task('build', function() {
-  if (argv.platform == undefined) {
+  if (argv.platform === undefined) {
     build.cleanup();
     build.buildAll();
     build.zipPackages();
