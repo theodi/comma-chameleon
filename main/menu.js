@@ -1,3 +1,4 @@
+/*jshint loopfunc: true */
 var file_formats = require('../renderer/file-actions.js').formats;
 
 // build 'Open..' and 'Save As..' submenus
