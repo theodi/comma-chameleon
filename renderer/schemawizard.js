@@ -27,7 +27,7 @@ var headerToVocab = function(headerArray){
     );
   });
   return schemaInWaiting;
-}
+};
 
 var headerRow = function(rowArray) {
   // function that extracts header data for use in schema wizard
@@ -38,9 +38,9 @@ var headerRow = function(rowArray) {
     }
   });
   return rowArray;
-}
+};
 
 module.exports = {
   returnHeaderRow: headerRow,
   createSchema: headerToVocab
-}
+};
