@@ -7,7 +7,7 @@
 var headerToVocab = function(headerArray){
   // a JSON parser
 
-  if(headerArray == false){
+  if(headerArray === false){
     // throw exception
     alert("Your first row doesn't contain the correct content for generating header data.\n It may be empty, try deleting the first row or naming it descriptively");
     return;

@@ -12,9 +12,9 @@
       for (var x = 0; x < getMaxColumns(worksheet); x++) {
         if (hot.getDataAtCell(y,x) === undefined) {
           // only triggers if a cell returns undefined
-          if (ragged_rows == 0) {
+          if (ragged_rows === 0) {
             // this is a way of prompting once and then proceeding to fix every other ragged instance
-            if (autoConfirm == true || confirm("Your file has ragged rows, do you want to correct this?")) {
+            if (autoConfirm === true || confirm("Your file has ragged rows, do you want to correct this?")) {
 
               ragged_rows = 1;
               reportFix(worksheet,y,x);

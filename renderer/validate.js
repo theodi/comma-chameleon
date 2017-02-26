@@ -63,7 +63,7 @@ var highlightCell = function(d) {
 };
 
 var scrollToCell = function(row, col) {
-  if (row == null && col == null) return;
+  if (row === null && col === null) return;
   row = row || 1;
   col = col || 1;
   hot.selectCell(row-1, col-1);
