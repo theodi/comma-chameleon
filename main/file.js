@@ -9,7 +9,7 @@ function openFile(format) {
 }
 
 function saveFileAs(format) {
-  window = BrowserWindow.getFocusedWindow();
+  var window = BrowserWindow.getFocusedWindow();
   Dialog.showSaveDialog({ filters: format.filters }, function (fileName) {
     if (fileName === undefined) return;
     window.webContents.send('saveData', fileName, format);
@@ -19,7 +19,7 @@ function saveFileAs(format) {
 }
 
 function saveFile() {
-  window = BrowserWindow.getFocusedWindow();
+  var window = BrowserWindow.getFocusedWindow();
   var fileName = window.getTitle();
   window.webContents.send('saveData', fileName, window.format);
 }
