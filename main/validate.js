@@ -20,7 +20,7 @@ function validateWithSchema() {
 }
 
 function validateFile(schema, window) {
-  if (window == undefined) {
+  if (window === undefined) {
     window = BrowserWindow.getFocusedWindow();
   }
   window.webContents.send('fetchData');
