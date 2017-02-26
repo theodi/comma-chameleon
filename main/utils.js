@@ -7,7 +7,7 @@ function createWindow(data, title, format) {
   // if window is not initialized with a format, default to csv
   format = typeof format !== 'undefined' ? format : file_formats.csv;
 
-  mainWindow = new BrowserWindow({width: 800, height: 600});
+  var mainWindow = new BrowserWindow({width: 800, height: 600});
   mainWindow.format = format;
 
   mainWindow.loadURL('file://' + __dirname + '/../views/index.html');
