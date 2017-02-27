@@ -31,6 +31,18 @@ for (var format in file_formats) {
   }
   save_submenu.push(save_option);
 }
+open_submenu.push({
+  label: 'Custom',
+  click: function() {
+    fileActions.openCustom();
+  },
+});
+save_submenu.push({
+  label: 'Custom',
+  click: function() {
+    fileActions.saveAsCustom();
+  },
+});
 
 
 exports.menu = [
