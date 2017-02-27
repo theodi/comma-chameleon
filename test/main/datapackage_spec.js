@@ -1,12 +1,12 @@
 /**
  * Created by stephenfortune on 15/09/15.
  */
-process.env.NODE_ENV = 'test' // this variable is set to permit access to the packages private methods
+process.env.NODE_ENV = 'test'; // this variable is set to permit access to the packages private methods
 
 var assert = require('chai').assert;
 var expect = require('chai').expect;
 var should = require('chai').should();
-var datapackage = require('./../../main/datapackage')
+var datapackage = require('./../../main/datapackage');
 
 describe("methods access for datapackage object", function(){
   //console.log(JSON.stringify(process.env));
@@ -15,7 +15,7 @@ describe("methods access for datapackage object", function(){
     expect(datapackage.exportDatapackage).to.be.a('function');
     expect(datapackage._private.inputToVocab).to.be.a('function');
     expect(datapackage._private.zipPackage).to.be.a('function');
-  })
+  });
 
   //expect(add).to.be.a('function');
 });

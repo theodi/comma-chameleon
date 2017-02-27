@@ -19,7 +19,7 @@ describe('populate a web page and check that everything is there', function(){
     var targetdiv = document.createElement('div');
     targetdiv.innerHTML = "populated";
     expect(targetdiv === div);
-    expect(targetdiv.innerText).to.not.equal(div.innerText)
-  })
+    expect(targetdiv.innerText).to.not.equal(div.innerText);
+  });
 
 });

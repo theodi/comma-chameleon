@@ -4,15 +4,15 @@ var os = require('os');
 var exec = require('child_process').exec;
 var argv = require('yargs').argv;
 
-var build = require('./scripts/build')
-var pageBuild = require('./scripts/page-build')
+var build = require('./scripts/build');
+var pageBuild = require('./scripts/page-build');
 
 gulp.task('page-build', function() {
   pageBuild.start();
 });
 
 gulp.task('build', function() {
-  if (argv.platform == undefined) {
+  if (argv.platform === undefined) {
     build.cleanup();
     build.buildAll();
     build.zipPackages();

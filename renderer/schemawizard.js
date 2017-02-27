@@ -7,7 +7,7 @@
 var headerToVocab = function(headerArray){
   // a JSON parser
 
-  if(headerArray == false){
+  if(headerArray === false){
     // throw exception
     alert("Your first row doesn't contain the correct content for generating header data.\n It may be empty, try deleting the first row or naming it descriptively");
     return;
@@ -27,7 +27,7 @@ var headerToVocab = function(headerArray){
     );
   });
   return schemaInWaiting;
-}
+};
 
 var headerRow = function(rowArray) {
   // function that extracts header data for use in schema wizard
@@ -38,9 +38,9 @@ var headerRow = function(rowArray) {
     }
   });
   return rowArray;
-}
+};
 
 module.exports = {
   returnHeaderRow: headerRow,
   createSchema: headerToVocab
-}
+};

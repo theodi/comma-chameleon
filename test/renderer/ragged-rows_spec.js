@@ -1,10 +1,10 @@
 /**
  * Created by stephenfortune on 15/09/15.
  */
-process.env.NODE_ENV = 'test'
+process.env.NODE_ENV = 'test';
 
-var assert = require('chai').assert
-var expect = require('chai').expect
+var assert = require('chai').assert;
+var expect = require('chai').expect;
 var should = require('chai').should();
 
 var hotController = require('./../../renderer/hot.js');
@@ -18,7 +18,7 @@ before(function(){
   mpanel.setAttribute("id","message-panel");
   document.body.appendChild(mpanel);
   document.body.appendChild(rpanel);
-})
+});
 
 beforeEach(function () {
   hotView = document.createElement('div');
@@ -55,7 +55,7 @@ describe('testing ragged row functions against 2D array', function(){
 
     hot.loadData(data);
     raggedRows.fixRaggedRows(hot.getData(), true);
-    expect(mpanel.innerText).to.have.string('has been added to file')
+    expect(mpanel.innerText).to.have.string('has been added to file');
 
   });
 
@@ -69,7 +69,7 @@ describe('testing ragged row functions against 2D array', function(){
 
     hot.loadData(data);
     raggedRows.fixRaggedRows(hot.getData(), true);
-    expect(mpanel.innerText).to.have.string('has been added to file')
+    expect(mpanel.innerText).to.have.string('has been added to file');
   });
 
 
@@ -91,4 +91,4 @@ describe('testing ragged row functions against 2D array', function(){
   });
 
 
-})
+});

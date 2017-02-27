@@ -1,5 +1,5 @@
 const fs = require('fs');
-const $ = jQuery = require('./../bower_components/jquery/dist/jquery.js');
+const $ = global.jQuery = require('./../bower_components/jquery/dist/jquery.js');
 require('./../bower_components/jquery-csv/src/jquery.csv.js');
 
 /**

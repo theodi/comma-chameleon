@@ -10,6 +10,7 @@ before_script:
 - npm install
 script:
 - npm test
+- node_modules/jshint/bin/jshint .
 before_deploy:
 - sudo dpkg --add-architecture i386
 - sudo apt-get -qq update
