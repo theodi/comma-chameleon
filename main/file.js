@@ -27,6 +27,7 @@ function openCustom() {
     dialog = null;
   });
   ipc.once('formatSelected', function(event, data) {
+    dialog.close();
     var format = makeCustomFormat(data.separator, data.delimiter);
     openFile(format);
   });
@@ -53,6 +54,7 @@ function saveAsCustom() {
     dialog = null;
   });
   ipc.once('formatSelected', function(event, data) {
+    dialog.close();
     var format = makeCustomFormat(data.separator, data.delimiter);
     saveFileAs(format, window);
   });

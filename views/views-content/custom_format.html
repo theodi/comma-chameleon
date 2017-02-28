@@ -38,13 +38,11 @@
 
         $("#submit").click(function(e) {
           e.preventDefault();
-          console.log($('#separator').val());
           format = {
             separator: $('#separator').val(),
             delimiter: $('#delimiter').val(),
           };
           ipc.send('formatSelected', format);
-          window.close();
         });
 
       });
