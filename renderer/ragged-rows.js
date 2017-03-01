@@ -7,9 +7,10 @@
     autoConfirm = typeof autoConfirm !== 'undefined' ? autoConfirm : false;
 
     var ragged_rows = 0;
+    var maxColumns = getMaxColumns(worksheet);
     //
     for (var y = 0; y < worksheet.length; y++) {
-      for (var x = 0; x < getMaxColumns(worksheet); x++) {
+      for (var x = 0; x < maxColumns; x++) {
         if (hot.getDataAtCell(y,x) === undefined) {
           // only triggers if a cell returns undefined
           if (ragged_rows === 0) {
