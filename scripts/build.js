@@ -49,7 +49,7 @@ let buildPlatform = function(platform) {
 
   for (var i = 0; i < architectures.length; i++) {
     getCSVLint(platform, architectures[i]);
-    execSync('electron-packager . "Comma Chameleon" --platform='+ platform +' --arch='+ architectures[i] +' --version='+ electronVersion +' --icon=resources/icon.icns --out=packages --overwrite');
+    execSync('electron-packager . "Comma Chameleon" --platform='+ platform +' --arch='+ architectures[i] +' --electron-version='+ electronVersion +' --icon=resources/icon.icns --out=packages --overwrite');
     execSync('rm -rf bin/');
   }
 };
