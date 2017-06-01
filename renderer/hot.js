@@ -6,6 +6,7 @@ var initialise = function(container) {
   var hot = new Handsontable(container, {
     colHeaders: true,
     rowHeaders: true,
+    fixedRowsTop: 0,
     columnSorting: true,
     contextMenu: false,
     autoRowSize: true,
@@ -120,6 +121,21 @@ var removeColumns = function() {
   hot.deselectCell();
 };
 
+var freezeRows = function(){
+    var selected = hot.getSelected(); // get the selected row
+    if(selected[3]+1 === hot.countCols()){
+      // clunky but functional workaround to 0 indexed array and sum comparison
+        hot.updateSettings({fixedRowsTop: selected[0]});
+        // TODO some color coding too, not straightFWD
+        hot.render();
+        hot.deselectCell();
+
+    } else {
+        window.alert("you have selected an invalid range, please select an entire single row");
+    }
+    hot.deselectCell();
+}
+
 module.exports = {
   insertRowAbove: insertRowAbove,
   insertRowBelow: insertRowBelow,
@@ -127,6 +143,7 @@ module.exports = {
   insertColumnRight: insertColumnRight,
   removeRows: removeRows,
   removeColumns: removeColumns,
+  freezeRows: freezeRows,
   create: initialise,
   // returns the HoT object
 };
