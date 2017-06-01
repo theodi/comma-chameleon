@@ -239,7 +239,7 @@ describe('freeze rows and columns', function () {
             hot.selectCell(1,0,1,4);
             hotController.freezeRows();
             var settings = hot.getSettings();
-            assert.strictEqual(settings.fixedRowsTop, 0);
+            assert.strictEqual(settings.fixedRowsTop, 1);
         });
         hot.loadData(data);
     });
