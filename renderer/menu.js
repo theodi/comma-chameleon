@@ -47,6 +47,15 @@ var removeCol = new MenuItem({
   }
 });
 
+var freezeRow = new MenuItem({
+    label: 'Freeze row(s) above',
+    click: function(){
+      hotController.freezeRows();
+    }
+});
+
+menu.append(freezeRow);
+menu.append(new MenuItem({ type: 'separator' }));
 menu.append(rowAbove);
 menu.append(rowBelow);
 menu.append(new MenuItem({ type: 'separator' }));
