@@ -233,13 +233,10 @@ describe('freeze rows and columns', function () {
     it('freezes the upper most row', function () {
         hot.addHook('afterLoadData', function() {
           // tests happen here
-            var settings = hot.getSettings();
-            assert.strictEqual(settings.fixedRowsTop, 0);
-
+            assert.strictEqual(hot.getSettings()["fixedRowsTop"], 0);
             hot.selectCell(1,0,1,4);
             hotController.freezeRows();
-            var settings = hot.getSettings();
-            assert.strictEqual(settings.fixedRowsTop, 1);
+            assert.strictEqual(hot.getSettings()["fixedRowsTop"], 1);
         });
         hot.loadData(data);
     });
