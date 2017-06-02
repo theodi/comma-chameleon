@@ -198,6 +198,15 @@ exports.menu = [
         type: 'separator'
       },
       {
+        label: 'Freeze/Unfreeze Rows',
+          click: function(){
+
+          }
+      },
+      {
+        type: 'separator'
+      },
+      {
         label: 'Insert row above',
         accelerator: 'CmdOrCtrl+I',
         click: function() {
