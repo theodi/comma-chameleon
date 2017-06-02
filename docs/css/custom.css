@@ -1,0 +1,141 @@
+div#sub-page {
+  margin-top: 20px;
+}
+
+.navbar {
+  background: #20b24b;
+  max-width:none;
+  margin-bottom:0;
+}
+
+.navbar ul {
+  max-width:1000px;
+  margin: 0 auto;
+}
+
+sixteen.colgrid .row .pull_eight.twelve.columns {
+  margin-bottom: 0px;
+  background: #20b24b;
+}
+
+.navbar ul li > a {
+  color: white;
+  font-size:18px;
+  font-size:1.1rem;
+}
+
+.gumby-no-touch .navbar ul li:hover > a,
+.gumby-touch .navbar ul li.active > a {
+  position: relative;
+  background: #0a742a;
+}
+
+.navbar a.toggle:hover {
+  background: #0a742a;
+}
+
+.navbar a.toggle:active, .navbar a.toggle.active {
+  background: #0a742a;
+}
+
+.site-header {
+  background-position: 50% 0px;
+  background-image: url("../img/chameleon.jpg");
+  border-top:none;
+}
+
+.header-intro-wrap {
+  padding-bottom: 100px;
+  text-align: center;
+}
+
+.btn-docs {
+  background: #20b24b;
+  border-color: #20b24b;
+}
+
+.footer-info a {
+  color: white;
+}
+
+@media screen and (max-width: 468px) {
+  .logo {
+    font-size: 45px;
+  }
+  .btn-docs {
+    border-color: #20b24b;
+  }
+  .site-header {
+  }
+  .header-intro-wrap p {
+    margin-top: 20px;
+  }
+  .header-signup {
+  }
+  .header-intro-wrap .hs-disclaimer {
+    margin-top:50px;
+  }
+  .header-intro-wrap {
+    padding-bottom: 50px;
+  }
+}
+
+.video-wrapper {
+  position: relative;
+  padding-bottom: 53.6%; /* 16:9 */
+  padding-top: 25px;
+  height: 0;
+}
+.video-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.download-options p {
+  text-align: center;
+}
+
+.download-options a {
+  color: #fff;
+}
+
+.download-options a i {
+  color: #fff;
+  font-size: 45px;
+  padding: 12px;
+}
+
+.features-item img {
+  height: 220px;
+}
+
+.comma-chameleon {
+  border-radius: 50%;
+  height: 100px;
+  width: 100px;
+  margin: 20px 0 0 0;
+}
+
+#odi-logo {
+  margin: 5px 0;
+}
+
+#features img {
+}
+
+.feature {
+  margin: 40px auto;
+}
+
+.featureimg {
+  float: right;
+  width: 300px;
+  text-align: center;
+  margin-left: 40px;
+}
+
+.featureimg img {
+}
