@@ -1,5 +1,7 @@
 {
   "name": "comma-chameleon",
+  "author": "The ODI",
+  "description": "A Desktop CSV Editor",
   "version": "0.5.1",
   "license": "MIT",
   "main": "main.js",
@@ -7,7 +9,9 @@
     "start": "gulp prebuild && NODE_ENV=development electron .",
     "test": "electron-mocha test/main/ && electron-mocha --renderer --no-timeouts test/renderer/",
     "test-main": "electron-mocha test/main/",
-    "test-renderer": "electron-mocha --renderer --no-timeouts test/renderer/"
+    "test-renderer": "electron-mocha --renderer --no-timeouts test/renderer/",
+    "pack": "build --dir",
+    "dist": "build"
   },
   "repository": {
     "type": "git",
@@ -35,5 +39,11 @@
     "pryjs": "^1.0.2",
     "sinon": "^1.17.3",
     "yargs": "^4.7.1"
+  },
+  "build": {
+    "appId": "com.theodi.commachameleon",
+    "mac": {
+      "category": "your.app.category.type"
+    }
   }
 }
