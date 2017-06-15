@@ -22,28 +22,29 @@ Choose a platform from the [Releases page](https://github.com/theodi/comma-chame
 
 #### Requirements
 
-`node`  
-`npm`  
+`node`
+`yarn`
 `electron`
 
-You can use npm to install all relevant packages and development dependencies using the following set of commands. The following uses Homebrew to install node and npm on Mac OSX. Node and Bower install the dependencies contained in `package.json` and `bower.json` respectively
+You can use yarn to install all relevant packages and development dependencies using the following set of commands. The following uses Homebrew to install node and yarn on Mac OSX. Yarn and Bower install the dependencies contained in `package.json` and `bower.json` respectively
 ```
 brew install node
-npm install
-npm install -g bower
+brew install yarn
+yarn install
+yarn global add bower
 bower install
 ```
 
 #### External (non-js) dependencies
 
-Comma Chameleon relies on [CSVlint.sh](https://github.com/theodi/csvlint.sh) to carry out CSV validation. This is not included in the repo, and is downloaded and installed by the [build.js](https://github.com/theodi/comma-chameleon/blob/master/scripts/build.js) script. As with the page build script, this script is also run when the app is started with the `npm start` command.
+Comma Chameleon relies on [CSVlint.sh](https://github.com/theodi/csvlint.sh) to carry out CSV validation. This is not included in the repo, and is downloaded and installed by the [build.js](https://github.com/theodi/comma-chameleon/blob/master/scripts/build.js) script. As with the page build script, this script is also run when the app is started with the `yarn start` command.
 
 #### Development: Running the full application locally
 
 To open the app run:
 
 ```
-npm start
+yarn start
 ```
 
 This will download the non-js dependencies (namely [CSVlint.sh](https://github.com/theodi/csvlint.sh)), build the [handlebars](http://handlebarsjs.com/) views (from `comma-chameleon/views-content`) and start the app.
@@ -63,23 +64,23 @@ For example, when importing an Excel file, the main process [reads the Excel fil
 
 ##### Views
 
-To keep things [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself), the HTML views are written using [Handlebars](http://handlebarsjs.com/), see the [`views-content`](https://github.com/theodi/comma-chameleon/blob/master/views/views-content) folder. The views are then built using the [page-build.js](https://github.com/theodi/comma-chameleon/blob/master/scripts/page-build.js) script, which also gets run when the app is started with the `npm start` command.
+To keep things [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself), the HTML views are written using [Handlebars](http://handlebarsjs.com/), see the [`views-content`](https://github.com/theodi/comma-chameleon/blob/master/views/views-content) folder. The views are then built using the [page-build.js](https://github.com/theodi/comma-chameleon/blob/master/scripts/page-build.js) script, which also gets run when the app is started with the `yarn start` command.
 
 ### Tests
 
 [Electron-Mocha](https://github.com/jprichardson/electron-mocha) has been adopted for testing, it enables both DOM and node.js testing and provides command line options to enable testing of both.
 
-Assuming you have installed `electron-mocha` globally (via `npm i electron-mocha -g`), you can run the tests like this:
+Assuming you have installed `electron-mocha` globally (via `yarn global add electron-mocha`), you can run the tests like this:
 
 ```
-npm run test
+yarn run test
 ```
 
 Or to run the main and renderer tests separately, you can run:
 
 ```
-npm run test-main  # run tests for the runtime components provided by Electron
-npm run test-renderer # run tests that execute client side
+yarn run test-main  # run tests for the runtime components provided by Electron
+yarn run test-renderer # run tests that execute client side
 ```
 
 Otherwise you can run:
@@ -98,7 +99,7 @@ electron-mocha --renderer test/renderer/ # run tests that execute client side
 [Install gulp](https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md)
 ```
 brew install wine # This allows us to specify the icon for Windows pacakges
-npm i electron-packager -g
+yarn global add electron-packager
 gulp build
 ```
 
