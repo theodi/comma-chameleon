@@ -152,14 +152,14 @@ exports.menu = [
         label: 'Undo',
         accelerator: 'CmdOrCtrl+Z',
         click: function() {
-          mainWindow.webContents.send('editUndo');
+          BrowserWindow.getFocusedWindow().webContents.send('editUndo');
         }
       },
       {
         label: 'Redo',
         accelerator: 'Shift+CmdOrCtrl+Z',
         click: function() {
-          mainWindow.webContents.send('editRedo');
+          BrowserWindow.getFocusedWindow().webContents.send('editRedo');
         }
       },
       {
@@ -169,7 +169,7 @@ exports.menu = [
         label: 'Cut',
         accelerator: 'CmdOrCtrl+X',
         click: function() {
-          mainWindow.webContents.send('editCut');
+          BrowserWindow.getFocusedWindow().webContents.send('editCut');
         }
       },
       {
@@ -177,21 +177,21 @@ exports.menu = [
         accelerator: 'CmdOrCtrl+C',
         selector: 'copy:',
         click: function() {
-          mainWindow.webContents.send('editCopy');
+          BrowserWindow.getFocusedWindow().webContents.send('editCopy');
         }
       },
       {
         label: 'Paste',
         accelerator: 'CmdOrCtrl+V',
         click: function() {
-          mainWindow.webContents.send('editPaste');
+          BrowserWindow.getFocusedWindow().webContents.send('editPaste');
         }
       },
       {
         label: 'Select All',
         accelerator: 'CmdOrCtrl+A',
         click: function() {
-          mainWindow.webContents.send('editSelectAll');
+          BrowserWindow.getFocusedWindow().webContents.send('editSelectAll');
         }
       },
       {
@@ -201,14 +201,14 @@ exports.menu = [
         label: 'Insert row above',
         accelerator: 'CmdOrCtrl+I',
         click: function() {
-          mainWindow.webContents.send('insertRowAbove');
+          BrowserWindow.getFocusedWindow().webContents.send('insertRowAbove');
         }
       },
       {
         label: 'Insert row below',
         accelerator: 'CmdOrCtrl+K',
         click: function() {
-          mainWindow.webContents.send('insertRowBelow');
+          BrowserWindow.getFocusedWindow().webContents.send('insertRowBelow');
         }
       },
       {
@@ -218,14 +218,14 @@ exports.menu = [
         label: 'Insert column left',
         accelerator: 'CmdOrCtrl+J',
         click: function() {
-          mainWindow.webContents.send('insertColumnLeft');
+          BrowserWindow.getFocusedWindow().webContents.send('insertColumnLeft');
         }
       },
       {
         label: 'Insert column right',
         accelerator: 'CmdOrCtrl+L',
         click: function() {
-          mainWindow.webContents.send('insertColumnRight');
+          BrowserWindow.getFocusedWindow().webContents.send('insertColumnRight');
         }
       },
       {
@@ -234,13 +234,13 @@ exports.menu = [
       {
         label: 'Remove row(s)',
         click: function() {
-          mainWindow.webContents.send('removeRows');
+          BrowserWindow.getFocusedWindow().webContents.send('removeRows');
         }
       },
       {
         label: 'Remove column(s)',
         click: function() {
-          mainWindow.webContents.send('removeColumns');
+          BrowserWindow.getFocusedWindow().webContents.send('removeColumns');
         }
       },
     ]
