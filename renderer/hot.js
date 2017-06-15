@@ -14,7 +14,7 @@ var initialise = function(container) {
       if (!event.shiftKey) {
         var selection = hot.getSelected();
         next = hot.getCell(selection[0], selection[1] + 1);
-        if (next === null) {
+        if (next === undefined) {
          hot.alter('insert_col', selection[1] + 1);
         }
       }
