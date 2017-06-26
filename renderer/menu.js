@@ -54,7 +54,15 @@ var freezeRow = new MenuItem({
     }
 });
 
+var unfreezeRow = new MenuItem({
+    label: 'unfreeze row(s)',
+    click: function(){
+        hotController.unfreeze();
+    }
+});
+
 menu.append(freezeRow);
+menu.append(unfreezeRow);
 menu.append(new MenuItem({ type: 'separator' }));
 menu.append(rowAbove);
 menu.append(rowBelow);
