@@ -121,8 +121,14 @@ var removeColumns = function() {
   hot.deselectCell();
 };
 
+var unfreeze = function(){
+    hot.updateSettings({fixedRowsTop: 0});
+    hot.render();
+}
+
 var freezeRows = function(){
     var selected = hot.getSelected(); // get the selected row
+    console.log(selected);
     if(selected[3]+1 === hot.countCols()){
       // clunky but functional workaround to 0 indexed array and sum comparison
         hot.updateSettings({fixedRowsTop: selected[0]});
@@ -144,6 +150,7 @@ module.exports = {
   removeRows: removeRows,
   removeColumns: removeColumns,
   freezeRows: freezeRows,
+  unfreeze: unfreeze,
   create: initialise,
   // returns the HoT object
 };
