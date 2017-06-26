@@ -95,6 +95,7 @@ electron-mocha --renderer test/renderer/ # run tests that execute client side
 
 (This assumes you're running OSX)
 
+[Install gulp](https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md)
 ```
 brew install wine # This allows us to specify the icon for Windows pacakges
 npm i electron-packager -g

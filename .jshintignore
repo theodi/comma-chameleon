@@ -1,3 +1,5 @@
 bin/
 bower_components/
 node_modules/
+docs/js/plugins
+docs/js/libs
