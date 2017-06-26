@@ -198,9 +198,15 @@ exports.menu = [
         type: 'separator'
       },
       {
-        label: 'Freeze/Unfreeze Rows',
+        label: 'Freeze Rows',
           click: function(){
-
+              BrowserWindow.getFocusedWindow().webContents.send('freezeRows');
+          }
+      },
+      {
+        label: 'Unfreeze Rows',
+          click: function(){
+              BrowserWindow.getFocusedWindow().webContents.send('unfreeze');
           }
       },
       {
