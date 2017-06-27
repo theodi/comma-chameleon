@@ -153,3 +153,10 @@ ipc.on('removeRows', function() {
 ipc.on('removeColumns', function() {
   hotController.removeColumns();
 });
+
+ipc.on('freezeRows', function(){
+  hotController.freezeRows();
+})
+ipc.on('unfreeze', function(){
+  hotController.unfreeze();
+})
