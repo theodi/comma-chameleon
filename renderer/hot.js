@@ -124,7 +124,7 @@ var removeColumns = function() {
 var unfreeze = function(){
     hot.updateSettings({fixedRowsTop: 0});
     hot.render();
-}
+};
 
 var freezeRows = function(){
     var selected = hot.getSelected(); // get the selected row
@@ -140,7 +140,7 @@ var freezeRows = function(){
         window.alert("you have selected an invalid range, please select an entire single row");
     }
     hot.deselectCell();
-}
+};
 
 module.exports = {
   insertRowAbove: insertRowAbove,
