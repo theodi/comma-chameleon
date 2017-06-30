@@ -18,7 +18,9 @@ Integrate with [Octopub](https://octopub.io/) and publish your data to Github
 
 Choose a platform from the [Releases page](https://github.com/theodi/comma-chameleon/releases/latest).
 
-Drag the application to your applications folder. If you encounter a warning message informing you the application cannot be opened due to emanating from an unknown developer try the following. This occurs due to Mac OS quarantining applications where it cannot determine the 
+Drag the application to your applications folder. If you encounter a warning message informing you the application cannot be opened due to emanating from an unknown developer try the following. This occurs due to Mac OS quarantining applications where it cannot determine the certificate used to sign the application.  
+Steps:
+
 Right click the app, then option+click on Open.
 
 ### Development
