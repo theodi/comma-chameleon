@@ -14,9 +14,14 @@ Validate your CSV on the fly using [CSVlint](http://csvlint.io/), so you can be 
 Comma Chameleon lets you export your data as a [Data Package](http://data.okfn.org/doc/data-package), ready for publication and reuse  
 Integrate with [Octopub](https://octopub.io/) and publish your data to Github  
 
-## Download app
+## Download and Install App
 
-Choose a platform from the [Releases page](https://github.com/theodi/comma-chameleon/releases/latest)
+Choose a platform from the [Releases page](https://github.com/theodi/comma-chameleon/releases/latest).
+
+Drag the application to your applications folder. If you encounter a warning message informing you the application cannot be opened due to emanating from an unknown developer try the following. This occurs due to Mac OS quarantining applications where it cannot determine the certificate used to sign the application.  
+Steps:
+
+Right click the app, then option+click on Open.
 
 ### Development
 
