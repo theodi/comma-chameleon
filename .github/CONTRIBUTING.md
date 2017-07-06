@@ -16,7 +16,7 @@ Ensure that the [tests](https://github.com/theodi/comma-chameleon/blob/master/RE
 All contributions to the codebase - whether fork or pull request - will be reviewed per the below criteria.
 To increase your chances of your push being accepted please be aware of the following
 - Write [well formed commit messages](http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html)
-- Follow our [style guide recommendations](https://github.com/theodi/toolbox/blob/README.md#code-style-guide)
+- Follow Electron [style guide recommendations](https://github.com/electron/electron/blob/master/docs/development/coding-style.md#javascript)
 - Write tests for all changes (additions or refactors of existing code).
 - Of the github integrations we use two will be utilised to check appraise your contribution. In order of priority these are
     - Travis ensures that all tests (existing and additions) pass
@@ -29,4 +29,4 @@ If you make a contribution to another repository in the Toolbox you will be expe
 
 ## Code Style Guide
 
-We follow the same code style conventions as detailed in Github’s [Ruby Style Guide](https://github.com/github/rubocop-github/blob/master/STYLEGUIDE.md)
+We follow the same loose code style conventions as detailed in Electron's [Javascript Style Guide](https://github.com/electron/electron/blob/master/docs/development/coding-style.md#javascript)
