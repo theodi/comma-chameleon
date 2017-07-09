@@ -8,6 +8,8 @@
 
 See [https://comma-chameleon.io/](https://comma-chameleon.io/) for features and screenshots or download the app and start using it now!
 
+Follow the [public feature roadmap for Comma Chameleon](https://trello.com/b/2xc7Q0kd/labs-public-toolbox-roadmap?menu=filter&filter=label:Comma%20Chameleon)
+
 ## Summary of features
 
 Validate your CSV on the fly using [CSVlint](http://csvlint.io/), so you can be sure your data is reuse-ready before you publish it  
