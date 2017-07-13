@@ -40,7 +40,7 @@ app.on('ready', function () {
   menu = Menu.buildFromTemplate(template)
   Menu.setApplicationMenu(menu)
 
-  filename = null
+  var filename = null
   if (process.env.NODE_ENV === 'development') {
     if (process.argv[2] && process.argv[2][0] !== '-') {
       filename = process.argv[2]
