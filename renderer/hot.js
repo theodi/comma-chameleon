@@ -4,43 +4,43 @@ var loader = require('../renderer/loader.js');
 var initialise = function(container) {
 
   var hot = new Handsontable(container, {
-    colHeaders: true,
-    rowHeaders: true,
-    fixedRowsTop: 0,
-    columnSorting: true,
-    contextMenu: false,
-    autoRowSize: true,
-    enterBeginsEditing: false,
-    tabMoves: function(event) {
-      if (!event.shiftKey) {
-        var selection = hot.getSelected();
-        next = hot.getCell(selection[0], selection[1] + 1);
-        if (next === undefined) {
-         hot.alter('insert_col', selection[1] + 1);
-        }
+      colHeaders: true,
+      rowHeaders: true,
+      fixedRowsTop: 0,
+      columnSorting: true,
+      contextMenu: false,
+      autoRowSize: true,
+      enterBeginsEditing: false,
+      tabMoves: function(event) {
+          if (!event.shiftKey) {
+              var selection = hot.getSelected();
+              next = hot.getCell(selection[0], selection[1] + 1);
+              if (next === undefined) {
+                  hot.alter('insert_col', selection[1] + 1);
+              }
+          }
+          return {row: 0, col: 1};
+      },
+      afterInit: function() {
+          loader.showLoader('Loading...');
+      },
+      afterLoadData: function() {
+          loader.hideLoader();
+      },
+      enterMoves: function(event) {
+          if (!event.shiftKey) {
+              var selection = hot.getSelected();
+              next = hot.getCell(selection[0] + 1, selection[1]);
+              if (next === null) {
+                  hot.alter('insert_row', selection[0] + 1);
+                  return {row: 1, col: 0 - selection[1]};
+              } else {
+                  return {row: 1, col: 0};
+              }
+          } else {
+              return {row: 1, col: 0};
+          }
       }
-      return {row: 0, col: 1};
-    },
-    afterInit: function() {
-      loader.showLoader('Loading...');
-    },
-    afterLoadData: function() {
-      loader.hideLoader();
-    },
-    enterMoves: function(event) {
-      if (!event.shiftKey) {
-        var selection = hot.getSelected();
-        next = hot.getCell(selection[0] + 1, selection[1]);
-        if (next === null) {
-         hot.alter('insert_row', selection[0] + 1);
-         return {row: 1, col: 0 - selection[1]};
-       } else {
-         return {row: 1, col: 0};
-       }
-     } else {
-       return {row: 1, col: 0};
-     }
-    }
   });
   return hot;
 };
@@ -121,25 +121,18 @@ var removeColumns = function() {
   hot.deselectCell();
 };
 
-var unfreeze = function(){
+var unfreezeHeaderRow = function(){
     hot.updateSettings({fixedRowsTop: 0});
-    hot.render();
+    hot.updateSettings({colHeaders: true});
+    hot.deselectCell();
 };
 
-var freezeRows = function(){
-    var selected = hot.getSelected(); // get the selected row
-    console.log(selected);
-    if(selected[3]+1 === hot.countCols()){
-      // clunky but functional workaround to 0 indexed array and sum comparison
-        hot.updateSettings({fixedRowsTop: selected[0]});
-        // TODO some color coding too, not straightFWD
-        hot.render();
-        hot.deselectCell();
+var freezeHeaderRow = function(){
 
-    } else {
-        window.alert("you have selected an invalid range, please select an entire single row");
-    }
+    hot.updateSettings({fixedRowsTop: 1});
+    hot.updateSettings({}, false);
     hot.deselectCell();
+
 };
 
 module.exports = {
@@ -149,8 +142,8 @@ module.exports = {
   insertColumnRight: insertColumnRight,
   removeRows: removeRows,
   removeColumns: removeColumns,
-  freezeRows: freezeRows,
-  unfreeze: unfreeze,
+  freeze: freezeHeaderRow,
+  unfreeze: unfreezeHeaderRow,
   create: initialise,
   // returns the HoT object
 };
