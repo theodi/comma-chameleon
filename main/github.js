@@ -24,13 +24,13 @@ var loadWindow = function (githubWindow, apiKey, viewName) {
 }
 
 var checkForAPIKey = function (url) {
-  regex = escape(rootURL + '/redirect?api_key=') + '([a-z0-9]+)'
-  match = url.match(new RegExp(regex))
+  var regex = escape(rootURL + '/redirect?api_key=') + '([a-z0-9]+)'
+  var match = url.match(new RegExp(regex))
   return match
 }
 
 var writeData = function (csv, filename) {
-  path = tmpdir + '/' + slug(filename, {lower: true}) + '.csv'
+  var path = tmpdir + '/' + slug(filename, {lower: true}) + '.csv'
   Fs.writeFileSync(path, csv, 'utf8')
   return path
 }
@@ -98,9 +98,9 @@ var displayResult = function (result, apiKey) {
 }
 
 var waitForDataset = function (jobURL, apiKey, callback) {
-  url = rootURL + jobURL
+  var url = rootURL + jobURL
 
-  options = {
+  var options = {
     json: true,
     headers: {
       'Authorization': apiKey
@@ -128,8 +128,8 @@ var uploadToGithub = function (parentWindow, data, apiKey) {
   parentWindow.webContents.send('getCSV', fileFormats.csv)
 
   ipc.once('sendCSV', function (e, csv) {
-    dataset = querystring.parse(data)
-    file = writeData(csv, dataset.file_name)
+    var dataset = querystring.parse(data)
+    var file = writeData(csv, dataset.file_name)
     postData(dataset, file, apiKey)
   })
 }
@@ -149,7 +149,7 @@ var authAndLoad = function (viewName) {
   githubWindow.loadURL(rootURL + '/auth/github?referer=comma-chameleon')
 
   githubWindow.webContents.on('did-get-redirect-request', function (event, oldUrl, newUrl) {
-    match = checkForAPIKey(newUrl)
+    var match = checkForAPIKey(newUrl)
     if (match) {
       loadWindow(githubWindow, match[1], viewName)
     }
@@ -168,8 +168,8 @@ var addFileToGithub = function () {
     console.log(data)
 
     ipc.once('sendCSV', function (e, csv) {
-      dataset = querystring.parse(data)
-      file = writeData(csv, dataset.file_name)
+      var dataset = querystring.parse(data)
+      var file = writeData(csv, dataset.file_name)
       putData(dataset, file, apiKey)
     })
   })
