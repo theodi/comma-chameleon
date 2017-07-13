@@ -36,5 +36,10 @@
     "sinon": "^1.17.3",
     "standard": "^10.0.2",
     "yargs": "^4.7.1"
+  },
+  "standard": {
+    "ignore": [
+      "docs"
+    ]
   }
 }
