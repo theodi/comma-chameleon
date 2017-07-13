@@ -1,43 +1,43 @@
 /* jshint loopfunc: true */
-var file_formats = require('../renderer/file-actions.js').formats
+var fileFormats = require('../renderer/file-actions.js').formats
 
 // build 'Open..' and 'Save As..' submenus
-var open_submenu = []
-var save_submenu = []
-for (var format in file_formats) {
-  var open_option = {
-    label: file_formats[format].label,
+var openSubmenu = []
+var saveSubmenu = []
+for (var format in fileFormats) {
+  var openOption = {
+    label: fileFormats[format].label,
     click: (function (format) {
       return function () {
         fileActions.openFile(format)
       }
-    }(file_formats[format]))
+    }(fileFormats[format]))
   }
   if (format === 'csv') {
-    open_option.accelerator = 'CmdOrCtrl+O'
+    openOption.accelerator = 'CmdOrCtrl+O'
   }
-  open_submenu.push(open_option)
+  openSubmenu.push(openOption)
 
-  var save_option = {
-    label: file_formats[format].label,
+  var saveOption = {
+    label: fileFormats[format].label,
     click: (function (format) {
       return function () {
         fileActions.saveFileAs(format)
       }
-    }(file_formats[format]))
+    }(fileFormats[format]))
   }
   if (format === 'csv') {
-    save_option.accelerator = 'Shift+CmdOrCtrl+S'
+    saveOption.accelerator = 'Shift+CmdOrCtrl+S'
   }
-  save_submenu.push(save_option)
+  saveSubmenu.push(saveOption)
 }
-open_submenu.push({
+openSubmenu.push({
   label: 'Custom',
   click: function () {
     fileActions.openCustom()
   }
 })
-save_submenu.push({
+saveSubmenu.push({
   label: 'Custom',
   click: function () {
     fileActions.saveAsCustom()
@@ -103,7 +103,7 @@ exports.menu = [
       },
       {
         label: 'Open File..',
-        submenu: open_submenu
+        submenu: openSubmenu
       },
       {
         label: 'Import Excel file',
@@ -120,7 +120,7 @@ exports.menu = [
       },
       {
         label: 'Save As..',
-        submenu: save_submenu
+        submenu: saveSubmenu
       },
       {
         label: 'Export as Datapackage',
