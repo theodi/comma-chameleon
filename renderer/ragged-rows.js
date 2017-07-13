@@ -21,7 +21,7 @@ var amendRows = function (worksheet, autoConfirm) {
           } else {
             raggedRows = -1
           }
-        } else if (raggedRows == 1) {
+        } else if (raggedRows === 1) {
           reportFix(worksheet, y, x)
         }
       }
