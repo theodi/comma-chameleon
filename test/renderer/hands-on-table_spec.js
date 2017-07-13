@@ -235,7 +235,7 @@ describe('freeze rows and columns', function () {
           // tests happen here
             assert.strictEqual(hot.getSettings()["fixedRowsTop"], 0);
             hot.selectCell(1,0,1,4);
-            hotController.freezeRows();
+            hotController.freeze();
             assert.strictEqual(hot.getSettings()["fixedRowsTop"], 1);
         });
         hot.loadData(data);
