@@ -1,4 +1,5 @@
 'use strict'
+let exec = require('child_process').exec
 let execSync = require('child_process').execSync
 let path = require('path')
 var pageBuild = require('./page-build')
