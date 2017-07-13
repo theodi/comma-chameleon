@@ -53,24 +53,24 @@ var exportdata = function () {
   })
 }
 
-function datapackageJson (data_arg, headers, format) {
-  data_arg.keywords = data_arg.keywords.split(',')
-  data_arg.resources = [
+function datapackageJson (DataArg, headers, format) {
+  DataArg.keywords = DataArg.keywords.split(',')
+  DataArg.resources = [
     {
-      'name': data_arg.name,
-      'path': 'data/' + data_arg.name + '.' + format.default_extension,
+      'name': DataArg.name,
+      'path': 'data/' + DataArg.name + '.' + format.default_extension,
       'mediatype': format.mime_type,
       'schema': headers
     }
   ]
-  return data_arg
+  return DataArg
 }
 
-function generateDatapackage (fileName, data_arg, csv, format) {
-  zip = new require('node-zip')()
-  zip.file('datapackage.json', JSON.stringify(data_arg, null, 2))
-  zip.file('data/' + data_arg.name + '.' + format.default_extension, csv)
-  zipData = zip.generate({base64: false, compression: 'DEFLATE'})
+function generateDatapackage (fileName, DataArg, csv, format) {
+  var Zip = new require('node-zip')()
+  Zip.file('datapackage.json', JSON.stringify(DataArg, null, 2))
+  Zip.file('data/' + DataArg.name + '.' + format.default_extension, csv)
+  var zipData = Zip.generate({base64: false, compression: 'DEFLATE'})
   Fs.writeFileSync(fileName, zipData, 'binary')
 }
 
