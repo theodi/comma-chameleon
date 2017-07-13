@@ -13,7 +13,7 @@ var formats = {
     filters: [
       { name: 'csv files', extensions: ['csv'] }
     ],
-    options: { separator: ',', delimiter: '"'},
+    options: {separator: ',', delimiter: '"'},
     mime_type: 'text/csv',
     default_extension: 'csv'
   },
@@ -24,7 +24,7 @@ var formats = {
       { name: 'txt files', extensions: ['txt'] },
       { name: 'dat files', extensions: ['dat'] }
     ],
-    options: { separator: '\t', delimiter: '"'},
+    options: {separator: '\t', delimiter: '"'},
     mime_type: 'text/tab-separated-values',
     default_extension: 'tsv'
   },
@@ -33,7 +33,7 @@ var formats = {
     filters: [
       { name: 'csv files', extensions: ['csv'] }
     ],
-    options: { separator: ';', delimiter: '"'},
+    options: {separator: ';', delimiter: '"'},
     mime_type: 'text/csv',
     default_extension: 'csv'
   }
