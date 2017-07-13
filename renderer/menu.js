@@ -48,14 +48,14 @@ var removeCol = new MenuItem({
 });
 
 var freezeRow = new MenuItem({
-    label: 'Freeze row(s) above',
+    label: 'Freeze Header Row',
     click: function(){
-      hotController.freezeRows();
+      hotController.freeze();
     }
 });
 
 var unfreezeRow = new MenuItem({
-    label: 'unfreeze row(s)',
+    label: 'unfreeze header row',
     click: function(){
         hotController.unfreeze();
     }
