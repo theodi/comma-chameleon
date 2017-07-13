@@ -1,7 +1,7 @@
 var gulp = require('gulp')
 var fs = require('fs')
 var os = require('os')
-var exec = require('child_process').exec
+
 var argv = require('yargs').argv
 
 var build = require('./scripts/build')
