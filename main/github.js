@@ -12,7 +12,7 @@ var querystring = require('querystring')
 var escape = require('escape-regexp')
 var slug = require('slug')
 var tmpdir = require('os-tmpdir')()
-var file_formats = require('../renderer/file-actions.js').formats
+var fileFormats = require('../renderer/file-actions.js').formats
 
 var rootURL = process.env.NODE_ENV == 'development' ? 'http://git-data-publisher.dev' : 'https://octopub.io'
 
@@ -125,7 +125,7 @@ var waitForDataset = function (jobURL, apiKey, callback) {
 }
 
 var uploadToGithub = function (parentWindow, data, apiKey) {
-  parentWindow.webContents.send('getCSV', file_formats.csv)
+  parentWindow.webContents.send('getCSV', fileFormats.csv)
 
   ipc.once('sendCSV', function (e, csv) {
     dataset = querystring.parse(data)
@@ -164,7 +164,7 @@ var addFileToGithub = function () {
   authAndLoad('choose-repo')
 
   ipc.on('addFileToExisting', function (e, data, apiKey) {
-    parentWindow.webContents.send('getCSV', file_formats.csv)
+    parentWindow.webContents.send('getCSV', fileFormats.csv)
     console.log(data)
 
     ipc.once('sendCSV', function (e, csv) {

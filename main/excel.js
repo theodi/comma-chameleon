@@ -5,8 +5,8 @@ function importExcel () {
     if (fileNames === undefined) return
     var fileName = fileNames[0]
     var workbook = XLSX.readFile(fileName)
-    var FirstSheetName = workbook.SheetNames[0]
-    var worksheet = workbook.Sheets[FirstSheetName]
+    var firstSheetName = workbook.SheetNames[0]
+    var worksheet = workbook.Sheets[firstSheetName]
 
     var popup = new BrowserWindow({width: 300, height: 150})
     popup.loadURL('file://' + __dirname + '/../views/select_worksheet.html')
