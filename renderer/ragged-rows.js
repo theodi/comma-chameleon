@@ -6,22 +6,22 @@
 var amendRows = function (worksheet, autoConfirm) {
   autoConfirm = typeof autoConfirm !== 'undefined' ? autoConfirm : false
 
-  var ragged_rows = 0
+  var raggedRows = 0
   var maxColumns = getMaxColumns(worksheet)
     //
   for (var y = 0; y < worksheet.length; y++) {
     for (var x = 0; x < maxColumns; x++) {
       if (hot.getDataAtCell(y, x) === undefined) {
           // only triggers if a cell returns undefined
-        if (ragged_rows === 0) {
+        if (raggedRows === 0) {
             // this is a way of prompting once and then proceeding to fix every other ragged instance
           if (autoConfirm === true || window.confirm('Your file has ragged rows, do you want to correct this?')) {
-            ragged_rows = 1
+            raggedRows = 1
             reportFix(worksheet, y, x)
           } else {
-            ragged_rows = -1
+            raggedRows = -1
           }
-        } else if (ragged_rows == 1) {
+        } else if (raggedRows == 1) {
           reportFix(worksheet, y, x)
         }
       }
@@ -37,27 +37,27 @@ var reportFix = function (sheet, y, x) {
   messagePanel.innerHTML += '<p>' + fixCell(sheet, y, x) + '<p>'
 }
 
-function getMaxColumns (csv_array) {
-  var max_columns = 0
-  for (var i = 0; i < csv_array.length; i++) {
-    var col_length = csv_array[i].length
-    if (col_length > max_columns) {
-      max_columns = col_length
+function getMaxColumns (csvArray) {
+  var maxColumns = 0
+  for (var i = 0; i < csvArray.length; i++) {
+    var colLength = csvArray[i].length
+    if (colLength > maxColumns) {
+      maxColumns = colLength
     }
   }
-  return max_columns
+  return maxColumns
 }
 
-function fixCell (csv_array, y, x) {
-  csv_array[y].push('')
+function fixCell (csvArray, y, x) {
+  csvArray[y].push('')
   var logMsg = 'Cell (' + String.fromCharCode(97 + x).toUpperCase() + ',' + (y + 1) + ') has been added to file'
   console.log(logMsg)
   return logMsg
 }
 
-var updateTable = function (csv_array) {
+var updateTable = function (csvArray) {
   hot.updateSettings({
-    data: csv_array
+    data: csvArray
   })
 }
 
