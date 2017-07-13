@@ -91,9 +91,9 @@ var messageTemplate = _.template('<div><h5><%= errorText(data) %></h5><p><%= err
     },
     errorGuidance: function (data) {
       var guidance = validationNotes.errors[data.type + '_guidance_html']
-      var guidance_template = _.template(guidance)
+      var guidanceTemplate = _.template(guidance)
       data.column = numToCol(data.col)
-      return guidance_template(data)
+      return guidanceTemplate(data)
     },
     numToCol: numToCol
   },
