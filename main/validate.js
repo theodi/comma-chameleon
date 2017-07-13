@@ -26,7 +26,7 @@ function validateFile (schema, window) {
   window.webContents.send('fetchData')
   window.webContents.send('validationStarted')
   ipc.once('dataSent', function (e, csv) {
-    file = writeTmpFile(csv)
+    var file = writeTmpFile(csv)
     exec(csvlintPath(schema) + file, function (error, stdout) {
       window.webContents.send('validationResults', stdout)
     })
@@ -34,13 +34,13 @@ function validateFile (schema, window) {
 }
 
 function writeTmpFile (csv) {
-  tmpPath = temp.path({ suffix: '.csv' })
+  var tmpPath = temp.path({ suffix: '.csv' })
   Fs.writeFileSync(tmpPath, csv, 'utf8')
   return tmpPath
 }
 
 function csvlintPath (schema) {
-  p = require('path').join(__dirname, '..', 'bin', 'csvlint')
+  var p = require('path').join(__dirname, '..', 'bin', 'csvlint')
   if (schema !== undefined) {
     p += ' --schema=' + schema
   }
