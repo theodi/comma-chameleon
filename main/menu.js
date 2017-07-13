@@ -1,5 +1,5 @@
 /* jshint loopfunc: true */
-var fileActions = require('../renderer/file-actions.js')
+// var fileActions = require('../renderer/file-actions.js')
 var fileFormats = require('../renderer/file-actions.js').formats
 
 // build 'Open..' and 'Save As..' submenus
