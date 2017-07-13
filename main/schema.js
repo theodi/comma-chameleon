@@ -21,10 +21,10 @@ function generateTemplate () {
 function templateFromSchema (schema) {
   try {
     schema = JSON.parse(schema)
-    header = schema.fields.map(function (field) {
+    var header = schema.fields.map(function (field) {
       return '"' + field.name + '"'
     })
-    row = new Array(schema.fields.length)
+    var row = new Array(schema.fields.length)
     return header.join(',') + '\r\n' + row.join(',')
   } catch (err) {
     Dialog.showMessageBox({
