@@ -3,7 +3,7 @@ function makeCustomFormat (separator, delimiter) {
   return {
     label: 'Custom',
     filters: [],
-    options: { separator: separator, delimiter: delimiter},
+    options: {separator: separator, delimiter: delimiter},
     mime_type: 'text/plain',
     default_extension: 'txt'
   }
