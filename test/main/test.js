@@ -1,3 +1,4 @@
+/* eslint-env mocha */
 process.env.NODE_ENV = 'test' // this variable is set to permit access to the packages private methods
 
 var assert = require('chai').assert

@@ -1,6 +1,7 @@
 /**
  * Created by stephenfortune on 15/09/15.
  */
+/* eslint-env mocha */
 process.env.NODE_ENV = 'test'
 
 var assert = require('chai').assert
