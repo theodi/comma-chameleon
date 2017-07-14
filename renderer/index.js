@@ -23,6 +23,7 @@ container.ondrop = function (e) {
   e.preventDefault()
   var f = e.dataTransfer.files[0]
   fs.readFile(f.path, 'utf-8', function (err, data) {
+    if (err) throw err
     // if we're dragging a file in, default the format to comma-separated
     var arrays = file.open(hot, data, file.formats.csv.options)
     rows.fixRaggedRows(arrays)

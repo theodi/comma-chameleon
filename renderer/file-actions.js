@@ -61,6 +61,7 @@ var saveFile = function (hot, fileName, format, callback) {
   }
   if (typeof callback === 'undefined') {
     fs.writeFile(fileName, data, function (err) {
+      if (err) throw err
     })
   } else {
     fs.writeFile(fileName, data, callback)
