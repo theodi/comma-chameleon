@@ -56,6 +56,7 @@ var postData = function (dataset, file, apiKey) {
   }
 
   request.post(opts, function (err, resp, body) {
+    if (err) throw err
     displayResult(body, apiKey)
   })
 }
@@ -75,6 +76,7 @@ var putData = function (dataset, file, apiKey) {
   }
 
   request.post(opts, function (err, resp, body) {
+    if (err) throw err
     displayResult(body, apiKey)
   })
 }
@@ -110,9 +112,11 @@ var waitForDataset = function (jobURL, apiKey, callback) {
 
   var checkURL = setInterval(function () {
     request.get(options, function (err, resp, body) {
+      if (err) throw err
       if (body.dataset_url) {
         options.url = rootURL + body.dataset_url
         request.get(options, function (err, resp, body) {
+          if (err) throw err
           clearInterval(checkURL)
           callback('success', body.gh_pages_url)
         })
