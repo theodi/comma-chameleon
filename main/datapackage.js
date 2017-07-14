@@ -53,17 +53,17 @@ var exportdata = function () {
   })
 }
 
-function datapackageJson (DataArg, headers, format) {
-  DataArg.keywords = DataArg.keywords.split(',')
-  DataArg.resources = [
+function datapackageJson (dataArg, headers, format) {
+  dataArg.keywords = dataArg.keywords.split(',')
+  dataArg.resources = [
     {
-      'name': DataArg.name,
-      'path': 'data/' + DataArg.name + '.' + format.default_extension,
+      'name': dataArg.name,
+      'path': 'data/' + dataArg.name + '.' + format.default_extension,
       'mediatype': format.mime_type,
       'schema': headers
     }
   ]
-  return DataArg
+  return dataArg
 }
 
 function generateDatapackage (fileName, DataArg, csv, format) {
