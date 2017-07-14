@@ -18,7 +18,7 @@ describe('methods access for datapackage object', function () {
 
 describe('templateFromSchema', function () {
   it('can generate headers from a schema', function (done) {
-    fileName = __dirname + '/../fixtures/schema.json'
+    fileName = `${__dirname}/../fixtures/schema.json`
     Fs.readFile(fileName, 'utf-8', function (err, data) {
       template = schema._private.templateFromSchema(data).split('\r\n')
       expect(template[0]).to.eq('"Post Unique Reference","Name","Grade","Job Title","Job/Team Function","Parent Department","Organisation","Unit","Contact Phone","Contact E-mail","Reports to Senior Post","Salary Cost of Reports (%)","FTE","Actual Pay Floor (%)","Actual Pay Ceiling (%)","Profession","Notes","Valid?"')
@@ -28,7 +28,7 @@ describe('templateFromSchema', function () {
   })
 
   it('returns an error if json is invalid', function (done) {
-    fileName = __dirname + '/../fixtures/invalid.json'
+    fileName = `${__dirname}/../fixtures/invalid.json`
     Fs.readFile(fileName, 'utf-8', function (err, data) {
       stub = sinon.stub(Dialog, 'showMessageBox')
       expect(schema._private.templateFromSchema(data)).to.eq(undefined)

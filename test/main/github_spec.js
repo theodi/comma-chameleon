@@ -45,7 +45,7 @@ describe('github', function () {
         'frequency': 'monthly'
       }
 
-      file = __dirname + '/../fixtures/fixture.csv'
+      file = `${__dirname}/../fixtures/fixture.csv`
 
       stub = sinon.stub(github._private.request, 'post')
 
@@ -78,7 +78,7 @@ describe('github', function () {
 
   describe('putData', function () {
     it('puts data to the right place', function () {
-      file = __dirname + '/../fixtures/fixture.csv'
+      file = `${__dirname}/../fixtures/fixture.csv`
 
       dataset = {
         dataset: 123,
