@@ -3,10 +3,7 @@ process.env.NODE_ENV = 'test'
 
 var chai = require('chai')
 var expect = chai.expect
-
-var $ = require('./../../bower_components/jquery/dist/jquery.js')
 var hotController = require('../../renderer/hot.js')
-var rows = require('./../../renderer/ragged-rows')
 var file_actions = require('./../../renderer/file-actions')
 var fs = require('fs')
 var os = require('os')
