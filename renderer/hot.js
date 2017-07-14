@@ -1,8 +1,7 @@
-var Handsontable = require('./../bower_components/handsontable/dist/handsontable.full.js');
-var loader = require('../renderer/loader.js');
+var Handsontable = require('./../bower_components/handsontable/dist/handsontable.full.js')
+var loader = require('../renderer/loader.js')
 
-var initialise = function(container) {
-
+var initialise = function (container) {
   var hot = new Handsontable(container, {
     colHeaders: true,
     rowHeaders: true,
@@ -10,115 +9,115 @@ var initialise = function(container) {
     contextMenu: false,
     autoRowSize: true,
     enterBeginsEditing: false,
-    tabMoves: function(event) {
+    tabMoves: function (event) {
       if (!event.shiftKey) {
-        var selection = hot.getSelected();
-        next = hot.getCell(selection[0], selection[1] + 1);
+        var selection = hot.getSelected()
+        var next = hot.getCell(selection[0], selection[1] + 1)
         if (next === undefined) {
-         hot.alter('insert_col', selection[1] + 1);
+          hot.alter('insert_col', selection[1] + 1)
         }
       }
-      return {row: 0, col: 1};
+      return {row: 0, col: 1}
     },
-    afterInit: function() {
-      loader.showLoader('Loading...');
+    afterInit: function () {
+      loader.showLoader('Loading...')
     },
-    afterLoadData: function() {
-      loader.hideLoader();
+    afterLoadData: function () {
+      loader.hideLoader()
     },
-    enterMoves: function(event) {
+    enterMoves: function (event) {
       if (!event.shiftKey) {
-        var selection = hot.getSelected();
-        next = hot.getCell(selection[0] + 1, selection[1]);
+        var selection = hot.getSelected()
+        var next = hot.getCell(selection[0] + 1, selection[1])
         if (next === null) {
-         hot.alter('insert_row', selection[0] + 1);
-         return {row: 1, col: 0 - selection[1]};
-       } else {
-         return {row: 1, col: 0};
-       }
-     } else {
-       return {row: 1, col: 0};
-     }
+          hot.alter('insert_row', selection[0] + 1)
+          return {row: 1, col: 0 - selection[1]}
+        } else {
+          return {row: 1, col: 0}
+        }
+      } else {
+        return {row: 1, col: 0}
+      }
     }
-  });
-  return hot;
-};
+  })
+  return hot
+}
 
-var insertRowAbove = function(deselect) {
-  hot.getActiveEditor().finishEditing(true);
-  var range = hot.getSelectedRange();
-  if (typeof range === 'undefined') { return; }
-  var start = Math.min(range.from.row, range.to.row);
-  hot.alter('insert_row', start);
+var insertRowAbove = function (deselect) {
+  hot.getActiveEditor().finishEditing(true)
+  var range = hot.getSelectedRange()
+  if (typeof range === 'undefined') { return }
+  var start = Math.min(range.from.row, range.to.row)
+  hot.alter('insert_row', start)
   if (deselect) {
-    hot.deselectCell();
+    hot.deselectCell()
   }
-};
+}
 
-var insertRowBelow = function(deselect) {
-  hot.getActiveEditor().finishEditing(true);
-  var range = hot.getSelectedRange();
-  if (typeof range === 'undefined') { return; }
-  var end = Math.max(range.from.row, range.to.row);
-  hot.alter('insert_row', (end + 1));
+var insertRowBelow = function (deselect) {
+  hot.getActiveEditor().finishEditing(true)
+  var range = hot.getSelectedRange()
+  if (typeof range === 'undefined') { return }
+  var end = Math.max(range.from.row, range.to.row)
+  hot.alter('insert_row', (end + 1))
   if (deselect) {
-    hot.deselectCell();
+    hot.deselectCell()
   }
-};
+}
 
-var insertColumnLeft = function(deselect) {
-  hot.getActiveEditor().finishEditing(true);
-  var range = hot.getSelectedRange();
-  if (typeof range === 'undefined') { return; }
-  var start = Math.min(range.from.col, range.to.col);
-  hot.alter('insert_col', start);
+var insertColumnLeft = function (deselect) {
+  hot.getActiveEditor().finishEditing(true)
+  var range = hot.getSelectedRange()
+  if (typeof range === 'undefined') { return }
+  var start = Math.min(range.from.col, range.to.col)
+  hot.alter('insert_col', start)
   if (deselect) {
-    hot.deselectCell();
+    hot.deselectCell()
   }
-};
+}
 
-var insertColumnRight = function(deselect) {
-  hot.getActiveEditor().finishEditing(true);
-  var range = hot.getSelectedRange();
-  if (typeof range === 'undefined') { return; }
-  var end = Math.max(range.from.col, range.to.col);
-  hot.alter('insert_col', (end + 1));
+var insertColumnRight = function (deselect) {
+  hot.getActiveEditor().finishEditing(true)
+  var range = hot.getSelectedRange()
+  if (typeof range === 'undefined') { return }
+  var end = Math.max(range.from.col, range.to.col)
+  hot.alter('insert_col', (end + 1))
   if (deselect) {
-    hot.deselectCell();
+    hot.deselectCell()
   }
-};
+}
 
-var removeRows = function() {
-  var range = hot.getSelectedRange();
-  if (typeof range === 'undefined') { return; }
+var removeRows = function () {
+  var range = hot.getSelectedRange()
+  if (typeof range === 'undefined') { return }
 
-  var start = Math.min(range.from.row, range.to.row);
-  var end   = Math.max(range.from.row, range.to.row);
+  var start = Math.min(range.from.row, range.to.row)
+  var end = Math.max(range.from.row, range.to.row)
 
   for (var row = start; row <= end; row++) {
     // rows are re-indexed after each remove
     // so always remove 'start'
-    hot.alter('remove_row', start);
+    hot.alter('remove_row', start)
   }
 
-  hot.deselectCell();
-};
+  hot.deselectCell()
+}
 
-var removeColumns = function() {
-  var range = hot.getSelectedRange();
-  if (typeof range === 'undefined') { return; }
+var removeColumns = function () {
+  var range = hot.getSelectedRange()
+  if (typeof range === 'undefined') { return }
 
-  var start = Math.min(range.from.col, range.to.col);
-  var end   = Math.max(range.from.col, range.to.col);
+  var start = Math.min(range.from.col, range.to.col)
+  var end = Math.max(range.from.col, range.to.col)
 
   for (var col = start; col <= end; col++) {
     // cols are re-indexed after each remove
     // so always remove 'start'
-    hot.alter('remove_col', start);
+    hot.alter('remove_col', start)
   }
 
-  hot.deselectCell();
-};
+  hot.deselectCell()
+}
 
 module.exports = {
   insertRowAbove: insertRowAbove,
@@ -127,6 +126,6 @@ module.exports = {
   insertColumnRight: insertColumnRight,
   removeRows: removeRows,
   removeColumns: removeColumns,
-  create: initialise,
+  create: initialise
   // returns the HoT object
-};
+}

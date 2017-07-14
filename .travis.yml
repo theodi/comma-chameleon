@@ -10,7 +10,7 @@ before_script:
 - npm install
 script:
 - npm test
-- node_modules/jshint/bin/jshint .
+- node_modules/standard/bin/cmd.js --verbose | snazzy
 before_deploy:
 - sudo dpkg --add-architecture i386
 - sudo apt-get -qq update

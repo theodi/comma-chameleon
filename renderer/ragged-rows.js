@@ -1,75 +1,73 @@
-'use strict';
+'use strict'
 
   // Fills undefined cells with an empty string, keeping the table in a
   // rectangular format
 
-  var amendRows = function(worksheet, autoConfirm) {
-    autoConfirm = typeof autoConfirm !== 'undefined' ? autoConfirm : false;
+var amendRows = function (worksheet, autoConfirm) {
+  autoConfirm = typeof autoConfirm !== 'undefined' ? autoConfirm : false
 
-    var ragged_rows = 0;
-    var maxColumns = getMaxColumns(worksheet);
+  var raggedRows = 0
+  var maxColumns = getMaxColumns(worksheet)
     //
-    for (var y = 0; y < worksheet.length; y++) {
-      for (var x = 0; x < maxColumns; x++) {
-        if (hot.getDataAtCell(y,x) === undefined) {
+  for (var y = 0; y < worksheet.length; y++) {
+    for (var x = 0; x < maxColumns; x++) {
+      if (hot.getDataAtCell(y, x) === undefined) {
           // only triggers if a cell returns undefined
-          if (ragged_rows === 0) {
+        if (raggedRows === 0) {
             // this is a way of prompting once and then proceeding to fix every other ragged instance
-            if (autoConfirm === true || window.confirm("Your file has ragged rows, do you want to correct this?")) {
-
-              ragged_rows = 1;
-              reportFix(worksheet,y,x);
-            } else {
-              ragged_rows = -1;
-            }
+          if (autoConfirm === true || window.confirm('Your file has ragged rows, do you want to correct this?')) {
+            raggedRows = 1
+            reportFix(worksheet, y, x)
+          } else {
+            raggedRows = -1
           }
-          else if (ragged_rows == 1) {
-            reportFix(worksheet,y,x);
-          }
+        } else if (raggedRows === 1) {
+          reportFix(worksheet, y, x)
         }
       }
     }
-    updateTable(worksheet);
-  };
+  }
+  updateTable(worksheet)
+}
 
-  var reportFix = function(sheet,y,x){
-    document.querySelector('#right-panel').classList.remove('hidden');
+var reportFix = function (sheet, y, x) {
+  document.querySelector('#right-panel').classList.remove('hidden')
 
-    var messagePanel = document.getElementById('message-panel');
-    messagePanel.innerHTML += '<p>' + fixCell(sheet,y,x) + '<p>';
-  };
+  var messagePanel = document.getElementById('message-panel')
+  messagePanel.innerHTML += '<p>' + fixCell(sheet, y, x) + '<p>'
+}
 
-  function getMaxColumns(csv_array) {
-    var max_columns = 0;
-    for (var i = 0; i < csv_array.length; i++) {
-      var col_length = csv_array[i].length;
-      if (col_length > max_columns) {
-        max_columns = col_length;
-      }
+function getMaxColumns (csvArray) {
+  var maxColumns = 0
+  for (var i = 0; i < csvArray.length; i++) {
+    var colLength = csvArray[i].length
+    if (colLength > maxColumns) {
+      maxColumns = colLength
     }
-    return max_columns;
   }
+  return maxColumns
+}
 
-  function fixCell(csv_array,y,x) {
-    csv_array[y].push("");
-    var logMsg = "Cell (" + String.fromCharCode(97 + x).toUpperCase() + "," + (y + 1) + ") has been added to file";
-    console.log(logMsg);
-    return logMsg;
-  }
+function fixCell (csvArray, y, x) {
+  csvArray[y].push('')
+  var logMsg = 'Cell (' + String.fromCharCode(97 + x).toUpperCase() + ',' + (y + 1) + ') has been added to file'
+  console.log(logMsg)
+  return logMsg
+}
 
-  var updateTable = function(csv_array) {
-    hot.updateSettings ({
-      data: csv_array,
-    });
-  };
+var updateTable = function (csvArray) {
+  hot.updateSettings({
+    data: csvArray
+  })
+}
 
 module.exports = {
   fixRaggedRows: amendRows
-};
+}
 if (process.env.NODE_ENV === 'test') {
   module.exports._private = {
     maxColumns: getMaxColumns,
     fix: fixCell,
     update: updateTable
-  };
+  }
 }

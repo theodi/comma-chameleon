@@ -1,29 +1,29 @@
-var gulp = require('gulp');
-var fs = require('fs');
-var os = require('os');
-var exec = require('child_process').exec;
-var argv = require('yargs').argv;
+var gulp = require('gulp')
+var fs = require('fs')
+var os = require('os')
 
-var build = require('./scripts/build');
-var pageBuild = require('./scripts/page-build');
+var argv = require('yargs').argv
 
-gulp.task('page-build', function() {
-  pageBuild.start();
-});
+var build = require('./scripts/build')
+var pageBuild = require('./scripts/page-build')
 
-gulp.task('build', function() {
+gulp.task('page-build', function () {
+  pageBuild.start()
+})
+
+gulp.task('build', function () {
   if (argv.platform === undefined) {
-    build.cleanup();
-    build.buildAll();
-    build.zipPackages();
+    build.cleanup()
+    build.buildAll()
+    build.zipPackages()
   } else {
-    build.cleanup();
-    build.buildPlatform(argv.platform);
-    build.zipPackages();
+    build.cleanup()
+    build.buildPlatform(argv.platform)
+    build.zipPackages()
   }
-});
+})
 
-gulp.task('prebuild', function() {
-  if (!fs.existsSync('./bin')) build.getCSVLint(os.platform(), os.arch());
-  pageBuild.start();
-});
+gulp.task('prebuild', function () {
+  if (!fs.existsSync('./bin')) build.getCSVLint(os.platform(), os.arch())
+  pageBuild.start()
+})
