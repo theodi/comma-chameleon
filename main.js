@@ -1,11 +1,9 @@
 global.electron = require('electron')
-
 global.app = electron.app
-global.request = electron.request
 global.BrowserWindow = electron.BrowserWindow
 global.Menu = electron.Menu
 global.Dialog = electron.dialog
-
+global.request = electron.request
 global.Fs = require('fs')
 global.XLSX = require('xlsx')
 global.ipc = require('electron').ipcMain
