@@ -3,10 +3,7 @@
  */
 /* eslint-env mocha */
 process.env.NODE_ENV = 'test' // this variable is set to permit access to the packages private methods
-
-var assert = require('chai').assert
 var expect = require('chai').expect
-var should = require('chai').should()
 var datapackage = require('./../../main/datapackage')
 
 describe('methods access for datapackage object', function () {
@@ -36,7 +33,7 @@ describe('testing datapackage', function () {
       filters: [
         { name: 'csv files', extensions: ['csv'] }
       ],
-      options: { separator: ',', delimiter: '"'},
+      options: {separator: ',', delimiter: '"'},
       mime_type: 'text/csv',
       default_extension: 'csv'
     }) // creates object
