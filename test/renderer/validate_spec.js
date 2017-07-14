@@ -3,8 +3,6 @@ process.env.NODE_ENV = 'test'
 
 var chai = require('chai')
 var expect = chai.expect
-
-
 var validate = require('./../../renderer/validate')
 var $ = require('./../../bower_components/jquery/dist/jquery.js')
 

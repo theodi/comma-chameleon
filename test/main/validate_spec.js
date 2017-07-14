@@ -1,11 +1,9 @@
 /* eslint-env mocha */
 process.env.NODE_ENV = 'test'
 
-var expect = require('chai').expect
-
 require('../../main')
+var expect = require('chai').expect
 var validate = require('./../../main/validate')
-
 var Fs = require('fs')
 
 describe('validate', function () {
