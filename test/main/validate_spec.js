@@ -1,10 +1,7 @@
 /* eslint-env mocha */
 process.env.NODE_ENV = 'test'
 
-var assert = require('chai').assert
 var expect = require('chai').expect
-var should = require('chai').should()
-var sinon = require('sinon')
 
 require('../../main')
 var validate = require('./../../main/validate')

@@ -2,10 +2,7 @@
 process.env.NODE_ENV = 'test'
 
 var chai = require('chai')
-
-var assert = chai.assert
 var expect = chai.expect
-var should = chai.should()
 
 var $ = require('./../../bower_components/jquery/dist/jquery.js')
 var hotController = require('../../renderer/hot.js')
