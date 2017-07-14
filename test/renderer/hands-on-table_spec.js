@@ -24,14 +24,14 @@ beforeEach(function () {
 
 describe('loading Hands On Table library into workview', function () {
   it('constructs a Hands On Table element from source', function () {
-    var hot = new HandMadeHOT(hotView, {
+    var HOT = new HandMadeHOT(hotView, {
       data: data,
       colHeaders: true,
       rowHeaders: true,
       columnSorting: true,
       contextMenu: false
     })
-    expect(hot.getData()).to.equal(data)
+    expect(HOT.getData()).to.equal(data)
   })
 
   it('constructs hands on table from programs source files', function () {
