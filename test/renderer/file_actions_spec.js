@@ -45,6 +45,7 @@ describe('save file', function () {
     hot.addHook('afterLoadData', function () {
       file_actions.save(hot, os.tmpdir() + '/mycsv.csv', file_actions.formats.csv, function () {
         fs.readFile(os.tmpdir() + '/mycsv.csv', 'utf-8', function (err, d) {
+          if (err) throw err
           expect(d).to.eq(data)
           expect(document.title).to.eq(os.tmpdir() + '/mycsv.csv')
           done()
@@ -61,6 +62,7 @@ describe('convert file', function () {
     hot.addHook('afterLoadData', function () {
       file_actions.save(hot, os.tmpdir() + '/mytsv.tsv', file_actions.formats.tsv, function () {
         fs.readFile(os.tmpdir() + '/mytsv.tsv', 'utf-8', function (err, d) {
+          if (err) throw err
           expect(d).to.eq('foo\tbar\tbaz\r\n1\t2\t3\r\n4\t5\t6\r\n')
           done()
         })
