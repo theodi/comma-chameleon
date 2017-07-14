@@ -8,7 +8,7 @@ function generateTemplate () {
     } else {
       var fileName = fileNames[0]
       Fs.readFile(fileName, 'utf-8', function (err, data) {
-        if (err) throw err;
+        if (err) throw err
         data = templateFromSchema(data)
         if (data) {
           utils.createWindow(data, 'Untitled.csv')
@@ -38,11 +38,11 @@ function templateFromSchema (schema) {
 }
 
 module.exports = {
-  generateTemplate
+  generateTemplate: generateTemplate
 }
 
 if (process.env.NODE_ENV === 'test') {
   module.exports._private = {
-    templateFromSchema
+    templateFromSchema: templateFromSchema
   }
 }
