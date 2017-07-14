@@ -5,7 +5,6 @@
 process.env.NODE_ENV = 'test'
 var assert = require('chai').assert
 var expect = require('chai').expect
-var should = require('chai').should()
 var hotController = require('./../../renderer/hot.js') // failing probably cause it cant access the bower_components
 var handMadeHOT = require('./../../bower_components/handsontable/dist/handsontable.full.js')
 
