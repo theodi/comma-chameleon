@@ -12,17 +12,17 @@ var Fs = require('fs')
 
 describe('validate', function () {
   it('generates the correct command path', function () {
-    expect(validate._private.csvlintPath()).to.match(/bin\/csvlint \-\-json/)
+    expect(validate._private.csvlintPath()).to.match(/bin\/csvlint --json/)
   })
 
   it('generates the correct command path with a schema', function () {
-    schema = '../../fixtures/all_constraints.json'
-    expect(validate._private.csvlintPath(schema)).to.match(/bin\/csvlint \-\-schema=\.\.\/\.\.\/fixtures\/all_constraints\.json \-\-json/)
+    var schema = '../../fixtures/all_constraints.json'
+    expect(validate._private.csvlintPath(schema)).to.match(/bin\/csvlint --schema=\.\.\/\.\.\/fixtures\/all_constraints\.json --json/)
   })
 
   it('writes a tmp file', function () {
-    data = 'here,is,some,data'
-    path = validate._private.writeTmpFile(data)
+    var data = 'here,is,some,data'
+    var path = validate._private.writeTmpFile(data)
     expect(Fs.readFileSync(path, 'utf8')).to.eq(data)
   })
 })
