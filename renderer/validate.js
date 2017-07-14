@@ -84,6 +84,17 @@ var bgColorRenderer = function (color) {
   }
 }
 
+var numToCol = function (number) {
+  var numeric = (number - 1) % 26
+  var letter = chr(65 + numeric)
+  var number2 = parseInt((number - 1) / 26)
+  if (number2 > 0) {
+    return numToCol(number2) + letter
+  } else {
+    return letter
+  }
+}
+
 var messageTemplate = _.template('<div><h5><%= errorText(data) %></h5><p><%= errorGuidance(data) %></p></div>', {
   imports: {
     errorText: function (data) {
@@ -99,17 +110,6 @@ var messageTemplate = _.template('<div><h5><%= errorText(data) %></h5><p><%= err
   },
   variable: 'data'
 })
-
-var numToCol = function (number) {
-  var numeric = (number - 1) % 26
-  var letter = chr(65 + numeric)
-  var number2 = parseInt((number - 1) / 26)
-  if (number2 > 0) {
-    return numToCol(number2) + letter
-  } else {
-    return letter
-  }
-}
 
 var chr = function (codePt) {
   if (codePt > 0xFFFF) {
