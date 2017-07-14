@@ -31,7 +31,7 @@ function openCustom () {
     var format = makeCustomFormat(data.separator, data.delimiter)
     openFile(format)
   })
-  dialog.loadURL('file://' + __dirname + '/../views/custom_format.html')
+  dialog.loadURL(`file://${__dirname}/../views/custom_format.html`)
 }
 
 function saveFileAs (format, window) {
@@ -58,7 +58,7 @@ function saveAsCustom () {
     var format = makeCustomFormat(data.separator, data.delimiter)
     saveFileAs(format, window)
   })
-  dialog.loadURL('file://' + __dirname + '/../views/custom_format.html')
+  dialog.loadURL(`file://${__dirname}/../views/custom_format.html`)
 }
 
 function saveFile () {

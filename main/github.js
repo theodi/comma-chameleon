@@ -17,7 +17,7 @@ var fileFormats = require('../renderer/file-actions.js').formats
 var rootURL = process.env.NODE_ENV === 'development' ? 'http://git-data-publisher.dev' : 'https://octopub.io'
 
 var loadWindow = function (githubWindow, apiKey, viewName) {
-  githubWindow.loadURL('file://' + __dirname + '/../views/' + viewName + '.html')
+  githubWindow.loadURL(`file://${__dirname}/../views/${viewName}.html`)
   githubWindow.webContents.on('dom-ready', function () {
     githubWindow.webContents.send('apiKey', apiKey)
   })
@@ -88,7 +88,7 @@ var displayResult = function (result, apiKey) {
       if (type === 'error') {
         githubWindow.webContents.send('errors', result)
       } else {
-        githubWindow.loadURL('file://' + __dirname + '/../views/github-success.html')
+        githubWindow.loadURL(`file://${__dirname}/../views/github-success.html`)
         githubWindow.webContents.on('dom-ready', function () {
           githubWindow.webContents.send('ghPagesUrl', result)
         })
@@ -146,7 +146,7 @@ var authAndLoad = function (viewName) {
   parentWindow = BrowserWindow.getFocusedWindow()
 
   githubWindow = new BrowserWindow({width: 450, height: 600})
-  githubWindow.loadURL(rootURL + '/auth/github?referer=comma-chameleon')
+  githubWindow.loadURL(`${rootURL}/auth/github?referer=comma-chameleon`)
 
   githubWindow.webContents.on('did-get-redirect-request', function (event, oldUrl, newUrl) {
     var match = checkForAPIKey(newUrl)

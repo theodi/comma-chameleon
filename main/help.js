@@ -5,7 +5,7 @@ global.Dialog = electron.dialog
 
 var showKeyboardHelp = function () {
   var showKeyboardHelp = new BrowserWindow({width: 600, height: 600})
-  showKeyboardHelp.loadURL('file://' + __dirname + '/../views/keyboard_help.html')
+  showKeyboardHelp.loadURL(`file://${__dirname}/../views/keyboard_help.html`)
 
   showKeyboardHelp.on('closed', function () {
     showKeyboardHelp = null

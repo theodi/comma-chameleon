@@ -11,8 +11,8 @@ var exportdata = function () {
   var window = BrowserWindow.getFocusedWindow()
 
   var datapackage = new BrowserWindow({width: 450, height: 600})
-  datapackage.loadURL('file://' + __dirname + '/../views/datapackage.html')
 
+  datapackage.loadURL(`file://${__dirname}/../views/datapackage.html`)
   datapackage.on('closed', function () {
     datapackage = null
   })
