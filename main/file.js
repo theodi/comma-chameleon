@@ -73,6 +73,7 @@ function readFile (fileNames, format) {
   } else {
     var fileName = fileNames[0]
     Fs.readFile(fileName, 'utf-8', function (err, data) {
+      if (err) throw err
       utils.createWindow(data, fileName, format)
       utils.enableSave()
     })

@@ -28,6 +28,7 @@ function validateFile (schema, window) {
   ipc.once('dataSent', function (e, csv) {
     var file = writeTmpFile(csv)
     exec(csvlintPath(schema) + file, function (error, stdout) {
+      if (error) throw error;
       window.webContents.send('validationResults', stdout)
     })
   })

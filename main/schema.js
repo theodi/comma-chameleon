@@ -8,6 +8,7 @@ function generateTemplate () {
     } else {
       var fileName = fileNames[0]
       Fs.readFile(fileName, 'utf-8', function (err, data) {
+        if (err) throw err;
         data = templateFromSchema(data)
         if (data) {
           utils.createWindow(data, 'Untitled.csv')
