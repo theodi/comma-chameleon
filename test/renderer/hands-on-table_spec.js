@@ -8,6 +8,9 @@ var expect = require('chai').expect
 var hotController = require('./../../renderer/hot.js') // failing probably cause it cant access the bower_components
 var handMadeHOT = require('./../../bower_components/handsontable/dist/handsontable.full.js')
 
+let hotView = null
+let data = null
+
 beforeEach(function () {
   hotView = document.createElement('div')
   hot = hotController.create(hotView)

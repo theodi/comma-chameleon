@@ -8,6 +8,9 @@ var expect = require('chai').expect
 
 var hotController = require('./../../renderer/hot.js')
 var raggedRows = require('./../../renderer/ragged-rows.js')
+let rpanel = null
+let mpanel = null
+let hotView = null
 
 before(function () {
   rpanel = document.createElement('div')

@@ -10,6 +10,7 @@ var rows = require('./../../renderer/ragged-rows')
 var file_actions = require('./../../renderer/file-actions')
 var fs = require('fs')
 var os = require('os')
+let hotView = null
 
 beforeEach(function () {
   hotView = document.createElement('div')

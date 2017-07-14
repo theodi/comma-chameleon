@@ -12,6 +12,7 @@ before(function () {
 })
 
 describe('displayValidationMessages', function () {
+  let validation = null
   beforeEach(function () {
     validation = {
       'state': 'warnings',
