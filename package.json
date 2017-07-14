@@ -38,6 +38,7 @@
     "yargs": "^4.7.1"
   },
   "standard": {
+    "globals": [ "electron", "app", "BrowserWindow", "Menu", "Dialog", "request", "Fs", "XLSX", "ipc", "utils", "datapackage", "github", "schema", "excel", "fileActions", "tools", "validate", "help" ],
     "ignore": [
       "docs"
     ]
