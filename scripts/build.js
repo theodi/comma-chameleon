@@ -26,7 +26,7 @@ let getCSVLint = function (platform, arch) {
 
   execSync('curl -L -O --fail https://github.com/theodi/csvlint.sh/releases/download/' + csvlintVersion + '/' + filename)
 
-  if (platform == 'win32') {
+  if (platform === 'win32') {
     execSync('unzip ' + filename)
     execSync('mv csvlint-' + csvlintVersion + '-win32/ bin/')
     execSync('rm csvlint-' + csvlintVersion + '-win32.zip')
