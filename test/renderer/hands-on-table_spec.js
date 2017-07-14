@@ -6,7 +6,7 @@ process.env.NODE_ENV = 'test'
 var assert = require('chai').assert
 var expect = require('chai').expect
 var hotController = require('./../../renderer/hot.js') // failing probably cause it cant access the bower_components
-var handMadeHOT = require('./../../bower_components/handsontable/dist/handsontable.full.js')
+var HandMadeHOT = require('./../../bower_components/handsontable/dist/handsontable.full.js')
 
 let hotView = null
 let data = null
@@ -24,7 +24,7 @@ beforeEach(function () {
 
 describe('loading Hands On Table library into workview', function () {
   it('constructs a Hands On Table element from source', function () {
-    var hot = new handMadeHOT(hotView, {
+    var hot = new HandMadeHOT(hotView, {
       data: data,
       colHeaders: true,
       rowHeaders: true,

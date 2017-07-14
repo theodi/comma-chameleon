@@ -4,7 +4,7 @@ process.env.NODE_ENV = 'test'
 var chai = require('chai')
 var expect = chai.expect
 var hotController = require('../../renderer/hot.js')
-var file_actions = require('./../../renderer/file-actions')
+var fileActions = require('./../../renderer/file-actions')
 var fs = require('fs')
 var os = require('os')
 let hotView = null
@@ -21,7 +21,7 @@ describe('open file (comma separated)', function () {
     hot.addHook('afterLoadData', function () {
       expect(hot.getData()).to.eql([['foo', 'bar', 'baz'], ['1', '2', '3'], ['4', '5', '6']])
     })
-    file_actions.open(hot, data)
+    fileActions.open(hot, data)
   })
 })
 
@@ -31,7 +31,7 @@ describe('open file (semicolon separated)', function () {
     hot.addHook('afterLoadData', function () {
       expect(hot.getData()).to.eql([['foo', 'bar', 'baz'], ['1', '2', '3'], ['4', '5', '6']])
     })
-    file_actions.open(hot, data, file_actions.formats.semicolon)
+    fileActions.open(hot, data, fileActions.formats.semicolon)
   })
 })
 
@@ -39,7 +39,7 @@ describe('save file', function () {
   it('saves a file', function (done) {
     var data = 'foo,bar,baz\r\n1,2,3\r\n4,5,6\r\n'
     hot.addHook('afterLoadData', function () {
-      file_actions.save(hot, os.tmpdir() + '/mycsv.csv', file_actions.formats.csv, function () {
+      fileActions.save(hot, os.tmpdir() + '/mycsv.csv', fileActions.formats.csv, function () {
         fs.readFile(os.tmpdir() + '/mycsv.csv', 'utf-8', function (err, d) {
           if (err) throw err
           expect(d).to.eq(data)
@@ -48,7 +48,7 @@ describe('save file', function () {
         })
       })
     })
-    file_actions.open(hot, data)
+    fileActions.open(hot, data)
   })
 })
 
@@ -56,7 +56,7 @@ describe('convert file', function () {
   it('converts a file from csv to tsv', function (done) {
     var data = 'foo,bar,baz\r\n1,2,3\r\n4,5,6'
     hot.addHook('afterLoadData', function () {
-      file_actions.save(hot, os.tmpdir() + '/mytsv.tsv', file_actions.formats.tsv, function () {
+      fileActions.save(hot, os.tmpdir() + '/mytsv.tsv', fileActions.formats.tsv, function () {
         fs.readFile(os.tmpdir() + '/mytsv.tsv', 'utf-8', function (err, d) {
           if (err) throw err
           expect(d).to.eq('foo\tbar\tbaz\r\n1\t2\t3\r\n4\t5\t6\r\n')
@@ -64,6 +64,6 @@ describe('convert file', function () {
         })
       })
     })
-    file_actions.open(hot, data)
+    fileActions.open(hot, data)
   })
 })
