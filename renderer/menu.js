@@ -47,6 +47,23 @@ var removeCol = new MenuItem({
   }
 });
 
+var freezeRow = new MenuItem({
+    label: 'Freeze header row',
+    click: function(){
+      hotController.freeze();
+    }
+});
+
+var unfreezeRow = new MenuItem({
+    label: 'Unfreeze header row',
+    click: function(){
+        hotController.unfreeze();
+    }
+});
+
+menu.append(freezeRow);
+menu.append(unfreezeRow);
+menu.append(new MenuItem({ type: 'separator' }));
 menu.append(rowAbove);
 menu.append(rowBelow);
 menu.append(new MenuItem({ type: 'separator' }));
