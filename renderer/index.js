@@ -154,7 +154,7 @@ ipc.on('removeColumns', function() {
   hotController.removeColumns();
 });
 
-ipc.on('freezeRows', function(){
+ipc.on('freeze', function(){
   hotController.freeze();
 });
 ipc.on('unfreeze', function(){
