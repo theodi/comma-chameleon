@@ -126,17 +126,11 @@ var removeColumns = function() {
 };
 
 var unfreezeHeaderRow = function(){
-    hot.updateSettings({fixedRowsTop: 0});
-    hot.updateSettings({colHeaders: true});
-    hot.deselectCell();
+  hot.updateSettings({fixedRowsTop: 0,colHeaders: true});
 };
 
 var freezeHeaderRow = function(){
-
-    hot.updateSettings({fixedRowsTop: 1});
-    hot.updateSettings({}, false);
-    hot.deselectCell();
-
+  hot.updateSettings({fixedRowsTop: 1});
 };
 
 module.exports = {
