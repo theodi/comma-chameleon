@@ -26,6 +26,7 @@ describe('loading Hands On Table library into workview', function(){
       colHeaders: true,
       rowHeaders: true,
       columnSorting: true,
+      fixedRowsTop: 0,
       contextMenu: false
     });
     expect(hot.getData()).to.equal(data);
@@ -226,4 +227,17 @@ describe('insertColumnRight tests', function() {
     });
     hot.loadData(data);
   });
+});
+
+describe('freeze rows and columns', function () {
+    it('freezes the upper most row', function () {
+        hot.addHook('afterLoadData', function() {
+          // tests happen here
+            assert.strictEqual(hot.getSettings()["fixedRowsTop"], 0);
+            hot.selectCell(1,0,1,4);
+            hotController.freeze();
+            assert.strictEqual(hot.getSettings()["fixedRowsTop"], 1);
+        });
+        hot.loadData(data);
+    });
 });

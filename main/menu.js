@@ -198,6 +198,21 @@ exports.menu = [
         type: 'separator'
       },
       {
+        label: 'Freeze Header Row',
+          click: function(){
+              BrowserWindow.getFocusedWindow().webContents.send('freeze');
+          }
+      },
+      {
+        label: 'Unfreeze Header Row',
+          click: function(){
+              BrowserWindow.getFocusedWindow().webContents.send('unfreeze');
+          }
+      },
+      {
+        type: 'separator'
+      },
+      {
         label: 'Insert row above',
         accelerator: 'CmdOrCtrl+I',
         click: function() {
