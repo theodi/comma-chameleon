@@ -27,6 +27,10 @@ var initialise = function(container) {
       afterLoadData: function() {
           loader.hideLoader();
       },
+      afterUpdateSettings: function(){
+          hot.render();
+          hot.deselectCell();
+      },
       enterMoves: function(event) {
           if (!event.shiftKey) {
               var selection = hot.getSelected();
