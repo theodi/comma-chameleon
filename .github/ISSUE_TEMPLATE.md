@@ -5,7 +5,7 @@
 ### Expected Behaviour
 > What should happen?
 
-### Desired Behaviour (for enhancement suggestions only)
+### Desired Behaviour (for improvement suggestions only)
 > if relevant include images or hyperlinks to other resources that clarify the enhancement you're seeking
 
 ### Current Behaviour (for problems)
