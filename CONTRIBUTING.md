@@ -1,7 +1,7 @@
 # Contributing to Comma Chameleon
 
 Comma Chameleon is open source, and contributions are gratefully accepted!
-Details on how to contribute are below. By participating in this project, you agree to abide by our [Code of Conduct](https://github.com/theodi/comma-chameleon/blob/master/.github/CODE_OF_CONDUCT.md).
+Details on how to contribute are below. By participating in this project, you agree to abide by our [Code of Conduct](https://github.com/theodi/comma-chameleon/blob/CODE_OF_CONDUCT.md).
 
 Before you start coding, please reach out to us either on our [gitter channel](https://gitter.im/theodi/toolbox) or by tagging a repository administrator on the issue ticket you are interested in contributing towards to indicate your interest in helping.
 
@@ -25,4 +25,3 @@ To increase your chances of your push being accepted please be aware of the foll
 - Once your PR is accepted you will be granted push access to the repository you have contributed to! Congratulations on joining our community, you’ll no longer need to work from forks.
 
 If you make a contribution to another repository in the Toolbox you will be expected to repeat this process. Read more about that [here](https://github.com/theodi/toolbox/blob/master/README.md#push-access).
-
