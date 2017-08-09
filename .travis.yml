@@ -5,18 +5,18 @@ node_js:
 - '5.1.0'
 before_script:
 - export DISPLAY=:99.0; sh -e /etc/init.d/xvfb start
-- npm install bower
+- yarn global add bower
 - bower install
-- npm install
+- yarn install
 script:
-- npm test
+- yarn test
 - node_modules/jshint/bin/jshint .
 before_deploy:
 - sudo dpkg --add-architecture i386
 - sudo apt-get -qq update
 - sudo apt-get install wine1.6
-- npm install -g gulp
-- npm install electron-packager -g
+- yarn global add gulp
+- yarn global add electron-packager
 - gulp build
 deploy:
   provider: releases
