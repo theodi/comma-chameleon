@@ -1,8 +1,8 @@
 function importExcel() {
   Dialog.showOpenDialog({ filters: [
-    { name: 'text', extensions: ['xlsx', 'xls'] }
+    { name: 'Spreadsheets', extensions: "xls|xlsx|xlsm|xlsb|xml|xlw|xlc|csv|txt|dif|sylk|slk|prn|ods|fods|uos|dbf|wks|123|wq1|qpw|htm|html".split("|") }
   ]}, function (fileNames) {
-    if (fileNames === undefined) return;
+    if (fileNames === undefined || !fileNames[0]) return;
     var fileName = fileNames[0];
     var workbook = XLSX.readFile(fileName);
     var first_sheet_name = workbook.SheetNames[0];
