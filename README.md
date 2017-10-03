@@ -6,7 +6,7 @@
 
 [Comma Chameleon](https://comma-chameleon.io/) is a desktop CSV editor (built with [Electron.js](electron.atom.io)) that provides a simple interface for editing data.
 
-See [https://comma-chameleon.io/](https://comma-chameleon.io/) for features and screenshots or download the app and start using it now!
+See <https://comma-chameleon.io/> for features and screenshots or download the app and start using it now!
 
 Follow the [public feature roadmap for Comma Chameleon](https://trello.com/b/2xc7Q0kd/labs-public-toolbox-roadmap?menu=filter&filter=label:Comma%20Chameleon)
 
@@ -29,19 +29,17 @@ Right click the app, then option+click on Open.
 
 #### Requirements
 
-`node`  
-`npm`  
-`electron`
+[`node` and `npm`](https://nodejs.org/en/download/)
 
-You can use npm to install all relevant packages and development dependencies using the following set of commands. The following uses Homebrew to install node and npm on Mac OSX. Node and Bower install the dependencies contained in `package.json` and `bower.json` respectively
+You can use npm to install all relevant packages and development dependencies using the following set of commands.  Node and Bower install the dependencies contained in `package.json` and `bower.json` respectively
+
 ```
-brew install node
+npm install -g bower electron
 npm install
-npm install -g bower
 bower install
 ```
 
-#### External (non-js) dependencies
+#### External (non-JS) dependencies
 
 Comma Chameleon relies on [CSVlint.sh](https://github.com/theodi/csvlint.sh) to carry out CSV validation. This is not included in the repo, and is downloaded and installed by the [build.js](https://github.com/theodi/comma-chameleon/blob/master/scripts/build.js) script. As with the page build script, this script is also run when the app is started with the `npm start` command.
 
@@ -53,14 +51,14 @@ To open the app run:
 npm start
 ```
 
-This will download the non-js dependencies (namely [CSVlint.sh](https://github.com/theodi/csvlint.sh)), build the [handlebars](http://handlebarsjs.com/) views (from `comma-chameleon/views-content`) and start the app.
+This will download the non-JS dependencies (namely [CSVlint.sh](https://github.com/theodi/csvlint.sh)), build the [handlebars](http://handlebarsjs.com/) views (from `comma-chameleon/views-content`) and start the app.
 
 
 #### Application Architecture
 
 Comma Chameleon is built using [Electron.js](electron.atom.io), a framework that allows developers to build desktop applications using web technology.
 
-There are two parts of the application, the main process and the renderer process. The main process deals with things like carrying out file operations, validating CSVs, rendering views, and exporting to Github. The renderer acts very much like client side javascript in a web browser, dealing with things like presentation, and user interactions.
+There are two parts of the application, the main process and the renderer process. The main process deals with things like carrying out file operations, validating CSVs, rendering views, and exporting to Github. The renderer acts very much like client side JS in a web browser, dealing with things like presentation, and user interactions.
 
 ##### IPC messaging
 
@@ -79,7 +77,7 @@ To keep things [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself), the
 Assuming you have installed `electron-mocha` globally (via `npm i electron-mocha -g`), you can run the tests like this:
 
 ```
-npm run test
+npm test
 ```
 
 Or to run the main and renderer tests separately, you can run:
