@@ -4,11 +4,9 @@
 
 # Comma Chameleon
 
-[Comma Chameleon](https://comma-chameleon.io/) is a desktop CSV editor (built with [Electron.js](electron.atom.io)) that provides a simple interface for editing data.
+[Comma Chameleon](https://comma-chameleon.io/) is a desktop CSV editor (built with [Electron.js](electron.atom.io)) that provides a simple interface for editing data. 
 
-See <https://comma-chameleon.io/> for features and screenshots or download the app and start using it now!
-
-Follow the [public feature roadmap for Comma Chameleon](https://trello.com/b/2xc7Q0kd/labs-public-toolbox-roadmap?menu=filter&filter=label:Comma%20Chameleon)
+Developed by the ODI as a proof of concept, it has now been replaced by [Data Curator](https://theodi.org.au/data-curator/) ([GitHub](https://github.com/ODIQueensland/data-curator)).
 
 ## Summary of features
 
